@@ -26,10 +26,48 @@ INCLUDEPATH += headers/
 
 SOURCES += \
         src/main.cpp \
-        src/mainwindow.cpp
+        src/mainwindow.cpp \
+        src/material.cpp \
+        src/project.cpp \
+        src/crew.cpp \
+        src/frameaspect.cpp \
+        src/packaging.cpp \
+        src/dvd.cpp \
+        src/twosideddvd.cpp \
+        src/singlesideddvd.cpp \
+        src/bluray.cpp \
+        src/vhs.cpp \
+        src/combobox.cpp \
+        src/director.cpp \
+        src/producer.cpp \
+        src/writer.cpp \
+        src/editor.cpp \
+        src/actor.cpp \
+        src/productiondesigner.cpp \
+        src/setdecorator.cpp \
+        src/costumedesigner.cpp
 
 HEADERS += \
-        headers/mainwindow.h
+        headers/mainwindow.h \
+        headers/material.h \
+        headers/project.h \
+        headers/crew.h \
+        headers/frameaspect.h \
+        headers/packaging.h \
+        headers/dvd.h \
+        headers/twosideddvd.h \
+        headers/singlesideddvd.h \
+        headers/bluray.h \
+        headers/vhs.h \
+        headers/combobox.h \
+        headers/director.h \
+        headers/producer.h \
+        headers/writer.h \
+        headers/editor.h \
+        headers/actor.h \
+        headers/productiondesigner.h \
+        headers/setdecorator.h \
+        headers/costumedesigner.h
 
 FORMS += \
         forms/mainwindow.ui
