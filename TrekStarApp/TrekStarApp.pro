@@ -45,7 +45,9 @@ SOURCES += \
         src/actor.cpp \
         src/productiondesigner.cpp \
         src/setdecorator.cpp \
-        src/costumedesigner.cpp
+        src/costumedesigner.cpp \
+        src/node.cpp \
+        src/doublylinkedlist.cpp
 
 HEADERS += \
         headers/mainwindow.h \
@@ -67,7 +69,9 @@ HEADERS += \
         headers/actor.h \
         headers/productiondesigner.h \
         headers/setdecorator.h \
-        headers/costumedesigner.h
+        headers/costumedesigner.h \
+        headers/node.h \
+        headers/doublylinkedlist.h
 
 FORMS += \
         forms/mainwindow.ui
