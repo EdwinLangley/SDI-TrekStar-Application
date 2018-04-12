@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.10.1
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -179,26 +179,26 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "TrekStar", nullptr));
-        pushButton->setText(QApplication::translate("MainWindow", "Click to open Project", nullptr));
-        startTitle->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">OPEN PROJECT</p></body></html>", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(startTab), QApplication::translate("MainWindow", "Start", nullptr));
-        newProjectTitle->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">NEW PROJECT</p></body></html>", nullptr));
-        label->setText(QApplication::translate("MainWindow", "Genre", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "Title", nullptr));
-        label_3->setText(QApplication::translate("MainWindow", "Summary", nullptr));
-        label_4->setText(QApplication::translate("MainWindow", "Release Date", nullptr));
-        addFilmLocationButton->setText(QApplication::translate("MainWindow", "Add", nullptr));
-        addKeywordButton->setText(QApplication::translate("MainWindow", "Add", nullptr));
-        label_5->setText(QApplication::translate("MainWindow", "Filming Locations", nullptr));
-        label_6->setText(QApplication::translate("MainWindow", "Keywords", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(newProjectTab), QApplication::translate("MainWindow", "New Project", nullptr));
-        existingProjectTitle->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">EXISTING PROJECTS</p></body></html>", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(existingProjects), QApplication::translate("MainWindow", "Existing Project", nullptr));
-        removeProjectsTitle->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">REMOVE PROJECTS</p></body></html>", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(removeProjects), QApplication::translate("MainWindow", "Remove Project", nullptr));
-        closeDownApplicationTitle->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">CLOSE DOWN APPLICATION</p></body></html>", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(closeApp), QApplication::translate("MainWindow", "Close Application (Save)", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "TrekStar", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("MainWindow", "Click to open Project", Q_NULLPTR));
+        startTitle->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">OPEN PROJECT</p></body></html>", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(startTab), QApplication::translate("MainWindow", "Start", Q_NULLPTR));
+        newProjectTitle->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">NEW PROJECT</p></body></html>", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "Genre", Q_NULLPTR));
+        label_2->setText(QApplication::translate("MainWindow", "Title", Q_NULLPTR));
+        label_3->setText(QApplication::translate("MainWindow", "Summary", Q_NULLPTR));
+        label_4->setText(QApplication::translate("MainWindow", "Release Date", Q_NULLPTR));
+        addFilmLocationButton->setText(QApplication::translate("MainWindow", "Add", Q_NULLPTR));
+        addKeywordButton->setText(QApplication::translate("MainWindow", "Add", Q_NULLPTR));
+        label_5->setText(QApplication::translate("MainWindow", "Filming Locations", Q_NULLPTR));
+        label_6->setText(QApplication::translate("MainWindow", "Keywords", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(newProjectTab), QApplication::translate("MainWindow", "New Project", Q_NULLPTR));
+        existingProjectTitle->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">EXISTING PROJECTS</p></body></html>", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(existingProjects), QApplication::translate("MainWindow", "Existing Project", Q_NULLPTR));
+        removeProjectsTitle->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">REMOVE PROJECTS</p></body></html>", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(removeProjects), QApplication::translate("MainWindow", "Remove Project", Q_NULLPTR));
+        closeDownApplicationTitle->setText(QApplication::translate("MainWindow", "<html><head/><body><p align=\"center\">CLOSE DOWN APPLICATION</p></body></html>", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(closeApp), QApplication::translate("MainWindow", "Close Application (Save)", Q_NULLPTR));
     } // retranslateUi
 
 };
