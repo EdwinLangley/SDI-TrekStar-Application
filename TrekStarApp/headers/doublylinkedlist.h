@@ -2,6 +2,7 @@
 #define DOUBLYLINKEDLIST_H
 
 #include "node.h"
+#include "project.h"
 
 
 
@@ -20,6 +21,21 @@ public:
 };
 
 void createNewNode(Project project);
+
+void displayAllNodes();
+
+void insert_start(Project value);
+
+void insert_position(int pos, Project value);
+
+void delete_first();
+
+void delete_last();
+
+void delete_position(int pos);
+
+
+
 
 
 #endif // DOUBLYLINKEDLIST_H
