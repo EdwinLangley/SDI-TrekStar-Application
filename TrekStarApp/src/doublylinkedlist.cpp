@@ -1,5 +1,5 @@
 #include "doublylinkedlist.h"
-
+/*
 DoublyLinkedList::DoublyLinkedList()
 {
 
@@ -91,3 +91,4 @@ void DoublyLinkedList::delete_position(int pos)
    }
    previous->next=current->next;
  }
+*/
