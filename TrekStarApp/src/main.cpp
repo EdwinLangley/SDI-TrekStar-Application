@@ -1,8 +1,14 @@
 #include "mainwindow.h"
 #include <QApplication>
 
+#include <iostream>
+
+using namespace std;
+
 int main(int argc, char *argv[])
 {
+    cout << "Hello, World" <<  endl;
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
