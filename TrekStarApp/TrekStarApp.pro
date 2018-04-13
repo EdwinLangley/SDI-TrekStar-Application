@@ -47,7 +47,8 @@ SOURCES += \
         src/setdecorator.cpp \
         src/costumedesigner.cpp \
         src/node.cpp \
-        src/doublylinkedlist.cpp
+        src/doublylinkedlist.cpp \
+        src/filehandler.cpp \
 
 HEADERS += \
         headers/mainwindow.h \
@@ -71,7 +72,8 @@ HEADERS += \
         headers/setdecorator.h \
         headers/costumedesigner.h \
         headers/node.h \
-        headers/doublylinkedlist.h
+        headers/doublylinkedlist.h \
+        headers/filehandler.h
 
 FORMS += \
         forms/mainwindow.ui
