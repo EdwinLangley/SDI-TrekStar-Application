@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QFile windowStyleSheet("/Users/edwardcelella/Documents/University/Software Design and Implementation/SDIPROJECT/TrekStarApp/style/main.qss");
+    QFile windowStyleSheet(":/style/main.qss");
     windowStyleSheet.open(QFile::ReadOnly);
     this->setStyleSheet(windowStyleSheet.readAll());
     windowStyleSheet.close();

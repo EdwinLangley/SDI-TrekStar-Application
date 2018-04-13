@@ -79,3 +79,6 @@ HEADERS += \
 
 FORMS += \
         forms/mainwindow.ui
+
+RESOURCES += \
+    style/main.qss
