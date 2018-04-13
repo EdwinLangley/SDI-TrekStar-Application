@@ -110,7 +110,7 @@ int DoublyLinkedList::size()
 }
 
 //Allows [] bracket notation to obtain referance to a project in nth position
-Project& operator[](unsigned int n)
+Project& DoublyLinkedList::operator[](unsigned int n)
 {
     Node *current = head;
     Node *previous = new Node;

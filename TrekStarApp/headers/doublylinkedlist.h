@@ -34,6 +34,10 @@ void delete_last();
 
 void delete_position(int pos);
 
+int size();
+
+Project& operator[](unsigned int n);
+
 };
 
 

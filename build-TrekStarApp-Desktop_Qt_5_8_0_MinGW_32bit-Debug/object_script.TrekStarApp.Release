@@ -22,5 +22,6 @@ INPUT(
 ./release\costumedesigner.o
 ./release\node.o
 ./release\doublylinkedlist.o
+./release\filehandler.o
 ./release\moc_mainwindow.o
 );

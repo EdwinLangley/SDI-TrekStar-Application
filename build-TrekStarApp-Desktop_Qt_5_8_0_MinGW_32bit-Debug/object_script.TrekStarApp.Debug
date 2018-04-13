@@ -22,5 +22,6 @@ INPUT(
 ./debug\costumedesigner.o
 ./debug\node.o
 ./debug\doublylinkedlist.o
+./debug\filehandler.o
 ./debug\moc_mainwindow.o
 );
