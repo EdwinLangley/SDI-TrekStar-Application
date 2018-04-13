@@ -1,7 +1,7 @@
+
+#include "gui.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QFileDialog>
-#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -9,12 +9,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    QImage loadProjectImage;
-//    QLabel *projectImageLabel;
-//    projectImageLabel = new QLabel(this);
-//    projectImageLabel->setPixmap(QPixmap(QString::fromUtf8("D:/Users/Edwin/Documents/SDIPROJECT/TrekStarApp/res/Open-file-icon.png")));
-//    projectImageLabel->show();
-//    projectImageLabel->setGeometry(340,180,128,128);
+    QFile windowStyleSheet("/Users/edwardcelella/Documents/University/Software Design and Implementation/SDIPROJECT/TrekStarApp/style/main.qss");
+    windowStyleSheet.open(QFile::ReadOnly);
+    this->setStyleSheet(windowStyleSheet.readAll());
+    windowStyleSheet.close();
 
 }
 
