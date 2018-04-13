@@ -60,6 +60,16 @@ void Project::setLanguage(const string &value)
     language = value;
 }
 
+vector<string> Project::getFilmLocations() const
+{
+    return filmLocations;
+}
+
+void Project::setFilmLocations(const vector<string> &value)
+{
+    filmLocations = value;
+}
+
 Project::Project()
 {
 
