@@ -1,5 +1,6 @@
 /build-TrekStarApp-Desktop_Qt_5_9_2_clang_64bit-Debug/*
 /build-TrekStarApp-Desktop_Qt_5_10_1_MinGW_32bit-Debug/*
 /build-TrekStarApp-Desktop_Qt_5_8_0_MinGW_32bit-Debug/*
+/build-TrekStarApp*/*
 .DS_Store
 TrekStarApp.pro.user
