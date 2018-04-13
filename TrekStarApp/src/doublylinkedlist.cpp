@@ -1,13 +1,14 @@
 #include "doublylinkedlist.h"
+
 /*
 DoublyLinkedList::DoublyLinkedList()
 {
 
 }
-
+*/
 void DoublyLinkedList::createNewNode(Project project)
 {
-    Node* temp=new node;
+    Node* temp=new Node;
     temp->data=project;
     temp->next=NULL;
     if(head==NULL)
@@ -24,27 +25,28 @@ void DoublyLinkedList::createNewNode(Project project)
   }
 
 void DoublyLinkedList::displayAllNodes() {
-    node *temp=new node;
+    Node *temp=new Node;
     temp=head;
     while(temp!=NULL)
     {
-      cout<<temp->data<<"\t";
-      temp=temp->next;
+      std::cout << "test data" << std::endl;
+      //temp->data
+      //temp=temp->next;
     }
   }
 
 
 void DoublyLinkedList::insert_start(Project value){
-  node *temp=new node;
+  Node *temp=new Node;
   temp->data=value;
   temp->next=head;
   head=temp;
 }
 
 void DoublyLinkedList::insert_position(int pos, Project value){
-  node *pre=new node;
-  node *cur=new node;
-  node *temp=new node;
+  Node *pre=new Node;
+  Node *cur=new Node;
+  Node *temp=new Node;
   cur=head;
   for(int i=1;i<pos;i++)
   {
@@ -58,7 +60,7 @@ void DoublyLinkedList::insert_position(int pos, Project value){
 
 void DoublyLinkedList::delete_first()
  {
-   node *temp=new node;
+   Node *temp=new Node;
    temp=head;
    head=head->next;
    delete temp;
@@ -66,8 +68,8 @@ void DoublyLinkedList::delete_first()
 
 void DoublyLinkedList::delete_last()
 {
-  node *current=new node;
-  node *previous=new node;
+  Node *current=new Node;
+  Node *previous=new Node;
   current=head;
   while(current->next!=NULL)
   {
@@ -81,8 +83,8 @@ void DoublyLinkedList::delete_last()
 
 void DoublyLinkedList::delete_position(int pos)
  {
-   node *current=new node;
-   node *previous=new node;
+   Node *current=new Node;
+   Node *previous=new Node;
    current=head;
    for(int i=1;i<pos;i++)
    {
@@ -91,4 +93,4 @@ void DoublyLinkedList::delete_position(int pos)
    }
    previous->next=current->next;
  }
-*/
+

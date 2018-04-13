@@ -18,7 +18,7 @@ public:
       tail=NULL;
     }
 
-};
+
 
 void createNewNode(Project project);
 
@@ -34,7 +34,7 @@ void delete_last();
 
 void delete_position(int pos);
 
-
+};
 
 
 
