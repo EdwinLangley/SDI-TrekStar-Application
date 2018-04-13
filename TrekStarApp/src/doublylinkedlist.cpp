@@ -94,3 +94,36 @@ void DoublyLinkedList::delete_position(int pos)
    previous->next=current->next;
  }
 
+int DoublyLinkedList::size()
+{
+   Node *current = head;
+   Node *previous = new Node;
+
+   int Size = 1;
+   while (current->next != NULL)
+   {
+       previous = current;
+       current = previous->next;
+       Size++;
+   }
+   return Size;
+}
+
+//Allows [] bracket notation to obtain referance to a project in nth position
+Project& operator[](unsigned int n)
+{
+    Node *current = head;
+    Node *previous = new Node;
+
+    int pos = 0;
+    while (pos != n)
+    {
+        previous = current;
+        current = previous->next;
+        pos++;
+    }
+    Project Selected = current->data;
+    return Selected;
+}
+
+
