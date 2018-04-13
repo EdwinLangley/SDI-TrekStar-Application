@@ -41,6 +41,24 @@ public:
     void setPrice(float value);
     vector<string> getSubTitleLanguages() const;
     void setSubTitleLanguages(const vector<string> &value);
+    string getMaterials(){
+        string Materials;
+        Materials.append(this->idNumber);
+        Materials.append(",");
+        Materials.append(this->title);
+        Materials.append(",");
+        Materials.append(this->vFormat);
+        Materials.append(",");
+        Materials.append(this->aFormat);
+        Materials.append(",");
+        Materials.append(this->language);
+        Materials.append(",");
+        Materials.append(to_string(this->runTime));
+        Materials.append(",");
+        Materials.append(to_string(this->price));
+        Materials.append(",");
+        return Materials;
+    }
 };
 
 #endif // MATERIAL_H

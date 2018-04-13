@@ -18,7 +18,7 @@ private:
     string releaseDate = "";
     string language = "";
 
-    vector<string> filmLoactions;
+    vector<string> filmLocations;
 
 
 public:
@@ -35,6 +35,8 @@ public:
     void setReleaseDate(const string &value);
     string getLanguage() const;
     void setLanguage(const string &value);
+    vector<string> getFilmLocations() const;
+    void setFilmLocations(const vector<string> &value);
 };
 
 #endif // PROJECT_H

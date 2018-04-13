@@ -5,7 +5,7 @@
 
 
 
-class SingleSidedDVD : public string
+class SingleSidedDVD : public DVD
 {
 public:
     SingleSidedDVD();
