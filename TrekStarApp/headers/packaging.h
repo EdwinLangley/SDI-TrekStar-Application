@@ -1,7 +1,7 @@
 #ifndef PACKAGING_H
 #define PACKAGING_H
 
-#include <string>
+#include "main.h"
 
 using namespace std;
 

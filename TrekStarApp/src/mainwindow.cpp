@@ -23,24 +23,3 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_clicked()
-{
-    QString fileName = QFileDialog::getOpenFileName(this,tr("Open File"),"C://","All files (*.*)");
-
-    QMessageBox::information(this,tr("File Name"),fileName);
-}
-
-
-
-void MainWindow::on_addFilmLocationButton_clicked()
-{
-    ui->listWidgetFilmLocations->addItem(ui->lineEditFilmLoc->text());
-    ui->lineEditFilmLoc->setText("");
-
-}
-
-void MainWindow::on_addKeywordButton_clicked()
-{
-    ui->listWidgetKeywords->addItem(ui->lineEditKeywords->text());
-    ui->lineEditKeywords->setText("");
-}

@@ -1,9 +1,7 @@
 #ifndef DVD_H
 #define DVD_H
 
-#include <vector>
-#include <string>
-
+#include "main.h"
 #include "material.h"
 
 using namespace std;

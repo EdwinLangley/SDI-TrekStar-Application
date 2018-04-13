@@ -1,9 +1,7 @@
 #ifndef PROJECT_H
 #define PROJECT_H
 
-#include <iostream>
-#include <string>
-#include <vector>
+#include "main.h"
 
 using namespace std;
 

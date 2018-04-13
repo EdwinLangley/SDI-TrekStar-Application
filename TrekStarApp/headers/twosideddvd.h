@@ -1,7 +1,7 @@
 #ifndef TWOSIDEDDVD_H
 #define TWOSIDEDDVD_H
 
-#include <string>
+#include "main.h"
 #include "dvd.h"
 
 using namespace std;

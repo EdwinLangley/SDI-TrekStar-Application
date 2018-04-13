@@ -73,7 +73,9 @@ HEADERS += \
         headers/costumedesigner.h \
         headers/node.h \
         headers/doublylinkedlist.h \
-        headers/filehandler.h
+        headers/filehandler.h \
+    headers/main.h \
+    headers/gui.h
 
 FORMS += \
         forms/mainwindow.ui

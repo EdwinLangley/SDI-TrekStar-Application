@@ -1,6 +1,7 @@
 #ifndef DOUBLYLINKEDLIST_H
 #define DOUBLYLINKEDLIST_H
 
+#include "main.h"
 #include "node.h"
 #include "project.h"
 

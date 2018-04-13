@@ -1,9 +1,7 @@
 #ifndef BLURAY_H
 #define BLURAY_H
-
+#include "main.h"
 #include "material.h"
-#include <string>
-#include <vector>
 
 using namespace std;
 

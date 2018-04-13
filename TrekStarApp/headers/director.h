@@ -1,6 +1,7 @@
 #ifndef DIRECTOR_H
 #define DIRECTOR_H
 
+#include "main.h"
 #include "crew.h"
 
 class Director : public Crew

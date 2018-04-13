@@ -1,8 +1,7 @@
 #ifndef CREW_H
 #define CREW_H
 
-#include <string>
-#include <vector>
+#include "main.h"
 
 using namespace std;
 

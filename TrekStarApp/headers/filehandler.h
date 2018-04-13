@@ -1,12 +1,13 @@
 #ifndef FILEWRITER_H
 #define FILEWRITER_H
+
+#include "main.h"
 #include "project.h"
 #include "twosideddvd.h"
 #include "singlesideddvd.h"
 #include "bluray.h"
 #include "vhs.h"
 #include "combobox.h"
-#include <fstream>
 
 #define PROJECTFILENAME     "ProjectFile.csv"
 #define MATERIALFILENAME    "MaterialFile.csv"

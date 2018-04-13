@@ -1,5 +1,7 @@
 #ifndef PRODUCER_H
 #define PRODUCER_H
+
+#include "main.h"
 #include "crew.h"
 
 class Producer : public Crew

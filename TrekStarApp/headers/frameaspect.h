@@ -1,7 +1,7 @@
 #ifndef FRAMEASPECT_H
 #define FRAMEASPECT_H
 
-#include <string>
+#include "main.h"
 
 using namespace std;
 
