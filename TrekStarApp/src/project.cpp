@@ -61,6 +61,7 @@ void Project::setLanguage(const string &value)
 }
 
 vector<string> Project::getFilmLocations() const
+
 {
     return filmLocations;
 }
