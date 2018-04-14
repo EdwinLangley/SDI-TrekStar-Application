@@ -81,4 +81,6 @@ FORMS += \
         forms/mainwindow.ui
 
 RESOURCES += \
+    style/styleVariables.txt \
     style/main.qss
+

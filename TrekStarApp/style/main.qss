@@ -1,3 +1,20 @@
 .QWidget{
-        background: #342E37;
+    background-color: @background;
+}
+
+.QLabel{
+    font-family: "Helventica Neue";
+    color: @font;
+}
+
+#lblTitle{
+    font-size: 45px;
+}
+
+#lblOpen{
+    font-size: 30px;
+}
+
+#lblNew{
+    font-size: 30px;
 }
