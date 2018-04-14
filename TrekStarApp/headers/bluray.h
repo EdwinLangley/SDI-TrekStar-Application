@@ -25,16 +25,19 @@ public:
         string bluRay;
         for(int i=0; i<this->extraLanguageTracks.size();i++){
             bluRay.append(this->extraLanguageTracks[i]);
-            bluRay.append(",");
+            bluRay.append(".");
         }
+        bluRay.append(",");
         for(int i=0; i<this->extraSubtitleTracks.size();i++){
-        bluRay.append(this->extraSubtitleTracks[i]);
-        bluRay.append(",");
+            bluRay.append(this->extraSubtitleTracks[i]);
+            bluRay.append(".");
         }
+        bluRay.append(",");
         for(int i=0; i<this->bonusTracks.size();i++){
-        bluRay.append(this->bonusTracks[i]);
-        bluRay.append(",");
+            bluRay.append(this->bonusTracks[i]);
+            bluRay.append(".");
         }
+        bluRay.append(",");
         return bluRay;
     }
 };

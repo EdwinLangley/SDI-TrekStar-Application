@@ -17,17 +17,15 @@ static void WriteProject(vector<Project> inputProject){
         newLine.append(",");
         newLine.append(inputProject[i].getReleaseDate());
         newLine.append(",");
-        newLine.append("<");
+        newLine.append(inputProject[i].getLanguage());
+        newLine.append(",");
         string filmLocationString;
         vector<string> filmLocations=inputProject[i].getFilmLocations();
         for (int j = 0; j < filmLocations.size(); j++) {
             filmLocationString.append(filmLocations[j]);
-            filmLocationString.append(",");
+            filmLocationString.append(".");
         }
         newLine.append(filmLocationString);
-        newLine.append(">");
-        newLine.append(",");
-        newLine.append(inputProject[i].getLanguage());
         newLine.append("\n");
         outputFile << newLine;
     }
@@ -36,7 +34,34 @@ static void WriteProject(vector<Project> inputProject){
 
 static vector<Project> ReadProjects(){
     vector<Project> returnedProjects;
-
+    ifstream inputFile;
+    inputFile.open(PROJECTFILENAME);
+    string line;
+    while (getline(inputFile,line)) {
+        Project tempProject;
+        std::stringstream lineStream;
+        lineStream<<line;
+        string section;
+        vector<string> resultsStorage, vectorStorage;
+        //Get member variables
+        while (getline(lineStream,section,',')){
+            resultsStorage.push_back(section);
+        }
+        //Get member vectors
+        while (getline(lineStream,section,'.')){
+            vectorStorage.push_back(section);
+        }
+        //Build a project
+        tempProject.setTitle(resultsStorage[0]);
+        tempProject.setProjectStatus(resultsStorage[1]);
+        tempProject.setSummary(resultsStorage[2]);
+        tempProject.setGenre(resultsStorage[3]);
+        tempProject.setReleaseDate(resultsStorage[4]);
+        tempProject.setLanguage(resultsStorage[5]);
+        tempProject.setFilmLocations(vectorStorage);
+        //Add project to returned ones
+        returnedProjects.push_back(tempProject);
+    }
     return returnedProjects;
 }
 
@@ -49,6 +74,10 @@ static void WriteOneSidedDVD(SingleSidedDVD inputDVDS){
     outputFile.open(MATERIALFILENAME);
     outputFile<<oneSidedDVD;
     outputFile.close();
+}
+
+static void ReadOneSidedDVD(){
+
 }
 
 static void WriteTwoSidedDVD(TwoSidedDVD inputDVDS){

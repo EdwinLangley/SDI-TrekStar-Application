@@ -29,12 +29,14 @@ public:
         string dvd;
         for(int i=0; i<this->extraLanguageTracks.size();i++){
             dvd.append(this->extraLanguageTracks[i]);
-            dvd.append(",");
+            dvd.append(".");
         }
-        for(int i=0; i<this->extraSubtitleTracks.size();i++){
-        dvd.append(this->extraSubtitleTracks[i]);
         dvd.append(",");
+        for(int i=0; i<this->extraSubtitleTracks.size();i++){
+            dvd.append(this->extraSubtitleTracks[i]);
+            dvd.append(".");
         }
+        dvd.append(",");
         dvd.append(this->firstSideContent);
         dvd.append(",");
         return dvd;

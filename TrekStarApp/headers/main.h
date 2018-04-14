@@ -5,5 +5,6 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <sstream>
 
 #endif // MAIN_H

@@ -17,6 +17,7 @@ private:
     string language = "";
 
     vector<string> filmLocations;
+    vector<string> materials;
 
 
 public:
