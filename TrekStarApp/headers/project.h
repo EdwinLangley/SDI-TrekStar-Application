@@ -36,6 +36,8 @@ public:
     void setLanguage(const string &value);
     vector<string> getFilmLocations() const;
     void setFilmLocations(const vector<string> &value);
+    vector<string> getMaterials() const;
+    void setMaterials(const vector<string> &value);
 };
 
 #endif // PROJECT_H

@@ -1,8 +1,10 @@
 #include "filehandler.h"
+#include "doublylinkedlist.h"
 
 using namespace std;
 
-static void WriteProject(vector<Project> inputProject){
+
+void WriteProject(vector<Project> inputProject){
     ofstream outputFile;
     outputFile.open(PROJECTFILENAME);
     for (int i = 0; i < inputProject.size(); i++) {
@@ -19,20 +21,17 @@ static void WriteProject(vector<Project> inputProject){
         newLine.append(",");
         newLine.append(inputProject[i].getLanguage());
         newLine.append(",");
-        string filmLocationString;
-        vector<string> filmLocations=inputProject[i].getFilmLocations();
-        for (int j = 0; j < filmLocations.size(); j++) {
-            filmLocationString.append(filmLocations[j]);
-            filmLocationString.append(".");
-        }
-        newLine.append(filmLocationString);
+        newLine.append(VectorToString(inputProject[i].getFilmLocations()));
+        newLine.append(",");
+        newLine.append(VectorToString(inputProject[i].getMaterials()));
+        newLine.append(",");
         newLine.append("\n");
         outputFile << newLine;
     }
     outputFile.close();
 }
 
-static vector<Project> ReadProjects(){
+vector<Project> ReadProjects(){
     vector<Project> returnedProjects;
     ifstream inputFile;
     inputFile.open(PROJECTFILENAME);
@@ -47,10 +46,6 @@ static vector<Project> ReadProjects(){
         while (getline(lineStream,section,',')){
             resultsStorage.push_back(section);
         }
-        //Get member vectors
-        while (getline(lineStream,section,'.')){
-            vectorStorage.push_back(section);
-        }
         //Build a project
         tempProject.setTitle(resultsStorage[0]);
         tempProject.setProjectStatus(resultsStorage[1]);
@@ -58,15 +53,21 @@ static vector<Project> ReadProjects(){
         tempProject.setGenre(resultsStorage[3]);
         tempProject.setReleaseDate(resultsStorage[4]);
         tempProject.setLanguage(resultsStorage[5]);
-        tempProject.setFilmLocations(vectorStorage);
+        tempProject.setFilmLocations(StringToVector(resultsStorage[6]));
+        tempProject.setMaterials(StringToVector(resultsStorage[7]));
         //Add project to returned ones
         returnedProjects.push_back(tempProject);
     }
     return returnedProjects;
 }
 
-static void WriteOneSidedDVD(SingleSidedDVD inputDVDS){
-    string oneSidedDVD;
+void WriteMaterials(DoublyLinkedList Materials){
+
+}
+
+void WriteOneSidedDVD(SingleSidedDVD inputDVDS){
+    string oneSidedDVD="1DVD";
+    twoSidedDVD.append(",");;
     oneSidedDVD=inputDVDS.getMaterials();
     oneSidedDVD.append(inputDVDS.getDVD());
     oneSidedDVD.append("\n");
@@ -76,12 +77,13 @@ static void WriteOneSidedDVD(SingleSidedDVD inputDVDS){
     outputFile.close();
 }
 
-static void ReadOneSidedDVD(){
+SingleSidedDVD ReadOneSidedDVD(){
 
 }
 
-static void WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
-    string twoSidedDVD;
+void WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
+    string twoSidedDVD="2DVD";
+    twoSidedDVD.append(",");
     twoSidedDVD=inputDVDS.getMaterials();
     twoSidedDVD.append(inputDVDS.getDVD());
     twoSidedDVD.append(inputDVDS.getSecondSideContent());
@@ -92,8 +94,9 @@ static void WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
     outputFile.close();
 }
 
-static void WriteBluRay(BluRay inputDVDS){
-    string bluRay;
+void WriteBluRay(BluRay inputDVDS){
+    string bluRay="BR";
+    bluRay.append(",");
     bluRay=inputDVDS.getMaterials();
     bluRay.append(inputDVDS.getBluRay());
     bluRay.append("\n");
@@ -103,8 +106,9 @@ static void WriteBluRay(BluRay inputDVDS){
     outputFile.close();
 }
 
-static void WriteVHS(VHS inputDVDS){
-    string vhs;
+void WriteVHS(VHS inputDVDS){
+    string vhs="VHS";
+    vhs.append(",");
     vhs=inputDVDS.getMaterials();
     vhs.append("\n");
     ofstream outputFile;
@@ -113,7 +117,7 @@ static void WriteVHS(VHS inputDVDS){
     outputFile.close();
 }
 
-static void WriteComboBox(ComboBox inputDVDS){
+void WriteComboBox(ComboBox inputDVDS){
     string comboBox;
 
 }

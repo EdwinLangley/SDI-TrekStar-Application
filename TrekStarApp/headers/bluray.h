@@ -23,20 +23,11 @@ public:
     void setBonusTracks(const vector<string> &value);
     string getBluRay(){
         string bluRay;
-        for(int i=0; i<this->extraLanguageTracks.size();i++){
-            bluRay.append(this->extraLanguageTracks[i]);
-            bluRay.append(".");
-        }
+        bluRay.append(VectorToString(extraLanguageTracks));
         bluRay.append(",");
-        for(int i=0; i<this->extraSubtitleTracks.size();i++){
-            bluRay.append(this->extraSubtitleTracks[i]);
-            bluRay.append(".");
-        }
+        bluRay.append(VectorToString(extraSubtitleTracks));
         bluRay.append(",");
-        for(int i=0; i<this->bonusTracks.size();i++){
-            bluRay.append(this->bonusTracks[i]);
-            bluRay.append(".");
-        }
+        bluRay.append(VectorToString(bonusTracks));
         bluRay.append(",");
         return bluRay;
     }
