@@ -84,7 +84,7 @@ HEADERS += \
         headers/data_structure/doublylinkedlist.h \
         headers/file_handler/filehandler.h \
         headers/main.h \
-        headers/gui/gui.h
+    headers/gui/gui.h
 
 FORMS += \
         forms/mainwindow.ui

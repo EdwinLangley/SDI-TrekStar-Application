@@ -1,3 +1,3 @@
-@background=#342E37;
-@font=#FFFFFF;
-@highlight=#FFFFFF;
+@background = #342E37;
+@font = #FFFFFF;
+@highlight = #FFFFFF;
