@@ -71,6 +71,26 @@ void Project::setFilmLocations(const vector<string> &value)
     filmLocations = value;
 }
 
+vector<string> Project::getMaterials() const
+{
+    return materialIDs;
+}
+
+void Project::setMaterials(const vector<string> &value)
+{
+    materialIDs = value;
+}
+
+string Project::getCrewID() const
+{
+    return crewID;
+}
+
+void Project::setCrewID(const string &value)
+{
+    crewID = value;
+}
+
 Project::Project()
 {
     

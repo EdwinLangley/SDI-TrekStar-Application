@@ -56,6 +56,7 @@ public:
         Materials.append(",");
         Materials.append(to_string(this->price));
         Materials.append(",");
+        Materials.append(VectorToString(subTitleLanguages));
         return Materials;
     }
 };

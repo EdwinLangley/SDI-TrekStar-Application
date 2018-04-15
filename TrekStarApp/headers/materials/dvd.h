@@ -27,15 +27,11 @@ public:
     void setFirstSideContent(const string &value);
     string getDVD(){
         string dvd;
-        for(int i=0; i<this->extraLanguageTracks.size();i++){
-            dvd.append(this->extraLanguageTracks[i]);
-            dvd.append(".");
-        }
+        dvd.append(VectorToString(extraLanguageTracks));
         dvd.append(",");
-        for(int i=0; i<this->extraSubtitleTracks.size();i++){
-            dvd.append(this->extraSubtitleTracks[i]);
-            dvd.append(".");
-        }
+        dvd.append(VectorToString(extraSubtitleTracks));
+        dvd.append(",");
+        dvd.append(VectorToString(bonusFeatures));
         dvd.append(",");
         dvd.append(this->firstSideContent);
         dvd.append(",");
