@@ -24,6 +24,7 @@ private:
 
 public:
     Material();
+    Material(string idNumber,string title,string vFormat,string aFormat,string language,int runTime,float price,vector<string> subTitleLanguages);
     string getIdNumber() const;
     void setIdNumber(const string &value);
     string getTitle() const;
@@ -40,25 +41,7 @@ public:
     void setPrice(float value);
     vector<string> getSubTitleLanguages() const;
     void setSubTitleLanguages(const vector<string> &value);
-    string getMaterials(){
-        string Materials;
-        Materials.append(this->idNumber);
-        Materials.append(",");
-        Materials.append(this->title);
-        Materials.append(",");
-        Materials.append(this->vFormat);
-        Materials.append(",");
-        Materials.append(this->aFormat);
-        Materials.append(",");
-        Materials.append(this->language);
-        Materials.append(",");
-        Materials.append(to_string(this->runTime));
-        Materials.append(",");
-        Materials.append(to_string(this->price));
-        Materials.append(",");
-        Materials.append(VectorToString(subTitleLanguages));
-        return Materials;
-    }
+    string getMaterials();
 };
 
 #endif // MATERIAL_H

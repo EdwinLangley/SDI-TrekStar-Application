@@ -82,7 +82,39 @@ void Material::setSubTitleLanguages(const vector<string> &value)
     subTitleLanguages = value;
 }
 
-Material::Material()
+string Material::getMaterials()
 {
+        string Materials;
+        Materials.append(this->idNumber);
+        Materials.append(",");
+        Materials.append(this->title);
+        Materials.append(",");
+        Materials.append(this->vFormat);
+        Materials.append(",");
+        Materials.append(this->aFormat);
+        Materials.append(",");
+        Materials.append(this->language);
+        Materials.append(",");
+        Materials.append(to_string(this->runTime));
+        Materials.append(",");
+        Materials.append(to_string(this->price));
+        Materials.append(",");
+        Materials.append(VectorToString(subTitleLanguages));
+        return Materials;
+    }
 
+Material::Material(){
+
+}
+
+Material::Material(string idNumber,string title,string vFormat,string aFormat,string language,int runTime,float price,vector<string> subTitleLanguages)
+{
+    this->idNumber=idNumber;
+    this->title=title;
+    this->vFormat=vFormat;
+    this->aFormat=aFormat;
+    this->language=language;
+    this->runTime=runTime;
+    this->price=price;
+    this->subTitleLanguages=subTitleLanguages;
 }
