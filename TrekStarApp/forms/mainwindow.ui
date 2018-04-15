@@ -29,7 +29,7 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>441</width>
+      <width>631</width>
       <height>51</height>
      </rect>
     </property>
@@ -43,7 +43,7 @@
      </font>
     </property>
     <property name="text">
-     <string>EAT A PIE SAM</string>
+     <string>TREKSTAR MANAGER</string>
     </property>
    </widget>
    <widget class="Line" name="lnTitle">
