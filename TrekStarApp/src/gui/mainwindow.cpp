@@ -8,9 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QString styleCode = readStyleSheet(":/style/main.qss");
-
-    this->setStyleSheet(styleCode);
+    //QString styleCode = readStyleSheet(":/style/main.qss");
+    //this->setStyleSheet(styleCode);
 
 }
 
