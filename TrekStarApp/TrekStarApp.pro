@@ -84,12 +84,15 @@ HEADERS += \
         headers/data_structure/doublylinkedlist.h \
         headers/file_handler/filehandler.h \
         headers/main.h \
-    headers/gui/gui.h
+        headers/gui/gui.h
 
 FORMS += \
         forms/mainwindow.ui
 
 RESOURCES += \
     style/styleVariables.txt \
-    style/main.qss
-
+    style/main.qss \
+    res/arrowDownWhite.png \
+    res/arrowDownBlue.png \
+    res/arrowUpWhite.png \
+    res/arrowUpBlue.png
