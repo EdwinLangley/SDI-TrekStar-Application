@@ -14,16 +14,16 @@ class Project
 {
 
 private:
-    string title = "";
-    string projectStatus = "";
-    string summary = "";
-    string genre = "";
-    string releaseDate = "";
-    string language = "";
+    string title = "TestTitle";
+    string projectStatus = "TestStatus";
+    string summary = "TestSummary";
+    string genre = "TestGenre";
+    string releaseDate = "TestReleaseData";
+    string language = "TestLanguage";
     //Like Material IDs but only links to one singular crew entity, as each crew will be unique.
     //CrewID 0 will be an unset crew
-    string crewID;
-    vector<string> filmLocations;
+    string crewID="0";
+    vector<string> filmLocations={"Location1","Location2","location3"};
    ;
 public:
     //ONLY TO BE SET ON LOAD FROM FILES/CREATION OF PROJECT MATERIAL

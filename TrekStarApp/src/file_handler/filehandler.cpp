@@ -3,7 +3,21 @@
 
 using namespace std;
 
-void WriteOneSidedDVD(SingleSidedDVD inputDVDS){
+//TAKE MATERIAL(ABSTRACT CLASS COMPONENT) OUT OF A DERRIVED CLASS
+Material FileWriter::SplitMaterial(string inputLine){
+
+    stringstream ss;
+    string section;
+    ss<<inputLine;
+    vector<string> materialStorage;
+    while(getline(ss,section,',')){
+        materialStorage.push_back(section);
+    }
+    Material outputMaterial(materialStorage[0],materialStorage[1],materialStorage[2],materialStorage[3],materialStorage[4],stoi(materialStorage[5]),stof(materialStorage[6]),StringToVector(materialStorage[7]));
+    return outputMaterial;
+}
+
+void FileWriter::WriteOneSidedDVD(SingleSidedDVD inputDVDS){
     string oneSidedDVD="1DVD,";
     oneSidedDVD=inputDVDS.getMaterials();
     oneSidedDVD.append(inputDVDS.getDVD());
@@ -14,12 +28,24 @@ void WriteOneSidedDVD(SingleSidedDVD inputDVDS){
     outputFile.close();
 }
 
-SingleSidedDVD ReadOneSidedDVD(string input)
+SingleSidedDVD FileWriter::ReadOneSidedDVD(string input)
 {
-
+    stringstream ss;
+    string section;
+    ss<<input;
+    vector<string> materialStorage;
+    while(getline(ss,section,',')){
+        materialStorage.push_back(section);
+    }
+    vector<string> extraLanguageTracks=StringToVector(materialStorage[8]);
+    vector<string> extraSubtitleTracks=StringToVector(materialStorage[9]);
+    vector<string> bonusFeatures=StringToVector(materialStorage[10]);
+    string firstSideContent=materialStorage[11];
+    SingleSidedDVD returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures,firstSideContent);
+    return returnDVD;
 }
 
-static void WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
+void FileWriter::WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
     string twoSidedDVD="2DVD,";
     twoSidedDVD=inputDVDS.getMaterials();
     twoSidedDVD.append(inputDVDS.getDVD());
@@ -31,12 +57,25 @@ static void WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
     outputFile.close();
 }
 
-TwoSidedDVD ReadTwoSidedDVD(string input)
+TwoSidedDVD FileWriter::ReadTwoSidedDVD(string input)
 {
-
+    stringstream ss;
+    string section;
+    ss<<input;
+    vector<string> materialStorage;
+    while(getline(ss,section,',')){
+        materialStorage.push_back(section);
+    }
+    vector<string> extraLanguageTracks=StringToVector(materialStorage[8]);
+    vector<string> extraSubtitleTracks=StringToVector(materialStorage[9]);
+    vector<string> bonusFeatures=StringToVector(materialStorage[10]);
+    string firstSideContent=materialStorage[11];
+    string secondSideContent=materialStorage[12];
+//    //TwoSidedDVD returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures,firstSideContent,secondSideContent);
+//    return returnDVD;
 }
 
-static void WriteBluRay(BluRay inputDVDS){
+void FileWriter::WriteBluRay(BluRay inputDVDS){
     string bluRay="BRAY,";
     bluRay=inputDVDS.getMaterials();
     bluRay.append(inputDVDS.getBluRay());
@@ -47,12 +86,23 @@ static void WriteBluRay(BluRay inputDVDS){
     outputFile.close();
 }
 
-BluRay ReadBluRay(string input)
+BluRay FileWriter::ReadBluRay(string input)
 {
-
+    stringstream ss;
+    string section;
+    ss<<input;
+    vector<string> materialStorage;
+    while(getline(ss,section,',')){
+        materialStorage.push_back(section);
+    }
+    vector<string> extraLanguageTracks=StringToVector(materialStorage[8]);
+    vector<string> extraSubtitleTracks=StringToVector(materialStorage[9]);
+    vector<string> bonusFeatures=StringToVector(materialStorage[10]);
+//    BluRay returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures);
+//    return returnDVD;
 }
 
-static void WriteVHS(VHS inputDVDS){
+void FileWriter::WriteVHS(VHS inputDVDS){
     string vhs="VHSS,";
     vhs=inputDVDS.getMaterials();
     vhs.append("\n");
@@ -62,22 +112,23 @@ static void WriteVHS(VHS inputDVDS){
     outputFile.close();
 }
 
-VHS ReadVHS(string input)
+VHS FileWriter::ReadVHS(string input)
 {
-
+//    VHS returnVHS(SplitMaterial(input));
+//    return returnVHS;
 }
 
-static void WriteComboBox(ComboBox inputDVDS){
+void FileWriter::WriteComboBox(ComboBox inputDVDS){
     string comboBox="CBOX";
 
 }
 
-ComboBox ReadComboBox(string input)
+ComboBox FileWriter::ReadComboBox(string input)
 {
 
 }
 
-static void WriteMaterials(vector<Project> inputProject){
+void FileWriter::WriteMaterials(vector<Project> inputProject){
     for (int i = 0; i < inputProject.size(); i++) {
         if(inputProject[i].singleDVD.getIdNumber()!="0"){
             WriteOneSidedDVD(inputProject[i].singleDVD);
@@ -97,7 +148,7 @@ static void WriteMaterials(vector<Project> inputProject){
     }
 }
 
-static vector<string> ReadMaterials(){
+vector<string> FileWriter::ReadMaterials(){
     vector<string> materials;
     ifstream inputFile;
     inputFile.open(MATERIALFILENAME);
@@ -109,7 +160,7 @@ static vector<string> ReadMaterials(){
     return materials;
 }
 
-static void WriteProject(vector<Project> inputProject){
+void FileWriter::WriteProject(vector<Project> inputProject){
     ofstream outputFile;
     outputFile.open(PROJECTFILENAME);
     for (int i = 0; i < inputProject.size(); i++) {
@@ -139,14 +190,14 @@ static void WriteProject(vector<Project> inputProject){
     outputFile.close();
 }
 
-static vector<Project> ReadProjects(){
+vector<Project> FileWriter::ReadProjects(){
     vector<Project> returnedProjects;
     ifstream inputFile;
     inputFile.open(PROJECTFILENAME);
     string line;
     while (getline(inputFile,line)) {
         Project tempProject;
-        std::stringstream lineStream;
+        stringstream lineStream;
         lineStream<<line;
         string section;
         vector<string> resultsStorage, vectorStorage;
@@ -172,18 +223,19 @@ static vector<Project> ReadProjects(){
     return returnedProjects;
 }
 
-static void WriteCrew(vector<string> inputcrew){
+void FileWriter::WriteCrew(vector<string> inputcrew){
 
 }
 
-static vector<string>ReadCrew(){
+vector<string> FileWriter::ReadCrew(){
 
 }
 
-static vector<Project> BuildProjectList(){
-    vector<Project>projects=ReadProjects();
-    vector<string>materialLines=ReadMaterials();
-    vector<string>crewLines=ReadCrew();
+vector<Project> FileWriter::BuildProjectList(){
+    FileWriter aFileWriter;
+    vector<Project>projects=aFileWriter.ReadProjects();
+    vector<string>materialLines=aFileWriter.ReadMaterials();
+    vector<string>crewLines=aFileWriter.ReadCrew();
     //Go through Project list
     for (int i=0; i<projects.size();i++){
         //Go through material list for the project
@@ -237,4 +289,9 @@ static vector<Project> BuildProjectList(){
             }
         }
     }
+}
+
+FileWriter::FileWriter()
+{
+
 }

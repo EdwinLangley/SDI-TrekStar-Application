@@ -4,15 +4,14 @@
 #include "project.h"
 #include "doublylinkedlist.h"
 #include "main.h"
+#include "filehandler.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-
     // Calls function which stores qss variables in a global list variable
     readVariables();
-
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

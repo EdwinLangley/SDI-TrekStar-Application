@@ -19,31 +19,32 @@ public:
     //Stored as
     //$Title,ProjectStatus,Summary,Genre,ReleaseData,<VECTOR of FilmLocations>,Language,
     //<VECTOR of OneSidedDVD>,<VECTOR of TwoSidedDVD>,<VECTOR of BluRay>,<VECTOR of VHS> \n
-    static void WriteProject(vector<Project> inputProject);
-    static vector<Project> ReadProjects(string input);
+    void WriteProject(vector<Project> inputProject);
+    vector<Project> ReadProjects();
 
-    static void WriteMaterials(vector<Project> inputProject);
-    static vector<string> ReadMaterials();
+    void WriteMaterials(vector<Project> inputProject);
+    vector<string> ReadMaterials();
+    Material SplitMaterial(string inputLine);
 
-    static void WriteCrew(vector<string> inputcrew);
-    static vector<string>ReadCrew();
+    void WriteCrew(vector<string> inputcrew);
+    vector<string>ReadCrew();
 
-    static void WriteOneSidedDVD(SingleSidedDVD inputDVDS);
-    static SingleSidedDVD ReadOneSidedDVD(string input);
+    void WriteOneSidedDVD(SingleSidedDVD inputDVDS);
+    SingleSidedDVD ReadOneSidedDVD(string input);
 
-    static void WriteTwoSidedDVD(TwoSidedDVD inputDVDS);
-    static TwoSidedDVD ReadTwoSidedDVD(string input);
+    void WriteTwoSidedDVD(TwoSidedDVD inputDVDS);
+    TwoSidedDVD ReadTwoSidedDVD(string input);
 
-    static void WriteBluRay(BluRay inputDVDS);
-    static BluRay ReadBluRay(string input);
+    void WriteBluRay(BluRay inputDVDS);
+    BluRay ReadBluRay(string input);
 
-    static void WriteVHS(VHS inputDVDS);
-    static VHS ReadVHS(string input);
+    void WriteVHS(VHS inputDVDS);
+    VHS ReadVHS(string input);
 
-    static void WriteComboBox(ComboBox inputDVDS);
-    static ComboBox ReadComboBox(string input);
+    void WriteComboBox(ComboBox inputDVDS);
+    ComboBox ReadComboBox(string input);
 
-    static vector<Project> BuildProjectList();
+    vector<Project> BuildProjectList();
 };
 
 #endif // FILEWRITER_H
