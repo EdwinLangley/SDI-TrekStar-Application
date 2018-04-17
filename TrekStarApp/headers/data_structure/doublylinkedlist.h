@@ -37,7 +37,9 @@ void delete_position(int pos);
 
 int size();
 
-Project& operator[](unsigned int n);
+//Project& operator[](unsigned int n);
+
+//Project& findByTitle(string title);
 
 };
 
