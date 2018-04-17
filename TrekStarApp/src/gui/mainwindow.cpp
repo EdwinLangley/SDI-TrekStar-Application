@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QString styleCode = readStyleSheet(":/style/main.qss");
+    QString styleCode = readStyleSheet(":/style/general.qss") + readStyleSheet(":/style/main.qss");
     this->setStyleSheet(styleCode);
 
     ui->lstProject->setAttribute(Qt::WA_MacShowFocusRect, 0);

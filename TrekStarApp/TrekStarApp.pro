@@ -57,7 +57,10 @@ SOURCES += \
         src/data_structure/node.cpp \
         src/data_structure/doublylinkedlist.cpp \
         src/file_handler/filehandler.cpp \
-        src/gui/stylesheetreader.cpp
+        src/gui/stylesheetreader.cpp \
+        src/gui/projectwindow.cpp \
+    src/controller/controllermain.cpp \
+    src/controller/controllerproject.cpp
 
 HEADERS += \
         headers/gui/mainwindow.h \
@@ -84,15 +87,21 @@ HEADERS += \
         headers/data_structure/doublylinkedlist.h \
         headers/file_handler/filehandler.h \
         headers/main.h \
-        headers/gui/gui.h
+        headers/gui/gui.h \
+        headers/gui/projectwindow.h \
+        headers/controller/controllerproject.h \
+    headers/controller/controllermain.h
 
 FORMS += \
-        forms/mainwindow.ui
+        forms/mainwindow.ui \
+        forms/projectwindow.ui
 
 RESOURCES += \
-    style/styleVariables.txt \
-    style/main.qss \
-    res/arrowDownWhite.png \
-    res/arrowDownBlue.png \
-    res/arrowUpWhite.png \
-    res/arrowUpBlue.png
+        style/styleVariables.txt \
+        style/general.qss \
+        style/main.qss \
+        style/project.qss \
+        res/arrowDownWhite.png \
+        res/arrowDownBlue.png \
+        res/arrowUpWhite.png \
+        res/arrowUpBlue.png

@@ -1,0 +1,10 @@
+.QTabBar::tab {
+    width: 300%;
+    height: 50%;
+}
+
+#lblProjectName {
+    background-color: @highlight;
+    color: @lightColour;
+    font-size: 60px;
+}
