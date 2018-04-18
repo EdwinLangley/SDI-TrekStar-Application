@@ -11,4 +11,4 @@ std::string VectorToString(std::vector<std::string> inputVector);
 std::vector<std::string> StringToVector(std::string inputString);
 
 
-#endif // MAIN_H
+#endif //MAIN_H

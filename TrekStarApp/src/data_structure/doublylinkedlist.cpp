@@ -95,64 +95,89 @@ void DoublyLinkedList::delete_position(int pos)
  }
 
 unsigned int DoublyLinkedList::size()
-    {
-        Node *current = head;
-        Node *previous = new Node;
+{
+    Node *current = head;
+    Node *previous = new Node;
 
-        unsigned int Size = 1;
-        while (current->next != NULL)
+    unsigned int Size = 1;
+    while (current->next != NULL)
+    {
+        previous = current;
+        current = previous->next;
+        Size++;
+    }
+
+    return Size;
+}
+
+//Function to get project n
+Project& DoublyLinkedList::operator[](unsigned int n)
+{
+    Node *current = head;
+    Node *previous = new Node;
+
+    if (n > size())
+    {
+        throw std::invalid_argument("Index out of bounds");
+    }
+
+    unsigned int pos = 0;
+    while (pos != n)
+    {
+        previous = current;
+        current = previous->next;
+        pos++;
+    }
+
+    return current->data;
+}
+
+Project& DoublyLinkedList::findByTitle(string title)
+{
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+        if (current->data.getTitle() == title)
         {
+
+            return current->data;
+        }
+        else {
             previous = current;
-            current = previous->next;
-            Size++;
+            current = current->next;
         }
-
-        return Size;
     }
 
-    //Function to get project n
-    Project& DoublyLinkedList::operator[](unsigned int n)
+    throw std::invalid_argument("Project not found");
+
+}
+
+vector<string> DoublyLinkedList::findByGenre(string Genre)
+{
+    vector<string> AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
     {
-        Node *current = head;
-        Node *previous = new Node;
 
-        if (n > size())
+        if (current->data.getGenre() == Genre)
         {
-            throw std::invalid_argument("Index out of bounds");
+            AllProjects.push_back(current->data.getTitle());
         }
-
-        unsigned int pos = 0;
-        while (pos != n)
-        {
-            previous = current;
-            current = previous->next;
-            pos++;
-        }
-
-        return current->data;
+        previous = current;
+        current = current->next;
     }
 
-    Project& DoublyLinkedList::findByTitle(string title)
+    if (AllProjects.empty())
     {
-        Node *current = head;
-        Node *previous = new Node;
-
-        while (current->next != NULL)
-        {
-            if (current->data.getTitle() == title)
-            {
-
-                return current->data;
-            }
-            else {
-                previous = current;
-                current = current->next;
-            }
-        }
-
-        throw std::invalid_argument("Project not found");
-
+        throw std::out_of_range("No films with this genre");
     }
+
+    return AllProjects;
+}
 
 
 
