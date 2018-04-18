@@ -94,59 +94,65 @@ void DoublyLinkedList::delete_position(int pos)
    previous->next=current->next;
  }
 
-int DoublyLinkedList::size()
-{
-   Node *current = head;
-   Node *previous = new Node;
+unsigned int DoublyLinkedList::size()
+    {
+        Node *current = head;
+        Node *previous = new Node;
 
-   int Size = 1;
-   while (current->next != NULL)
-   {
-       previous = current;
-       current = previous->next;
-       Size++;
-   }
-   return Size;
-}
+        unsigned int Size = 1;
+        while (current->next != NULL)
+        {
+            previous = current;
+            current = previous->next;
+            Size++;
+        }
 
-////Allows [] bracket notation to obtain referance to a project in nth position
-//Project& DoublyLinkedList::operator[](unsigned int n)
-//{
-//    Node *current = head;
-//    Node *previous = new Node;
+        return Size;
+    }
 
-//    int pos = 0;
-//    while (pos != n)
-//    {
-//        previous = current;
-//        current = previous->next;
-//        pos++;
-//    }
-//    Project Selected = current->data;
-//    return Selected;
-//}
+    //Function to get project n
+    Project& DoublyLinkedList::operator[](unsigned int n)
+    {
+        Node *current = head;
+        Node *previous = new Node;
 
-//Project& DoublyLinkedList::findByTitle (string title)
-//{
-//    Node *current = head;
-//    Node *previous = new Node;
+        if (n > size())
+        {
+            throw std::invalid_argument("Index out of bounds");
+        }
 
-//    while (current->next != NULL)
-//    {
-//        if (current->data.getTitle() == title)
-//        {
-//            Project Selected = current->data;
-//            return Selected;
-//        }
-//        else {
-//            previous = current;
-//            current = current->next;
-//        }
-//    }
+        unsigned int pos = 0;
+        while (pos != n)
+        {
+            previous = current;
+            current = previous->next;
+            pos++;
+        }
 
-//    //Return something if not found
+        return current->data;
+    }
 
-//}
+    Project& DoublyLinkedList::findByTitle(string title)
+    {
+        Node *current = head;
+        Node *previous = new Node;
+
+        while (current->next != NULL)
+        {
+            if (current->data.getTitle() == title)
+            {
+
+                return current->data;
+            }
+            else {
+                previous = current;
+                current = current->next;
+            }
+        }
+
+        throw std::invalid_argument("Project not found");
+
+    }
 
 
 

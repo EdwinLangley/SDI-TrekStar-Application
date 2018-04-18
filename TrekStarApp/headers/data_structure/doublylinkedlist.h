@@ -35,11 +35,11 @@ void delete_last();
 
 void delete_position(int pos);
 
-int size();
+unsigned int size();
 
-//Project& operator[](unsigned int n);
+Project& operator[](unsigned int n);
 
-//Project& findByTitle(string title);
+Project& findByTitle(string title);
 
 };
 
