@@ -109,21 +109,44 @@ int DoublyLinkedList::size()
    return Size;
 }
 
-//Allows [] bracket notation to obtain referance to a project in nth position
-Project& DoublyLinkedList::operator[](unsigned int n)
-{
-    Node *current = head;
-    Node *previous = new Node;
+////Allows [] bracket notation to obtain referance to a project in nth position
+//Project& DoublyLinkedList::operator[](unsigned int n)
+//{
+//    Node *current = head;
+//    Node *previous = new Node;
 
-    int pos = 0;
-    while (pos != n)
-    {
-        previous = current;
-        current = previous->next;
-        pos++;
-    }
-    Project Selected = current->data;
-    return Selected;
-}
+//    int pos = 0;
+//    while (pos != n)
+//    {
+//        previous = current;
+//        current = previous->next;
+//        pos++;
+//    }
+//    Project Selected = current->data;
+//    return Selected;
+//}
+
+//Project& DoublyLinkedList::findByTitle (string title)
+//{
+//    Node *current = head;
+//    Node *previous = new Node;
+
+//    while (current->next != NULL)
+//    {
+//        if (current->data.getTitle() == title)
+//        {
+//            Project Selected = current->data;
+//            return Selected;
+//        }
+//        else {
+//            previous = current;
+//            current = current->next;
+//        }
+//    }
+
+//    //Return something if not found
+
+//}
+
 
 
