@@ -1,66 +1,66 @@
 #include "crewMember.h"
 
-string Crew::getName() const
+string CrewMember::getName() const
 {
     return name;
 }
 
-void Crew::setName(const string &value)
+void CrewMember::setName(const string &value)
 {
     name = value;
 }
 
-string Crew::getDateOfBirth() const
+string CrewMember::getDateOfBirth() const
 {
     return dateOfBirth;
 }
 
-void Crew::setDateOfBirth(const string &value)
+void CrewMember::setDateOfBirth(const string &value)
 {
     dateOfBirth = value;
 }
 
-string Crew::getIdNumber() const
+string CrewMember::getIdNumber() const
 {
     return idNumber;
 }
 
-void Crew::setIdNumber(const string &value)
+void CrewMember::setIdNumber(const string &value)
 {
     idNumber = value;
 }
 
-string Crew::getTitle() const
+string CrewMember::getTitle() const
 {
     return title;
 }
 
-void Crew::setTitle(const string &value)
+void CrewMember::setTitle(const string &value)
 {
     title = value;
 }
 
-int Crew::getYearsOfExperience() const
+int CrewMember::getYearsOfExperience() const
 {
     return yearsOfExperience;
 }
 
-void Crew::setYearsOfExperience(int value)
+void CrewMember::setYearsOfExperience(int value)
 {
     yearsOfExperience = value;
 }
 
-vector<string> Crew::getLocationsWorkedAt() const
+vector<string> CrewMember::getLocationsWorkedAt() const
 {
     return locationsWorkedAt;
 }
 
-void Crew::setLocationsWorkedAt(const vector<string> &value)
+void CrewMember::setLocationsWorkedAt(const vector<string> &value)
 {
     locationsWorkedAt = value;
 }
 
-Crew::Crew()
+CrewMember::CrewMember()
 {
     
 }

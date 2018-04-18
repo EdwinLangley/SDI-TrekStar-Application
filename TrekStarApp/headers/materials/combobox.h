@@ -16,12 +16,19 @@ private:
 
     vector<string> idsOfDVDs;
 
+    vector<SingleSidedDVD> SingleDVDs;
+    vector<TwoSidedDVD> DoubleDVDs;
+
 public:
     ComboBox();
     unsigned int getNumberOfDVDs() const;
     void setNumberOfDVDs(unsigned int value);
     vector<string> getIdsOfDVDs() const;
     void setIdsOfDVDs(const vector<string> &value);
+    vector<SingleSidedDVD> getSingleDVDs() const;
+    void setSingleDVDs(const vector<SingleSidedDVD> &value);
+    vector<TwoSidedDVD> getDoubleDVDs() const;
+    void setDoubleDVDs(const vector<TwoSidedDVD> &value);
 };
 
 #endif // COMBOBOX_H

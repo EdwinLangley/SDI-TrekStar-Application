@@ -103,8 +103,28 @@ string Material::getMaterials()
         return Materials;
     }
 
-Material::Material(){
+FrameAspect Material::getFrame() const
+{
+    return frame;
+}
 
+void Material::setFrame(const FrameAspect &value)
+{
+    frame = value;
+}
+
+Packaging Material::getPackage() const
+{
+    return package;
+}
+
+void Material::setPackage(const Packaging &value)
+{
+    package = value;
+}
+
+Material::Material(){
+    
 }
 
 Material::Material(string idNumber,string title,string vFormat,string aFormat,string language,int runTime,float price,vector<string> subTitleLanguages)

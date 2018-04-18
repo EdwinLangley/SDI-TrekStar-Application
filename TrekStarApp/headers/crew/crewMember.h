@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Crew
+class CrewMember
 {
 
 private:
@@ -20,7 +20,7 @@ private:
 
 
 public:
-    Crew();
+    CrewMember();
     string getName() const;
     void setName(const string &value);
     string getDateOfBirth() const;
