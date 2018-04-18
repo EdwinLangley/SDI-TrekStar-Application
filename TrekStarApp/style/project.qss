@@ -8,3 +8,11 @@
     color: @lightColour;
     font-size: 60px;
 }
+
+#cmdClearChanges {
+    font-size: 20px;
+}
+
+#cmdApplyChanges {
+    font-size: 20px;
+}

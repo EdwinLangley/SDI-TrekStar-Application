@@ -6,6 +6,7 @@
 #include "main.h"
 #include "filehandler.h"
 #include "controllermain.h"
+#include "controllerproject.h"
 
 using namespace std;
 
@@ -14,9 +15,12 @@ int main(int argc, char *argv[])
     // Calls function which stores qss variables in a global list variable
     readVariables();
 
-    controllermain c (argc, argv);
+    QApplication a(argc, argv);
 
-    return 0;
+    controllermain cm;
+    controllerproject cp;
+
+    return a.exec();
 
 }
 

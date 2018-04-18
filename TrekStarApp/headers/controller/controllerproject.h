@@ -2,11 +2,14 @@
 #define CONTROLLERPROJECT_H
 
 #include "gui.h"
+#include "projectwindow.h"
 
 class controllerproject
 {
 public:
-    controllerproject(int argc, char *argv[]);
+    controllerproject();
+private:
+    ProjectWindow pw;
 };
 
 #endif // CONTROLLERPROJECT_H
