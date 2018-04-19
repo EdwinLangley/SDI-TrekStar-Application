@@ -2,6 +2,7 @@
 #define PROJECT_H
 
 #include "main.h"
+#include "material.h"
 #include "twosideddvd.h"
 #include "singlesideddvd.h"
 #include "bluray.h"

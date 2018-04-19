@@ -13,7 +13,7 @@ private:
     string dateOfBirth = "";
     string idNumber = "";
     string title = "";
-
+    string role = "";
     int yearsOfExperience = 0;
 
     vector<string> locationsWorkedAt;
@@ -33,6 +33,8 @@ public:
     void setYearsOfExperience(int value);
     vector<string> getLocationsWorkedAt() const;
     void setLocationsWorkedAt(const vector<string> &value);
+    string getRole() const;
+    void setRole(const string &value);
 };
 
 #endif // CREW_H

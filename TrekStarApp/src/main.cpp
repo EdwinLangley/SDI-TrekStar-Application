@@ -15,6 +15,86 @@ int main(int argc, char *argv[])
     // Calls function which stores qss variables in a global list variable
     readVariables();
 
+    try {
+        //Testing LinkedList
+        DoublyLinkedList list;
+        Project test1;
+        test1.setTitle("The Revenant");
+
+        CrewMember testCrew1;
+        testCrew1.setName("Jeff");
+        testCrew1.setRole("Actor");
+
+        CrewMember testCrew2;
+        testCrew2.setName("Jane");
+        testCrew2.setRole("Director");
+
+        CrewMember testCrew3;
+        testCrew3.setName("Jeremy");
+        testCrew3.setRole("Actor");
+
+        vector<CrewMember> CrewTest;
+        CrewTest.push_back(testCrew1);
+        CrewTest.push_back(testCrew2);
+        CrewTest.push_back(testCrew3);
+
+        test1.setCrew(CrewTest);
+        test1.setCrewID("1");
+
+        list.createnode(test1);
+
+
+        Project test2;
+        test2.setTitle("Four Lions");
+
+
+        testCrew1.setName("Annie");
+        testCrew1.setRole("Actor");
+
+
+        testCrew2.setName("Jane");
+        testCrew2.setRole("Director");
+
+
+        testCrew3.setName("Edwin");
+        testCrew3.setRole("Terrorist");
+
+        vector<CrewMember> CrewTest2;
+        CrewTest2.push_back(testCrew1);
+        CrewTest2.push_back(testCrew2);
+        CrewTest2.push_back(testCrew3);
+
+        test2.setCrew(CrewTest2);
+        test2.setCrewID("2");
+
+        list.createnode(test2);
+
+        try {
+            string Name;
+            vector<string> vecTest = list.findByRoleAndName("Terrorist","Edwin");
+            Name = vecTest.at(0);
+            std::cout << Name << std::endl;
+
+            list.findByTitle(Name).setTitle("Four Lions is shit jk");
+
+
+            vector<string> vecTest2 = list.findByRoleAndName("Terrorist","Edwin2");
+            Name = vecTest2.at(0);
+            std::cout << Name << std::endl;
+        } catch (...)
+        {
+            //Update gui with no names
+            cout << "No film with this person in specified role" << endl;
+        }
+
+
+
+    } catch (std::bad_alloc e)
+    {
+        cout << e.what() << endl;
+    }
+
+
     QApplication a(argc, argv);
 
     controllermain cm;

@@ -60,6 +60,16 @@ void CrewMember::setLocationsWorkedAt(const vector<string> &value)
     locationsWorkedAt = value;
 }
 
+string CrewMember::getRole() const
+{
+    return role;
+}
+
+void CrewMember::setRole(const string &value)
+{
+    role = value;
+}
+
 CrewMember::CrewMember()
 {
     

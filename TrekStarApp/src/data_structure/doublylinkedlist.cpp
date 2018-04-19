@@ -1,105 +1,109 @@
 #include "doublylinkedlist.h"
 
-/*
-DoublyLinkedList::DoublyLinkedList()
+void DoublyLinkedList::createnode(Project value)
 {
-
-}
-*/
-void DoublyLinkedList::createNewNode(Project project)
-{
-    Node* temp=new Node;
-    temp->data=project;
-    temp->next=NULL;
-    if(head==NULL)
+    Node *temp = new Node; //Create new node
+    temp->data = value; //New nodes data = passed value
+    temp->next = NULL; //No node after, so Next set to Null
+    if (head == NULL) //if there are no other nodes in list
     {
-      head=temp;
-      tail=temp;
-      temp=NULL;
+        head = temp; //points to first node created
+        tail = temp; //points to first node created
+        temp = NULL; //temp
     }
     else
     {
-      tail->next=temp;
-      tail=temp;
+        tail->next = temp; //The tail is now pointing to the new node, as it is the end
+        tail = temp; //new node is at the end, = tail
     }
-  }
-
-void DoublyLinkedList::displayAllNodes() {
-    Node *temp=new Node;
-    temp=head;
-    while(temp!=NULL)
-    {
-      std::cout << "test data" << std::endl;
-      //temp->data
-      //temp=temp->next;
-    }
-  }
-
-
-void DoublyLinkedList::insert_start(Project value){
-  Node *temp=new Node;
-  temp->data=value;
-  temp->next=head;
-  head=temp;
 }
 
-void DoublyLinkedList::insert_position(int pos, Project value){
-  Node *pre=new Node;
-  Node *cur=new Node;
-  Node *temp=new Node;
-  cur=head;
-  for(int i=1;i<pos;i++)
-  {
-    pre=cur;
-    cur=cur->next;
-  }
-  temp->data=value;
-  pre->next=temp;
-  temp->next=cur;
-}
-
-void DoublyLinkedList::delete_first()
- {
-   Node *temp=new Node;
-   temp=head;
-   head=head->next;
-   delete temp;
- }
-
-void DoublyLinkedList::delete_last()
+void DoublyLinkedList::display()
 {
-  Node *current=new Node;
-  Node *previous=new Node;
-  current=head;
-  while(current->next!=NULL)
-  {
-    previous=current;
-    current=current->next;
-  }
-  tail=previous;
-  previous->next=NULL;
-  delete current;
+    Node *temp = new Node; //Create new node to traverse list
+    temp = head; //Set to head to start at the begining of the list
+    while (temp != NULL) //Until we reach the end of the list
+    {
+        cout << temp->data.getTitle() << "\t"; //Output the data of the current node, then tab
+        temp = temp->next; //Temp is now assigned the next node in the list
+    }
+    cout << "\n";
+}
+
+void DoublyLinkedList::insert_start(Project value) //To create a node to go at the start of the list
+{
+    Node *temp = new Node; //temp = new node
+    temp->data = value; //New node = value passed
+    temp->next = head; //New node Next = previous head as this replaces start of the list
+    head = temp; //head = to pointer to the new node as this is new start of list
+}
+
+void DoublyLinkedList::insert_position(int pos, Project value)
+{
+    //Using this we do not disturb head or tail
+    //New node is placed between the previous and current
+    Node *pre = new Node;  //Previous node
+    Node *cur = new Node; //Current node
+    Node *temp = new Node; //temperary //New Node
+    cur = head; //Start of the list
+
+    for (int i = 1; i < pos; i++) //Loop until we reach the position we want to insert at
+    {
+        pre = cur; //set previous = to the current pointer
+        cur = cur->next; //Make current = to the next node
+    }
+    //When we are in the right position
+    temp->data = value; //Assign value to new node
+    pre->next = temp; //The node before the new one, Next points to the new node
+    temp->next = cur; //New node next, = to one after it.
+}
+
+void DoublyLinkedList::delete_first() //Delete first node in the list
+{
+    Node *temp = new Node; //Create new node to hold value, so it can be deleted.
+    temp = head; //New node set to the old head
+    head = head->next; //Head is changed to the next node. Therefore this will be the start of the list
+    delete temp; //Remove the first node from memory.
+}
+
+void DoublyLinkedList::delete_last() //traverse list to find 2nd to last node
+{
+    Node *current = new Node; //make new pointer to traverse with
+    Node *previous = new Node; //To set as new tail
+    current = head; //Start traversing at start of the list
+    while (current->next != NULL) //Untill end of list
+    {
+        previous = current; //pass current Node to previous
+        current = current->next; //Current = next node, unless NULL
+    }
+    tail = previous; //Set tail to second to last node
+    previous->next = NULL; //Set null as new end of list
+    delete current;
 }
 
 void DoublyLinkedList::delete_position(int pos)
- {
-   Node *current=new Node;
-   Node *previous=new Node;
-   current=head;
-   for(int i=1;i<pos;i++)
-   {
-     previous=current;
-     current=current->next;
-   }
-   previous->next=current->next;
- }
+{
+    Node *current = new Node; //To traverse
+    Node *previous = new Node; //To set as new node
+    current = head; //start traverse from start of list
+    for (int i = 1; i < pos; i++) //until position has been found
+    {
+        previous = current; //Pass current node to previous
+        current = current->next; //Current = next node
+    }
+    previous->next = current->next; //previous, now points towards the next.
+    delete current;
+    //there for current can not be pointed too and no longer accessed.
+}
+
+
 
 unsigned int DoublyLinkedList::size()
 {
     Node *current = head;
     Node *previous = new Node;
 
-    unsigned int Size = 1;
+    int Size = 1;
     while (current->next != NULL)
     {
         previous = current;
@@ -121,7 +125,7 @@ Project& DoublyLinkedList::operator[](unsigned int n)
         throw std::invalid_argument("Index out of bounds");
     }
 
-    unsigned int pos = 0;
+    int pos = 0;
     while (pos != n)
     {
         previous = current;
@@ -179,5 +183,36 @@ vector<string> DoublyLinkedList::findByGenre(string Genre)
     return AllProjects;
 }
 
+vector<string> DoublyLinkedList::findByRoleAndName(string Role, string ActorName)
+{
+    vector<string> AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+
+        vector<CrewMember> Crew = current->data.getCrew();
+
+        for (int i = 0; i < Crew.size(); i++)
+        {
+            CrewMember test = Crew.at(i);
+            if (test.getRole() == Role && test.getName() == ActorName)
+            {
+                AllProjects.push_back(current->data.getTitle());
+            }
+        }
+        previous = current;
+        current = current->next;
+
+    }
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No films with this actor");
+    }
+
+    return AllProjects;
+}
 
 

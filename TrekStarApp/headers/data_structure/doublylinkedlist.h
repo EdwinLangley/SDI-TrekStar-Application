@@ -2,13 +2,21 @@
 #define DOUBLYLINKEDLIST_H
 
 #include "main.h"
-#include "node.h"
+//#include "node.h"
 #include "project.h"
 
 
 
 class DoublyLinkedList
 {
+public:
+    struct Node
+    {
+        Project data;
+        Node *next;
+        Node *prev;
+    };
+
 
 private:
     Node *head, *tail;
@@ -19,11 +27,30 @@ public:
       tail=NULL;
     }
 
+    //Deconstructor to delete all nodes
+    ~DoublyLinkedList()
+    {
+        Node *current = head;
+        Node *nextNode = NULL;
+        while (current != NULL)
+        {
+        nextNode = current->next;
+        // destroy the current node
+        delete current;
+        current = nextNode;
+        }
+
+    }
 
 
-void createNewNode(Project project);
 
-void displayAllNodes();
+
+
+void createnode(Project value);
+
+void display();
+
+//void displayAllNodes();
 
 void insert_start(Project value);
 
@@ -48,6 +75,9 @@ Project& findByTitle(string title);
 //Function to return a vector of strings with Film names that are for the same genre.
 //If no films are found for this genre, throws an out_of_range error that needs to be caught
 vector<string> findByGenre(string Genre);
+
+vector<string> findByRoleAndName(string Role, string ActorName);
+
 
 };
 
