@@ -36,3 +36,8 @@ BluRay::BluRay()
 {
 
 }
+
+BluRay::BluRay(Material inputMaterial, vector<string> extraLanguageTracks, vector<string> extraSubtitleTracks, vector<string> bonusTracks)
+{
+
+}

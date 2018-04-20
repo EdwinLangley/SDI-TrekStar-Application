@@ -34,3 +34,19 @@ FrameAspect::FrameAspect()
 {
 
 }
+
+FrameAspect::FrameAspect(int horizontalRatio, int verticalRatio, string ratioDescription)
+{
+
+}
+
+string FrameAspect::getFrameAspect()
+{
+    string frameAspect;
+    frameAspect.append(to_string(this->horizontalRatio));
+    frameAspect.append(",");
+    frameAspect.append(to_string(this->verticalRatio));
+    frameAspect.append(",");
+    frameAspect.append(this->ratioDescription);
+    return frameAspect;
+}

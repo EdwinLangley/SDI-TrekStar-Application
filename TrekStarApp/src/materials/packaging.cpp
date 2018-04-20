@@ -40,7 +40,25 @@ void Packaging::setDepth(unsigned int value)
     depth = value;
 }
 
+string Packaging::getPackaging()
+{
+    string packaging;
+    packaging.append(this->material);
+    packaging.append(",");
+    packaging.append(to_string(this->height));
+    packaging.append(",");
+    packaging.append(to_string(this->width));
+    packaging.append(",");
+    packaging.append(to_string(this->depth));
+    return packaging;
+}
+
 Packaging::Packaging()
+{
+
+}
+
+Packaging::Packaging(string material, unsigned int height, unsigned int width, unsigned int depth)
 {
 
 }

@@ -70,7 +70,31 @@ void CrewMember::setRole(const string &value)
     role = value;
 }
 
+string CrewMember::getCrewMember()
+{
+ string crewMember;
+ crewMember.append(this->name);
+ crewMember.append(",");
+ crewMember.append(this->dateOfBirth);
+ crewMember.append(",");
+ crewMember.append(this->idNumber);
+ crewMember.append(",");
+ crewMember.append(this->title);
+ crewMember.append(",");
+ crewMember.append(this->role);
+ crewMember.append(",");
+ crewMember.append(to_string(this->yearsOfExperience));
+ crewMember.append(",");
+ crewMember.append(VectorToString(this->locationsWorkedAt));
+ return crewMember;
+}
+
 CrewMember::CrewMember()
 {
     
+}
+
+CrewMember::CrewMember(string name, string dateOfBirth, string idNumber, string title, string role, int yearsOfExperience, vector<string> locationsWorkedAt)
+{
+
 }

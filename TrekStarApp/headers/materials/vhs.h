@@ -8,6 +8,7 @@ class VHS : public Material
 {
 public:
     VHS();
+    VHS(Material inputMaterial);
 };
 
 #endif // VHS_H

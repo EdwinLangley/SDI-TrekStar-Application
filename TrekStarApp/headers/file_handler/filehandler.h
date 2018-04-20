@@ -11,6 +11,7 @@
 
 #define PROJECTFILENAME     "ProjectFile.csv"
 #define MATERIALFILENAME    "MaterialFile.csv"
+#define CREWFILENAME        "CrewFile.csv"
 
 class FileWriter
 {
@@ -26,8 +27,10 @@ public:
     vector<string> ReadMaterials();
     Material SplitMaterial(string inputLine);
 
-    void WriteCrew(vector<string> inputcrew);
+    void WriteCrew(string crewID, vector<CrewMember> inputcrew);
     vector<string>ReadCrew();
+    vector<CrewMember> CreateCrewMembers(string inputLine);
+    CrewMember CreateMember(string inputLine);
 
     void WriteOneSidedDVD(SingleSidedDVD inputDVDS);
     SingleSidedDVD ReadOneSidedDVD(string input);

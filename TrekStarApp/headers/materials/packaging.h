@@ -17,6 +17,7 @@ private:
 
 public:
     Packaging();
+    Packaging(string material, unsigned int height,unsigned int width,unsigned int depth);
     string getMaterial() const;
     void setMaterial(const string &value);
     unsigned int getHeight() const;
@@ -25,6 +26,7 @@ public:
     void setWidth(unsigned int value);
     unsigned int getDepth() const;
     void setDepth(unsigned int value);
+    string getPackaging();
 };
 
 #endif // PACKAGING_H

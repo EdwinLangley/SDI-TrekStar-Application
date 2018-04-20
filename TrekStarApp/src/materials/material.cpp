@@ -1,5 +1,5 @@
 #include "material.h"
-
+#include "frameaspect.h"
 
 
 string Material::getIdNumber() const
@@ -85,21 +85,25 @@ void Material::setSubTitleLanguages(const vector<string> &value)
 string Material::getMaterials()
 {
         string Materials;
-        Materials.append(this->idNumber);
+        Materials.append(this->idNumber);//0
         Materials.append(",");
-        Materials.append(this->title);
+        Materials.append(this->title);//1
         Materials.append(",");
-        Materials.append(this->vFormat);
+        Materials.append(this->vFormat);//2
         Materials.append(",");
-        Materials.append(this->aFormat);
+        Materials.append(this->aFormat);//3
         Materials.append(",");
-        Materials.append(this->language);
+        Materials.append(this->language);//4
         Materials.append(",");
-        Materials.append(to_string(this->runTime));
+        Materials.append(this->frame.getFrameAspect());//3 Items long 5/6/7
         Materials.append(",");
-        Materials.append(to_string(this->price));
+        Materials.append(this->package.getPackaging());//4 items long 8/9/10/11
         Materials.append(",");
-        Materials.append(VectorToString(subTitleLanguages));
+        Materials.append(to_string(this->runTime));//12
+        Materials.append(",");
+        Materials.append(to_string(this->price));//13
+        Materials.append(",");
+        Materials.append(VectorToString(subTitleLanguages));//14
         return Materials;
     }
 
@@ -127,13 +131,15 @@ Material::Material(){
     
 }
 
-Material::Material(string idNumber,string title,string vFormat,string aFormat,string language,int runTime,float price,vector<string> subTitleLanguages)
+Material::Material(string idNumber, string title, string vFormat, string aFormat, string language, FrameAspect frame, Packaging package, int runTime, float price, vector<string> subTitleLanguages)
 {
     this->idNumber=idNumber;
     this->title=title;
     this->vFormat=vFormat;
     this->aFormat=aFormat;
     this->language=language;
+    this->frame=frame;
+    this->package=package;
     this->runTime=runTime;
     this->price=price;
     this->subTitleLanguages=subTitleLanguages;

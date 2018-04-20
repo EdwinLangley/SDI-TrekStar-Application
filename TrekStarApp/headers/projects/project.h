@@ -3,8 +3,6 @@
 
 #include "main.h"
 #include "material.h"
-#include "twosideddvd.h"
-#include "singlesideddvd.h"
 #include "bluray.h"
 #include "vhs.h"
 #include "combobox.h"
@@ -27,8 +25,6 @@ private:
     //CrewID 0 will be an unset crew
     string crewID="0";
     vector<CrewMember> Crew;
-
-public:
     //ONLY TO BE SET ON LOAD FROM FILES/CREATION OF PROJECT MATERIAL
     SingleSidedDVD singleDVD;
     TwoSidedDVD twoDVD;

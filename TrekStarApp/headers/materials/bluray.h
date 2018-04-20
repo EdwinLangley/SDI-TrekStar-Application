@@ -20,6 +20,7 @@ private:
 
 public:
     BluRay();
+    BluRay(Material inputMaterial, vector<string> extraLanguageTracks, vector<string> extraSubtitleTracks, vector<string> bonusTracks);
     vector<string> getExtraLanguageTracks() const;
     void setExtraLanguageTracks(const vector<string> &value);
     vector<string> getExtraSubtitleTracks() const;

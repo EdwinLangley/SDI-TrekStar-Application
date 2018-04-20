@@ -34,14 +34,14 @@ public:
     void setFirstSideContent(const string &value);
     string getDVD(){
         string dvd;
-//        dvd.append(VectorToString(extraLanguageTracks));
-//        dvd.append(",");
-//        dvd.append(VectorToString(extraSubtitleTracks));
-//        dvd.append(",");
-//        dvd.append(VectorToString(bonusFeatures));
-//        dvd.append(",");
-//        dvd.append(this->firstSideContent);
-//        dvd.append(",");
+        dvd.append(VectorToString(extraLanguageTracks));
+        dvd.append(",");
+        dvd.append(VectorToString(extraSubtitleTracks));
+        dvd.append(",");
+        dvd.append(VectorToString(bonusFeatures));
+        dvd.append(",");
+        dvd.append(this->firstSideContent);
+        dvd.append(",");
         return dvd;
     }
 

@@ -13,6 +13,7 @@ private:
 
 public:
     TwoSidedDVD();
+    TwoSidedDVD(Material baseMaterial,vector<string> extraLanguageTracks, vector<string> extraSubtitleTracks,vector<string> bonusFeatures,string firstSideContent, string secondSideContent);
     string getSecondSideContent() const;
     void setSecondSideContent(const string &value);
 };

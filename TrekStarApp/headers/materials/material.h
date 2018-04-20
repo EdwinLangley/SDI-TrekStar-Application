@@ -29,7 +29,9 @@ private:
 
 public:
     Material();
-    Material(string idNumber,string title,string vFormat,string aFormat,string language,int runTime,float price,vector<string> subTitleLanguages);
+    Material(string idNumber,string title,string vFormat,string aFormat,string language,
+             FrameAspect frame, Packaging package, int runTime,float price,
+             vector<string> subTitleLanguages);
     string getIdNumber() const;
     void setIdNumber(const string &value);
     string getTitle() const;

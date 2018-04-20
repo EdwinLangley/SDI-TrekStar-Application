@@ -4,3 +4,8 @@ VHS::VHS()
 {
 
 }
+
+VHS::VHS(Material inputMaterial)
+{
+
+}

@@ -9,18 +9,21 @@ class CrewMember
 {
 
 private:
-    string name = "";
-    string dateOfBirth = "";
-    string idNumber = "";
-    string title = "";
-    string role = "";
-    int yearsOfExperience = 0;
+    string name = "";//0
+    string dateOfBirth = "";//1
+    string idNumber = "";//2
+    string title = "";//3
+    string role = "";//4
+    int yearsOfExperience = 0;//5
 
-    vector<string> locationsWorkedAt;
+    vector<string> locationsWorkedAt;//6
 
 
 public:
     CrewMember();
+    CrewMember(string name, string dateOfBirth, string idNumber,
+               string title, string role, int yearsOfExperience,
+               vector<string>locationsWorkedAt);
     string getName() const;
     void setName(const string &value);
     string getDateOfBirth() const;
@@ -35,6 +38,7 @@ public:
     void setLocationsWorkedAt(const vector<string> &value);
     string getRole() const;
     void setRole(const string &value);
+    string getCrewMember();
 };
 
 #endif // CREW_H

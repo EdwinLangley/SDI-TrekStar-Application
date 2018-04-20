@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "filehandler.h"
 
 using namespace std;
@@ -13,7 +12,10 @@ Material FileWriter::SplitMaterial(string inputLine){
     while(getline(ss,section,',')){
         materialStorage.push_back(section);
     }
-    Material outputMaterial(materialStorage[0],materialStorage[1],materialStorage[2],materialStorage[3],materialStorage[4],stoi(materialStorage[5]),stof(materialStorage[6]),StringToVector(materialStorage[7]));
+    FrameAspect frame(stoi(materialStorage[5]),stoi(materialStorage[6]),materialStorage[7]);
+    Packaging package(materialStorage[8],stoi(materialStorage[9]),stoi(materialStorage[10]),stoi(materialStorage[11]));
+    Material outputMaterial(materialStorage[0],materialStorage[1],materialStorage[2],materialStorage[3],materialStorage[4],
+            frame, package, stoi(materialStorage[12]),stof(materialStorage[13]),StringToVector(materialStorage[14]));
     return outputMaterial;
 }
 
@@ -41,8 +43,8 @@ SingleSidedDVD FileWriter::ReadOneSidedDVD(string input)
     vector<string> extraSubtitleTracks=StringToVector(materialStorage[9]);
     vector<string> bonusFeatures=StringToVector(materialStorage[10]);
     string firstSideContent=materialStorage[11];
-    //SingleSidedDVD returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures,firstSideContent);
-    //return returnDVD;
+    SingleSidedDVD returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures,firstSideContent);
+    return returnDVD;
 }
 
 void FileWriter::WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
@@ -71,8 +73,8 @@ TwoSidedDVD FileWriter::ReadTwoSidedDVD(string input)
     vector<string> bonusFeatures=StringToVector(materialStorage[10]);
     string firstSideContent=materialStorage[11];
     string secondSideContent=materialStorage[12];
-//    //TwoSidedDVD returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures,firstSideContent,secondSideContent);
-//    return returnDVD;
+    TwoSidedDVD returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures,firstSideContent,secondSideContent);
+    return returnDVD;
 }
 
 void FileWriter::WriteBluRay(BluRay inputDVDS){
@@ -98,8 +100,8 @@ BluRay FileWriter::ReadBluRay(string input)
     vector<string> extraLanguageTracks=StringToVector(materialStorage[8]);
     vector<string> extraSubtitleTracks=StringToVector(materialStorage[9]);
     vector<string> bonusFeatures=StringToVector(materialStorage[10]);
-//    BluRay returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures);
-//    return returnDVD;
+    BluRay returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures);
+    return returnDVD;
 }
 
 void FileWriter::WriteVHS(VHS inputDVDS){
@@ -114,36 +116,74 @@ void FileWriter::WriteVHS(VHS inputDVDS){
 
 VHS FileWriter::ReadVHS(string input)
 {
-//    VHS returnVHS(SplitMaterial(input));
-//    return returnVHS;
+    VHS returnVHS(SplitMaterial(input));
+    return returnVHS;
 }
 
 void FileWriter::WriteComboBox(ComboBox inputDVDS){
     string comboBox="CBOX";
-
+    comboBox.append(",");
+    comboBox.append(VectorToString(inputDVDS.getIdsOfDVDs()));
+    comboBox.append("\n");
+    ofstream outputFile;
+    outputFile.open(MATERIALFILENAME);
+    outputFile<<comboBox;
+    outputFile.close();
 }
 
 ComboBox FileWriter::ReadComboBox(string input)
 {
-
+    vector<string> Materials=ReadMaterials();
+    stringstream ss;
+    string section;
+    ss<<input;
+    getline(ss,section,',');
+    vector<string> idsOfDVDS = StringToVector(section);
+    vector<SingleSidedDVD> singleDVDS;
+    vector<TwoSidedDVD> doubleDVDS;
+    for(int i=0;i<idsOfDVDS.size();i++){
+        string comboID=idsOfDVDS[i];
+        for (int j=0;j<Materials.size();j++){
+            string line =Materials[j];
+            string type,id;
+            stringstream ss;
+            ss<<line;
+            getline(ss,type,',');
+            getline(ss,id,',');
+            //If the current material matches a line
+            if(idsOfDVDS[i]==id){
+                //CALL WHICHEVER READ MATERIAL FUNCTION BASED ON WHATEVER MATERIAL TYPE
+                if(type=="1DVD"){
+                    //Make a 1 sided dvd
+                    //Add to project
+                    singleDVDS.push_back(ReadOneSidedDVD(line));
+                }
+                else if (type=="2DVD") {
+                    //Make a 2 sided DVD
+                    //Add to project
+                    doubleDVDS.push_back(ReadTwoSidedDVD(line));
+                }
+            }
+        }
+    }
+    ComboBox returnComboBox(idsOfDVDS.size(),idsOfDVDS,singleDVDS,doubleDVDS);
 }
-
 void FileWriter::WriteMaterials(vector<Project> inputProject){
     for (int i = 0; i < inputProject.size(); i++) {
-        if(inputProject[i].singleDVD.getIdNumber()!="0"){
-            WriteOneSidedDVD(inputProject[i].singleDVD);
+        if(inputProject[i].getSingleDVD().getIdNumber()!="0"){
+            WriteOneSidedDVD(inputProject[i].getSingleDVD());
         }
-        if(inputProject[i].twoDVD.getIdNumber()!="0"){
-            WriteTwoSidedDVD(inputProject[i].twoDVD);
+        if(inputProject[i].getTwoDVD().getIdNumber()!="0"){
+            WriteTwoSidedDVD(inputProject[i].getTwoDVD());
         }
-        if(inputProject[i].bluRay.getIdNumber()!="0"){
-            WriteBluRay(inputProject[i].bluRay);
+        if(inputProject[i].getBluRay().getIdNumber()!="0"){
+            WriteBluRay(inputProject[i].getBluRay());
         }
-        if(inputProject[i].vhs.getIdNumber()!="0"){
-            WriteVHS(inputProject[i].vhs);
+        if(inputProject[i].getVhs().getIdNumber()!="0"){
+            WriteVHS(inputProject[i].getVhs());
         }
-        if(inputProject[i].comboBox.getIdsOfDVDs()[0]!="0"){
-            WriteComboBox(inputProject[i].comboBox);
+        if(inputProject[i].getComboBox().getIdsOfDVDs()[0]!="0"){
+            WriteComboBox(inputProject[i].getComboBox());
         }
     }
 }
@@ -164,7 +204,8 @@ void FileWriter::WriteProject(vector<Project> inputProject){
     ofstream outputFile;
     outputFile.open(PROJECTFILENAME);
     for (int i = 0; i < inputProject.size(); i++) {
-        string newLine = "$";
+//      string newLine = "$";
+        string newLine;
         newLine.append(inputProject[i].getTitle());
         newLine.append(",");
         newLine.append(inputProject[i].getProjectStatus());
@@ -182,10 +223,10 @@ void FileWriter::WriteProject(vector<Project> inputProject){
         newLine.append(VectorToString(inputProject[i].getFilmLocations()));
         newLine.append(",");
         newLine.append(VectorToString(inputProject[i].getMaterials()));
-        newLine.append(",");
         newLine.append("\n");
         outputFile << newLine;
         WriteMaterials(inputProject);
+        WriteCrew(inputProject[i].getCrewID(),inputProject[i].getCrew());
     }
     outputFile.close();
 }
@@ -223,12 +264,52 @@ vector<Project> FileWriter::ReadProjects(){
     return returnedProjects;
 }
 
-void FileWriter::WriteCrew(vector<string> inputcrew){
-
+void FileWriter::WriteCrew(string crewID, vector<CrewMember> inputcrew){
+    vector<string> crewMemebers;
+    for (int i=0; i<inputcrew.size();i++){
+        crewMemebers.push_back(inputcrew[i].getCrewMember());
+    }
+    ofstream outputFile;
+    string crewLine=crewID;
+    crewLine.append(",");
+    crewLine.append(VectorToString(crewMemebers));
+    outputFile.open(CREWFILENAME);
+    outputFile<<crewLine;
+    outputFile.close();
 }
 
 vector<string> FileWriter::ReadCrew(){
+    vector<string> AllCrews;
+    ifstream inputFile;
+    string line;
+    inputFile.open(CREWFILENAME);
+    while(getline(inputFile,line)){
+        AllCrews.push_back(line);
+    }
+    return AllCrews;
+}
 
+CrewMember FileWriter::CreateMember(string inputLine){
+    vector<string> variables;
+    stringstream ss;
+    ss<<inputLine;
+    string section;
+    while(getline(ss,section,',')){
+        variables.push_back(section);
+    }
+    CrewMember crewMember(variables[0],variables[1],variables[2],variables[3],
+            variables[4],stoi(variables[5]),StringToVector(variables[6]));
+    return crewMember;
+}
+
+vector<CrewMember> FileWriter::CreateCrewMembers(string inputLine){
+    vector<CrewMember> crewMembers;
+    vector<string> crewMemberLines=StringToVector(inputLine);
+    for(int i=0;i<crewMemberLines.size();i++){
+        CrewMember crew = CreateMember(crewMemberLines[i]);
+        crewMembers.push_back(crew);
+    }
+    return crewMembers;
 }
 
 vector<Project> FileWriter::BuildProjectList(){
@@ -239,7 +320,7 @@ vector<Project> FileWriter::BuildProjectList(){
     //Go through Project list
     for (int i=0; i<projects.size();i++){
         //Go through material list for the project
-        for (int j=0;j<projects[i].materialIDs.size();j++){
+        for (int j=0;j<projects[i].getMaterialIDs().size();j++){
             //Go through list of materials and then compare it to the current material
             for (int k=0;k<materialLines.size();k++){
                 string line=materialLines[k];
@@ -249,28 +330,28 @@ vector<Project> FileWriter::BuildProjectList(){
                 getline(ss,type,',');
                 getline(ss,id,',');
                 //If the current material matches a line
-                if(projects[i].materialIDs[j]==id){
+                if(projects[i].getMaterialIDs()[j]==id){
                     //CALL WHICHEVER READ MATERIAL FUNCTION BASED ON WHATEVER MATERIAL TYPE
                     if(type=="1DVD"){
                         //Make a 1 sided dvd
                         //Add to project
-                        projects[i].singleDVD=ReadOneSidedDVD(line);
+                        projects[i].getSingleDVD()=ReadOneSidedDVD(line);
                     }else if (type=="2DVD") {
                         //Make a 2 sided DVD
                         //Add to project
-                        projects[i].twoDVD=ReadTwoSidedDVD(line);
+                        projects[i].getTwoDVD()=ReadTwoSidedDVD(line);
                     }else if (type=="BRAY") {
                         //Make a BluRay
                         //Add to project
-                        projects[i].bluRay=ReadBluRay(line);
+                        projects[i].getBluRay()=ReadBluRay(line);
                     }else if (type=="VHSS"){
                         //Make a VHS
                         //Add to project
-                        projects[i].vhs=ReadVHS(line);
+                        projects[i].getVhs()=ReadVHS(line);
                     }else if (type=="CBOX"){
                         //Make a ComboBox
                         //Add to project
-                        projects[i].comboBox=ReadComboBox(line);
+                        projects[i].getComboBox()=ReadComboBox(line);
                     }
                 }
             }
@@ -279,13 +360,14 @@ vector<Project> FileWriter::BuildProjectList(){
         //Go through list of crews and then compare it to the current crewID
         for (int j=0;j<crewLines.size();j++){
             string line=crewLines[j];
-            string type,id;
+            string id;
             stringstream ss;
             ss<<line;
-            getline(ss,type,',');
             getline(ss,id,',');
             if(projects[i].getCrewID()==id){
                 //Write found crew to the project
+                vector<CrewMember> crew=CreateCrewMembers(line);
+                projects[i].setCrew(crew);
             }
         }
     }
