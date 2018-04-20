@@ -60,6 +60,8 @@ void delete_first();
 
 void delete_last();
 
+void delete_by_title(string Title);
+
 void delete_position(int pos);
 
 //Function to get the amount of nodes of the linked list
