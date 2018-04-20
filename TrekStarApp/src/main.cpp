@@ -160,6 +160,9 @@ int main(int argc, char *argv[])
             }
             cout << "Num of films: " << list.size() << endl;
 
+            bool exists = list.alreadyExists("Kingsmen");
+            cout << exists << endl;
+
         } catch (...)
         {
             //Update gui with no names

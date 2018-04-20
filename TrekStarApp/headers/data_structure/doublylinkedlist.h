@@ -93,6 +93,9 @@ vector<string> dailyReportsForAll();
 //Get Box office stats for one
 string dailyReportsByName(string NameOfProject);
 
+//Function to check if a project with the Title already exists
+bool alreadyExists(string Title);
+
 };
 
 

@@ -351,5 +351,23 @@ string DoublyLinkedList::dailyReportsByName(string NameOfProject)
 
 }
 
+bool DoublyLinkedList::alreadyExists(string Title)
+{
+    bool Exists = false;
+    Node *current = head;
+    Node *previous = new Node;
 
+    while (current != NULL)
+    {
+
+        if (current->data.getTitle() == Title)
+        {
+            Exists = true;
+        }
+
+        previous = current;
+        current = current->next;
+    }
+    return Exists;
+}
 
