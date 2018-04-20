@@ -60,6 +60,8 @@ void delete_first();
 
 void delete_last();
 
+void delete_by_title(string Title);
+
 void delete_position(int pos);
 
 //Function to get the amount of nodes of the linked list
@@ -76,8 +78,20 @@ Project& findByTitle(string title);
 //If no films are found for this genre, throws an out_of_range error that needs to be caught
 vector<string> findByGenre(string Genre);
 
-vector<string> findByRoleAndName(string Role, string ActorName);
+//Returns a vector<string> of project titles with the selected Role and Name
+vector<string> findByRoleAndName(string Role, string Name);
 
+//A function to get all the titles of projects stored
+vector<string> getAllFilmTitles();
+
+//A function to sort alphabetically a vector it is passed
+vector<string> sortProject(vector<string> Unsorted);
+
+//Get Box office stats for all
+vector<string> dailyReportsForAll();
+
+//Get Box office stats for one
+string dailyReportsByName(string NameOfProject);
 
 };
 

@@ -161,6 +161,16 @@ void Project::setMaterialIDs(const vector<string> &value)
     materialIDs = value;
 }
 
+int Project::getWeeklyBoxFigures() const
+{
+    return weeklyBoxFigures;
+}
+
+void Project::setWeeklyBoxFigures(int value)
+{
+    weeklyBoxFigures = value;
+}
+
 Project::Project()
 {
     

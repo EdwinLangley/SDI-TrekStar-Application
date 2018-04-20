@@ -96,6 +96,40 @@ void DoublyLinkedList::delete_position(int pos)
     //there for current can not be pointed too and no longer accessed.
 }
 
+void DoublyLinkedList::delete_by_title(string Title)
+{
+    Node *current = new Node; //To traverse
+    Node *previous = new Node; //To set as new node
+    current = head; //start traverse from start of list
+    while (current != NULL) //until position has been found
+    {
+
+        if (current->data.getTitle() == Title)
+        {
+            if (current = head)
+            {
+                Node *temp = new Node; //Create new node to hold value, so it can be deleted.
+                temp = head; //New node set to the old head
+                head = head->next; //Head is changed to the next node. Therefore this will be the start of the list
+                delete temp;
+            }
+            else if (current->next == NULL)
+            {
+                tail = previous;
+            }
+            else{
+                previous->next = current->next; //previous, now points towards the next.
+                delete current;
+                break;
+            }
+
+        }
+
+        previous = current; //Pass current node to previous
+        current = current->next; //Current = next node
+    }
+
+}
 
 
 unsigned int DoublyLinkedList::size()
@@ -183,7 +217,7 @@ vector<string> DoublyLinkedList::findByGenre(string Genre)
     return AllProjects;
 }
 
-vector<string> DoublyLinkedList::findByRoleAndName(string Role, string ActorName)
+vector<string> DoublyLinkedList::findByRoleAndName(string Role, string Name)
 {
     vector<string> AllProjects;
     Node *current = head;
@@ -197,7 +231,7 @@ vector<string> DoublyLinkedList::findByRoleAndName(string Role, string ActorName
         for (int i = 0; i < Crew.size(); i++)
         {
             CrewMember test = Crew.at(i);
-            if (test.getRole() == Role && test.getName() == ActorName)
+            if (test.getRole() == Role && test.getName() == Name)
             {
                 AllProjects.push_back(current->data.getTitle());
             }
@@ -215,4 +249,106 @@ vector<string> DoublyLinkedList::findByRoleAndName(string Role, string ActorName
     return AllProjects;
 }
 
+vector<string> DoublyLinkedList::getAllFilmTitles()
+{
+    vector<string> AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+        AllProjects.push_back(current->data.getTitle());
+        previous = current;
+        current = current->next;
+    }
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No films with this actor");
+    }
+
+    return AllProjects;
+}
+
+vector<string> DoublyLinkedList::sortProject(vector<string> Unsorted)
+{
+
+    string Temp;
+    for (int stop = Unsorted.size() - 1; stop > 0; stop-- )
+    {
+        for (int check = 0; check < stop; check++)
+        {
+            if (Unsorted.at(check) > Unsorted.at(check+1))
+            {
+                Temp = Unsorted.at(check);
+                Unsorted[check] = Unsorted[check+1];
+                Unsorted[check+1] = Temp;
+            }
+        }
+    }
+
+    return Unsorted;
+
+}
+
+vector<string> DoublyLinkedList::dailyReportsForAll()
+{
+    vector<string> AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+        AllProjects.push_back(current->data.getTitle() + " sold " + to_string(current->data.getWeeklyBoxFigures()) + " tickets this week");
+        previous = current;
+        current = current->next;
+    }
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No Box Figures In Any Project");
+    }
+
+    return AllProjects;
+
+}
+
+string DoublyLinkedList::dailyReportsByName(string NameOfProject)
+{
+    string AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+        if(current->data.getTitle() == NameOfProject){
+            AllProjects = current->data.getTitle() + " sold " + to_string(current->data.getWeeklyBoxFigures()) + " tickets this week";
+
+        }
+        previous = current;
+        current = current->next;
+    }
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No Box Figures In Any Project");
+    }
+
+    return AllProjects;
+
+}
+
+
+//void BubbleSort(int List[] , int Size) {
+//int tempInt;
+    //for (int Stop = Size - 1; Stop > 0; Stop--) {
+        //for (int Check = 0; Check < Stop; Check++) {
+            //if (List[Check] > List[Check + 1]) {
+                //tempInt = List[Check];
+                //List[Check] = List[Check + 1]; // wrong order
+                //List[Check + 1] = tempInt;
+                //}
+        //}
+    //}
+//}
 

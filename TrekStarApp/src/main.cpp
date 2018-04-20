@@ -69,6 +69,29 @@ int main(int argc, char *argv[])
 
         list.createnode(test2);
 
+
+        Project test3;
+        test3.setTitle("Spiderman 3");
+        test3.setWeeklyBoxFigures(3000);
+        list.createnode(test3);
+
+        Project test4;
+        test4.setTitle("Batman");
+        test4.setWeeklyBoxFigures(5000);
+        list.createnode(test4);
+
+        Project test5;
+        test5.setTitle("Kingsmen");
+        test5.setGenre("Action/Comdedy");
+        test5.setWeeklyBoxFigures(9000);
+        list.createnode(test5);
+
+
+
+
+        vector<string> AllFilms = list.getAllFilmTitles();
+
+
         try {
             string Name;
             vector<string> vecTest = list.findByRoleAndName("Terrorist","Edwin");
@@ -78,14 +101,75 @@ int main(int argc, char *argv[])
             list.findByTitle(Name).setTitle("Four Lions is shit jk");
 
 
-            vector<string> vecTest2 = list.findByRoleAndName("Terrorist","Edwin2");
+            vector<string> vecTest2 = list.findByRoleAndName("Terrorist","Edwin");
             Name = vecTest2.at(0);
             std::cout << Name << std::endl;
+            vector<string> SortedFilms = list.sortProject(list.getAllFilmTitles());
+
+            vector<string> allDailyReports = list.dailyReportsForAll();
+
+            cout << "----------Unsorted----------" << endl;
+
+            for (int i = 0; i < AllFilms.size(); i++)
+            {
+                cout << AllFilms[i] << endl;
+            }
+
+            cout << "----------Sorted----------" << endl;
+
+            for (int i = 0; i < SortedFilms.size(); i++)
+            {
+                cout << SortedFilms[i] << endl;
+            }
+            cout << "Num of films: " << list.size() << endl;
+
+            cout << "----------Daily Reports----------" << endl;
+
+            for (int i = 0; i < allDailyReports.size(); i++)
+            {
+                cout << allDailyReports[i] << endl;
+            }
+
+            cout << "----------Daily Report for one----------" << endl;
+
+            cout << list.dailyReportsByName("Batman") << endl;
+
+
+
+
+            cout << list.findByTitle(SortedFilms[2]).getGenre() << endl;
+
+
+            //After moving the revenant. Lists again:
+            list.delete_by_title(SortedFilms[4]);
+
+
+            AllFilms = list.getAllFilmTitles();
+            SortedFilms = list.sortProject(list.getAllFilmTitles());
+
+            cout << "----------Unsorted----------" << endl;
+
+            for (int i = 0; i < AllFilms.size(); i++)
+            {
+                cout << AllFilms[i] << endl;
+            }
+
+            cout << "----------Sorted----------" << endl;
+
+            for (int i = 0; i < SortedFilms.size(); i++)
+            {
+                cout << SortedFilms[i] << endl;
+            }
+            cout << "Num of films: " << list.size() << endl;
+
         } catch (...)
         {
             //Update gui with no names
             cout << "No film with this person in specified role" << endl;
         }
+
+
+
 
 
 
