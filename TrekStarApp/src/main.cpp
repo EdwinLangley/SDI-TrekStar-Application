@@ -72,15 +72,18 @@ int main(int argc, char *argv[])
 
         Project test3;
         test3.setTitle("Spiderman 3");
+        test3.setWeeklyBoxFigures(3000);
         list.createnode(test3);
 
         Project test4;
         test4.setTitle("Batman");
+        test4.setWeeklyBoxFigures(5000);
         list.createnode(test4);
 
         Project test5;
         test5.setTitle("Kingsmen");
         test5.setGenre("Action/Comdedy");
+        test5.setWeeklyBoxFigures(9000);
         list.createnode(test5);
 
 
@@ -103,6 +106,8 @@ int main(int argc, char *argv[])
             std::cout << Name << std::endl;
             vector<string> SortedFilms = list.sortProject(list.getAllFilmTitles());
 
+            vector<string> allDailyReports = list.dailyReportsForAll();
+
             cout << "----------Unsorted----------" << endl;
 
             for (int i = 0; i < AllFilms.size(); i++)
@@ -116,6 +121,19 @@ int main(int argc, char *argv[])
             {
                 cout << SortedFilms[i] << endl;
             }
+
+            cout << "----------Daily Reports----------" << endl;
+
+            for (int i = 0; i < allDailyReports.size(); i++)
+            {
+                cout << allDailyReports[i] << endl;
+            }
+
+            cout << "----------Daily Report for one----------" << endl;
+
+            cout << list.dailyReportsByName("Batman") << endl;
+
+
 
 
             cout << list.findByTitle(SortedFilms[2]).getGenre() << endl;

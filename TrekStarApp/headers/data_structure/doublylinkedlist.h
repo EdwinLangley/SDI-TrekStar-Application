@@ -85,6 +85,12 @@ vector<string> getAllFilmTitles();
 //A function to sort alphabetically a vector it is passed
 vector<string> sortProject(vector<string> Unsorted);
 
+//Get Box office stats for all
+vector<string> dailyReportsForAll();
+
+//Get Box office stats for one
+string dailyReportsByName(string NameOfProject);
+
 };
 
 

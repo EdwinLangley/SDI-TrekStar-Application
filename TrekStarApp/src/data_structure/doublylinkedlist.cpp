@@ -257,6 +257,53 @@ vector<string> DoublyLinkedList::sortProject(vector<string> Unsorted)
 
 }
 
+vector<string> DoublyLinkedList::dailyReportsForAll()
+{
+    vector<string> AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+        AllProjects.push_back(current->data.getTitle() + " sold " + to_string(current->data.getWeeklyBoxFigures()) + " tickets this week");
+        previous = current;
+        current = current->next;
+    }
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No Box Figures In Any Project");
+    }
+
+    return AllProjects;
+
+}
+
+string DoublyLinkedList::dailyReportsByName(string NameOfProject)
+{
+    string AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+        if(current->data.getTitle() == NameOfProject){
+            AllProjects = current->data.getTitle() + " sold " + to_string(current->data.getWeeklyBoxFigures()) + " tickets this week";
+
+        }
+        previous = current;
+        current = current->next;
+    }
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No Box Figures In Any Project");
+    }
+
+    return AllProjects;
+
+}
+
 
 //void BubbleSort(int List[] , int Size) {
 //int tempInt;
