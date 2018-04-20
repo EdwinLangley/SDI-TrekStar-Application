@@ -96,6 +96,12 @@ string dailyReportsByName(string NameOfProject);
 //Function to check if a project with the Title already exists
 bool alreadyExists(string Title);
 
+//function to sort by date newest
+vector<string> sortByNewest();
+
+//function to sort by date oldest
+vector<string> sortByOldest();
+
 };
 
 

@@ -73,17 +73,21 @@ int main(int argc, char *argv[])
         Project test3;
         test3.setTitle("Spiderman 3");
         test3.setWeeklyBoxFigures(3000);
+        test3.setReleaseDate("09/03/1998");
         list.createnode(test3);
+
 
         Project test4;
         test4.setTitle("Batman");
         test4.setWeeklyBoxFigures(5000);
+        test4.setReleaseDate("22/03/2000");
         list.createnode(test4);
 
         Project test5;
         test5.setTitle("Kingsmen");
         test5.setGenre("Action/Comdedy");
         test5.setWeeklyBoxFigures(9000);
+        test5.setReleaseDate("01/03/2200");
         list.createnode(test5);
 
 
@@ -133,6 +137,27 @@ int main(int argc, char *argv[])
 //            cout << "----------Daily Report for one----------" << endl;
 
 //            cout << list.dailyReportsByName("Batman") << endl;
+
+
+            cout << "----------Sort by date Newest----------" << endl;
+
+            vector<string> sortedbyDate = list.sortByNewest();
+
+
+            for (int i = 0; i < sortedbyDate.size(); i++)
+            {
+                cout << sortedbyDate[i] << endl;
+            }
+
+            cout << "----------Sort by date Oldest----------" << endl;
+
+            sortedbyDate = list.sortByOldest();
+
+
+            for (int i = 0; i < sortedbyDate.size(); i++)
+            {
+                cout << sortedbyDate[i] << endl;
+            }
 
 
 

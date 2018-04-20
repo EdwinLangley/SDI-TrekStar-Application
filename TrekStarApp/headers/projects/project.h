@@ -18,7 +18,7 @@ private:
     string projectStatus = "TestStatus";
     string summary = "TestSummary";
     string genre = "TestGenre";
-    string releaseDate = "TestReleaseData";
+    string releaseDate = "01/01/1000";
     string language = "TestLanguage";
     int weeklyBoxFigures = 0;
     vector<string> filmLocations={"Location1","Location2","location3"};
