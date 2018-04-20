@@ -1,5 +1,5 @@
+#include "stdafx.h"
 #include "filehandler.h"
-#include "doublylinkedlist.h"
 
 using namespace std;
 
