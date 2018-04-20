@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
             Name = vecTest.at(0);
             std::cout << Name << std::endl;
 
-            list.findByTitle(Name).setTitle("Four Lions is shit jk");
+
 
 
             vector<string> vecTest2 = list.findByRoleAndName("Terrorist","Edwin");
@@ -123,25 +123,23 @@ int main(int argc, char *argv[])
             }
             cout << "Num of films: " << list.size() << endl;
 
-            cout << "----------Daily Reports----------" << endl;
+//            cout << "----------Daily Reports----------" << endl;
 
-            for (int i = 0; i < allDailyReports.size(); i++)
-            {
-                cout << allDailyReports[i] << endl;
-            }
+//            for (int i = 0; i < allDailyReports.size(); i++)
+//            {
+//                cout << allDailyReports[i] << endl;
+//            }
 
-            cout << "----------Daily Report for one----------" << endl;
+//            cout << "----------Daily Report for one----------" << endl;
 
-            cout << list.dailyReportsByName("Batman") << endl;
-
-
+//            cout << list.dailyReportsByName("Batman") << endl;
 
 
-            cout << list.findByTitle(SortedFilms[2]).getGenre() << endl;
+
 
 
             //After moving the revenant. Lists again:
-            list.delete_by_title(SortedFilms[4]);
+            list.delete_by_title("The Revenant");
 
 
             AllFilms = list.getAllFilmTitles();

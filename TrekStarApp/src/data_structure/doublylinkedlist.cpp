@@ -98,6 +98,7 @@ void DoublyLinkedList::delete_position(int pos)
 
 void DoublyLinkedList::delete_by_title(string Title)
 {
+    bool removed = false;
     Node *current = new Node; //To traverse
     Node *previous = new Node; //To set as new node
     current = head; //start traverse from start of list
@@ -106,27 +107,39 @@ void DoublyLinkedList::delete_by_title(string Title)
 
         if (current->data.getTitle() == Title)
         {
-            if (current = head)
+            if (current->data.getTitle() == head->data.getTitle())
             {
                 Node *temp = new Node; //Create new node to hold value, so it can be deleted.
                 temp = head; //New node set to the old head
                 head = head->next; //Head is changed to the next node. Therefore this will be the start of the list
                 delete temp;
+                removed = true;
+                break;
             }
             else if (current->next == NULL)
             {
+                previous->next = NULL;
                 tail = previous;
+                delete current;
+                removed = true;
+                break;
             }
             else{
                 previous->next = current->next; //previous, now points towards the next.
                 delete current;
+                removed = true;
                 break;
             }
 
         }
 
+
         previous = current; //Pass current node to previous
         current = current->next; //Current = next node
+    }
+    if (removed == false)
+    {
+        throw std::invalid_argument("No film to remove: " + Title);
     }
 
 }
@@ -211,7 +224,7 @@ vector<string> DoublyLinkedList::findByGenre(string Genre)
 
     if (AllProjects.empty())
     {
-        throw std::out_of_range("No films with this genre");
+        throw std::out_of_range("No films with genre " + Genre);
     }
 
     return AllProjects;
@@ -243,7 +256,7 @@ vector<string> DoublyLinkedList::findByRoleAndName(string Role, string Name)
 
     if (AllProjects.empty())
     {
-        throw std::out_of_range("No films with this actor");
+        throw std::out_of_range("No films with this person as a " + Role + " called " + Name);
     }
 
     return AllProjects;
@@ -264,7 +277,7 @@ vector<string> DoublyLinkedList::getAllFilmTitles()
 
     if (AllProjects.empty())
     {
-        throw std::out_of_range("No films with this actor");
+        throw std::out_of_range("No films in list");
     }
 
     return AllProjects;
@@ -339,16 +352,4 @@ string DoublyLinkedList::dailyReportsByName(string NameOfProject)
 }
 
 
-//void BubbleSort(int List[] , int Size) {
-//int tempInt;
-    //for (int Stop = Size - 1; Stop > 0; Stop--) {
-        //for (int Check = 0; Check < Stop; Check++) {
-            //if (List[Check] > List[Check + 1]) {
-                //tempInt = List[Check];
-                //List[Check] = List[Check + 1]; // wrong order
-                //List[Check + 1] = tempInt;
-                //}
-        //}
-    //}
-//}
 
