@@ -1,4 +1,5 @@
 #include "dvd.h"
+#include "material.h"
 
 vector<string> DVD::getExtraLanguageTracks() const
 {

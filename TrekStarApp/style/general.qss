@@ -1,0 +1,116 @@
+.QWidget {
+    background-color: @lightColour;
+    font-family: "Helventica Neue";
+}
+
+.QLabel {
+    color: @highlight;
+    font-size: 16px;
+}
+
+.QTabBar::tab {
+    font-size: 20px;
+    color: @lightColour;
+    background-color: @highlight;
+    border: 2px solid @highlight;
+}
+
+.QTabBar::tab:selected, QTabBar::tab:hover {
+    color: @highlight;
+    background-color: @lightColour;
+    border: 2px solid @lightColour;
+}
+
+.QPushButton {
+    background-color: @highlight;
+    color: @lightColour;
+    border: 3px solid @highlight;
+    border-radius: 25px;
+}
+
+.QPushButton:hover {
+    background-color: @lightColour;
+    color: @highlight;
+
+}
+
+.QComboBox::drop-down {
+    border-top: 2px solid @lightColour;
+    border-bottom: 2px solid @lightColour;
+    border-right: 2px solid @lightColour;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: @highlight;
+    image: url(:/res/arrowDownWhite.png);
+}
+
+.QComboBox::drop-down:hover {
+    background-color: @lightColour;
+    image: url(:/res/arrowDownBlue.png);
+}
+
+.QDoubleSpinBox::down-button {
+    border-bottom-right-radius: 5px;
+    background-color: @highlight;
+    image: url(:/res/arrowDownWhite.png);
+}
+
+.QDoubleSpinBox::down-button:hover {
+    background-color: @lightColour;
+    image: url(:/res/arrowDownBlue.png);
+}
+
+.QDoubleSpinBox::up-button {
+    border-top-right-radius: 5px;
+    background-color: @highlight;
+    image: url(:/res/arrowUpWhite.png);
+}
+
+.QDoubleSpinBox::up-button:hover {
+    background-color: @lightColour;
+    image: url(:/res/arrowUpBlue.png);
+}
+
+.QSpinBox::down-button {
+    border-bottom-right-radius: 5px;
+    background-color: @highlight;
+    image: url(:/res/arrowDownWhite.png);
+}
+
+.QSpinBox::down-button:hover {
+    background-color: @lightColour;
+    image: url(:/res/arrowDownBlue.png);
+}
+
+.QSpinBox::up-button {
+    border-top-right-radius: 5px;
+    background-color: @highlight;
+    image: url(:/res/arrowUpWhite.png);
+}
+
+.QSpinBox::up-button:hover {
+    background-color: @lightColour;
+    image: url(:/res/arrowUpBlue.png);
+}
+
+.QDateEdit::down-button {
+    border-bottom-right-radius: 5px;
+    background-color: @highlight;
+    image: url(:/res/arrowDownWhite.png);
+}
+
+.QDateEdit::down-button:hover {
+    background-color: @lightColour;
+    image: url(:/res/arrowDownBlue.png);
+}
+
+.QDateEdit::up-button {
+    border-top-right-radius: 5px;
+    background-color: @highlight;
+    image: url(:/res/arrowUpWhite.png);
+}
+
+.QDateEdit::up-button:hover {
+    background-color: @lightColour;
+    image: url(:/res/arrowUpBlue.png);
+}

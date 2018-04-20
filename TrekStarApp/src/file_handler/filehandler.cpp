@@ -41,8 +41,8 @@ SingleSidedDVD FileWriter::ReadOneSidedDVD(string input)
     vector<string> extraSubtitleTracks=StringToVector(materialStorage[9]);
     vector<string> bonusFeatures=StringToVector(materialStorage[10]);
     string firstSideContent=materialStorage[11];
-    SingleSidedDVD returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures,firstSideContent);
-    return returnDVD;
+    //SingleSidedDVD returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures,firstSideContent);
+    //return returnDVD;
 }
 
 void FileWriter::WriteTwoSidedDVD(TwoSidedDVD inputDVDS){

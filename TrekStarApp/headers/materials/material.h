@@ -2,6 +2,8 @@
 #define MATERIAL_H
 
 #include "main.h"
+#include "frameaspect.h"
+#include "packaging.h"
 
 using namespace std;
 
@@ -14,6 +16,9 @@ private:
    string vFormat = "";
    string aFormat = "";
    string language = "";
+   FrameAspect frame;
+   Packaging package;
+
 
    int runTime = 0;
 
@@ -42,6 +47,10 @@ public:
     vector<string> getSubTitleLanguages() const;
     void setSubTitleLanguages(const vector<string> &value);
     string getMaterials();
+    FrameAspect getFrame() const;
+    void setFrame(const FrameAspect &value);
+    Packaging getPackage() const;
+    void setPackage(const Packaging &value);
 };
 
 #endif // MATERIAL_H

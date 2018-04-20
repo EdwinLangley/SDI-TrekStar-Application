@@ -20,7 +20,27 @@ void ComboBox::setIdsOfDVDs(const vector<string> &value)
     idsOfDVDs = value;
 }
 
+vector<SingleSidedDVD> ComboBox::getSingleDVDs() const
+{
+    return SingleDVDs;
+}
+
+void ComboBox::setSingleDVDs(const vector<SingleSidedDVD> &value)
+{
+    SingleDVDs = value;
+}
+
+vector<TwoSidedDVD> ComboBox::getDoubleDVDs() const
+{
+    return DoubleDVDs;
+}
+
+void ComboBox::setDoubleDVDs(const vector<TwoSidedDVD> &value)
+{
+    DoubleDVDs = value;
+}
+
 ComboBox::ComboBox()
 {
-
+    
 }

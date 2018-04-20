@@ -37,7 +37,6 @@ SOURCES += \
         src/gui/mainwindow.cpp \
         src/materials/material.cpp \
         src/projects/project.cpp \
-        src/crew/crew.cpp \
         src/materials/frameaspect.cpp \
         src/materials/packaging.cpp \
         src/materials/dvd.cpp \
@@ -46,24 +45,19 @@ SOURCES += \
         src/materials/bluray.cpp \
         src/materials/vhs.cpp \
         src/materials/combobox.cpp \
-        src/crew/director.cpp \
-        src/crew/producer.cpp \
-        src/crew/writer.cpp \
-        src/crew/editor.cpp \
-        src/crew/actor.cpp \
-        src/crew/productiondesigner.cpp \
-        src/crew/setdecorator.cpp \
-        src/crew/costumedesigner.cpp \
         src/data_structure/node.cpp \
         src/data_structure/doublylinkedlist.cpp \
         src/file_handler/filehandler.cpp \
-        src/gui/stylesheetreader.cpp
+        src/gui/stylesheetreader.cpp \
+        src/gui/projectwindow.cpp \
+        src/controller/controllermain.cpp \
+        src/controller/controllerproject.cpp \
+        src/crew/crewMember.cpp
 
 HEADERS += \
         headers/gui/mainwindow.h \
         headers/materials/material.h \
         headers/projects/project.h \
-        headers/crew/crew.h \
         headers/materials/frameaspect.h \
         headers/materials/packaging.h \
         headers/materials/dvd.h \
@@ -72,27 +66,26 @@ HEADERS += \
         headers/materials/bluray.h \
         headers/materials/vhs.h \
         headers/materials/combobox.h \
-        headers/crew/director.h \
-        headers/crew/producer.h \
-        headers/crew/writer.h \
-        headers/crew/editor.h \
-        headers/crew/actor.h \
-        headers/crew/productiondesigner.h \
-        headers/crew/setdecorator.h \
-        headers/crew/costumedesigner.h \
         headers/data_structure/node.h \
         headers/data_structure/doublylinkedlist.h \
         headers/file_handler/filehandler.h \
         headers/main.h \
-        headers/gui/gui.h
+        headers/gui/gui.h \
+        headers/gui/projectwindow.h \
+        headers/controller/controllerproject.h \
+        headers/controller/controllermain.h \
+        headers/crew/crewMember.h
 
 FORMS += \
-        forms/mainwindow.ui
+        forms/mainwindow.ui \
+        forms/projectwindow.ui
 
 RESOURCES += \
-    style/styleVariables.txt \
-    style/main.qss \
-    res/arrowDownWhite.png \
-    res/arrowDownBlue.png \
-    res/arrowUpWhite.png \
-    res/arrowUpBlue.png
+        style/styleVariables.txt \
+        style/general.qss \
+        style/main.qss \
+        style/project.qss \
+        res/arrowDownWhite.png \
+        res/arrowDownBlue.png \
+        res/arrowUpWhite.png \
+        res/arrowUpBlue.png

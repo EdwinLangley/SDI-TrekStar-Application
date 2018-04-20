@@ -1,4 +1,6 @@
 #include "bluray.h"
+#include "material.h"
+#include "main.h"
 
 vector<string> BluRay::getExtraLanguageTracks() const
 {

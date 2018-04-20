@@ -91,6 +91,76 @@ void Project::setCrewID(const string &value)
     crewID = value;
 }
 
+vector<CrewMember> Project::getCrew() const
+{
+    return Crew;
+}
+
+void Project::setCrew(const vector<CrewMember> &value)
+{
+    Crew = value;
+}
+
+SingleSidedDVD Project::getSingleDVD() const
+{
+    return singleDVD;
+}
+
+void Project::setSingleDVD(const SingleSidedDVD &value)
+{
+    singleDVD = value;
+}
+
+TwoSidedDVD Project::getTwoDVD() const
+{
+    return twoDVD;
+}
+
+void Project::setTwoDVD(const TwoSidedDVD &value)
+{
+    twoDVD = value;
+}
+
+BluRay Project::getBluRay() const
+{
+    return bluRay;
+}
+
+void Project::setBluRay(const BluRay &value)
+{
+    bluRay = value;
+}
+
+VHS Project::getVhs() const
+{
+    return vhs;
+}
+
+void Project::setVhs(const VHS &value)
+{
+    vhs = value;
+}
+
+ComboBox Project::getComboBox() const
+{
+    return comboBox;
+}
+
+void Project::setComboBox(const ComboBox &value)
+{
+    comboBox = value;
+}
+
+vector<string> Project::getMaterialIDs() const
+{
+    return materialIDs;
+}
+
+void Project::setMaterialIDs(const vector<string> &value)
+{
+    materialIDs = value;
+}
+
 Project::Project()
 {
     

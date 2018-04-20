@@ -5,7 +5,7 @@
 
 using namespace std;
 
-class Crew
+class CrewMember
 {
 
 private:
@@ -13,14 +13,14 @@ private:
     string dateOfBirth = "";
     string idNumber = "";
     string title = "";
-
+    string role = "";
     int yearsOfExperience = 0;
 
     vector<string> locationsWorkedAt;
 
 
 public:
-    Crew();
+    CrewMember();
     string getName() const;
     void setName(const string &value);
     string getDateOfBirth() const;
@@ -33,6 +33,8 @@ public:
     void setYearsOfExperience(int value);
     vector<string> getLocationsWorkedAt() const;
     void setLocationsWorkedAt(const vector<string> &value);
+    string getRole() const;
+    void setRole(const string &value);
 };
 
 #endif // CREW_H

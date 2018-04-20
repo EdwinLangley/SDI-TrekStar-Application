@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>902</width>
+    <width>900</width>
     <height>675</height>
    </rect>
   </property>
@@ -183,9 +183,9 @@
      <widget class="QPushButton" name="cmdLocationAdd">
       <property name="geometry">
        <rect>
-        <x>800</x>
+        <x>750</x>
         <y>70</y>
-        <width>91</width>
+        <width>61</width>
         <height>31</height>
        </rect>
       </property>
@@ -211,7 +211,7 @@
        <rect>
         <x>470</x>
         <y>250</y>
-        <width>321</width>
+        <width>261</width>
         <height>31</height>
        </rect>
       </property>
@@ -252,9 +252,9 @@
      <widget class="QPushButton" name="cmdKeywordsAdd">
       <property name="geometry">
        <rect>
-        <x>800</x>
+        <x>750</x>
         <y>250</y>
-        <width>91</width>
+        <width>61</width>
         <height>31</height>
        </rect>
       </property>
@@ -319,7 +319,7 @@
        <rect>
         <x>470</x>
         <y>70</y>
-        <width>321</width>
+        <width>261</width>
         <height>31</height>
        </rect>
       </property>
@@ -347,6 +347,32 @@
        </rect>
       </property>
      </widget>
+     <widget class="QPushButton" name="cmdLocationDel">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>70</y>
+        <width>61</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Delete</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="cmdKeywordsDel">
+      <property name="geometry">
+       <rect>
+        <x>830</x>
+        <y>250</y>
+        <width>61</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Delete</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tabOpen">
      <attribute name="title">
@@ -356,16 +382,16 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>30</y>
-        <width>861</width>
-        <height>331</height>
+        <y>70</y>
+        <width>851</width>
+        <height>291</height>
        </rect>
       </property>
      </widget>
      <widget class="QPushButton" name="cmdOpen">
       <property name="geometry">
        <rect>
-        <x>470</x>
+        <x>460</x>
         <y>380</y>
         <width>421</width>
         <height>81</height>
@@ -386,6 +412,39 @@
       </property>
       <property name="text">
        <string>Delete Project</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txtFilter">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>20</y>
+        <width>441</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbFilter">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>20</y>
+        <width>271</width>
+        <height>31</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="cmdFilter">
+      <property name="geometry">
+       <rect>
+        <x>780</x>
+        <y>20</y>
+        <width>101</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Filter</string>
       </property>
      </widget>
     </widget>
