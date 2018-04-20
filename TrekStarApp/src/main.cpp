@@ -69,6 +69,26 @@ int main(int argc, char *argv[])
 
         list.createnode(test2);
 
+
+        Project test3;
+        test3.setTitle("Spiderman 3");
+        list.createnode(test3);
+
+        Project test4;
+        test4.setTitle("Batman");
+        list.createnode(test4);
+
+        Project test5;
+        test5.setTitle("Kingsmen");
+        test5.setGenre("Action/Comdedy");
+        list.createnode(test5);
+
+
+
+
+        vector<string> AllFilms = list.getAllFilmTitles();
+
+
         try {
             string Name;
             vector<string> vecTest = list.findByRoleAndName("Terrorist","Edwin");
@@ -78,14 +98,36 @@ int main(int argc, char *argv[])
             list.findByTitle(Name).setTitle("Four Lions is shit jk");
 
 
-            vector<string> vecTest2 = list.findByRoleAndName("Terrorist","Edwin2");
+            vector<string> vecTest2 = list.findByRoleAndName("Terrorist","Edwin");
             Name = vecTest2.at(0);
             std::cout << Name << std::endl;
+            vector<string> SortedFilms = list.sortProject(list.getAllFilmTitles());
+
+            cout << "----------Unsorted----------" << endl;
+
+            for (int i = 0; i < AllFilms.size(); i++)
+            {
+                cout << AllFilms[i] << endl;
+            }
+
+            cout << "----------Sorted----------" << endl;
+
+            for (int i = 0; i < SortedFilms.size(); i++)
+            {
+                cout << SortedFilms[i] << endl;
+            }
+
+
+            cout << list.findByTitle(SortedFilms[2]).getGenre() << endl;
+
         } catch (...)
         {
             //Update gui with no names
             cout << "No film with this person in specified role" << endl;
         }
+
+
+
 
 
 

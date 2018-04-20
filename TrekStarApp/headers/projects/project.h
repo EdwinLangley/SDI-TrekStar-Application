@@ -22,6 +22,7 @@ private:
     string genre = "TestGenre";
     string releaseDate = "TestReleaseData";
     string language = "TestLanguage";
+    int weeklyBoxFigures = 0;
     vector<string> filmLocations={"Location1","Location2","location3"};
     //Like Material IDs but only links to one singular crew entity, as each crew will be unique.
     //CrewID 0 will be an unset crew
@@ -73,6 +74,8 @@ public:
     void setComboBox(const ComboBox &value);
     vector<string> getMaterialIDs() const;
     void setMaterialIDs(const vector<string> &value);
+    int getWeeklyBoxFigures() const;
+    void setWeeklyBoxFigures(int value);
 };
 
 #endif // PROJECT_H

@@ -183,7 +183,7 @@ vector<string> DoublyLinkedList::findByGenre(string Genre)
     return AllProjects;
 }
 
-vector<string> DoublyLinkedList::findByRoleAndName(string Role, string ActorName)
+vector<string> DoublyLinkedList::findByRoleAndName(string Role, string Name)
 {
     vector<string> AllProjects;
     Node *current = head;
@@ -197,7 +197,7 @@ vector<string> DoublyLinkedList::findByRoleAndName(string Role, string ActorName
         for (int i = 0; i < Crew.size(); i++)
         {
             CrewMember test = Crew.at(i);
-            if (test.getRole() == Role && test.getName() == ActorName)
+            if (test.getRole() == Role && test.getName() == Name)
             {
                 AllProjects.push_back(current->data.getTitle());
             }
@@ -215,4 +215,59 @@ vector<string> DoublyLinkedList::findByRoleAndName(string Role, string ActorName
     return AllProjects;
 }
 
+vector<string> DoublyLinkedList::getAllFilmTitles()
+{
+    vector<string> AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+        AllProjects.push_back(current->data.getTitle());
+        previous = current;
+        current = current->next;
+    }
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No films with this actor");
+    }
+
+    return AllProjects;
+}
+
+vector<string> DoublyLinkedList::sortProject(vector<string> Unsorted)
+{
+
+    string Temp;
+    for (int stop = Unsorted.size() - 1; stop > 0; stop-- )
+    {
+        for (int check = 0; check < stop; check++)
+        {
+            if (Unsorted.at(check) > Unsorted.at(check+1))
+            {
+                Temp = Unsorted.at(check);
+                Unsorted[check] = Unsorted[check+1];
+                Unsorted[check+1] = Temp;
+            }
+        }
+    }
+
+    return Unsorted;
+
+}
+
+
+//void BubbleSort(int List[] , int Size) {
+//int tempInt;
+    //for (int Stop = Size - 1; Stop > 0; Stop--) {
+        //for (int Check = 0; Check < Stop; Check++) {
+            //if (List[Check] > List[Check + 1]) {
+                //tempInt = List[Check];
+                //List[Check] = List[Check + 1]; // wrong order
+                //List[Check + 1] = tempInt;
+                //}
+        //}
+    //}
+//}
 
