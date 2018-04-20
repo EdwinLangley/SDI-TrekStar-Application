@@ -96,6 +96,40 @@ void DoublyLinkedList::delete_position(int pos)
     //there for current can not be pointed too and no longer accessed.
 }
 
+void DoublyLinkedList::delete_by_title(string Title)
+{
+    Node *current = new Node; //To traverse
+    Node *previous = new Node; //To set as new node
+    current = head; //start traverse from start of list
+    while (current != NULL) //until position has been found
+    {
+
+        if (current->data.getTitle() == Title)
+        {
+            if (current = head)
+            {
+                Node *temp = new Node; //Create new node to hold value, so it can be deleted.
+                temp = head; //New node set to the old head
+                head = head->next; //Head is changed to the next node. Therefore this will be the start of the list
+                delete temp;
+            }
+            else if (current->next == NULL)
+            {
+                tail = previous;
+            }
+            else{
+                previous->next = current->next; //previous, now points towards the next.
+                delete current;
+                break;
+            }
+
+        }
+
+        previous = current; //Pass current node to previous
+        current = current->next; //Current = next node
+    }
+
+}
 
 
 unsigned int DoublyLinkedList::size()

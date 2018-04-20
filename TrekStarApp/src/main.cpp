@@ -121,6 +121,7 @@ int main(int argc, char *argv[])
             {
                 cout << SortedFilms[i] << endl;
             }
+            cout << "Num of films: " << list.size() << endl;
 
             cout << "----------Daily Reports----------" << endl;
 
@@ -137,6 +138,29 @@ int main(int argc, char *argv[])
 
 
             cout << list.findByTitle(SortedFilms[2]).getGenre() << endl;
+
+
+            //After moving the revenant. Lists again:
+            list.delete_by_title(SortedFilms[4]);
+
+
+            AllFilms = list.getAllFilmTitles();
+            SortedFilms = list.sortProject(list.getAllFilmTitles());
+
+            cout << "----------Unsorted----------" << endl;
+
+            for (int i = 0; i < AllFilms.size(); i++)
+            {
+                cout << AllFilms[i] << endl;
+            }
+
+            cout << "----------Sorted----------" << endl;
+
+            for (int i = 0; i < SortedFilms.size(); i++)
+            {
+                cout << SortedFilms[i] << endl;
+            }
+            cout << "Num of films: " << list.size() << endl;
 
         } catch (...)
         {
