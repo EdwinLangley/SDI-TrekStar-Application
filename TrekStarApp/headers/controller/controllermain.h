@@ -4,10 +4,16 @@
 #include "gui.h"
 #include "mainwindow.h"
 
-class controllermain
+class controllermain : public QObject
 {
+    Q_OBJECT
+
 public:
     controllermain();
+
+private slots:
+    void handleCreateProject();
+
 private:
     MainWindow mw;
 };

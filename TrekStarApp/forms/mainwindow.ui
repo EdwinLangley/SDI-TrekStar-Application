@@ -108,7 +108,7 @@
        </rect>
       </property>
      </widget>
-     <widget class="QLineEdit" name="txtTitleProjects">
+     <widget class="QLineEdit" name="txtTitleProject">
       <property name="geometry">
        <rect>
         <x>110</x>
@@ -337,7 +337,7 @@
        <string>Clear</string>
       </property>
      </widget>
-     <widget class="QSpinBox" name="spinBox">
+     <widget class="QSpinBox" name="sbSales">
       <property name="geometry">
        <rect>
         <x>110</x>

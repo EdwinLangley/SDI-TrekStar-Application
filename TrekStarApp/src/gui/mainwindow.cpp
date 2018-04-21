@@ -1,6 +1,7 @@
 #include "gui.h"
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "controllermain.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent) :
     this->setStyleSheet(styleCode);
 
     ui->lstProject->setAttribute(Qt::WA_MacShowFocusRect, 0);
-
 
 }
 
