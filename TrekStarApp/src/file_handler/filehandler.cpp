@@ -167,6 +167,7 @@ ComboBox FileWriter::ReadComboBox(string input)
         }
     }
     ComboBox returnComboBox(idsOfDVDS.size(),idsOfDVDS,singleDVDS,doubleDVDS);
+    return returnComboBox;
 }
 void FileWriter::WriteMaterials(vector<Project> inputProject){
     for (int i = 0; i < inputProject.size(); i++) {
@@ -220,6 +221,10 @@ void FileWriter::WriteProject(vector<Project> inputProject){
         newLine.append(",");
         newLine.append(inputProject[i].getCrewID());
         newLine.append(",");
+        newLine.append(to_string(inputProject[i].getWeeklyBoxFigures()));
+        newLine.append(",");
+        newLine.append(VectorToString(inputProject[i].getKeywords()));
+        newLine.append(",");
         newLine.append(VectorToString(inputProject[i].getFilmLocations()));
         newLine.append(",");
         newLine.append(VectorToString(inputProject[i].getMaterials()));
@@ -254,9 +259,11 @@ vector<Project> FileWriter::ReadProjects(){
         tempProject.setReleaseDate(resultsStorage[4]);
         tempProject.setLanguage(resultsStorage[5]);
         tempProject.setCrewID(resultsStorage[6]);
-        tempProject.setFilmLocations(StringToVector(resultsStorage[7]));
+        tempProject.setWeeklyBoxFigures(stoi(resultsStorage[7]));
+        tempProject.setKeywords(StringToVector(resultsStorage[8]));
+        tempProject.setFilmLocations(StringToVector(resultsStorage[9]));
         //USE THIS TO DETERMINE WHICH MATERIALS TO ASSIGN TO THE PROJECT
-        tempProject.setMaterials(StringToVector(resultsStorage[8]));
+        tempProject.setMaterials(StringToVector(resultsStorage[10]));
         //Add project to returned ones
         returnedProjects.push_back(tempProject);
     }
@@ -371,6 +378,7 @@ vector<Project> FileWriter::BuildProjectList(){
             }
         }
     }
+    return projects;
 }
 
 FileWriter::FileWriter()

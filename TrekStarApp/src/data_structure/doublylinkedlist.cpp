@@ -262,6 +262,38 @@ vector<string> DoublyLinkedList::findByRoleAndName(string Role, string Name)
     return AllProjects;
 }
 
+vector<string> DoublyLinkedList::findByKeyword(string keyword)
+{
+    vector<string> AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+
+        vector<string> Keywords = current->data.getKeywords();
+
+        for (int i = 0; i < Keywords.size(); i++)
+        {
+            if (Keywords[i] == keyword)
+            {
+                AllProjects.push_back(current->data.getTitle());
+            }
+        }
+        previous = current;
+        current = current->next;
+
+    }
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No films with this keyword " + keyword);
+    }
+
+    return AllProjects;
+}
+
+
 vector<string> DoublyLinkedList::getAllFilmTitles()
 {
     vector<string> AllProjects;
@@ -351,5 +383,163 @@ string DoublyLinkedList::dailyReportsByName(string NameOfProject)
 
 }
 
+bool DoublyLinkedList::alreadyExists(string Title)
+{
+    bool Exists = false;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+
+        if (current->data.getTitle() == Title)
+        {
+            Exists = true;
+        }
+
+        previous = current;
+        current = current->next;
+    }
+    return Exists;
+}
 
 
+vector<string> DoublyLinkedList::sortByNewest()
+{
+    vector<Project> AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+
+        AllProjects.push_back(current->data);
+
+        previous = current;
+        current = current->next;
+    }
+
+    Project Temp;
+    Project Compare1;
+    Project Compare2;
+    string date1;
+    string date2;
+    string toMakeToInt1;
+    string toMakeToInt2;
+    int CompareInt1;
+    int CompareInt2;
+
+    //09/03/1998
+
+    for (int stop = AllProjects.size() - 1; stop > 0; stop-- )
+    {
+        for (int check = 0; check < stop; check++)
+        {
+            Compare1 = AllProjects.at(check);
+            Compare2 = AllProjects.at(check+1);
+
+            date1 = Compare1.getReleaseDate();
+            date2 = Compare2.getReleaseDate();
+
+            toMakeToInt1 = date1.substr(6,4) + date1.substr(3,2) + date1.substr(0,2);
+            toMakeToInt2 = date2.substr(6,4) + date2.substr(3,2) + date2.substr(0,2);
+
+            CompareInt1 = stoi(toMakeToInt1);
+            CompareInt2 = stoi(toMakeToInt2);
+
+
+            if (CompareInt1 > CompareInt2)
+            {
+                Temp = AllProjects.at(check);
+                AllProjects[check] = AllProjects[check+1];
+                AllProjects[check+1] = Temp;
+            }
+        }
+    }
+
+    vector<string> AllProjectsStrings;
+
+    for (int stop = AllProjects.size() - 1; stop >= 0; stop-- )
+    {
+        AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + " was released on " +AllProjects.at(stop).getReleaseDate());
+    }
+
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No Box Figures In Any Project");
+    }
+
+    return AllProjectsStrings;
+
+}
+
+vector<string> DoublyLinkedList::sortByOldest()
+{
+    vector<Project> AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+
+        AllProjects.push_back(current->data);
+
+        previous = current;
+        current = current->next;
+    }
+
+    Project Temp;
+    Project Compare1;
+    Project Compare2;
+    string date1;
+    string date2;
+    string toMakeToInt1;
+    string toMakeToInt2;
+    int CompareInt1;
+    int CompareInt2;
+
+    //09/03/1998
+
+    for (int stop = AllProjects.size() - 1; stop > 0; stop-- )
+    {
+        for (int check = 0; check < stop; check++)
+        {
+            Compare1 = AllProjects.at(check);
+            Compare2 = AllProjects.at(check+1);
+
+            date1 = Compare1.getReleaseDate();
+            date2 = Compare2.getReleaseDate();
+
+            toMakeToInt1 = date1.substr(6,4) + date1.substr(3,2) + date1.substr(0,2);
+            toMakeToInt2 = date2.substr(6,4) + date2.substr(3,2) + date2.substr(0,2);
+
+            CompareInt1 = stoi(toMakeToInt1);
+            CompareInt2 = stoi(toMakeToInt2);
+
+
+            if (CompareInt1 > CompareInt2)
+            {
+                Temp = AllProjects.at(check);
+                AllProjects[check] = AllProjects[check+1];
+                AllProjects[check+1] = Temp;
+            }
+        }
+    }
+
+    vector<string> AllProjectsStrings;
+
+    for (int stop =0; stop < AllProjects.size(); stop++ )
+    {
+        AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + " was released on " +AllProjects.at(stop).getReleaseDate());
+    }
+
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No Box Figures In Any Project");
+    }
+
+    return AllProjectsStrings;
+
+}
