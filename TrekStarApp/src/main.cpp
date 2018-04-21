@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 
         test1.setCrew(CrewTest);
         test1.setCrewID("1");
+        test1.setKeywords({"Action", "Adventure", "Awesome"});
 
         list.createnode(test1);
 
@@ -65,6 +66,7 @@ int main(int argc, char *argv[])
         CrewTest2.push_back(testCrew3);
 
         test2.setCrew(CrewTest2);
+        test2.setKeywords({"Funny", "Comedy", "Jokes"});
         test2.setCrewID("2");
 
         list.createnode(test2);
@@ -74,6 +76,7 @@ int main(int argc, char *argv[])
         test3.setTitle("Spiderman 3");
         test3.setWeeklyBoxFigures(3000);
         test3.setReleaseDate("09/03/1998");
+        test3.setKeywords({"Adventure"});
         list.createnode(test3);
 
 
@@ -81,11 +84,12 @@ int main(int argc, char *argv[])
         test4.setTitle("Batman");
         test4.setWeeklyBoxFigures(5000);
         test4.setReleaseDate("22/03/2000");
+        test4.setKeywords({"Sad","Parents", "Action"});
         list.createnode(test4);
 
         Project test5;
         test5.setTitle("Kingsmen");
-        test5.setGenre("Action/Comdedy");
+        test5.setGenre("Action");
         test5.setWeeklyBoxFigures(9000);
         test5.setReleaseDate("01/03/2200");
         list.createnode(test5);
@@ -164,7 +168,7 @@ int main(int argc, char *argv[])
 
 
             //After moving the revenant. Lists again:
-            list.delete_by_title("The Revenant");
+            list.delete_by_title("Kingsmen");
 
 
             AllFilms = list.getAllFilmTitles();
@@ -188,10 +192,22 @@ int main(int argc, char *argv[])
             bool exists = list.alreadyExists("Kingsmen");
             cout << exists << endl;
 
-        } catch (...)
+
+            cout << "-----------------------------" << endl;
+
+            string keyword = "Awesome1";
+
+            vector<string> keywordFilms = list.findByKeyword(keyword);
+            cout << "Films found with keyword " + keyword << endl;
+            for (int i = 0; i < keywordFilms.size(); i++)
+            {
+                cout << keywordFilms[i] << endl;
+            }
+
+        } catch (out_of_range e)
         {
             //Update gui with no names
-            cout << "No film with this person in specified role" << endl;
+            cout << e.what() << endl;
         }
 
 

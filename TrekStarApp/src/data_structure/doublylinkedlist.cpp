@@ -262,6 +262,38 @@ vector<string> DoublyLinkedList::findByRoleAndName(string Role, string Name)
     return AllProjects;
 }
 
+vector<string> DoublyLinkedList::findByKeyword(string keyword)
+{
+    vector<string> AllProjects;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+
+        vector<string> Keywords = current->data.getKeywords();
+
+        for (int i = 0; i < Keywords.size(); i++)
+        {
+            if (Keywords[i] == keyword)
+            {
+                AllProjects.push_back(current->data.getTitle());
+            }
+        }
+        previous = current;
+        current = current->next;
+
+    }
+
+    if (AllProjects.empty())
+    {
+        throw std::out_of_range("No films with this keyword " + keyword);
+    }
+
+    return AllProjects;
+}
+
+
 vector<string> DoublyLinkedList::getAllFilmTitles()
 {
     vector<string> AllProjects;

@@ -171,6 +171,16 @@ void Project::setWeeklyBoxFigures(int value)
     weeklyBoxFigures = value;
 }
 
+vector<string> Project::getKeywords() const
+{
+    return keywords;
+}
+
+void Project::setKeywords(const vector<string> &value)
+{
+    keywords = value;
+}
+
 Project::Project()
 {
     

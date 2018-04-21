@@ -81,6 +81,9 @@ vector<string> findByGenre(string Genre);
 //Returns a vector<string> of project titles with the selected Role and Name
 vector<string> findByRoleAndName(string Role, string Name);
 
+//Returns a vector of project titles containing the keyword searched for
+vector<string> findByKeyword(string keyword);
+
 //A function to get all the titles of projects stored
 vector<string> getAllFilmTitles();
 
