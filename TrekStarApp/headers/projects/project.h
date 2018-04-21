@@ -20,8 +20,8 @@ private:
     string genre = "TestGenre";
     string releaseDate = "01/01/1000";
     string language = "TestLanguage";
-    vector<string> keywords = {"Keywords"};
     int weeklyBoxFigures = 0;
+    vector<string> keywords = {"Keywords"};
     vector<string> filmLocations={"Location1"};
     //Like Material IDs but only links to one singular crew entity, as each crew will be unique.
     //CrewID 0 will be an unset crew
