@@ -19,8 +19,8 @@ int main(int argc, char *argv[])
 
     std::cout << "*** press enter to exit the program gracefully\n\n";
 
-    const unsigned int update_interval = 50; // update after every 50 milliseconds
-    std::thread update_thread(updateReports, update_interval);
+    //const unsigned int update_interval = 50; // update after every 50 milliseconds
+    //std::thread update_thread(updateReports, update_interval);
 
     try {
         DoublyLinkedList list;
@@ -258,6 +258,7 @@ string VectorToString(vector<string> inputVector){
 
 void updateReports( unsigned int update_interval_millisecs)
 {
+
     const auto wait_duration = std::chrono::milliseconds(2000);
     while (true)
     {
@@ -272,4 +273,5 @@ void updateReports( unsigned int update_interval_millisecs)
 
         std::this_thread::sleep_for(wait_duration);
     }
+
 }
