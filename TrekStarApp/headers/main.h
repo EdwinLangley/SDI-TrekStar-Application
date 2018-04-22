@@ -9,6 +9,8 @@
 #include <atomic>
 #include <thread>
 #include <chrono>
+#include <ctime>
+#include <fstream>
 
 
 std::string VectorToString(std::vector<std::string> inputVector);

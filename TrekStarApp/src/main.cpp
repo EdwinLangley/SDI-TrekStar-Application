@@ -9,6 +9,9 @@
 #include "controllerproject.h"
 
 using namespace std;
+using namespace std::chrono;
+
+
 
 int main(int argc, char *argv[])
 {
@@ -21,8 +24,8 @@ int main(int argc, char *argv[])
     std::thread update_thread(updateReports, update_interval);
 
     try {
-        //Testing LinkedList
         DoublyLinkedList list;
+        //Testing LinkedList
         Project test1;
         test1.setTitle("The Revenant");
 
@@ -260,7 +263,15 @@ void updateReports( unsigned int update_interval_millisecs)
     const auto wait_duration = std::chrono::milliseconds(2000);
     while (true)
     {
-        std::cout << "update stuff\n" << std::flush;
+        system_clock::time_point today = system_clock::now();
+        time_t timeNow;
+        timeNow = system_clock::to_time_t( today );
+        ofstream myfile;
+        myfile.open("example.txt",(ofstream::app));
+        myfile << ">>>> Report at time  " << ctime(&timeNow);
+        myfile << "=============================================" << endl;
+        myfile.close();
+
         std::this_thread::sleep_for(wait_duration);
     }
 }
