@@ -8,7 +8,7 @@
 #include "controller.h"
 
 using namespace std;
-using namespace std::chrono;
+//using namespace std::chrono;
 
 
 
@@ -17,215 +17,213 @@ int main(int argc, char *argv[])
     // Calls function which stores qss variables in a global list variable
     readVariables();
 
-    std::cout << "*** press enter to exit the program gracefully\n\n";
-
     //const unsigned int update_interval = 50; // update after every 50 milliseconds
     //std::thread update_thread(updateReports, update_interval);
 
-    try {
-        DoublyLinkedList list;
-        //Testing LinkedList
-        Project test1;
-        test1.setTitle("The Revenant");
+//    try {
+//        DoublyLinkedList list;
+//        //Testing LinkedList
+//        Project test1;
+//        test1.setTitle("The Revenant");
 
-        CrewMember testCrew1;
-        testCrew1.setName("Jeff");
-        testCrew1.setRole("Actor");
+//        CrewMember testCrew1;
+//        testCrew1.setName("Jeff");
+//        testCrew1.setRole("Actor");
 
-        CrewMember testCrew2;
-        testCrew2.setName("Jane");
-        testCrew2.setRole("Director");
+//        CrewMember testCrew2;
+//        testCrew2.setName("Jane");
+//        testCrew2.setRole("Director");
 
-        CrewMember testCrew3;
-        testCrew3.setName("Jeremy");
-        testCrew3.setRole("Actor");
+//        CrewMember testCrew3;
+//        testCrew3.setName("Jeremy");
+//        testCrew3.setRole("Actor");
 
-        vector<CrewMember> CrewTest;
-        CrewTest.push_back(testCrew1);
-        CrewTest.push_back(testCrew2);
-        CrewTest.push_back(testCrew3);
+//        vector<CrewMember> CrewTest;
+//        CrewTest.push_back(testCrew1);
+//        CrewTest.push_back(testCrew2);
+//        CrewTest.push_back(testCrew3);
 
-        test1.setCrew(CrewTest);
-        test1.setCrewID("1");
-        test1.setKeywords({"Action", "Adventure", "Awesome"});
+//        test1.setCrew(CrewTest);
+//        test1.setCrewID("1");
+//        test1.setKeywords({"Action", "Adventure", "Awesome"});
 
-        list.createnode(test1);
-
-
-        Project test2;
-        test2.setTitle("Four Lions");
+//        list.createnode(test1);
 
 
-        testCrew1.setName("Annie");
-        testCrew1.setRole("Actor");
+//        Project test2;
+//        test2.setTitle("Four Lions");
 
 
-        testCrew2.setName("Jane");
-        testCrew2.setRole("Director");
+//        testCrew1.setName("Annie");
+//        testCrew1.setRole("Actor");
 
 
-        testCrew3.setName("Edwin");
-        testCrew3.setRole("Terrorist");
-
-        vector<CrewMember> CrewTest2;
-        CrewTest2.push_back(testCrew1);
-        CrewTest2.push_back(testCrew2);
-        CrewTest2.push_back(testCrew3);
-
-        test2.setCrew(CrewTest2);
-        test2.setKeywords({"Funny", "Comedy", "Jokes"});
-        test2.setCrewID("2");
-
-        list.createnode(test2);
+//        testCrew2.setName("Jane");
+//        testCrew2.setRole("Director");
 
 
-        Project test3;
-        test3.setTitle("Spiderman 3");
-        test3.setWeeklyBoxFigures(3000);
-        test3.setReleaseDate("09/03/1998");
-        test3.setKeywords({"Adventure"});
-        list.createnode(test3);
+//        testCrew3.setName("Edwin");
+//        testCrew3.setRole("Terrorist");
+
+//        vector<CrewMember> CrewTest2;
+//        CrewTest2.push_back(testCrew1);
+//        CrewTest2.push_back(testCrew2);
+//        CrewTest2.push_back(testCrew3);
+
+//        test2.setCrew(CrewTest2);
+//        test2.setKeywords({"Funny", "Comedy", "Jokes"});
+//        test2.setCrewID("2");
+
+//        list.createnode(test2);
 
 
-        Project test4;
-        test4.setTitle("Batman");
-        test4.setWeeklyBoxFigures(5000);
-        test4.setReleaseDate("22/03/2000");
-        test4.setKeywords({"Sad","Parents", "Action"});
-        list.createnode(test4);
-
-        Project test5;
-        test5.setTitle("Kingsmen");
-        test5.setGenre("Action");
-        test5.setWeeklyBoxFigures(9000);
-        test5.setReleaseDate("01/03/2200");
-        list.createnode(test5);
+//        Project test3;
+//        test3.setTitle("Spiderman 3");
+//        test3.setWeeklyBoxFigures(3000);
+//        test3.setReleaseDate("09/03/1998");
+//        test3.setKeywords({"Adventure"});
+//        list.createnode(test3);
 
 
+//        Project test4;
+//        test4.setTitle("Batman");
+//        test4.setWeeklyBoxFigures(5000);
+//        test4.setReleaseDate("22/03/2000");
+//        test4.setKeywords({"Sad","Parents", "Action"});
+//        list.createnode(test4);
 
-
-        vector<string> AllFilms = list.getAllFilmTitles();
-
-
-        try {
-            string Name;
-            vector<string> vecTest = list.findByRoleAndName("Terrorist","Edwin");
-            Name = vecTest.at(0);
-            std::cout << Name << std::endl;
+//        Project test5;
+//        test5.setTitle("Kingsmen");
+//        test5.setGenre("Action");
+//        test5.setWeeklyBoxFigures(9000);
+//        test5.setReleaseDate("01/03/2200");
+//        list.createnode(test5);
 
 
 
 
-            vector<string> vecTest2 = list.findByRoleAndName("Terrorist","Edwin");
-            Name = vecTest2.at(0);
-            std::cout << Name << std::endl;
-            vector<string> SortedFilms = list.sortProject(list.getAllFilmTitles());
+//        vector<string> AllFilms = list.getAllFilmTitles();
 
-            vector<string> allDailyReports = list.dailyReportsForAll();
 
-            cout << "----------Unsorted----------" << endl;
+//        try {
+//            string Name;
+//            vector<string> vecTest = list.findByRoleAndName("Terrorist","Edwin");
+//            Name = vecTest.at(0);
+//            std::cout << Name << std::endl;
 
-            for (int i = 0; i < AllFilms.size(); i++)
-            {
-                cout << AllFilms[i] << endl;
-            }
 
-            cout << "----------Sorted----------" << endl;
 
-            for (int i = 0; i < SortedFilms.size(); i++)
-            {
-                cout << SortedFilms[i] << endl;
-            }
-            cout << "Num of films: " << list.size() << endl;
 
-//            cout << "----------Daily Reports----------" << endl;
+//            vector<string> vecTest2 = list.findByRoleAndName("Terrorist","Edwin");
+//            Name = vecTest2.at(0);
+//            std::cout << Name << std::endl;
+//            vector<string> SortedFilms = list.sortProject(list.getAllFilmTitles());
 
-//            for (int i = 0; i < allDailyReports.size(); i++)
+//            vector<string> allDailyReports = list.dailyReportsForAll();
+
+//            cout << "----------Unsorted----------" << endl;
+
+//            for (int i = 0; i < AllFilms.size(); i++)
 //            {
-//                cout << allDailyReports[i] << endl;
+//                cout << AllFilms[i] << endl;
 //            }
 
-//            cout << "----------Daily Report for one----------" << endl;
+//            cout << "----------Sorted----------" << endl;
 
-//            cout << list.dailyReportsByName("Batman") << endl;
+//            for (int i = 0; i < SortedFilms.size(); i++)
+//            {
+//                cout << SortedFilms[i] << endl;
+//            }
+//            cout << "Num of films: " << list.size() << endl;
 
+////            cout << "----------Daily Reports----------" << endl;
 
-            cout << "----------Sort by date Newest----------" << endl;
+////            for (int i = 0; i < allDailyReports.size(); i++)
+////            {
+////                cout << allDailyReports[i] << endl;
+////            }
 
-            vector<string> sortedbyDate = list.sortByNewest();
+////            cout << "----------Daily Report for one----------" << endl;
 
-
-            for (int i = 0; i < sortedbyDate.size(); i++)
-            {
-                cout << sortedbyDate[i] << endl;
-            }
-
-            cout << "----------Sort by date Oldest----------" << endl;
-
-            sortedbyDate = list.sortByOldest();
-
-
-            for (int i = 0; i < sortedbyDate.size(); i++)
-            {
-                cout << sortedbyDate[i] << endl;
-            }
+////            cout << list.dailyReportsByName("Batman") << endl;
 
 
+//            cout << "----------Sort by date Newest----------" << endl;
+
+//            vector<string> sortedbyDate = list.sortByNewest();
 
 
+//            for (int i = 0; i < sortedbyDate.size(); i++)
+//            {
+//                cout << sortedbyDate[i] << endl;
+//            }
 
-            //After moving the revenant. Lists again:
-            list.delete_by_title("Kingsmen");
+//            cout << "----------Sort by date Oldest----------" << endl;
 
-
-            AllFilms = list.getAllFilmTitles();
-            SortedFilms = list.sortProject(list.getAllFilmTitles());
-
-            cout << "----------Unsorted----------" << endl;
-
-            for (int i = 0; i < AllFilms.size(); i++)
-            {
-                cout << AllFilms[i] << endl;
-            }
-
-            cout << "----------Sorted----------" << endl;
-
-            for (int i = 0; i < SortedFilms.size(); i++)
-            {
-                cout << SortedFilms[i] << endl;
-            }
-            cout << "Num of films: " << list.size() << endl;
-
-            bool exists = list.alreadyExists("Kingsmen");
-            cout << exists << endl;
+//            sortedbyDate = list.sortByOldest();
 
 
-            cout << "-----------------------------" << endl;
-
-            string keyword = "Awesome1";
-
-            vector<string> keywordFilms = list.findByKeyword(keyword);
-            cout << "Films found with keyword " + keyword << endl;
-            for (int i = 0; i < keywordFilms.size(); i++)
-            {
-                cout << keywordFilms[i] << endl;
-            }
-
-        } catch (out_of_range e)
-        {
-            //Update gui with no names
-            cout << e.what() << endl;
-        }
+//            for (int i = 0; i < sortedbyDate.size(); i++)
+//            {
+//                cout << sortedbyDate[i] << endl;
+//            }
 
 
 
 
 
+//            //After moving the revenant. Lists again:
+//            list.delete_by_title("Kingsmen");
 
-    } catch (std::bad_alloc e)
-    {
-        cout << e.what() << endl;
-    }
+
+//            AllFilms = list.getAllFilmTitles();
+//            SortedFilms = list.sortProject(list.getAllFilmTitles());
+
+//            cout << "----------Unsorted----------" << endl;
+
+//            for (int i = 0; i < AllFilms.size(); i++)
+//            {
+//                cout << AllFilms[i] << endl;
+//            }
+
+//            cout << "----------Sorted----------" << endl;
+
+//            for (int i = 0; i < SortedFilms.size(); i++)
+//            {
+//                cout << SortedFilms[i] << endl;
+//            }
+//            cout << "Num of films: " << list.size() << endl;
+
+//            bool exists = list.alreadyExists("Kingsmen");
+//            cout << exists << endl;
+
+
+//            cout << "-----------------------------" << endl;
+
+//            string keyword = "Awesome";
+
+//            vector<string> keywordFilms = list.findByKeyword(keyword);
+//            cout << "Films found with keyword " + keyword << endl;
+//            for (int i = 0; i < keywordFilms.size(); i++)
+//            {
+//                cout << keywordFilms[i] << endl;
+//            }
+
+//        } catch (out_of_range e)
+//        {
+//            //Update gui with no names
+//            cout << e.what() << endl;
+//        }
+
+
+
+
+
+
+//    } catch (std::bad_alloc e)
+//    {
+//        cout << e.what() << endl;
+//    }
 
 
     QApplication a(argc, argv);
@@ -256,22 +254,22 @@ string VectorToString(vector<string> inputVector){
     return outputString;
 }
 
-void updateReports( unsigned int update_interval_millisecs)
-{
+//void updateReports( unsigned int update_interval_millisecs)
+//{
 
-    const auto wait_duration = std::chrono::milliseconds(2000);
-    while (true)
-    {
-        system_clock::time_point today = system_clock::now();
-        time_t timeNow;
-        timeNow = system_clock::to_time_t( today );
-        ofstream myfile;
-        myfile.open("example.txt",(ofstream::app));
-        myfile << ">>>> Report at time  " << ctime(&timeNow);
-        myfile << "=============================================" << endl;
-        myfile.close();
+//    const auto wait_duration = std::chrono::milliseconds(2000);
+//    while (true)
+//    {
+//        system_clock::time_point today = system_clock::now();
+//        time_t timeNow;
+//        timeNow = system_clock::to_time_t( today );
+//        ofstream myfile;
+//        myfile.open("example.txt",(ofstream::app));
+//        myfile << ">>>> Report at time  " << ctime(&timeNow);
+//        myfile << "=============================================" << endl;
+//        myfile.close();
 
-        std::this_thread::sleep_for(wait_duration);
-    }
+//        std::this_thread::sleep_for(wait_duration);
+//    }
 
-}
+//}

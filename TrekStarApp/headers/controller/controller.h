@@ -12,6 +12,8 @@ class controller : public QObject
 
 public:
     controller();
+    //Global linked list, calls constructor and loads all projects
+    DoublyLinkedList projList;
 
 private slots:
     void handleCreateProject();
@@ -22,7 +24,6 @@ private slots:
     void handleKeywordsDel();
 
 private:
-    DoublyLinkedList projList;
     MainWindow mw;
     ProjectWindow pw;
     Project* openProj;

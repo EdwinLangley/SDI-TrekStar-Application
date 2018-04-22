@@ -14,7 +14,7 @@ class ComboBox
 private:
     unsigned int numberOfDVDs = 0;
 
-    vector<string> idsOfDVDs;
+    vector<string> idsOfDVDs = {"0"};
 
     vector<SingleSidedDVD> SingleDVDs;
     vector<TwoSidedDVD> DoubleDVDs;

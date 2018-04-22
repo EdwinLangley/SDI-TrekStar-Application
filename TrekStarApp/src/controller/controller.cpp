@@ -123,6 +123,11 @@ void controller::handleClear(){
     mw.ui->lblSummary->setStyleSheet("color: #78CAD2");
     mw.ui->lblLocations->setStyleSheet("color: #78CAD2");
     mw.ui->lblKeywords->setStyleSheet("color: #78CAD2");
+
+    //Keep this comment, its how we are calling the destructor and I wont remember it :(
+    //DoublyLinkedList *projList2 = &projList;
+    //delete projList2;
+
 }
 
 // Adds the input from the text box to the location list
