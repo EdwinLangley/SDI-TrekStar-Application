@@ -88,26 +88,6 @@
        </rect>
       </property>
      </widget>
-     <widget class="QDoubleSpinBox" name="dsbRuntime">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>300</y>
-        <width>331</width>
-        <height>31</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QListView" name="lstKeywords">
-      <property name="geometry">
-       <rect>
-        <x>470</x>
-        <y>300</y>
-        <width>421</width>
-        <height>81</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLineEdit" name="txtTitleProject">
       <property name="geometry">
        <rect>
@@ -239,16 +219,6 @@
        </rect>
       </property>
      </widget>
-     <widget class="QListView" name="lstLocation">
-      <property name="geometry">
-       <rect>
-        <x>470</x>
-        <y>120</y>
-        <width>421</width>
-        <height>81</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QPushButton" name="cmdKeywordsAdd">
       <property name="geometry">
        <rect>
@@ -371,6 +341,36 @@
       </property>
       <property name="text">
        <string>Delete</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="lstLocations">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>120</y>
+        <width>421</width>
+        <height>81</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="lstKeywords">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>300</y>
+        <width>421</width>
+        <height>81</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="sbRuntime">
+      <property name="geometry">
+       <rect>
+        <x>110</x>
+        <y>300</y>
+        <width>331</width>
+        <height>31</height>
+       </rect>
       </property>
      </widget>
     </widget>

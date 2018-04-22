@@ -181,6 +181,16 @@ void Project::setKeywords(const vector<string> &value)
     keywords = value;
 }
 
+int Project::getRunTime() const
+{
+    return runTime;
+}
+
+void Project::setRunTime(int value)
+{
+    runTime = value;
+}
+
 Project::Project()
 {
     

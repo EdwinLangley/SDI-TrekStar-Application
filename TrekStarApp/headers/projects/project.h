@@ -20,6 +20,7 @@ private:
     string genre = "TestGenre";
     string releaseDate = "01/01/1000";
     string language = "TestLanguage";
+    int runTime = 0;
     int weeklyBoxFigures = 0;
     vector<string> keywords = {"Keywords"};
     vector<string> filmLocations={"Location1"};
@@ -75,6 +76,8 @@ public:
     void setWeeklyBoxFigures(int value);
     vector<string> getKeywords() const;
     void setKeywords(const vector<string> &value);
+    int getRunTime() const;
+    void setRunTime(int value);
 };
 
 #endif // PROJECT_H

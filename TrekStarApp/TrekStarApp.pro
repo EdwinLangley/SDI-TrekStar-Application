@@ -50,9 +50,8 @@ SOURCES += \
         src/file_handler/filehandler.cpp \
         src/gui/stylesheetreader.cpp \
         src/gui/projectwindow.cpp \
-        src/controller/controllermain.cpp \
-        src/controller/controllerproject.cpp \
-        src/crew/crewMember.cpp
+        src/crew/crewMember.cpp \
+    src/controller/controller.cpp
 
 HEADERS += \
         headers/gui/mainwindow.h \
@@ -72,9 +71,8 @@ HEADERS += \
         headers/main.h \
         headers/gui/gui.h \
         headers/gui/projectwindow.h \
-        headers/controller/controllerproject.h \
-        headers/controller/controllermain.h \
-        headers/crew/crewMember.h
+        headers/crew/crewMember.h \
+    headers/controller/controller.h
 
 FORMS += \
         forms/mainwindow.ui \

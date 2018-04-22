@@ -5,8 +5,7 @@
 #include "doublylinkedlist.h"
 #include "main.h"
 #include "filehandler.h"
-#include "controllermain.h"
-#include "controllerproject.h"
+#include "controller.h"
 
 using namespace std;
 
@@ -223,8 +222,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    controllermain cm;
-    controllerproject cp;
+    controller cm;
 
     return a.exec();
 
