@@ -11,7 +11,7 @@ class Material
 {
 
 private:
-   string idNumber = "";
+   string idNumber = "0";
    string title = "";
    string vFormat = "";
    string aFormat = "";

@@ -104,11 +104,10 @@ void controller::handleCreateProject(){
 
         openProj = &projList.findByTitle(projTitle);
 
-        openProj->setGenre("lol");
+        //openProj->setGenre("lol");
 
         std::cout << "Project created" << std::endl;
 
-        std::cout << projList.findByTitle(projList.getAllFilmTitles().at(0)).getGenre() << std::endl;
 
      }
 
@@ -117,7 +116,9 @@ void controller::handleCreateProject(){
 }
 
 void controller::handleClear(){
-    std::cout << "clear" << std::endl;
+    //Keep this comment, its how we are calling the destructor and I wont remember it :(
+//    DoublyLinkedList *projList2 = &projList;
+//    delete projList2;
 }
 
 void controller::handleLocationAdd(){

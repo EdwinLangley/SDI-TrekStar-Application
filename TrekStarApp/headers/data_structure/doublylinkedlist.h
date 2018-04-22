@@ -4,6 +4,7 @@
 #include "main.h"
 //#include "node.h"
 #include "project.h"
+#include "filehandler.h"
 
 
 
@@ -21,24 +22,48 @@ public:
 private:
     Node *head, *tail;
 public:
+    FileWriter File;
     DoublyLinkedList()
     {
       head=NULL;
       tail=NULL;
+      //To load projects into the double linked list
+
+      vector<Project> AllProjects = File.ReadProjects();
+
+      for (int i =0;i<AllProjects.size();i++)
+      {
+          createnode(AllProjects[i]);
+      }
+
     }
 
     //Deconstructor to delete all nodes
     ~DoublyLinkedList()
     {
+        //For getting all project and information, and then writting using the Filewriter
+        vector<string> Titles = getAllFilmTitles();
+        vector<Project> Projects;
+
+
+        for (int i = 0; i < Titles.size(); i++)
+        {
+            Projects.push_back(findByTitle(Titles[i]));
+        }
+        File.WriteProject(Projects);
+
+
+
         Node *current = head;
         Node *nextNode = NULL;
         while (current != NULL)
         {
-        nextNode = current->next;
-        // destroy the current node
-        delete current;
-        current = nextNode;
+            nextNode = current->next;
+            // destroy the current node
+            delete current;
+            current = nextNode;
         }
+
 
     }
 

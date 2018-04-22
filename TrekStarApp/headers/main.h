@@ -15,7 +15,7 @@
 
 std::string VectorToString(std::vector<std::string> inputVector);
 std::vector<std::string> StringToVector(std::string inputString);
-void updateReports( unsigned int update_interval_millisecs);
+//void updateReports( unsigned int update_interval_millisecs);
 
 
 #endif //MAIN_H
