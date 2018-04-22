@@ -15,6 +15,11 @@ int main(int argc, char *argv[])
     // Calls function which stores qss variables in a global list variable
     readVariables();
 
+    std::cout << "*** press enter to exit the program gracefully\n\n";
+
+    const unsigned int update_interval = 50; // update after every 50 milliseconds
+    std::thread update_thread(updateReports, update_interval);
+
     try {
         //Testing LinkedList
         DoublyLinkedList list;
@@ -248,4 +253,14 @@ string VectorToString(vector<string> inputVector){
         outputString.append(".");
     }
     return outputString;
+}
+
+void updateReports( unsigned int update_interval_millisecs)
+{
+    const auto wait_duration = std::chrono::milliseconds(2000);
+    while (true)
+    {
+        std::cout << "update stuff\n" << std::flush;
+        std::this_thread::sleep_for(wait_duration);
+    }
 }
