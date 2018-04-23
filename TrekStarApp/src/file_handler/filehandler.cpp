@@ -170,6 +170,9 @@ ComboBox FileWriter::ReadComboBox(string input)
     return returnComboBox;
 }
 void FileWriter::WriteMaterials(vector<Project> inputProject){
+    ofstream outputFile;
+    outputFile.open(MATERIALFILENAME,ios_base::trunc);
+    outputFile.close();
     for (int i = 0; i < inputProject.size(); i++) {
         if(inputProject[i].getSingleDVD().getIdNumber()!="0"){
             WriteOneSidedDVD(inputProject[i].getSingleDVD());
@@ -193,6 +196,11 @@ vector<string> FileWriter::ReadMaterials(){
     vector<string> materials;
     ifstream inputFile;
     inputFile.open(MATERIALFILENAME);
+    if (!inputFile.is_open()){
+        materials.clear();
+        cout<<"empty file:Materials"<<endl;
+        return materials;
+    }
     string line;
     while (getline(inputFile,line)) {
         materials.push_back(line);
@@ -203,7 +211,7 @@ vector<string> FileWriter::ReadMaterials(){
 
 void FileWriter::WriteProject(vector<Project> inputProject){
     ofstream outputFile;
-    outputFile.open(PROJECTFILENAME);
+    outputFile.open(PROJECTFILENAME,ios_base::trunc);
     for (int i = 0; i < inputProject.size(); i++) {
 //      string newLine = "$";
         string newLine;
@@ -243,6 +251,12 @@ vector<Project> FileWriter::ReadProjects(){
     ifstream inputFile;
     inputFile.open(PROJECTFILENAME);
     string line;
+    cout<<"file reading"<<endl;
+    if (!inputFile.is_open()){
+        returnedProjects.clear();
+        cout<<"empty file:Projects"<<endl;
+        return returnedProjects;
+    }
     while (getline(inputFile,line)) {
         Project tempProject;
         stringstream lineStream;
@@ -271,6 +285,7 @@ vector<Project> FileWriter::ReadProjects(){
         returnedProjects.push_back(tempProject);
     }
     inputFile.close();
+    cout<<returnedProjects.size()<<endl;
     return returnedProjects;
 }
 
@@ -293,6 +308,11 @@ vector<string> FileWriter::ReadCrew(){
     ifstream inputFile;
     string line;
     inputFile.open(CREWFILENAME);
+    if (!inputFile.is_open()){
+        AllCrews.clear();
+        cout<<"empty file:Crew"<<endl;
+        return AllCrews;
+    }
     while(getline(inputFile,line)){
         AllCrews.push_back(line);
     }

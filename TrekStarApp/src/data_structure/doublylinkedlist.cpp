@@ -309,7 +309,7 @@ vector<string> DoublyLinkedList::getAllFilmTitles()
 
     if (AllProjects.empty())
     {
-        throw std::out_of_range("No films in list");
+        throw std::out_of_range("No films in list:SAMS CODE");
     }
 
     return AllProjects;

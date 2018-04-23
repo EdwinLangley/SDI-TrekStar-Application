@@ -25,17 +25,16 @@ public:
     FileWriter File;
     DoublyLinkedList()
     {
-      head=NULL;
-      tail=NULL;
-      //To load projects into the double linked list
-
-      vector<Project> AllProjects = File.ReadProjects();
-
-      for (int i =0;i<AllProjects.size();i++)
-      {
-          createnode(AllProjects[i]);
-      }
-
+        head=NULL;
+        tail=NULL;
+        //To load projects into the double linked list
+        vector<Project> AllProjects = File.BuildProjectList();
+        if(AllProjects.size()==0){
+            for (int i =0;i<AllProjects.size();i++)
+            {
+                createnode(AllProjects[i]);
+            }
+        }
     }
 
     //Deconstructor to delete all nodes
