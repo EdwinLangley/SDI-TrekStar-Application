@@ -174,6 +174,9 @@ void FileWriter::WriteMaterials(vector<Project> inputProject){
     outputFile.open(MATERIALFILENAME,ios_base::trunc);
     outputFile.close();
     for (int i = 0; i < inputProject.size(); i++) {
+        if(inputProject[i].getMaterialIDs()[0]==0){
+            continue;
+        }
         if(inputProject[i].getSingleDVD().getIdNumber()!="0"){
             WriteOneSidedDVD(inputProject[i].getSingleDVD());
         }
@@ -291,6 +294,9 @@ vector<Project> FileWriter::ReadProjects(){
 
 void FileWriter::WriteCrew(string crewID, vector<CrewMember> inputcrew){
     vector<string> crewMemebers;
+    if(crewMemebers[0]==0){
+        return;
+    }
     for (int i=0; i<inputcrew.size();i++){
         crewMemebers.push_back(inputcrew[i].getCrewMember());
     }
