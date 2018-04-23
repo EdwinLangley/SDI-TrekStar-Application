@@ -244,15 +244,17 @@ void controller::handleFilter(){
                 else{
                     returnedValues = projList.findByRoleAndName(filterCategory, input);
                 }
-            }catch(...){
-
+            }catch(out_of_range e){
+                cout << e.what() << endl;
             }
         }
 
         for(unsigned int i = 0; i < returnedValues.size(); ++i){
             mw.ui->lstProjects->addItem(QString::fromStdString(returnedValues[i]));
         }
-    }catch(...){}
+    }catch(out_of_range e){
+        cout << e.what() << endl;
+    }
 
 }
 
@@ -263,20 +265,30 @@ void controller::showAllProjects(){
         for(unsigned int i = 0; i < allProjects.size(); ++i){
             mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i]));
         }
-    }catch(...){}
+    }catch(out_of_range e){
+        cout << e.what() << endl;
+    }
 
 }
 
 // Removes project from linked list and list widget
 void controller::handleProjectDel(){
 
-    QList <QListWidgetItem *> selectedItems = mw.ui->lstProjects->selectedItems();
-    std::string projectTitle;
-    for(int i = 0; i < selectedItems.size(); i++){
-        delete mw.ui->lstProjects->takeItem(mw.ui->lstLocations->row(selectedItems[i]));
-        projectTitle = selectedItems[i]->text().toStdString();
-        projList.delete_by_title(projectTitle);
+    try {
+
+        QList <QListWidgetItem *> selectedItems = mw.ui->lstProjects->selectedItems();
+        std::string projectTitle;
+        for(int i = 0; i < selectedItems.size(); i++){
+            delete mw.ui->lstProjects->takeItem(mw.ui->lstLocations->row(selectedItems[i]));
+            projectTitle = selectedItems[i]->text().toStdString();
+            projList.delete_by_title(projectTitle);
+        }
+
+    } catch (invalid_argument e)
+    {
+        cout << e.what() << endl;
     }
+
 
 }
 
@@ -290,8 +302,8 @@ void controller::handleOpenProject(){
             openProj = &projList.findByTitle(projectTitle);
             pw.show();
         }
-    }catch(...){
-
+    }catch(invalid_argument e){
+        cout << e.what() << endl;
     }
 
 }
