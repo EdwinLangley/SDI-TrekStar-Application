@@ -15,6 +15,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     Ui::MainWindow *ui;
+    QPushButton *x;
 };
 
 #endif // MAINWINDOW_H

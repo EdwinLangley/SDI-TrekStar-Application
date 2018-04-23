@@ -45,6 +45,7 @@ controller::controller()
     mw.ui->cbFilter->addItem("Costume Designer");
 
     // Connects button press signal to functions
+    connect(mw.x, SIGNAL(aboutToQuit()), this, SLOT(handleClose()));
     connect(mw.ui->cmdCreate, SIGNAL (clicked()), this, SLOT (handleCreateProject()));
     connect(mw.ui->cmdClear, SIGNAL (clicked()), this, SLOT (handleClear()));
     connect(mw.ui->cmdLocationAdd, SIGNAL (clicked()), this, SLOT (handleLocationAdd()));
@@ -65,6 +66,10 @@ controller::controller()
     // Displays the main window
     mw.show();
 
+}
+
+void controller::handleClose(){
+    std::cout << "lol" << std::endl;
 }
 
 void controller::handleCreateProject(){
@@ -231,7 +236,6 @@ void controller::handleFilter(){
         }
         else if (input != ""){
 
-            try{
                 if(filterCategory == "Title"){
                     returnedValues = projList.findByKeyword(input);
                 }
@@ -244,17 +248,22 @@ void controller::handleFilter(){
                 else{
                     returnedValues = projList.findByRoleAndName(filterCategory, input);
                 }
-            }catch(out_of_range e){
-                cout << e.what() << endl;
-            }
         }
 
         for(unsigned int i = 0; i < returnedValues.size(); ++i){
             mw.ui->lstProjects->addItem(QString::fromStdString(returnedValues[i]));
         }
-    }catch(out_of_range e){
-        cout << e.what() << endl;
     }
+    catch(std::out_of_range e1){
+        std::cout << e1.what() << std::endl;
+    }
+    catch(std::invalid_argument e2){
+        std::cout << e2.what() << std::endl;
+    }
+    catch(std::bad_alloc e3){
+        std::cout << e3.what() << std::endl;
+    }
+    catch(...){}
 
 }
 
@@ -265,9 +274,17 @@ void controller::showAllProjects(){
         for(unsigned int i = 0; i < allProjects.size(); ++i){
             mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i]));
         }
-    }catch(out_of_range e){
-        cout << e.what() << endl;
     }
+    catch(out_of_range e1){
+        std::cout << e1.what() << std::endl;
+    }
+    catch(std::invalid_argument e2){
+        std::cout << e2.what() << std::endl;
+    }
+    catch(std::bad_alloc e3){
+        std::cout << e3.what() << std::endl;
+    }
+    catch(...){}
 
 }
 
@@ -284,10 +301,17 @@ void controller::handleProjectDel(){
             projList.delete_by_title(projectTitle);
         }
 
-    } catch (invalid_argument e)
-    {
-        cout << e.what() << endl;
     }
+    catch (invalid_argument e1){
+        std::cout << e1.what() << std::endl;
+    }
+    catch(std::invalid_argument e2){
+        std::cout << e2.what() << std::endl;
+    }
+    catch(std::bad_alloc e3){
+        std::cout << e3.what() << std::endl;
+    }
+    catch(...){}
 
 
 }
@@ -302,9 +326,17 @@ void controller::handleOpenProject(){
             openProj = &projList.findByTitle(projectTitle);
             pw.show();
         }
-    }catch(invalid_argument e){
-        cout << e.what() << endl;
     }
+    catch(invalid_argument e1){
+        std::cout << e1.what() << std::endl;
+    }
+    catch(std::invalid_argument e2){
+        std::cout << e2.what() << std::endl;
+    }
+    catch(std::bad_alloc e3){
+        std::cout << e3.what() << std::endl;
+    }
+    catch(...){}
 
 }
 
