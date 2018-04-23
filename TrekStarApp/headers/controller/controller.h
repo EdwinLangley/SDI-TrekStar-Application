@@ -26,6 +26,7 @@ private slots:
     void handleFilter();
     void handleProjectDel();
     void handleOpenProject();
+    void handleStatusChange();
 
 private:
     void showAllProjects();

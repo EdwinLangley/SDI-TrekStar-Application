@@ -8,6 +8,11 @@
 controller::controller()
 {
 
+    // Sets all options for status combo box
+    mw.ui->cbStatus->addItem("Unreleased");
+    mw.ui->cbStatus->addItem("Now Playing");
+    mw.ui->cbStatus->addItem("Released");
+
     // Sets all options for the genre combo box
     mw.ui->cbGenre->addItem("Action");
     mw.ui->cbGenre->addItem("Comedy");
@@ -49,9 +54,13 @@ controller::controller()
     connect(mw.ui->cmdFilter, SIGNAL (clicked()), this, SLOT (handleFilter()));
     connect(mw.ui->cmdProjectDel, SIGNAL (clicked()), this, SLOT (handleProjectDel()));
     connect(mw.ui->cmdOpenProject, SIGNAL (clicked()), this, SLOT (handleOpenProject()));
+    connect(mw.ui->cbStatus, SIGNAL(currentIndexChanged(int)), this, SLOT(handleStatusChange()));
 
     // Displays list of all projects
     showAllProjects();
+
+    // Locks any input options based on status selection
+    handleStatusChange();
 
     // Displays the main window
     mw.show();
@@ -65,6 +74,7 @@ void controller::handleCreateProject(){
     // Gets data from the form
     std::string projTitle = mw.ui->txtTitleProject->text().toStdString();
     std::string summary = mw.ui->txtSummary->toPlainText().toStdString();
+    std::string status = mw.ui->cbStatus->currentText().toStdString();
     std::string genre = mw.ui->cbGenre->currentText().toStdString();
     std::string language = mw.ui->cbLanguage->currentText().toStdString();
     std::string date = mw.ui->deRelease->date().toString().toStdString();
@@ -117,6 +127,7 @@ void controller::handleCreateProject(){
 
         input.setTitle(projTitle);
         input.setSummary(summary);
+        input.setProjectStatus(status);
         input.setGenre(genre);
         input.setLanguage(language);
         input.setReleaseDate(date);
@@ -138,6 +149,7 @@ void controller::handleClear(){
 
     mw.ui->txtTitleProject->clear();
     mw.ui->txtSummary->clear();
+    mw.ui->cbStatus->setCurrentIndex(0);
     mw.ui->cbGenre->setCurrentIndex(0);
     mw.ui->cbLanguage->setCurrentIndex(0);
     mw.ui->deRelease->setDate(QDate(2000, 1, 1));
@@ -242,6 +254,16 @@ void controller::handleFilter(){
 
 }
 
+// Outputs all projects to project list
+void controller::showAllProjects(){
+
+    std::vector<std::string> allProjects = projList.getAllFilmTitles();
+    for(unsigned int i = 0; i < allProjects.size(); ++i){
+        mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i]));
+    }
+
+}
+
 // Removes project from linked list and list widget
 void controller::handleProjectDel(){
 
@@ -250,8 +272,7 @@ void controller::handleProjectDel(){
     for(int i = 0; i < selectedItems.size(); i++){
         delete mw.ui->lstProjects->takeItem(mw.ui->lstLocations->row(selectedItems[i]));
         projectTitle = selectedItems[i]->text().toStdString();
-        //projList.findByTitle(projectTitle)
-        //projList.delete_position();
+        projList.delete_by_title(projectTitle);
     }
 
 }
@@ -268,12 +289,30 @@ void controller::handleOpenProject(){
 
 }
 
-// Outputs all projects to project list
-void controller::showAllProjects(){
+// Changes input options based on status combo box selection
+void controller::handleStatusChange(){
+    // released = sales,
+    // unreleased = sales, materials,
+    // now playing = materials,
 
-    std::vector<std::string> allProjects = projList.getAllFilmTitles();
-    for(unsigned int i = 0; i < allProjects.size(); ++i){
-        mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i]));
+    std::string status = mw.ui->cbStatus->currentText().toStdString();
+
+    if(status == "Unreleased"){
+        mw.ui->lblSales->setStyleSheet("color: #7C8483");
+        mw.ui->sbSales->setReadOnly(true);
+        mw.ui->sbSales->setVisible(false);
+    }
+    else if (status == "Now Playing"){
+        mw.ui->lblSales->setStyleSheet("color: #78CAD2");
+        mw.ui->sbSales->setReadOnly(false);
+        mw.ui->sbSales->setVisible(true);
+    }
+    else if (status == "Released"){
+        mw.ui->lblSales->setStyleSheet("color: #7C8483");
+        mw.ui->sbSales->setReadOnly(true);
+        mw.ui->sbSales->setVisible(false);
     }
 
 }
+
+
