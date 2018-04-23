@@ -223,6 +223,8 @@ void FileWriter::WriteProject(vector<Project> inputProject){
         newLine.append(",");
         newLine.append(to_string(inputProject[i].getWeeklyBoxFigures()));
         newLine.append(",");
+        newLine.append(to_string(inputProject[i].getRunTime()));
+        newLine.append(",");
         newLine.append(VectorToString(inputProject[i].getKeywords()));
         newLine.append(",");
         newLine.append(VectorToString(inputProject[i].getFilmLocations()));
@@ -260,10 +262,11 @@ vector<Project> FileWriter::ReadProjects(){
         tempProject.setLanguage(resultsStorage[5]);
         tempProject.setCrewID(resultsStorage[6]);
         tempProject.setWeeklyBoxFigures(stoi(resultsStorage[7]));
-        tempProject.setKeywords(StringToVector(resultsStorage[8]));
-        tempProject.setFilmLocations(StringToVector(resultsStorage[9]));
+        tempProject.setRunTime(stoi(resultsStorage[8]));
+        tempProject.setKeywords(StringToVector(resultsStorage[9]));
+        tempProject.setFilmLocations(StringToVector(resultsStorage[10]));
         //USE THIS TO DETERMINE WHICH MATERIALS TO ASSIGN TO THE PROJECT
-        tempProject.setMaterials(StringToVector(resultsStorage[10]));
+        tempProject.setMaterials(StringToVector(resultsStorage[11]));
         //Add project to returned ones
         returnedProjects.push_back(tempProject);
     }
