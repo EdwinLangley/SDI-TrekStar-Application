@@ -29,7 +29,7 @@ public:
         tail=NULL;
         //To load projects into the double linked list
         vector<Project> AllProjects = File.BuildProjectList();
-        if(AllProjects.size()==0){
+        if(AllProjects.size()!=0){
             for (int i =0;i<AllProjects.size();i++)
             {
                 createnode(AllProjects[i]);
