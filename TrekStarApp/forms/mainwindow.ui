@@ -378,17 +378,7 @@
      <attribute name="title">
       <string>Open Project</string>
      </attribute>
-     <widget class="QListView" name="lstProject">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>70</y>
-        <width>851</width>
-        <height>291</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="cmdOpen">
+     <widget class="QPushButton" name="cmdOpenProject">
       <property name="geometry">
        <rect>
         <x>460</x>
@@ -401,7 +391,7 @@
        <string>Open Project</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="cmdDelete">
+     <widget class="QPushButton" name="cmdProjectDel">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -445,6 +435,16 @@
       </property>
       <property name="text">
        <string>Filter</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="lstProjects">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>71</y>
+        <width>851</width>
+        <height>291</height>
+       </rect>
       </property>
      </widget>
     </widget>

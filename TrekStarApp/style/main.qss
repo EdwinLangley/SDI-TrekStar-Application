@@ -3,11 +3,11 @@
     height: 50%;
 }
 
-#cmdDelete {
+#cmdProjectDel {
     font-size: 20px;
 }
 
-#cmdOpen {
+#cmdOpenProject {
     font-size: 20px;
 }
 
