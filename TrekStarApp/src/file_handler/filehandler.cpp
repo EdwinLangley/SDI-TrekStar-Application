@@ -174,6 +174,9 @@ void FileWriter::WriteMaterials(vector<Project> inputProject){
     outputFile.open(MATERIALFILENAME,ios_base::trunc);
     outputFile.close();
     for (int i = 0; i < inputProject.size(); i++) {
+        if(inputProject[i].getMaterialIDs()[0]=="0"){
+            continue;
+        }
         if(inputProject[i].getSingleDVD().getIdNumber()!="0"){
             WriteOneSidedDVD(inputProject[i].getSingleDVD());
         }
@@ -199,6 +202,7 @@ vector<string> FileWriter::ReadMaterials(){
     if (!inputFile.is_open()){
         materials.clear();
         cout<<"empty file:Materials"<<endl;
+        inputFile.close();
         return materials;
     }
     string line;
@@ -210,6 +214,9 @@ vector<string> FileWriter::ReadMaterials(){
 }
 
 void FileWriter::WriteProject(vector<Project> inputProject){
+    if(inputProject.size()==0){
+        return;
+    }
     ofstream outputFile;
     outputFile.open(PROJECTFILENAME,ios_base::trunc);
     for (int i = 0; i < inputProject.size(); i++) {
@@ -255,6 +262,7 @@ vector<Project> FileWriter::ReadProjects(){
     if (!inputFile.is_open()){
         returnedProjects.clear();
         cout<<"empty file:Projects"<<endl;
+        inputFile.close();
         return returnedProjects;
     }
     while (getline(inputFile,line)) {
@@ -291,6 +299,9 @@ vector<Project> FileWriter::ReadProjects(){
 
 void FileWriter::WriteCrew(string crewID, vector<CrewMember> inputcrew){
     vector<string> crewMemebers;
+    if(crewMemebers[0]=="0"){
+        return;
+    }
     for (int i=0; i<inputcrew.size();i++){
         crewMemebers.push_back(inputcrew[i].getCrewMember());
     }
@@ -311,6 +322,7 @@ vector<string> FileWriter::ReadCrew(){
     if (!inputFile.is_open()){
         AllCrews.clear();
         cout<<"empty file:Crew"<<endl;
+        inputFile.close();
         return AllCrews;
     }
     while(getline(inputFile,line)){
