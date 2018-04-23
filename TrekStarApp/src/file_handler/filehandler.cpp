@@ -174,7 +174,7 @@ void FileWriter::WriteMaterials(vector<Project> inputProject){
     outputFile.open(MATERIALFILENAME,ios_base::trunc);
     outputFile.close();
     for (int i = 0; i < inputProject.size(); i++) {
-        if(inputProject[i].getMaterialIDs()[0]=="0"){
+        if(inputProject[i].getMaterialIDs()[0]=="0"){//ISSUE HERE
             continue;
         }
         if(inputProject[i].getSingleDVD().getIdNumber()!="0"){
@@ -299,7 +299,7 @@ vector<Project> FileWriter::ReadProjects(){
 
 void FileWriter::WriteCrew(string crewID, vector<CrewMember> inputcrew){
     vector<string> crewMemebers;
-    if(crewMemebers[0]=="0"){
+    if(crewID=="0"){
         return;
     }
     for (int i=0; i<inputcrew.size();i++){
@@ -362,6 +362,9 @@ vector<Project> FileWriter::BuildProjectList(){
     //Go through Project list
     for (int i=0; i<projects.size();i++){
         //Go through material list for the project
+        if(projects[i].getMaterialIDs()[0]=="0"){
+            continue;
+        }
         for (int j=0;j<projects[i].getMaterialIDs().size();j++){
             //Go through list of materials and then compare it to the current material
             for (int k=0;k<materialLines.size();k++){
@@ -400,6 +403,9 @@ vector<Project> FileWriter::BuildProjectList(){
         }
         //Go through list of crew members and do the same as materials
         //Go through list of crews and then compare it to the current crewID
+        if (projects[i].getCrewID()=="0"){
+            continue;
+        }
         for (int j=0;j<crewLines.size();j++){
             string line=crewLines[j];
             string id;
