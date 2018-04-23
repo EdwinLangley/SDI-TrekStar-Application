@@ -213,54 +213,57 @@ void controller::handleKeywordsDel(){
 // Filters project list
 void controller::handleFilter(){
 
-    mw.ui->lstProjects->clear();
+    try{
+        mw.ui->lstProjects->clear();
 
-    std::string filterCategory = mw.ui->cbFilter->currentText().toStdString();
-    std::string input = mw.ui->txtFilter->text().toStdString();
-    std::vector<std::string> returnedValues;
+        std::string filterCategory = mw.ui->cbFilter->currentText().toStdString();
+        std::string input = mw.ui->txtFilter->text().toStdString();
+        std::vector<std::string> returnedValues;
 
-    if(filterCategory == "No Filter"){
-        showAllProjects();
-    }
-    else if(filterCategory == "Newest to Oldest"){
-        returnedValues = projList.sortByNewest();
-    }
-    else if(filterCategory == "Oldest to Newest"){
-        returnedValues = projList.sortByOldest();
-    }
-    else if (input != ""){
-
-        try{
-            if(filterCategory == "Title"){
-                returnedValues = projList.findByKeyword(input);
-            }
-            else if(filterCategory == "Genre"){
-                returnedValues = projList.findByGenre(input);
-            }
-            else if(filterCategory == "Keywords"){
-                returnedValues = projList.findByKeyword(input);
-            }
-            else{
-                returnedValues = projList.findByRoleAndName(filterCategory, input);
-            }
-        }catch(...){
-
+        if(filterCategory == "No Filter"){
+            showAllProjects();
         }
-    }
+        else if(filterCategory == "Newest to Oldest"){
+            returnedValues = projList.sortByNewest();
+        }
+        else if(filterCategory == "Oldest to Newest"){
+            returnedValues = projList.sortByOldest();
+        }
+        else if (input != ""){
 
-    for(unsigned int i = 0; i < returnedValues.size(); ++i){
-        mw.ui->lstProjects->addItem(QString::fromStdString(returnedValues[i]));
-    }
+            try{
+                if(filterCategory == "Title"){
+                    returnedValues = projList.findByKeyword(input);
+                }
+                else if(filterCategory == "Genre"){
+                    returnedValues = projList.findByGenre(input);
+                }
+                else if(filterCategory == "Keywords"){
+                    returnedValues = projList.findByKeyword(input);
+                }
+                else{
+                    returnedValues = projList.findByRoleAndName(filterCategory, input);
+                }
+            }catch(...){
+
+            }
+        }
+
+        for(unsigned int i = 0; i < returnedValues.size(); ++i){
+            mw.ui->lstProjects->addItem(QString::fromStdString(returnedValues[i]));
+        }
+    }catch(...){}
 
 }
 
 // Outputs all projects to project list
 void controller::showAllProjects(){
-
-    std::vector<std::string> allProjects = projList.getAllFilmTitles();
-    for(unsigned int i = 0; i < allProjects.size(); ++i){
-        mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i]));
-    }
+    try{
+        std::vector<std::string> allProjects = projList.getAllFilmTitles();
+        for(unsigned int i = 0; i < allProjects.size(); ++i){
+            mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i]));
+        }
+    }catch(...){}
 
 }
 
@@ -280,11 +283,15 @@ void controller::handleProjectDel(){
 // Opens selected project from the list
 void controller::handleOpenProject(){
 
-    QList <QListWidgetItem *> selectedItems = mw.ui->lstProjects->selectedItems();
-    std::string projectTitle = selectedItems[0]->text().toStdString();
-    if(projectTitle != ""){
-        openProj = &projList.findByTitle(projectTitle);
-        pw.show();
+    try{
+        QList <QListWidgetItem *> selectedItems = mw.ui->lstProjects->selectedItems();
+        std::string projectTitle = selectedItems[0]->text().toStdString();
+        if(projectTitle != ""){
+            openProj = &projList.findByTitle(projectTitle);
+            pw.show();
+        }
+    }catch(...){
+
     }
 
 }
