@@ -36,7 +36,7 @@ private:
     ComboBox comboBox;
     //MAKE SURE TO ADD THE IDs OF ANY MATERIALS ASSOCIATED WITH A PROJECTS TO THIS
     //OTHERWISE CANT FIND THE MATERIALS. MAKE SURE THEY ARE UNIQUE AND NOT 0 AS 0 IS UNSET MATERIALS
-    vector<string> materialIDs;
+    vector<string> materialIDs={"0"};
 
 public:
     Project();
