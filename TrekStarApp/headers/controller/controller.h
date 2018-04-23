@@ -17,6 +17,7 @@ public:
     DoublyLinkedList projList;
 
 private slots:
+    void handleClose();
     void handleCreateProject();
     void handleClear();
     void handleLocationAdd();

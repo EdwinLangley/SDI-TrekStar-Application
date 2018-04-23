@@ -8,6 +8,7 @@
 #include <QObject>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QCloseEvent>
 #include "main.h"
 
 // Declares list which stores variable names used in qss style sheets
