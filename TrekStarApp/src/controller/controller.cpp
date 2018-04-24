@@ -82,7 +82,7 @@ void controller::handleCreateProject(){
     std::string status = mw.ui->cbStatus->currentText().toStdString();
     std::string genre = mw.ui->cbGenre->currentText().toStdString();
     std::string language = mw.ui->cbLanguage->currentText().toStdString();
-    std::string date = mw.ui->deRelease->date().toString().toStdString();
+    std::string date = mw.ui->deRelease->date().toString(Qt::DefaultLocaleShortDate).toStdString();
     int runtime = mw.ui->sbRuntime->value();
     int sales = mw.ui->sbSales->value();
 
