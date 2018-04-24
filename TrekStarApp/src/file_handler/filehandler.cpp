@@ -214,11 +214,12 @@ vector<string> FileWriter::ReadMaterials(){
 }
 
 void FileWriter::WriteProject(vector<Project> inputProject){
-    if(inputProject.size()==0){
-        return;
-    }
     ofstream outputFile;
     outputFile.open(PROJECTFILENAME,ios_base::trunc);
+	if(inputProject.size()==0){
+		outputFile.close();
+		return;
+	}
     for (int i = 0; i < inputProject.size(); i++) {
 //      string newLine = "$";
         string newLine;
