@@ -138,12 +138,16 @@ void controller::handleCreateProject(){
         input.setReleaseDate(date);
         input.setRunTime(runtime);
         input.setWeeklyBoxFigures(sales);
+        input.setFilmLocations(locations);
+        input.setKeywords(keywords);
 
         projList.createnode(input);
         openProj = &projList.findByTitle(projTitle);
         pw.show();
 
         handleClear();
+
+        showAllProjects();
 
      }
 
@@ -272,6 +276,7 @@ void controller::handleFilter(){
 void controller::showAllProjects(){
     try{
         std::vector<std::string> allProjects = projList.getAllFilmTitles();
+        mw.ui->lstProjects->clear();
         for(unsigned int i = 0; i < allProjects.size(); ++i){
             mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i]));
         }
