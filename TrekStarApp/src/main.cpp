@@ -30,7 +30,7 @@ vector<string> StringToVector(string inputString){
     stringstream ss;
     ss<<inputString;
     string section;
-    while(getline(ss,section,'.')){
+    while(getline(ss,section,VECTORDELIMCHAR)){
         outputVector.push_back(section);
     }
     return outputVector;
@@ -40,7 +40,7 @@ string VectorToString(vector<string> inputVector){
     string outputString;
     for(int i=0; i<inputVector.size();i++){
         outputString.append(inputVector[i]);
-        outputString.append(".");
+        outputString.append(VECTORDELIMSTRNG);
     }
     return outputString;
 }

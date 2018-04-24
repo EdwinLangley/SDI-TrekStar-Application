@@ -32,6 +32,18 @@ void BluRay::setBonusTracks(const vector<string> &value)
     bonusTracks = value;
 }
 
+string BluRay::getBluRay()
+{
+    string bluRay;
+    bluRay.append(VectorToString(extraLanguageTracks));//15
+    bluRay.append(FIRSTLEVELDELIMSTRNG);
+    bluRay.append(VectorToString(extraSubtitleTracks));//16
+    bluRay.append(FIRSTLEVELDELIMSTRNG);
+    bluRay.append(VectorToString(bonusTracks));//17
+
+    return bluRay;
+}
+
 BluRay::BluRay()
 {
 

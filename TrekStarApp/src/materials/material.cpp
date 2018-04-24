@@ -85,25 +85,27 @@ void Material::setSubTitleLanguages(const vector<string> &value)
 string Material::getMaterials()
 {
         string Materials;
-        Materials.append(this->idNumber);//0
-        Materials.append(",");
-        Materials.append(this->title);//1
-        Materials.append(",");
-        Materials.append(this->vFormat);//2
-        Materials.append(",");
-        Materials.append(this->aFormat);//3
-        Materials.append(",");
-        Materials.append(this->language);//4
-        Materials.append(",");
-        Materials.append(this->frame.getFrameAspect());//3 Items long 5/6/7
-        Materials.append(",");
-        Materials.append(this->package.getPackaging());//4 items long 8/9/10/11
-        Materials.append(",");
-        Materials.append(to_string(this->runTime));//12
-        Materials.append(",");
-        Materials.append(to_string(this->price));//13
-        Materials.append(",");
-        Materials.append(VectorToString(subTitleLanguages));//14
+        //Material Type is here;
+        Materials.append(FIRSTLEVELDELIMSTRNG);
+        Materials.append(this->idNumber);//1
+        Materials.append(FIRSTLEVELDELIMSTRNG);
+        Materials.append(this->title);//2
+        Materials.append(FIRSTLEVELDELIMSTRNG);
+        Materials.append(this->vFormat);//3
+        Materials.append(FIRSTLEVELDELIMSTRNG);
+        Materials.append(this->aFormat);//4
+        Materials.append(FIRSTLEVELDELIMSTRNG);
+        Materials.append(this->language);//5
+        Materials.append(FIRSTLEVELDELIMSTRNG);
+        Materials.append(this->frame.getFrameAspect());//3 Items long 6/7/8
+        Materials.append(FIRSTLEVELDELIMSTRNG);
+        Materials.append(this->package.getPackaging());//4 items long 9/10/11/12
+        Materials.append(FIRSTLEVELDELIMSTRNG);
+        Materials.append(to_string(this->runTime));//13
+        Materials.append(FIRSTLEVELDELIMSTRNG);
+        Materials.append(to_string(this->price));//14
+        Materials.append(FIRSTLEVELDELIMSTRNG);
+        Materials.append(VectorToString(subTitleLanguages));//15
         return Materials;
     }
 

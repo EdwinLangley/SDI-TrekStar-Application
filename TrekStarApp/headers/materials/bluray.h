@@ -27,16 +27,7 @@ public:
     void setExtraSubtitleTracks(const vector<string> &value);
     vector<string> getBonusTracks() const;
     void setBonusTracks(const vector<string> &value);
-    string getBluRay(){
-        string bluRay;
-        bluRay.append(VectorToString(extraLanguageTracks));
-        bluRay.append(",");
-        bluRay.append(VectorToString(extraSubtitleTracks));
-        bluRay.append(",");
-        bluRay.append(VectorToString(bonusTracks));
-        bluRay.append(",");
-        return bluRay;
-    }
+    string getBluRay();
 };
 
 #endif // BLURAY_H
