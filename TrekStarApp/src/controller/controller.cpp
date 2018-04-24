@@ -1,6 +1,7 @@
 #include "controller.h"
 #include "gui.h"
 #include "ui_mainwindow.h"
+#include "ui_projectwindow.h"
 #include "project.h"
 #include "doublylinkedlist.h"
 
@@ -8,12 +9,12 @@
 controller::controller()
 {
 
-    // Sets all options for status combo box
+    // Sets all options for status combo box on the main window
     mw.ui->cbStatus->addItem("Unreleased");
     mw.ui->cbStatus->addItem("Now Playing");
     mw.ui->cbStatus->addItem("Released");
 
-    // Sets all options for the genre combo box
+    // Sets all options for the genre combo box on the main window
     mw.ui->cbGenre->addItem("Action");
     mw.ui->cbGenre->addItem("Comedy");
     mw.ui->cbGenre->addItem("Drama");
@@ -21,14 +22,14 @@ controller::controller()
     mw.ui->cbGenre->addItem("Horror");
     mw.ui->cbGenre->addItem("Thriller");
 
-    // Sets all options for the language combo box
+    // Sets all options for the language combo box on the main window
     mw.ui->cbLanguage->addItem("English");
     mw.ui->cbLanguage->addItem("French");
     mw.ui->cbLanguage->addItem("German");
     mw.ui->cbLanguage->addItem("Spanish");
     mw.ui->cbLanguage->addItem("Mandarin");
 
-    // Sets all options for the filter combo box
+    // Sets all options for the filter combo box on the main window
     mw.ui->cbFilter->addItem("No Filter");
     mw.ui->cbFilter->addItem("Title");
     mw.ui->cbFilter->addItem("Genre");
@@ -44,8 +45,41 @@ controller::controller()
     mw.ui->cbFilter->addItem("Set Decorator");
     mw.ui->cbFilter->addItem("Costume Designer");
 
-    // Connects button press signal to functions
-    //connect(mw.x, SIGNAL(aboutToQuit()), this, SLOT(handleClose()));
+
+    // Sets all options for status combo box on the project window
+    pw.ui->cbStatus->addItem("Unreleased");
+    pw.ui->cbStatus->addItem("Now Playing");
+    pw.ui->cbStatus->addItem("Released");
+
+    // Sets all options for the genre combo box on the project window
+    pw.ui->cbGenre->addItem("Action");
+    pw.ui->cbGenre->addItem("Comedy");
+    pw.ui->cbGenre->addItem("Drama");
+    pw.ui->cbGenre->addItem("Documentary");
+    pw.ui->cbGenre->addItem("Horror");
+    pw.ui->cbGenre->addItem("Thriller");
+
+    // Sets all options for the language combo box on the project window
+    pw.ui->cbLanguage->addItem("English");
+    pw.ui->cbLanguage->addItem("French");
+    pw.ui->cbLanguage->addItem("German");
+    pw.ui->cbLanguage->addItem("Spanish");
+    pw.ui->cbLanguage->addItem("Mandarin");
+
+    /*
+    // Sets all options for the filter combo box on the project window
+    pw.ui->cbFilter->addItem("No Filter");
+    pw.ui->cbFilter->addItem("Director");
+    pw.ui->cbFilter->addItem("Actor");
+    pw.ui->cbFilter->addItem("Producer");
+    pw.ui->cbFilter->addItem("Writer");
+    pw.ui->cbFilter->addItem("Editor");
+    pw.ui->cbFilter->addItem("Production Designer");
+    pw.ui->cbFilter->addItem("Set Decorator");
+    pw.ui->cbFilter->addItem("Costume Designer");
+    */
+
+    // Connects button press signals on main window to functions
     connect(mw.ui->cmdCreate, SIGNAL (clicked()), this, SLOT (handleCreateProject()));
     connect(mw.ui->cmdClear, SIGNAL (clicked()), this, SLOT (handleClear()));
     connect(mw.ui->cmdLocationAdd, SIGNAL (clicked()), this, SLOT (handleLocationAdd()));
@@ -56,6 +90,14 @@ controller::controller()
     connect(mw.ui->cmdProjectDel, SIGNAL (clicked()), this, SLOT (handleProjectDel()));
     connect(mw.ui->cmdOpenProject, SIGNAL (clicked()), this, SLOT (handleOpenProject()));
     connect(mw.ui->cbStatus, SIGNAL(currentIndexChanged(int)), this, SLOT(handleStatusChange()));
+
+    // Connects button press signals on project window to functions
+    connect(pw.ui->cmdApplyChanges, SIGNAL(clicked()),this, SLOT(handleApplyChanges()));
+    connect(pw.ui->cmdClearChanges, SIGNAL(clicked()),this, SLOT(setProjectWindow()));
+    connect(pw.ui->cmdLocationAdd, SIGNAL(clicked()),this, SLOT(handleProjectWindowLocationAdd()));
+    connect(pw.ui->cmdLocationDel, SIGNAL(clicked()),this, SLOT(handleProjectWindowLocationDel()));
+    connect(pw.ui->cmdKeywordsAdd, SIGNAL(clicked()),this, SLOT(handleProjectWindowKeywordsAdd()));
+    connect(pw.ui->cmdKeywordsDel, SIGNAL(clicked()),this, SLOT(handleProjectWindowKeywordsDel()));
 
     // Displays list of all projects
     showAllProjects();
@@ -143,10 +185,9 @@ void controller::handleCreateProject(){
 
         projList.createnode(input);
         openProj = &projList.findByTitle(projTitle);
+        setProjectWindow();
         pw.show();
-
         handleClear();
-
         showAllProjects();
 
      }
@@ -164,7 +205,9 @@ void controller::handleClear(){
     mw.ui->deRelease->setDate(QDate(2000, 1, 1));
     mw.ui->sbRuntime->setValue(0);
     mw.ui->sbSales->setValue(0);
+    mw.ui->txtLocationAdd->clear();
     mw.ui->lstLocations->clear();
+    mw.ui->txtKeywordsAdd->clear();
     mw.ui->lstKeywords->clear();
 
     mw.ui->lblTitleProjects->setStyleSheet("color: #78CAD2");
@@ -331,6 +374,7 @@ void controller::handleOpenProject(){
         std::string projectTitle = selectedItems[0]->text().toStdString();
         if(projectTitle != ""){
             openProj = &projList.findByTitle(projectTitle);
+            setProjectWindow();
             pw.show();
         }
     }
@@ -373,4 +417,185 @@ void controller::handleStatusChange(){
 
 }
 
+void controller::setProjectWindow(){
 
+    pw.ui->lblProjectName->setText(QString::fromStdString("  " + openProj->getTitle()));
+    pw.ui->txtTitleProject->setText(QString::fromStdString(openProj->getTitle()));
+    pw.ui->txtSummary->setText(QString::fromStdString(openProj->getSummary()));
+
+    if(openProj->getProjectStatus() == "Unreleased"){
+        pw.ui->cbStatus->setCurrentIndex(0);
+    }
+    else if(openProj->getProjectStatus() == "Now Playing"){
+        pw.ui->cbStatus->setCurrentIndex(1);
+    }
+
+    if(openProj->getGenre() == "Action"){
+        pw.ui->cbGenre->setCurrentIndex(0);
+    }
+    else if(openProj->getGenre() == "Comedy"){
+        pw.ui->cbGenre->setCurrentIndex(1);
+    }
+    else if(openProj->getGenre() == "Drama"){
+        pw.ui->cbGenre->setCurrentIndex(2);
+    }
+    else if(openProj->getGenre() == "Documentary"){
+        pw.ui->cbGenre->setCurrentIndex(3);
+    }
+    else if(openProj->getGenre() == "Horror"){
+        pw.ui->cbGenre->setCurrentIndex(4);
+    }
+    else if(openProj->getGenre() == "Thriller"){
+        pw.ui->cbGenre->setCurrentIndex(5);
+    }
+
+    if(openProj->getLanguage() == "English"){
+        pw.ui->cbLanguage->setCurrentIndex(0);
+    }
+    else if(openProj->getLanguage() == "French"){
+        pw.ui->cbLanguage->setCurrentIndex(1);
+    }
+    else if(openProj->getLanguage() == "German"){
+        pw.ui->cbLanguage->setCurrentIndex(2);
+    }
+    else if(openProj->getLanguage() == "Spanish"){
+        pw.ui->cbLanguage->setCurrentIndex(3);
+    }
+    else if(openProj->getLanguage() == "Mandarin"){
+        pw.ui->cbLanguage->setCurrentIndex(4);
+    }
+
+    pw.ui->deRelease->setDate(QDate::fromString(QString::fromStdString(openProj->getReleaseDate()), "dd/MM/yyyy"));
+    pw.ui->sbRuntime->setValue(openProj->getRunTime());
+    pw.ui->sbSales->setValue(openProj->getWeeklyBoxFigures());
+
+    pw.ui->txtLocationAdd->clear();
+    pw.ui->lstLocations->clear();
+    for(unsigned int i = 0; i < openProj->getFilmLocations().size(); ++i){
+         pw.ui->lstLocations->addItem(QString::fromStdString(openProj->getFilmLocations()[i]));
+    }
+
+    pw.ui->txtKeywordsAdd->clear();
+    pw.ui->lstKeywords->clear();
+    for(unsigned int j = 0; j < openProj->getKeywords().size(); ++j){
+         pw.ui->lstKeywords->addItem(QString::fromStdString(openProj->getKeywords()[j]));
+    }
+
+    pw.ui->lblTitleProjects->setStyleSheet("color: #78CAD2");
+    pw.ui->lblSummary->setStyleSheet("color: #78CAD2");
+    pw.ui->lblLocations->setStyleSheet("color: #78CAD2");
+    pw.ui->lblKeywords->setStyleSheet("color: #78CAD2");
+
+}
+
+void controller::handleApplyChanges(){
+
+    bool apply = true;
+
+    // Gets data from the form
+    std::string projTitle = pw.ui->txtTitleProject->text().toStdString();
+    std::string summary = pw.ui->txtSummary->toPlainText().toStdString();
+    std::string status = pw.ui->cbStatus->currentText().toStdString();
+    std::string genre = pw.ui->cbGenre->currentText().toStdString();
+    std::string language = pw.ui->cbLanguage->currentText().toStdString();
+    std::string date = pw.ui->deRelease->date().toString(Qt::DefaultLocaleShortDate).toStdString();
+    int runtime = pw.ui->sbRuntime->value();
+    int sales = pw.ui->sbSales->value();
+
+    std::vector<std::string> locations;
+    for(int i = 0; i < pw.ui->lstLocations->count(); ++i){
+        locations.push_back(pw.ui->lstLocations->item(i)->text().toStdString());
+    }
+
+    std::vector<std::string> keywords;
+    for(int i = 0; i < pw.ui->lstKeywords->count(); ++i){
+        keywords.push_back(pw.ui->lstKeywords->item(i)->text().toStdString());
+    }
+
+    // Checks data has been inputted and flags red if it has not
+    if(projTitle == ""){
+        pw.ui->lblTitleProjects->setStyleSheet("color: #D81E5B");
+        apply = false;
+    }else{
+        pw.ui->lblTitleProjects->setStyleSheet("color: #78CAD2");
+    }
+
+    if(summary == ""){
+        pw.ui->lblSummary->setStyleSheet("color: #D81E5B");
+        apply = false;
+    }else{
+        pw.ui->lblSummary->setStyleSheet("color: #78CAD2");
+    }
+
+    if(locations.size() == 0){
+        pw.ui->lblLocations->setStyleSheet("color: #D81E5B");
+        apply = false;
+    }else{
+        pw.ui->lblLocations->setStyleSheet("color: #78CAD2");
+    }
+
+    if(keywords.size() == 0){
+        pw.ui->lblKeywords->setStyleSheet("color: #D81E5B");
+        apply = false;
+    }else{
+        pw.ui->lblKeywords->setStyleSheet("color: #78CAD2");
+    }
+
+    // If all fields have correctly inputted data a new project is created
+    if(apply){
+
+        openProj->setTitle(projTitle);
+        openProj->setSummary(summary);
+        openProj->setProjectStatus(status);
+        openProj->setGenre(genre);
+        openProj->setLanguage(language);
+        openProj->setReleaseDate(date);
+        openProj->setRunTime(runtime);
+        openProj->setWeeklyBoxFigures(sales);
+        openProj->setFilmLocations(locations);
+        openProj->setKeywords(keywords);
+
+        setProjectWindow();
+        showAllProjects();
+
+     }
+
+}
+
+void controller::handleProjectWindowLocationAdd(){
+
+    QString input = pw.ui->txtLocationAdd->text();
+    if(input.toStdString() != ""){
+        pw.ui->lstLocations->addItem(input);
+    }
+    pw.ui->txtLocationAdd->clear();
+
+}
+
+void controller::handleProjectWindowLocationDel(){
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstLocations->selectedItems();
+    for(int i = 0; i < selectedItems.size(); i++){
+        delete pw.ui->lstLocations->takeItem(pw.ui->lstLocations->row(selectedItems[i]));
+    }
+
+}
+
+void controller::handleProjectWindowKeywordsAdd(){
+
+    QString input = pw.ui->txtKeywordsAdd->text();
+    if(input.toStdString() != ""){
+        pw.ui->lstKeywords->addItem(input);
+    }
+    pw.ui->txtKeywordsAdd->clear();
+
+}
+
+void controller::handleProjectWindowKeywordsDel(){
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstKeywords->selectedItems();
+    for(int i = 0; i < selectedItems.size(); i++){
+        delete pw.ui->lstKeywords->takeItem(pw.ui->lstKeywords->row(selectedItems[i]));
+    }
+
+}

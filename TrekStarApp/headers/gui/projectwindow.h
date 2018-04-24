@@ -1,7 +1,7 @@
 #ifndef PROJECTWINDOW_H
 #define PROJECTWINDOW_H
 
-#include <QWidget>
+#include "gui.h"
 
 namespace Ui {
 class ProjectWindow;
@@ -14,8 +14,6 @@ class ProjectWindow : public QWidget
 public:
     explicit ProjectWindow(QWidget *parent = 0);
     ~ProjectWindow();
-
-private:
     Ui::ProjectWindow *ui;
 };
 

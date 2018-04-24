@@ -17,6 +17,7 @@ public:
     DoublyLinkedList projList;
 
 private slots:
+
     void handleClose();
     void handleCreateProject();
     void handleClear();
@@ -28,6 +29,14 @@ private slots:
     void handleProjectDel();
     void handleOpenProject();
     void handleStatusChange();
+
+    void setProjectWindow();
+    void handleApplyChanges();
+    void handleProjectWindowLocationAdd();
+    void handleProjectWindowLocationDel();
+    void handleProjectWindowKeywordsAdd();
+    void handleProjectWindowKeywordsDel();
+
 
 private:
     void showAllProjects();
