@@ -222,10 +222,10 @@ vector<string> DoublyLinkedList::findByGenre(string Genre)
         current = current->next;
     }
 
-    if (AllProjects.empty())
-    {
-        throw std::out_of_range("No films with genre " + Genre);
-    }
+//    if (AllProjects.empty())
+//    {
+//        throw std::out_of_range("No films with genre " + Genre);
+//    }
 
     return AllProjects;
 }
@@ -254,10 +254,10 @@ vector<string> DoublyLinkedList::findByRoleAndName(string Role, string Name)
 
     }
 
-    if (AllProjects.empty())
-    {
-        throw std::out_of_range("No films with this person as a " + Role + " called " + Name);
-    }
+//    if (AllProjects.empty())
+//    {
+//        throw std::out_of_range("No films with this person as a " + Role + " called " + Name);
+//    }
 
     return AllProjects;
 }
@@ -285,10 +285,10 @@ vector<string> DoublyLinkedList::findByKeyword(string keyword)
 
     }
 
-    if (AllProjects.empty())
-    {
-        throw std::out_of_range("No films with this keyword " + keyword);
-    }
+//    if (AllProjects.empty())
+//    {
+//        throw std::out_of_range("No films with this keyword " + keyword);
+//    }
 
     return AllProjects;
 }
@@ -306,10 +306,12 @@ vector<string> DoublyLinkedList::getAllFilmTitles()
         previous = current;
         current = current->next;
     }
-
+//PLEASE DO THIS WHEN THERE IS NO DATA, DONT THROW ERRORS
     if (AllProjects.empty())
     {
-        throw std::out_of_range("No films in list:SAMS CODE");
+        AllProjects.clear();
+        return AllProjects;
+        //throw std::out_of_range("No films in list");
     }
 
     return AllProjects;
@@ -338,7 +340,7 @@ vector<string> DoublyLinkedList::sortProject(vector<string> Unsorted)
 
 vector<string> DoublyLinkedList::dailyReportsForAll()
 {
-    vector<string> AllProjects;
+    vector<string> AllProjects = {};
     Node *current = head;
     Node *previous = new Node;
 
@@ -349,10 +351,10 @@ vector<string> DoublyLinkedList::dailyReportsForAll()
         current = current->next;
     }
 
-    if (AllProjects.empty())
-    {
-        throw std::out_of_range("No Box Figures In Any Project");
-    }
+//    if (AllProjects.empty())
+//    {
+//        throw std::out_of_range("No Box Figures In Any Project");
+//    }
 
     return AllProjects;
 
@@ -360,7 +362,7 @@ vector<string> DoublyLinkedList::dailyReportsForAll()
 
 string DoublyLinkedList::dailyReportsByName(string NameOfProject)
 {
-    string AllProjects;
+    string AllProjects = {};
     Node *current = head;
     Node *previous = new Node;
 
@@ -374,10 +376,10 @@ string DoublyLinkedList::dailyReportsByName(string NameOfProject)
         current = current->next;
     }
 
-    if (AllProjects.empty())
-    {
-        throw std::out_of_range("No Box Figures In Any Project");
-    }
+//    if (AllProjects.empty())
+//    {
+//        throw std::out_of_range("No Box Figures In Any Project");
+//    }
 
     return AllProjects;
 
@@ -465,10 +467,10 @@ vector<string> DoublyLinkedList::sortByNewest()
     }
 
 
-    if (AllProjects.empty())
-    {
-        throw std::out_of_range("No Box Figures In Any Project");
-    }
+//    if (AllProjects.empty())
+//    {
+//        throw std::out_of_range("No Box Figures In Any Project");
+//    }
 
     return AllProjectsStrings;
 
@@ -535,10 +537,10 @@ vector<string> DoublyLinkedList::sortByOldest()
     }
 
 
-    if (AllProjects.empty())
-    {
-        throw std::out_of_range("No Box Figures In Any Project");
-    }
+//    if (AllProjects.empty())
+//    {
+//        throw std::out_of_range("No Box Figures In Any Project");
+//    }
 
     return AllProjectsStrings;
 
