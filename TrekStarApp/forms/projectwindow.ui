@@ -42,10 +42,10 @@
     <attribute name="title">
      <string>General</string>
     </attribute>
-    <widget class="QPushButton" name="cmdClearChanges">
+    <widget class="QPushButton" name="cmdClearGeneralChanges">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>440</y>
        <width>421</width>
        <height>61</height>
@@ -58,7 +58,7 @@
     <widget class="QLabel" name="lblLocations">
      <property name="geometry">
       <rect>
-       <x>470</x>
+       <x>460</x>
        <y>20</y>
        <width>91</width>
        <height>31</height>
@@ -71,7 +71,7 @@
     <widget class="QComboBox" name="cbLanguage">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>100</x>
        <y>240</y>
        <width>331</width>
        <height>31</height>
@@ -84,7 +84,7 @@
     <widget class="QLineEdit" name="txtKeywordsAdd">
      <property name="geometry">
       <rect>
-       <x>470</x>
+       <x>460</x>
        <y>270</y>
        <width>261</width>
        <height>31</height>
@@ -94,7 +94,7 @@
     <widget class="QPushButton" name="cmdKeywordsAdd">
      <property name="geometry">
       <rect>
-       <x>750</x>
+       <x>740</x>
        <y>270</y>
        <width>61</width>
        <height>31</height>
@@ -107,7 +107,7 @@
     <widget class="QComboBox" name="cbGenre">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>100</x>
        <y>190</y>
        <width>331</width>
        <height>31</height>
@@ -117,7 +117,7 @@
     <widget class="QLabel" name="lblSummary">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>70</y>
        <width>81</width>
        <height>31</height>
@@ -130,7 +130,7 @@
     <widget class="QLabel" name="lblRelease">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>290</y>
        <width>91</width>
        <height>31</height>
@@ -143,7 +143,7 @@
     <widget class="QLineEdit" name="txtTitleProject">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>100</x>
        <y>20</y>
        <width>331</width>
        <height>31</height>
@@ -153,7 +153,7 @@
     <widget class="QLabel" name="lblGenre">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>190</y>
        <width>60</width>
        <height>31</height>
@@ -166,7 +166,7 @@
     <widget class="QLabel" name="lblLanguage">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>240</y>
        <width>81</width>
        <height>31</height>
@@ -179,7 +179,7 @@
     <widget class="QComboBox" name="cbStatus">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>100</x>
        <y>140</y>
        <width>331</width>
        <height>31</height>
@@ -189,7 +189,7 @@
     <widget class="QLabel" name="lblKeywords">
      <property name="geometry">
       <rect>
-       <x>470</x>
+       <x>460</x>
        <y>220</y>
        <width>91</width>
        <height>31</height>
@@ -202,7 +202,7 @@
     <widget class="QListWidget" name="lstKeywords">
      <property name="geometry">
       <rect>
-       <x>470</x>
+       <x>460</x>
        <y>320</y>
        <width>421</width>
        <height>101</height>
@@ -212,7 +212,7 @@
     <widget class="QDateEdit" name="deRelease">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>100</x>
        <y>290</y>
        <width>331</width>
        <height>31</height>
@@ -222,7 +222,7 @@
     <widget class="QLabel" name="lblRuntime">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>340</y>
        <width>60</width>
        <height>31</height>
@@ -235,7 +235,7 @@
     <widget class="QLabel" name="lblSales">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>390</y>
        <width>81</width>
        <height>31</height>
@@ -248,7 +248,7 @@
     <widget class="QLabel" name="lblTitleProjects">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>20</y>
        <width>51</width>
        <height>31</height>
@@ -258,10 +258,10 @@
       <string>Title:</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="cmdApplyChanges">
+    <widget class="QPushButton" name="cmdApplyGeneralChanges">
      <property name="geometry">
       <rect>
-       <x>470</x>
+       <x>460</x>
        <y>440</y>
        <width>421</width>
        <height>61</height>
@@ -274,7 +274,7 @@
     <widget class="QTextEdit" name="txtSummary">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>100</x>
        <y>70</y>
        <width>331</width>
        <height>51</height>
@@ -284,7 +284,7 @@
     <widget class="QSpinBox" name="sbSales">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>100</x>
        <y>390</y>
        <width>331</width>
        <height>31</height>
@@ -300,7 +300,7 @@
     <widget class="QListWidget" name="lstLocations">
      <property name="geometry">
       <rect>
-       <x>470</x>
+       <x>460</x>
        <y>110</y>
        <width>421</width>
        <height>101</height>
@@ -310,7 +310,7 @@
     <widget class="QLineEdit" name="txtLocationAdd">
      <property name="geometry">
       <rect>
-       <x>470</x>
+       <x>460</x>
        <y>60</y>
        <width>261</width>
        <height>31</height>
@@ -320,7 +320,7 @@
     <widget class="QLabel" name="lblStatus">
      <property name="geometry">
       <rect>
-       <x>20</x>
+       <x>10</x>
        <y>140</y>
        <width>71</width>
        <height>31</height>
@@ -333,7 +333,7 @@
     <widget class="QPushButton" name="cmdLocationAdd">
      <property name="geometry">
       <rect>
-       <x>750</x>
+       <x>740</x>
        <y>60</y>
        <width>61</width>
        <height>31</height>
@@ -346,7 +346,7 @@
     <widget class="QSpinBox" name="sbRuntime">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>100</x>
        <y>340</y>
        <width>331</width>
        <height>31</height>
@@ -359,7 +359,7 @@
     <widget class="QPushButton" name="cmdKeywordsDel">
      <property name="geometry">
       <rect>
-       <x>830</x>
+       <x>820</x>
        <y>270</y>
        <width>61</width>
        <height>31</height>
@@ -372,7 +372,7 @@
     <widget class="QPushButton" name="cmdLocationDel">
      <property name="geometry">
       <rect>
-       <x>830</x>
+       <x>820</x>
        <y>60</y>
        <width>61</width>
        <height>31</height>
@@ -387,6 +387,101 @@
     <attribute name="title">
      <string>Crew</string>
     </attribute>
+    <widget class="QLineEdit" name="txtCrew">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>20</y>
+       <width>571</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="lstCrew">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>140</y>
+       <width>861</width>
+       <height>281</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdCrewFilter">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>271</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Filter</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cbCrew">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>271</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdCrewDel">
+     <property name="geometry">
+      <rect>
+       <x>610</x>
+       <y>70</y>
+       <width>271</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Delete</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdCrewAdd">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>70</y>
+       <width>281</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdClearCrewChanges">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>440</y>
+       <width>411</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Clear Changes</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cmdApplyCrewChanges">
+     <property name="geometry">
+      <rect>
+       <x>460</x>
+       <y>440</y>
+       <width>411</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Apply Changes</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tbMaterials">
     <attribute name="title">

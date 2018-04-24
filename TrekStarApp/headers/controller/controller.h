@@ -31,12 +31,17 @@ private slots:
     void handleStatusChange();
 
     void setProjectWindow();
-    void handleApplyChanges();
+    void handleApplyGeneralChanges();
     void handleProjectWindowLocationAdd();
     void handleProjectWindowLocationDel();
     void handleProjectWindowKeywordsAdd();
     void handleProjectWindowKeywordsDel();
-
+    void handleProjectWindowStatusChange();
+    void handleProjectWindowCrewChange();
+    void handleProjectWindowCrewApplyChanges();
+    void handleProjectWindowCrewClearChanges();
+    void handleProjectWindowCrewAdd();
+    void handleProjectWindowCrewDel();
 
 private:
     void showAllProjects();

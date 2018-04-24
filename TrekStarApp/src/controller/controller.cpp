@@ -66,18 +66,18 @@ controller::controller()
     pw.ui->cbLanguage->addItem("Spanish");
     pw.ui->cbLanguage->addItem("Mandarin");
 
-    /*
+
     // Sets all options for the filter combo box on the project window
-    pw.ui->cbFilter->addItem("No Filter");
-    pw.ui->cbFilter->addItem("Director");
-    pw.ui->cbFilter->addItem("Actor");
-    pw.ui->cbFilter->addItem("Producer");
-    pw.ui->cbFilter->addItem("Writer");
-    pw.ui->cbFilter->addItem("Editor");
-    pw.ui->cbFilter->addItem("Production Designer");
-    pw.ui->cbFilter->addItem("Set Decorator");
-    pw.ui->cbFilter->addItem("Costume Designer");
-    */
+    pw.ui->cbCrew->addItem("All Crew Members");
+    pw.ui->cbCrew->addItem("Director");
+    pw.ui->cbCrew->addItem("Actor");
+    pw.ui->cbCrew->addItem("Producer");
+    pw.ui->cbCrew->addItem("Writer");
+    pw.ui->cbCrew->addItem("Editor");
+    pw.ui->cbCrew->addItem("Production Designer");
+    pw.ui->cbCrew->addItem("Set Decorator");
+    pw.ui->cbCrew->addItem("Costume Designer");
+
 
     // Connects button press signals on main window to functions
     connect(mw.ui->cmdCreate, SIGNAL (clicked()), this, SLOT (handleCreateProject()));
@@ -92,12 +92,16 @@ controller::controller()
     connect(mw.ui->cbStatus, SIGNAL(currentIndexChanged(int)), this, SLOT(handleStatusChange()));
 
     // Connects button press signals on project window to functions
-    connect(pw.ui->cmdApplyChanges, SIGNAL(clicked()),this, SLOT(handleApplyChanges()));
-    connect(pw.ui->cmdClearChanges, SIGNAL(clicked()),this, SLOT(setProjectWindow()));
+    connect(pw.ui->cmdApplyGeneralChanges, SIGNAL(clicked()),this, SLOT(handleApplyGeneralChanges()));
+    connect(pw.ui->cmdClearGeneralChanges, SIGNAL(clicked()),this, SLOT(setProjectWindow()));
     connect(pw.ui->cmdLocationAdd, SIGNAL(clicked()),this, SLOT(handleProjectWindowLocationAdd()));
     connect(pw.ui->cmdLocationDel, SIGNAL(clicked()),this, SLOT(handleProjectWindowLocationDel()));
     connect(pw.ui->cmdKeywordsAdd, SIGNAL(clicked()),this, SLOT(handleProjectWindowKeywordsAdd()));
     connect(pw.ui->cmdKeywordsDel, SIGNAL(clicked()),this, SLOT(handleProjectWindowKeywordsDel()));
+    connect(pw.ui->cbStatus, SIGNAL(currentIndexChanged(int)), this, SLOT(handleProjectWindowStatusChange()));
+    connect(pw.ui->cbCrew, SIGNAL(currentIndexChanged(int)), this, SLOT(handleProjectWindowCrewChange()));
+    connect(pw.ui->cmdCrewAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowCrewAdd()));
+    connect(pw.ui->cmdCrewDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowCrewDel()));
 
     // Displays list of all projects
     showAllProjects();
@@ -186,6 +190,8 @@ void controller::handleCreateProject(){
         projList.createnode(input);
         openProj = &projList.findByTitle(projTitle);
         setProjectWindow();
+        handleProjectWindowCrewChange();
+        handleProjectWindowStatusChange();
         pw.show();
         handleClear();
         showAllProjects();
@@ -375,6 +381,8 @@ void controller::handleOpenProject(){
         if(projectTitle != ""){
             openProj = &projList.findByTitle(projectTitle);
             setProjectWindow();
+            handleProjectWindowCrewChange();
+            handleProjectWindowStatusChange();
             pw.show();
         }
     }
@@ -393,9 +401,6 @@ void controller::handleOpenProject(){
 
 // Changes input options based on status combo box selection
 void controller::handleStatusChange(){
-    // released = sales,
-    // unreleased = sales, materials,
-    // now playing = materials,
 
     std::string status = mw.ui->cbStatus->currentText().toStdString();
 
@@ -488,7 +493,7 @@ void controller::setProjectWindow(){
 
 }
 
-void controller::handleApplyChanges(){
+void controller::handleApplyGeneralChanges(){
 
     bool apply = true;
 
@@ -598,4 +603,66 @@ void controller::handleProjectWindowKeywordsDel(){
         delete pw.ui->lstKeywords->takeItem(pw.ui->lstKeywords->row(selectedItems[i]));
     }
 
+}
+
+void controller::handleProjectWindowStatusChange(){
+
+    std::string status = pw.ui->cbStatus->currentText().toStdString();
+
+    if(status == "Unreleased" || status == "Released"){
+        pw.ui->lblSales->setStyleSheet("color: #7C8483");
+        pw.ui->sbSales->setReadOnly(true);
+        pw.ui->sbSales->setVisible(false);
+        if(status == "Unreleased"){
+            pw.ui->tabWidget->setTabEnabled(2, false);
+        }
+        else{
+            pw.ui->tabWidget->setTabEnabled(2, true);
+        }
+    }
+    else if (status == "Now Playing"){
+        pw.ui->lblSales->setStyleSheet("color: #78CAD2");
+        pw.ui->sbSales->setReadOnly(false);
+        pw.ui->sbSales->setVisible(true);
+        pw.ui->tabWidget->setTabEnabled(2, false);
+    }
+
+}
+
+void controller::handleProjectWindowCrewChange(){
+
+    std::string selection = pw.ui->cbCrew->currentText().toStdString();
+
+    if(selection == "All Crew Members"){
+        pw.ui->txtCrew->setReadOnly(true);
+        pw.ui->txtCrew->setVisible(false);
+        pw.ui->cmdCrewAdd->setDisabled(true);
+        pw.ui->cmdCrewAdd->setVisible(false);
+        pw.ui->cmdCrewDel->setDisabled(true);
+        pw.ui->cmdCrewDel->setVisible(false);
+    }else{
+        pw.ui->txtCrew->setReadOnly(false);
+        pw.ui->txtCrew->setVisible(true);
+        pw.ui->cmdCrewAdd->setDisabled(false);
+        pw.ui->cmdCrewAdd->setVisible(true);
+        pw.ui->cmdCrewDel->setDisabled(false);
+        pw.ui->cmdCrewDel->setVisible(true);
+    }
+
+}
+
+void controller::handleProjectWindowCrewApplyChanges(){
+    std::cout << "test1" << std::endl;
+}
+
+void controller::handleProjectWindowCrewClearChanges(){
+    std::cout << "test2" << std::endl;
+}
+
+void controller::handleProjectWindowCrewAdd(){
+    std::cout << "test1" << std::endl;
+}
+
+void controller::handleProjectWindowCrewDel(){
+    std::cout << "test2" << std::endl;
 }

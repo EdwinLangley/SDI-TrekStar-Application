@@ -9,10 +9,30 @@
     font-size: 60px;
 }
 
-#cmdClearChanges {
+#cmdClearGeneralChanges {
     font-size: 20px;
 }
 
-#cmdApplyChanges {
+#cmdApplyGeneralChanges {
     font-size: 20px;
+}
+
+#cmdClearCrewChanges {
+    font-size: 20px;
+}
+
+#cmdApplyCrewChanges {
+    font-size: 20px;
+}
+
+#cmdCrewAdd{
+    font-size: 15px;
+}
+
+#cmdCrewDelete{
+    font-size: 15px;
+}
+
+#cmdCrewFilter{
+    font-size: 15px;
 }
