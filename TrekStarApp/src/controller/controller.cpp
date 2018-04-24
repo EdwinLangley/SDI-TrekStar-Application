@@ -45,7 +45,7 @@ controller::controller()
     mw.ui->cbFilter->addItem("Costume Designer");
 
     // Connects button press signal to functions
-    connect(mw.x, SIGNAL(aboutToQuit()), this, SLOT(handleClose()));
+    //connect(mw.x, SIGNAL(aboutToQuit()), this, SLOT(handleClose()));
     connect(mw.ui->cmdCreate, SIGNAL (clicked()), this, SLOT (handleCreateProject()));
     connect(mw.ui->cmdClear, SIGNAL (clicked()), this, SLOT (handleClear()));
     connect(mw.ui->cmdLocationAdd, SIGNAL (clicked()), this, SLOT (handleLocationAdd()));
@@ -302,7 +302,7 @@ void controller::handleProjectDel(){
         }
 
     }
-    catch (invalid_argument e1){
+    catch (out_of_range e1){
         std::cout << e1.what() << std::endl;
     }
     catch(std::invalid_argument e2){
@@ -327,7 +327,7 @@ void controller::handleOpenProject(){
             pw.show();
         }
     }
-    catch(invalid_argument e1){
+    catch(out_of_range e1){
         std::cout << e1.what() << std::endl;
     }
     catch(std::invalid_argument e2){
