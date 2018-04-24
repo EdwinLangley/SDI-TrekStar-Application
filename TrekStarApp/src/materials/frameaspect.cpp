@@ -44,9 +44,9 @@ string FrameAspect::getFrameAspect()
 {
     string frameAspect;
     frameAspect.append(to_string(this->horizontalRatio));
-    frameAspect.append(",");
+    frameAspect.append(FIRSTLEVELDELIMSTRNG);
     frameAspect.append(to_string(this->verticalRatio));
-    frameAspect.append(",");
+    frameAspect.append(FIRSTLEVELDELIMSTRNG);
     frameAspect.append(this->ratioDescription);
     return frameAspect;
 }

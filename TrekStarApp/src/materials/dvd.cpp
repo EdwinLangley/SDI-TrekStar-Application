@@ -41,6 +41,19 @@ void DVD::setFirstSideContent(const string &value)
     firstSideContent = value;
 }
 
+string DVD::getDVD()
+{
+    string dvd;
+    dvd.append(VectorToString(extraLanguageTracks));//15
+    dvd.append(FIRSTLEVELDELIMSTRNG);
+    dvd.append(VectorToString(extraSubtitleTracks));//16
+    dvd.append(FIRSTLEVELDELIMSTRNG);
+    dvd.append(VectorToString(bonusFeatures));//17
+    dvd.append(FIRSTLEVELDELIMSTRNG);
+    dvd.append(this->firstSideContent);//18
+    return dvd;
+}
+
 DVD::DVD()
 {
 

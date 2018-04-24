@@ -74,17 +74,17 @@ string CrewMember::getCrewMember()
 {
  string crewMember;
  crewMember.append(this->name);
- crewMember.append(",");
+ crewMember.append(SECONDLEVELDELIMSTRNG);
  crewMember.append(this->dateOfBirth);
- crewMember.append(",");
+ crewMember.append(SECONDLEVELDELIMSTRNG);
  crewMember.append(this->idNumber);
- crewMember.append(",");
+ crewMember.append(SECONDLEVELDELIMSTRNG);
  crewMember.append(this->title);
- crewMember.append(",");
+ crewMember.append(SECONDLEVELDELIMSTRNG);
  crewMember.append(this->role);
- crewMember.append(",");
+ crewMember.append(SECONDLEVELDELIMSTRNG);
  crewMember.append(to_string(this->yearsOfExperience));
- crewMember.append(",");
+ crewMember.append(SECONDLEVELDELIMSTRNG);
  crewMember.append(VectorToString(this->locationsWorkedAt));
  return crewMember;
 }

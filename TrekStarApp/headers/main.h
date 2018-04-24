@@ -11,6 +11,20 @@
 #include <chrono>
 #include <ctime>
 
+//JOE'S CONSTANTS DON'T TOUCH
+#define PROJECTFILENAME     "ProjectFile.txt"
+#define MATERIALFILENAME    "MaterialFile.txt"
+#define CREWFILENAME        "CrewFile.txt"
+
+#define FIRSTLEVELDELIMCHAR     '#'
+#define FIRSTLEVELDELIMSTRNG    "#"
+
+#define SECONDLEVELDELIMCHAR    '|'
+#define SECONDLEVELDELIMSTRNG   "|"
+
+#define VECTORDELIMCHAR         '%'
+#define VECTORDELIMSTRNG        "%"
+
 
 std::string VectorToString(std::vector<std::string> inputVector);
 std::vector<std::string> StringToVector(std::string inputString);
