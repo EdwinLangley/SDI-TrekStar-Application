@@ -82,7 +82,7 @@ void controller::handleCreateProject(){
     std::string status = mw.ui->cbStatus->currentText().toStdString();
     std::string genre = mw.ui->cbGenre->currentText().toStdString();
     std::string language = mw.ui->cbLanguage->currentText().toStdString();
-    std::string date = mw.ui->deRelease->date().toString().toStdString();
+    std::string date = mw.ui->deRelease->date().toString(Qt::DefaultLocaleShortDate).toStdString();
     int runtime = mw.ui->sbRuntime->value();
     int sales = mw.ui->sbSales->value();
 
@@ -138,12 +138,16 @@ void controller::handleCreateProject(){
         input.setReleaseDate(date);
         input.setRunTime(runtime);
         input.setWeeklyBoxFigures(sales);
+        input.setFilmLocations(locations);
+        input.setKeywords(keywords);
 
         projList.createnode(input);
         openProj = &projList.findByTitle(projTitle);
         pw.show();
 
         handleClear();
+
+        showAllProjects();
 
      }
 
@@ -272,6 +276,7 @@ void controller::handleFilter(){
 void controller::showAllProjects(){
     try{
         std::vector<std::string> allProjects = projList.getAllFilmTitles();
+        mw.ui->lstProjects->clear();
         for(unsigned int i = 0; i < allProjects.size(); ++i){
             mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i]));
         }
