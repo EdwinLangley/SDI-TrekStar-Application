@@ -133,7 +133,6 @@ void DoublyLinkedList::delete_by_title(string Title)
 
         }
 
-
         previous = current; //Pass current node to previous
         current = current->next; //Current = next node
     }
@@ -222,11 +221,6 @@ vector<string> DoublyLinkedList::findByGenre(string Genre)
         current = current->next;
     }
 
-//    if (AllProjects.empty())
-//    {
-//        throw std::out_of_range("No films with genre " + Genre);
-//    }
-
     return AllProjects;
 }
 
@@ -254,11 +248,6 @@ vector<string> DoublyLinkedList::findByRoleAndName(string Role, string Name)
 
     }
 
-//    if (AllProjects.empty())
-//    {
-//        throw std::out_of_range("No films with this person as a " + Role + " called " + Name);
-//    }
-
     return AllProjects;
 }
 
@@ -285,11 +274,6 @@ vector<string> DoublyLinkedList::findByKeyword(string keyword)
 
     }
 
-//    if (AllProjects.empty())
-//    {
-//        throw std::out_of_range("No films with this keyword " + keyword);
-//    }
-
     return AllProjects;
 }
 
@@ -306,12 +290,12 @@ vector<string> DoublyLinkedList::getAllFilmTitles()
         previous = current;
         current = current->next;
     }
-//PLEASE DO THIS WHEN THERE IS NO DATA, DONT THROW ERRORS
+
     if (AllProjects.empty())
     {
         AllProjects.clear();
         return AllProjects;
-        //throw std::out_of_range("No films in list");
+
     }
 
     return AllProjects;
@@ -351,11 +335,6 @@ vector<string> DoublyLinkedList::dailyReportsForAll()
         current = current->next;
     }
 
-//    if (AllProjects.empty())
-//    {
-//        throw std::out_of_range("No Box Figures In Any Project");
-//    }
-
     return AllProjects;
 
 }
@@ -375,11 +354,6 @@ string DoublyLinkedList::dailyReportsByName(string NameOfProject)
         previous = current;
         current = current->next;
     }
-
-//    if (AllProjects.empty())
-//    {
-//        throw std::out_of_range("No Box Figures In Any Project");
-//    }
 
     return AllProjects;
 
@@ -431,8 +405,6 @@ vector<string> DoublyLinkedList::sortByNewest()
     int CompareInt1;
     int CompareInt2;
 
-    //09/03/1998
-
     for (int stop = AllProjects.size() - 1; stop > 0; stop-- )
     {
         for (int check = 0; check < stop; check++)
@@ -463,14 +435,8 @@ vector<string> DoublyLinkedList::sortByNewest()
 
     for (int stop = AllProjects.size() - 1; stop >= 0; stop-- )
     {
-        AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + " was released on " +AllProjects.at(stop).getReleaseDate());
+        AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + ": was released on " +AllProjects.at(stop).getReleaseDate());
     }
-
-
-//    if (AllProjects.empty())
-//    {
-//        throw std::out_of_range("No Box Figures In Any Project");
-//    }
 
     return AllProjectsStrings;
 
@@ -500,8 +466,6 @@ vector<string> DoublyLinkedList::sortByOldest()
     string toMakeToInt2;
     int CompareInt1;
     int CompareInt2;
-
-    //09/03/1998
 
     for (int stop = AllProjects.size() - 1; stop > 0; stop-- )
     {
@@ -533,14 +497,8 @@ vector<string> DoublyLinkedList::sortByOldest()
 
     for (int stop =0; stop < AllProjects.size(); stop++ )
     {
-        AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + " was released on " +AllProjects.at(stop).getReleaseDate());
+        AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + ": was released on " +AllProjects.at(stop).getReleaseDate());
     }
-
-
-//    if (AllProjects.empty())
-//    {
-//        throw std::out_of_range("No Box Figures In Any Project");
-//    }
 
     return AllProjectsStrings;
 
