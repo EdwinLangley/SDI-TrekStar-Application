@@ -297,9 +297,10 @@ void controller::handleProjectDel(){
         QList <QListWidgetItem *> selectedItems = mw.ui->lstProjects->selectedItems();
         std::string projectTitle;
         for(int i = 0; i < selectedItems.size(); i++){
-            delete mw.ui->lstProjects->takeItem(mw.ui->lstProjects->row(selectedItems[i]));
             projectTitle = selectedItems[i]->text().toStdString();
             projList.delete_by_title(projectTitle);
+            delete mw.ui->lstProjects->takeItem(mw.ui->lstProjects->row(selectedItems[i]));
+
         }
 
     }
