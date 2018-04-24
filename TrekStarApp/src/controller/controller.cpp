@@ -192,6 +192,7 @@ void controller::handleLocationDel(){
         delete mw.ui->lstLocations->takeItem(mw.ui->lstLocations->row(selectedItems[i]));
     }
 
+
 }
 
 // Adds the input from the text box to the keywords list
@@ -299,6 +300,7 @@ void controller::handleProjectDel(){
             delete mw.ui->lstProjects->takeItem(mw.ui->lstLocations->row(selectedItems[i]));
             projectTitle = selectedItems[i]->text().toStdString();
             projList.delete_by_title(projectTitle);
+            //Need to update list here
         }
 
     }
