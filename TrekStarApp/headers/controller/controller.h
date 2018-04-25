@@ -38,13 +38,13 @@ private slots:
     void handleProjectWindowKeywordsDel();
     void handleProjectWindowStatusChange();
     void handleProjectWindowCrewChange();
-    void handleProjectWindowCrewApplyChanges();
-    void handleProjectWindowCrewClearChanges();
     void handleProjectWindowCrewAdd();
     void handleProjectWindowCrewDel();
+    void handleProjectWindowCrewFilter();
 
 private:
     void showAllProjects();
+    void displayCrew();
     MainWindow mw;
     ProjectWindow pw;
     Project* openProj;

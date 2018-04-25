@@ -78,6 +78,15 @@ controller::controller()
     pw.ui->cbCrew->addItem("Set Decorator");
     pw.ui->cbCrew->addItem("Costume Designer");
 
+    // Sets all options for the name title combo box on the project window
+    pw.ui->cbNameTitle->addItem("Mr");
+    pw.ui->cbNameTitle->addItem("Mrs");
+    pw.ui->cbNameTitle->addItem("Miss");
+    pw.ui->cbNameTitle->addItem("Dr");
+
+    // Sets placeholder text for search bars
+    mw.ui->txtFilter->setPlaceholderText("Enter search here and choose corrsponding category");
+    pw.ui->txtCrew->setPlaceholderText("Enter name of crew member to search");
 
     // Connects button press signals on main window to functions
     connect(mw.ui->cmdCreate, SIGNAL (clicked()), this, SLOT (handleCreateProject()));
@@ -102,6 +111,7 @@ controller::controller()
     connect(pw.ui->cbCrew, SIGNAL(currentIndexChanged(int)), this, SLOT(handleProjectWindowCrewChange()));
     connect(pw.ui->cmdCrewAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowCrewAdd()));
     connect(pw.ui->cmdCrewDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowCrewDel()));
+    connect(pw.ui->cmdCrewFilter, SIGNAL(clicked()), this, SLOT(handleProjectWindowCrewFilter()));
 
     // Displays list of all projects
     showAllProjects();
@@ -192,6 +202,7 @@ void controller::handleCreateProject(){
         setProjectWindow();
         handleProjectWindowCrewChange();
         handleProjectWindowStatusChange();
+        displayCrew();
         pw.show();
         handleClear();
         showAllProjects();
@@ -383,6 +394,7 @@ void controller::handleOpenProject(){
             setProjectWindow();
             handleProjectWindowCrewChange();
             handleProjectWindowStatusChange();
+            displayCrew();
             pw.show();
         }
     }
@@ -629,40 +641,147 @@ void controller::handleProjectWindowStatusChange(){
 
 }
 
+void controller::displayCrew(){
+
+    pw.ui->lstCrew->clear();
+    std::vector <CrewMember> crew = openProj->getCrew();
+    for(unsigned int i = 0; i < crew.size(); ++i){
+        pw.ui->lstCrew->addItem(QString::fromStdString(\
+               crew[i].getTitle() + " " + crew[i].getName() + ": \n ID: " + crew[i].getIdNumber() \
+               + "\n Born: " + crew[i].getDateOfBirth() + "\n Experience: " \
+               + std::to_string(crew[i].getYearsOfExperience()) + " years"));
+    }
+
+}
+
 void controller::handleProjectWindowCrewChange(){
 
     std::string selection = pw.ui->cbCrew->currentText().toStdString();
 
     if(selection == "All Crew Members"){
-        pw.ui->txtCrew->setReadOnly(true);
-        pw.ui->txtCrew->setVisible(false);
+        pw.ui->lblNameTitle->setVisible(false);
+        pw.ui->cbNameTitle->setDisabled(true);
+        pw.ui->cbNameTitle->setVisible(false);
+        pw.ui->lblName->setVisible(false);
+        pw.ui->txtName->setDisabled(true);
+        pw.ui->txtName->setVisible(false);
+        pw.ui->lblIDNum->setVisible(false);
+        pw.ui->txtIDNum->setVisible(false);
+        pw.ui->txtIDNum->setDisabled(true);
+        pw.ui->cbNameTitle->setVisible(false);
+        pw.ui->lblDateOfBirth->setVisible(false);
+        pw.ui->deDofB->setVisible(false);
+        pw.ui->deDofB->setDisabled(true);
+        pw.ui->lblExperience->setVisible(false);
+        pw.ui->sbExperience->setDisabled(true);
+        pw.ui->sbExperience->setVisible(false);
         pw.ui->cmdCrewAdd->setDisabled(true);
         pw.ui->cmdCrewAdd->setVisible(false);
-        pw.ui->cmdCrewDel->setDisabled(true);
-        pw.ui->cmdCrewDel->setVisible(false);
     }else{
-        pw.ui->txtCrew->setReadOnly(false);
-        pw.ui->txtCrew->setVisible(true);
+        pw.ui->lblNameTitle->setVisible(true);
+        pw.ui->cbNameTitle->setDisabled(false);
+        pw.ui->cbNameTitle->setVisible(true);
+        pw.ui->lblName->setVisible(true);
+        pw.ui->txtName->setDisabled(false);
+        pw.ui->txtName->setVisible(true);
+        pw.ui->lblIDNum->setVisible(true);
+        pw.ui->txtIDNum->setVisible(true);
+        pw.ui->txtIDNum->setDisabled(false);
+        pw.ui->cbNameTitle->setVisible(true);
+        pw.ui->lblDateOfBirth->setVisible(true);
+        pw.ui->deDofB->setVisible(true);
+        pw.ui->deDofB->setDisabled(false);
+        pw.ui->lblExperience->setVisible(true);
+        pw.ui->sbExperience->setDisabled(false);
+        pw.ui->sbExperience->setVisible(true);
         pw.ui->cmdCrewAdd->setDisabled(false);
         pw.ui->cmdCrewAdd->setVisible(true);
-        pw.ui->cmdCrewDel->setDisabled(false);
-        pw.ui->cmdCrewDel->setVisible(true);
     }
 
 }
 
-void controller::handleProjectWindowCrewApplyChanges(){
-    std::cout << "test1" << std::endl;
-}
-
-void controller::handleProjectWindowCrewClearChanges(){
-    std::cout << "test2" << std::endl;
-}
-
 void controller::handleProjectWindowCrewAdd(){
-    std::cout << "test1" << std::endl;
+
+    bool addCrew = true;
+
+    std::string name = pw.ui->txtName->text().toStdString();
+    std::string title = pw.ui->cbNameTitle->currentText().toStdString();
+    std::string DofB = pw.ui->deDofB->date().toString(Qt::DefaultLocaleShortDate).toStdString();
+    std::string ID = pw.ui->txtIDNum->text().toStdString();
+    std::string role = pw.ui->cbCrew->currentText().toStdString();
+    int experience = pw.ui->sbExperience->value();
+
+    if(name == ""){
+        pw.ui->lblName->setStyleSheet("color: #D81E5B");
+        addCrew = false;
+    }else{
+        pw.ui->lblName->setStyleSheet("color: #78CAD2");
+    }
+
+    if(ID == ""){
+        pw.ui->lblIDNum->setStyleSheet("color: #D81E5B");
+        addCrew = false;
+    }else{
+        pw.ui->lblIDNum->setStyleSheet("color: #78CAD2");
+    }
+
+    if(addCrew){
+        pw.ui->lstCrew->addItem(QString::fromStdString(\
+               title + " " + name + ": \n ID: " + ID + "\n Born: " + DofB + "\n Role: "\
+               + role + "\n Experience: " + std::to_string(experience) + " years"));
+
+        CrewMember newC;
+
+        newC.setName(name);
+        newC.setTitle(title);
+        newC.setIdNumber(ID);
+        newC.setDateOfBirth(DofB);
+        newC.setRole(role);
+        newC.setYearsOfExperience(experience);
+
+        std::vector <CrewMember> newCrew = openProj->getCrew();
+        newCrew.push_back(newC);
+        openProj->setCrew(newCrew);
+
+        pw.ui->txtName->clear();
+        pw.ui->cbNameTitle->setCurrentIndex(0);
+        pw.ui->deDofB->setDate(QDate(2000, 1, 1));
+        pw.ui->txtIDNum->clear();
+        pw.ui->sbExperience->setValue(0);
+    }
+
 }
 
 void controller::handleProjectWindowCrewDel(){
-    std::cout << "test2" << std::endl;
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstCrew->selectedItems();
+
+    for(int i = 0; i < selectedItems.size(); i++){
+
+        std::string text = selectedItems[i]->text().toStdString();
+
+        std::string title = text.substr(0, text.find_first_of(" "));
+        std::string name = text.substr((text.find_first_of(" ") + 1), \
+                                       (text.find_first_of(":") - (text.find_first_of(" ") + 1)));
+        std::string id = text.substr((text.find("ID:") + 4), (text.find("\n Born:") - (text.find("ID:") + 4)));
+
+        /*
+        std::cout << title << std::endl;
+        std::cout << name << std::endl;
+        std::cout << id << std::endl;
+        */
+
+        delete pw.ui->lstCrew->takeItem(pw.ui->lstCrew->row(selectedItems[i]));
+    }
+
+}
+
+void controller::handleProjectWindowCrewFilter(){
+    std::string category = pw.ui->cbCrew->currentText().toStdString();
+    std::string input = pw.ui->txtCrew->text().toStdString();
+    /*
+    std::cout << category << std::endl;
+    std::cout << input << std::endl;
+    */
+
 }

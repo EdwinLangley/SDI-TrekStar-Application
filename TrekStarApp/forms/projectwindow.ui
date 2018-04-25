@@ -36,7 +36,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tbGeneral">
     <attribute name="title">
@@ -390,9 +390,9 @@
     <widget class="QLineEdit" name="txtCrew">
      <property name="geometry">
       <rect>
-       <x>310</x>
+       <x>260</x>
        <y>20</y>
-       <width>571</width>
+       <width>411</width>
        <height>31</height>
       </rect>
      </property>
@@ -401,19 +401,19 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>140</y>
+       <y>160</y>
        <width>861</width>
-       <height>281</height>
+       <height>341</height>
       </rect>
      </property>
     </widget>
     <widget class="QPushButton" name="cmdCrewFilter">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>70</y>
-       <width>271</width>
-       <height>51</height>
+       <x>680</x>
+       <y>20</y>
+       <width>201</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
@@ -425,7 +425,7 @@
       <rect>
        <x>20</x>
        <y>20</y>
-       <width>271</width>
+       <width>221</width>
        <height>31</height>
       </rect>
      </property>
@@ -433,10 +433,10 @@
     <widget class="QPushButton" name="cmdCrewDel">
      <property name="geometry">
       <rect>
-       <x>610</x>
+       <x>680</x>
        <y>70</y>
-       <width>271</width>
-       <height>51</height>
+       <width>201</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
@@ -446,40 +446,129 @@
     <widget class="QPushButton" name="cmdCrewAdd">
      <property name="geometry">
       <rect>
-       <x>310</x>
-       <y>70</y>
-       <width>281</width>
-       <height>51</height>
+       <x>680</x>
+       <y>110</y>
+       <width>201</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
       <string>Add</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="cmdClearCrewChanges">
+    <widget class="QLabel" name="lblDateOfBirth">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>70</y>
+       <width>101</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Date of Birth:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblIDNum">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>110</y>
+       <width>41</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>ID:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblNameTitle">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>440</y>
-       <width>411</width>
-       <height>61</height>
+       <y>70</y>
+       <width>41</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>Clear Changes</string>
+      <string>Title:</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="cmdApplyCrewChanges">
+    <widget class="QLabel" name="lblExperience">
      <property name="geometry">
       <rect>
-       <x>460</x>
-       <y>440</y>
-       <width>411</width>
-       <height>61</height>
+       <x>450</x>
+       <y>70</y>
+       <width>91</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>Apply Changes</string>
+      <string>Experience: </string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="cbNameTitle">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>70</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtIDNum">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>110</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QDateEdit" name="deDofB">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>70</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="sbExperience">
+     <property name="geometry">
+      <rect>
+       <x>540</x>
+       <y>70</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="txtName">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>110</y>
+       <width>121</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblName">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>110</y>
+       <width>60</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Name:</string>
      </property>
     </widget>
    </widget>

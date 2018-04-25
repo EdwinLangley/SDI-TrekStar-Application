@@ -30,7 +30,7 @@ public:
         //To load projects into the double linked list
         vector<Project> AllProjects = File.BuildProjectList();
         if(AllProjects.size()!=0){
-            for (int i =0;i<AllProjects.size();i++)
+            for (unsigned int i =0; i < AllProjects.size();i++)
             {
                 createnode(AllProjects[i]);
             }
@@ -45,7 +45,7 @@ public:
         vector<Project> Projects;
 
 
-        for (int i = 0; i < Titles.size(); i++)
+        for (unsigned int i = 0; i < Titles.size(); i++)
         {
             Projects.push_back(findByTitle(Titles[i]));
         }
