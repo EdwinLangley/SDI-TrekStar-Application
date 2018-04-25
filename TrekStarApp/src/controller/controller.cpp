@@ -88,6 +88,9 @@ controller::controller()
     mw.ui->txtFilter->setPlaceholderText("Enter search here and choose corrsponding category");
     pw.ui->txtCrew->setPlaceholderText("Enter name of crew member to search");
 
+    // Allows multiple selection on list
+    pw.ui->lstCrewLocations->setSelectionMode(QAbstractItemView::ExtendedSelection);
+
     // Connects button press signals on main window to functions
     connect(mw.ui->cmdCreate, SIGNAL (clicked()), this, SLOT (handleCreateProject()));
     connect(mw.ui->cmdClear, SIGNAL (clicked()), this, SLOT (handleClear()));
@@ -202,7 +205,6 @@ void controller::handleCreateProject(){
         setProjectWindow();
         handleProjectWindowCrewChange();
         handleProjectWindowStatusChange();
-        displayCrew();
         pw.show();
         handleClear();
         showAllProjects();
@@ -394,7 +396,6 @@ void controller::handleOpenProject(){
             setProjectWindow();
             handleProjectWindowCrewChange();
             handleProjectWindowStatusChange();
-            displayCrew();
             pw.show();
         }
     }
@@ -502,6 +503,8 @@ void controller::setProjectWindow(){
     pw.ui->lblSummary->setStyleSheet("color: #78CAD2");
     pw.ui->lblLocations->setStyleSheet("color: #78CAD2");
     pw.ui->lblKeywords->setStyleSheet("color: #78CAD2");
+
+    updateCrewLocations();
 
 }
 
@@ -645,11 +648,34 @@ void controller::displayCrew(){
 
     pw.ui->lstCrew->clear();
     std::vector <CrewMember> crew = openProj->getCrew();
+
     for(unsigned int i = 0; i < crew.size(); ++i){
+
+        std::string locationString = "";
+
+        for(unsigned int j = 0; j < crew[i].getLocationsWorkedAt().size(); ++j){
+
+            locationString += crew[i].getLocationsWorkedAt()[j];
+            if(j != crew[i].getLocationsWorkedAt().size() - 1){
+                locationString += ", ";
+            }
+
+        }
+
         pw.ui->lstCrew->addItem(QString::fromStdString(\
                crew[i].getTitle() + " " + crew[i].getName() + ": \n ID: " + crew[i].getIdNumber() \
-               + "\n Born: " + crew[i].getDateOfBirth() + "\n Experience: " \
-               + std::to_string(crew[i].getYearsOfExperience()) + " years"));
+               + "\n Born: " + crew[i].getDateOfBirth() + "\n Role: " + crew[i].getRole() + "\n Experience: " \
+               + std::to_string(crew[i].getYearsOfExperience()) + " years"\
+               + "\n Locations: " + locationString));
+    }
+
+}
+
+void controller::updateCrewLocations(){
+
+    pw.ui->lstCrewLocations->clear();
+    for(unsigned int i = 0; i < openProj->getFilmLocations().size(); ++i){
+        pw.ui->lstCrewLocations->addItem(QString::fromStdString(openProj->getFilmLocations()[i]));
     }
 
 }
@@ -677,6 +703,11 @@ void controller::handleProjectWindowCrewChange(){
         pw.ui->sbExperience->setVisible(false);
         pw.ui->cmdCrewAdd->setDisabled(true);
         pw.ui->cmdCrewAdd->setVisible(false);
+        pw.ui->lblCrewLocations->setVisible(false);
+        pw.ui->lstCrewLocations->setDisabled(true);
+        pw.ui->lstCrewLocations->setVisible(false);
+
+        displayCrew();
     }else{
         pw.ui->lblNameTitle->setVisible(true);
         pw.ui->cbNameTitle->setDisabled(false);
@@ -696,6 +727,35 @@ void controller::handleProjectWindowCrewChange(){
         pw.ui->sbExperience->setVisible(true);
         pw.ui->cmdCrewAdd->setDisabled(false);
         pw.ui->cmdCrewAdd->setVisible(true);
+        pw.ui->lblCrewLocations->setVisible(true);
+        pw.ui->lstCrewLocations->setDisabled(false);
+        pw.ui->lstCrewLocations->setVisible(true);
+
+        if(selection == "Director"){
+            filterCrewByRole("Director");
+        }
+        else if(selection == "Actor"){
+            filterCrewByRole("Actor");
+        }
+        else if(selection == "Producer"){
+            filterCrewByRole("Producer");
+        }
+        else if(selection == "Writer"){
+            filterCrewByRole("Writer");
+        }
+        else if(selection == "Editor"){
+            filterCrewByRole("Editor");
+        }
+        else if(selection == "Production Designer"){
+            filterCrewByRole("Production Designer");
+        }
+        else if(selection == "Set Decorator"){
+            filterCrewByRole("Set Decorator");
+        }
+        else if(selection == "Costume Designer"){
+            filterCrewByRole("Costume Designer");
+        }
+
     }
 
 }
@@ -711,6 +771,13 @@ void controller::handleProjectWindowCrewAdd(){
     std::string role = pw.ui->cbCrew->currentText().toStdString();
     int experience = pw.ui->sbExperience->value();
 
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstCrewLocations->selectedItems();
+    std::vector <std::string> loc;
+
+    for(int i = 0; i < selectedItems.size(); ++i){
+        loc.push_back(selectedItems[i]->text().toStdString());
+    }
+
     if(name == ""){
         pw.ui->lblName->setStyleSheet("color: #D81E5B");
         addCrew = false;
@@ -725,10 +792,26 @@ void controller::handleProjectWindowCrewAdd(){
         pw.ui->lblIDNum->setStyleSheet("color: #78CAD2");
     }
 
+    if(loc.size() == 0){
+        pw.ui->lblCrewLocations->setStyleSheet("color: #D81E5B");
+        addCrew = false;
+    }else{
+        pw.ui->lblIDNum->setStyleSheet("color: #78CAD2");
+    }
+
     if(addCrew){
+
+        std::string locationString = "";
+        for(unsigned int j = 0; j < loc.size(); ++j){
+            locationString += loc[j];
+            if(j != loc.size() - 1){
+                locationString += ", ";
+            }
+        }
         pw.ui->lstCrew->addItem(QString::fromStdString(\
                title + " " + name + ": \n ID: " + ID + "\n Born: " + DofB + "\n Role: "\
-               + role + "\n Experience: " + std::to_string(experience) + " years"));
+               + role + "\n Experience: " + std::to_string(experience) + " years" \
+               + "\n Locations: " + locationString));
 
         CrewMember newC;
 
@@ -738,6 +821,7 @@ void controller::handleProjectWindowCrewAdd(){
         newC.setDateOfBirth(DofB);
         newC.setRole(role);
         newC.setYearsOfExperience(experience);
+        newC.setLocationsWorkedAt(loc);
 
         std::vector <CrewMember> newCrew = openProj->getCrew();
         newCrew.push_back(newC);
@@ -766,23 +850,81 @@ void controller::handleProjectWindowCrewDel(){
                                        (text.find_first_of(":") - (text.find_first_of(" ") + 1)));
         std::string id = text.substr((text.find("ID:") + 4), (text.find("\n Born:") - (text.find("ID:") + 4)));
 
-        /*
-        std::cout << title << std::endl;
-        std::cout << name << std::endl;
-        std::cout << id << std::endl;
-        */
+        std::vector <CrewMember> crew = openProj->getCrew();
 
+        for(unsigned int i = 0; i < crew.size(); ++i){
+            if(crew[i].getTitle() == title && crew[i].getName() == name && crew[i].getIdNumber() == id){
+                crew.erase(crew.begin() + i);
+            }
+        }
+
+        openProj->setCrew(crew);
         delete pw.ui->lstCrew->takeItem(pw.ui->lstCrew->row(selectedItems[i]));
     }
 
 }
 
 void controller::handleProjectWindowCrewFilter(){
-    std::string category = pw.ui->cbCrew->currentText().toStdString();
+
+    std::string role = pw.ui->cbCrew->currentText().toStdString();
     std::string input = pw.ui->txtCrew->text().toStdString();
-    /*
-    std::cout << category << std::endl;
-    std::cout << input << std::endl;
-    */
+
+    pw.ui->lstCrew->clear();
+
+    std::vector <CrewMember> crew = openProj->getCrew();
+
+    for(unsigned int i = 0; i < crew.size(); ++i){
+        if((crew[i].getRole() == role || role == "All Crew Members") && crew[i].getName() == input){
+
+            std::string locationString = "";
+
+            for(unsigned int j = 0; j < crew[i].getLocationsWorkedAt().size(); ++j){
+
+                locationString += crew[i].getLocationsWorkedAt()[j];
+                if(j != crew[i].getLocationsWorkedAt().size() - 1){
+                    locationString += ", ";
+                }
+
+            }
+
+            pw.ui->lstCrew->addItem(QString::fromStdString(\
+                   crew[i].getTitle() + " " + crew[i].getName() + ": \n ID: " + crew[i].getIdNumber() \
+                   + "\n Born: " + crew[i].getDateOfBirth() + "\n Role: " + crew[i].getRole() + "\n Experience: " \
+                   + std::to_string(crew[i].getYearsOfExperience()) + " years"\
+                   + "\n Locations: " + locationString));
+
+        }
+    }
+
+}
+
+void controller::filterCrewByRole(std::string role){
+
+    pw.ui->lstCrew->clear();
+
+    std::vector <CrewMember> crew = openProj->getCrew();
+
+    for(unsigned int i = 0; i < crew.size(); ++i){
+        if(crew[i].getRole() == role){
+
+            std::string locationString = "";
+
+            for(unsigned int j = 0; j < crew[i].getLocationsWorkedAt().size(); ++j){
+
+                locationString += crew[i].getLocationsWorkedAt()[j];
+                if(j != crew[i].getLocationsWorkedAt().size() - 1){
+                    locationString += ", ";
+                }
+
+            }
+
+            pw.ui->lstCrew->addItem(QString::fromStdString(\
+                   crew[i].getTitle() + " " + crew[i].getName() + ": \n ID: " + crew[i].getIdNumber() \
+                   + "\n Born: " + crew[i].getDateOfBirth() + "\n Role: " + crew[i].getRole() + "\n Experience: " \
+                   + std::to_string(crew[i].getYearsOfExperience()) + " years"\
+                   + "\n Locations: " + locationString));
+
+        }
+    }
 
 }

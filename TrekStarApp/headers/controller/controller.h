@@ -45,6 +45,8 @@ private slots:
 private:
     void showAllProjects();
     void displayCrew();
+    void updateCrewLocations();
+    void filterCrewByRole(std::string role);
     MainWindow mw;
     ProjectWindow pw;
     Project* openProj;

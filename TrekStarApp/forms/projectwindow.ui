@@ -401,9 +401,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>160</y>
+       <y>210</y>
        <width>861</width>
-       <height>341</height>
+       <height>291</height>
       </rect>
      </property>
     </widget>
@@ -433,9 +433,9 @@
     <widget class="QPushButton" name="cmdCrewDel">
      <property name="geometry">
       <rect>
-       <x>680</x>
-       <y>70</y>
-       <width>201</width>
+       <x>550</x>
+       <y>160</y>
+       <width>331</width>
        <height>31</height>
       </rect>
      </property>
@@ -446,9 +446,9 @@
     <widget class="QPushButton" name="cmdCrewAdd">
      <property name="geometry">
       <rect>
-       <x>680</x>
-       <y>110</y>
-       <width>201</width>
+       <x>210</x>
+       <y>160</y>
+       <width>321</width>
        <height>31</height>
       </rect>
      </property>
@@ -472,8 +472,8 @@
     <widget class="QLabel" name="lblIDNum">
      <property name="geometry">
       <rect>
-       <x>210</x>
-       <y>110</y>
+       <x>20</x>
+       <y>160</y>
        <width>41</width>
        <height>31</height>
       </rect>
@@ -498,8 +498,8 @@
     <widget class="QLabel" name="lblExperience">
      <property name="geometry">
       <rect>
-       <x>450</x>
-       <y>70</y>
+       <x>210</x>
+       <y>120</y>
        <width>91</width>
        <height>31</height>
       </rect>
@@ -521,8 +521,8 @@
     <widget class="QLineEdit" name="txtIDNum">
      <property name="geometry">
       <rect>
-       <x>310</x>
-       <y>110</y>
+       <x>70</x>
+       <y>160</y>
        <width>121</width>
        <height>31</height>
       </rect>
@@ -541,8 +541,8 @@
     <widget class="QSpinBox" name="sbExperience">
      <property name="geometry">
       <rect>
-       <x>540</x>
-       <y>70</y>
+       <x>310</x>
+       <y>120</y>
        <width>121</width>
        <height>31</height>
       </rect>
@@ -569,6 +569,29 @@
      </property>
      <property name="text">
       <string>Name:</string>
+     </property>
+    </widget>
+    <widget class="QListWidget" name="lstCrewLocations">
+     <property name="geometry">
+      <rect>
+       <x>530</x>
+       <y>80</y>
+       <width>351</width>
+       <height>71</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="lblCrewLocations">
+     <property name="geometry">
+      <rect>
+       <x>450</x>
+       <y>70</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Locations:</string>
      </property>
     </widget>
    </widget>
