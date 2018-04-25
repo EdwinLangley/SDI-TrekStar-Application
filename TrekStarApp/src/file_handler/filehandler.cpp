@@ -244,7 +244,7 @@ void FileWriter::WriteProject(vector<Project> inputProject){
         newLine.append(FIRSTLEVELDELIMSTRNG);
         newLine.append(inputProject[i].getLanguage());
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(inputProject[i].getCrewID());
+        newLine.append(to_string(inputProject[i].getCrewID()));
         newLine.append(FIRSTLEVELDELIMSTRNG);
         newLine.append(to_string(inputProject[i].getWeeklyBoxFigures()));
         newLine.append(FIRSTLEVELDELIMSTRNG);
@@ -258,7 +258,7 @@ void FileWriter::WriteProject(vector<Project> inputProject){
         newLine.append("\n");
         projectFile << newLine;
         WriteMaterials(inputProject);
-        WriteCrew(inputProject[i].getCrewID(),inputProject[i].getCrew());
+        WriteCrew(to_string(inputProject[i].getCrewID()),inputProject[i].getCrew());
     }
     projectFile.close();
 }
@@ -292,7 +292,7 @@ vector<Project> FileWriter::ReadProjects(){
         tempProject.setGenre(resultsStorage[3]);
         tempProject.setReleaseDate(resultsStorage[4]);
         tempProject.setLanguage(resultsStorage[5]);
-        tempProject.setCrewID(resultsStorage[6]);
+        tempProject.setCrewID(stoi(resultsStorage[6]));
         tempProject.setWeeklyBoxFigures(stoi(resultsStorage[7]));
         tempProject.setRunTime(stoi(resultsStorage[8]));
         tempProject.setKeywords(StringToVector(resultsStorage[9]));
@@ -428,6 +428,7 @@ vector<Project> FileWriter::BuildProjectList(){
             getline(ss,id,FIRSTLEVELDELIMCHAR);
             if(projects[i].getCrewID()==id){
                 //Write found crew to the project
+                projects[i].setCrewID(stoi(id));
                 vector<CrewMember> crew=CreateCrewMembers(line);
                 projects[i].setCrew(crew);
             }
