@@ -81,12 +81,12 @@ void Project::setMaterials(const vector<string> &value)
     materialIDs = value;
 }
 
-string Project::getCrewID() const
+int Project::getCrewID() const
 {
     return crewID;
 }
 
-void Project::setCrewID(const string &value)
+void Project::setCrewID(const int &value)
 {
     crewID = value;
 }

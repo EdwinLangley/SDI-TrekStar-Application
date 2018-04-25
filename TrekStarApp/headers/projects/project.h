@@ -26,7 +26,7 @@ private:
     vector<string> filmLocations={"Location1"};
     //Like Material IDs but only links to one singular crew entity, as each crew will be unique.
     //CrewID 0 will be an unset crew
-    string crewID="0";
+    int crewID=0;
     vector<CrewMember> Crew;
     //ONLY TO BE SET ON LOAD FROM FILES/CREATION OF PROJECT MATERIAL
     SingleSidedDVD singleDVD;
@@ -56,8 +56,8 @@ public:
     void setFilmLocations(const vector<string> &value);
     vector<string> getMaterials() const;
     void setMaterials(const vector<string> &value);
-    string getCrewID() const;
-    void setCrewID(const string &value);
+    int getCrewID() const;
+    void setCrewID(const int &value);
     vector<CrewMember> getCrew() const;
     void setCrew(const vector<CrewMember> &value);
     SingleSidedDVD getSingleDVD() const;

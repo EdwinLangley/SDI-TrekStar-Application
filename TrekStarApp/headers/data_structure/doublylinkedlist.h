@@ -19,6 +19,7 @@ public:
     };
 
 
+
 private:
     Node *head, *tail;
 public:
@@ -128,6 +129,8 @@ vector<string> sortByNewest();
 
 //function to sort by date oldest
 vector<string> sortByOldest();
+
+int getNewCrewId();
 
 };
 

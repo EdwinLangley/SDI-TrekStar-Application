@@ -742,6 +742,7 @@ void controller::handleProjectWindowCrewAdd(){
         std::vector <CrewMember> newCrew = openProj->getCrew();
         newCrew.push_back(newC);
         openProj->setCrew(newCrew);
+        openProj->setCrewID(projList.getNewCrewId());
 
         pw.ui->txtName->clear();
         pw.ui->cbNameTitle->setCurrentIndex(0);

@@ -503,3 +503,25 @@ vector<string> DoublyLinkedList::sortByOldest()
     return AllProjectsStrings;
 
 }
+
+
+int DoublyLinkedList::getNewCrewId()
+{
+    int HighestId;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+
+        if (current->data.getCrewID() > HighestId)
+        {
+            HighestId = current->data.getCrewID();
+        }
+        previous = current;
+        current = current->next;
+    }
+
+    return HighestId;
+}
+
