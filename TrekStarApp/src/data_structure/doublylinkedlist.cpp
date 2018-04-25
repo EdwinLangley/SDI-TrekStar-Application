@@ -507,7 +507,7 @@ vector<string> DoublyLinkedList::sortByOldest()
 
 int DoublyLinkedList::getNewCrewId()
 {
-    int HighestId;
+    int HighestId = 0;
     Node *current = head;
     Node *previous = new Node;
 
@@ -522,6 +522,6 @@ int DoublyLinkedList::getNewCrewId()
         current = current->next;
     }
 
-    return HighestId;
+    return HighestId+1;
 }
 

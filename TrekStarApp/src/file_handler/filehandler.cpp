@@ -376,48 +376,47 @@ vector<Project> FileWriter::BuildProjectList(){
     //Go through Project list
     for (int i=0; i<projects.size();i++){
         //Go through material list for the project
-        if(projects[i].getMaterialIDs()[0]=="0"){
-            continue;
-        }
-        for (int j=0;j<projects[i].getMaterialIDs().size();j++){
-            //Go through list of materials and then compare it to the current material
-            for (int k=0;k<materialLines.size();k++){
-                string line=materialLines[k];
-                string type,id;
-                stringstream ss;
-                ss<<line;
-                getline(ss,type,FIRSTLEVELDELIMCHAR);
-                getline(ss,id,FIRSTLEVELDELIMCHAR);
-                //If the current material matches a line
-                if(projects[i].getMaterialIDs()[j]==id){
-                    //CALL WHICHEVER READ MATERIAL FUNCTION BASED ON WHATEVER MATERIAL TYPE
-                    if(type=="1DVD"){
-                        //Make a 1 sided dvd
-                        //Add to project
-                        projects[i].setSingleDVD(ReadOneSidedDVD(line));
-                    }else if (type=="2DVD") {
-                        //Make a 2 sided DVD
-                        //Add to project
-                        projects[i].setTwoDVD(ReadTwoSidedDVD(line));
-                    }else if (type=="BRAY") {
-                        //Make a BluRay
-                        //Add to project
-                        projects[i].setBluRay(ReadBluRay(line));
-                    }else if (type=="VHSS"){
-                        //Make a VHS
-                        //Add to project
-                        projects[i].setVhs(ReadVHS(line));
-                    }else if (type=="CBOX"){
-                        //Make a ComboBox
-                        //Add to project
-                        projects[i].setComboBox(ReadComboBox(line));
+        if(projects[i].getMaterialIDs()[0]!="0"){
+            for (int j=0;j<projects[i].getMaterialIDs().size();j++){
+                //Go through list of materials and then compare it to the current material
+                for (int k=0;k<materialLines.size();k++){
+                    string line=materialLines[k];
+                    string type,id;
+                    stringstream ss;
+                    ss<<line;
+                    getline(ss,type,FIRSTLEVELDELIMCHAR);
+                    getline(ss,id,FIRSTLEVELDELIMCHAR);
+                    //If the current material matches a line
+                    if(projects[i].getMaterialIDs()[j]==id){
+                        //CALL WHICHEVER READ MATERIAL FUNCTION BASED ON WHATEVER MATERIAL TYPE
+                        if(type=="1DVD"){
+                            //Make a 1 sided dvd
+                            //Add to project
+                            projects[i].setSingleDVD(ReadOneSidedDVD(line));
+                        }else if (type=="2DVD") {
+                            //Make a 2 sided DVD
+                            //Add to project
+                            projects[i].setTwoDVD(ReadTwoSidedDVD(line));
+                        }else if (type=="BRAY") {
+                            //Make a BluRay
+                            //Add to project
+                            projects[i].setBluRay(ReadBluRay(line));
+                        }else if (type=="VHSS"){
+                            //Make a VHS
+                            //Add to project
+                            projects[i].setVhs(ReadVHS(line));
+                        }else if (type=="CBOX"){
+                            //Make a ComboBox
+                            //Add to project
+                            projects[i].setComboBox(ReadComboBox(line));
+                        }
                     }
                 }
             }
         }
         //Go through list of crew members and do the same as materials
         //Go through list of crews and then compare it to the current crewID
-        if (projects[i].getCrewID()=="0"){
+        if (projects[i].getCrewID()==0){
             continue;
         }
         for (int j=0;j<crewLines.size();j++){
@@ -426,7 +425,7 @@ vector<Project> FileWriter::BuildProjectList(){
             stringstream ss;
             ss<<line;
             getline(ss,id,FIRSTLEVELDELIMCHAR);
-            if(projects[i].getCrewID()==id){
+            if(projects[i].getCrewID()==stoi(id)){
                 //Write found crew to the project
                 projects[i].setCrewID(stoi(id));
                 vector<CrewMember> crew=CreateCrewMembers(line);

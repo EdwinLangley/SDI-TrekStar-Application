@@ -96,5 +96,11 @@ CrewMember::CrewMember()
 
 CrewMember::CrewMember(string name, string dateOfBirth, string idNumber, string title, string role, int yearsOfExperience, vector<string> locationsWorkedAt)
 {
-
+    this->name=name;
+    this->dateOfBirth=dateOfBirth;
+    this->idNumber=idNumber;
+    this->title=title;
+    this->role=role;
+    this->yearsOfExperience=yearsOfExperience;
+    this->locationsWorkedAt=locationsWorkedAt;
 }
