@@ -313,7 +313,7 @@ void FileWriter::WriteCrew(string crewID, vector<CrewMember> inputcrew){
         return;
     }
     ofstream outputFile;
-    string crewLine=crewID;
+    string crewLine=to_string(crewID);
     for (int i=0; i<inputcrew.size();i++){
         crewLine.append(FIRSTLEVELDELIMSTRNG);
         crewLine.append(inputcrew[i].getCrewMember());
@@ -428,6 +428,7 @@ vector<Project> FileWriter::BuildProjectList(){
             getline(ss,id,FIRSTLEVELDELIMCHAR);
             if(projects[i].getCrewID()==id){
                 //Write found crew to the project
+                projects[i].setCrewID(id);
                 vector<CrewMember> crew=CreateCrewMembers(line);
                 projects[i].setCrew(crew);
             }
