@@ -41,6 +41,7 @@ private slots:
     void handleProjectWindowCrewAdd();
     void handleProjectWindowCrewDel();
     void handleProjectWindowCrewFilter();
+    void handleProjectWindowMaterialChange();
 
 private:
     void showAllProjects();
