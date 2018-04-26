@@ -2,23 +2,20 @@
 #define DOUBLYLINKEDLIST_H
 
 #include "main.h"
-//#include "node.h"
 #include "project.h"
 #include "filehandler.h"
-
-
 
 class DoublyLinkedList
 {
 public:
+    //The structure of a node that the linked list will use.
+    //The data is of type Project, with Pointers of next and previous
     struct Node
     {
         Project data;
         Node *next;
         Node *prev;
     };
-
-
 
 private:
     Node *head, *tail;
@@ -67,27 +64,11 @@ public:
 
     }
 
-
-
-
-
+//Creates a new node, with Data = Value (Project)
 void createnode(Project value);
 
-void display();
-
-//void displayAllNodes();
-
-void insert_start(Project value);
-
-void insert_position(int pos, Project value);
-
-void delete_first();
-
-void delete_last();
-
+//Deletes a node with the Project Title that is passed
 void delete_by_title(string Title);
-
-void delete_position(int pos);
 
 //Function to get the amount of nodes of the linked list
 unsigned int size();
@@ -127,9 +108,11 @@ bool alreadyExists(string Title);
 //function to sort by date newest
 vector<string> sortByNewest();
 
-//function to sort by date oldest
+//Function to sort by date oldest
 vector<string> sortByOldest();
 
+//Function to find the highest Crew ID that has already been used,
+//and then return the value incremented by one.
 int getNewCrewId();
 
 };
