@@ -28,12 +28,13 @@ private:
     //CrewID 0 will be an unset crew
     int crewID=0;
     vector<CrewMember> Crew;
-    //ONLY TO BE SET ON LOAD FROM FILES/CREATION OF PROJECT MATERIAL
-    SingleSidedDVD singleDVD;
-    TwoSidedDVD twoDVD;
-    BluRay bluRay;
-    VHS vhs;
-    ComboBox comboBox;
+    //ONLY TO BE SET ON LOAD FROM FILES/CREATION OF PROJECT MATERIAL. DEFAULT VALUES SET TO ENSURE
+    //SECURITY WHEN WRITING INCOMPLETE PROJECT MATERIALS
+    SingleSidedDVD singleDVD = SingleSidedDVD();
+    TwoSidedDVD twoDVD = TwoSidedDVD();
+    BluRay bluRay = BluRay();
+    VHS vhs = VHS();
+    ComboBox comboBox = ComboBox();
     //MAKE SURE TO ADD THE IDs OF ANY MATERIALS ASSOCIATED WITH A PROJECTS TO THIS
     //OTHERWISE CANT FIND THE MATERIALS. MAKE SURE THEY ARE UNIQUE AND NOT 0 AS 0 IS UNSET MATERIALS
     vector<string> materialIDs={"0"};
