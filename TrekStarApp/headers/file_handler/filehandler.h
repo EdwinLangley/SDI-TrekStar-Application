@@ -22,7 +22,7 @@ public:
     void WriteMaterials(vector<Project> inputProject);
     vector<string> ReadMaterials();
 
-    vector<string> SplitMaterial(string inputLine);
+    vector<string> SplitLine(string inputLine);
     //Updated
     void WriteCrew(string crewID, vector<CrewMember> inputcrew);
     vector<string>ReadCrew();

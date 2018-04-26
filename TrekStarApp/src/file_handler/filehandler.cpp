@@ -2,9 +2,8 @@
 
 using namespace std;
 
-//TAKE MATERIAL(ABSTRACT CLASS COMPONENT) OUT OF A DERRIVED CLASS
-vector<string> FileWriter::SplitMaterial(string inputLine){
-
+vector<string> FileWriter::SplitLine(string inputLine){
+    //Splits a line up based on the first delim character
     stringstream ss;
     string section;
     ss<<inputLine;
@@ -12,14 +11,11 @@ vector<string> FileWriter::SplitMaterial(string inputLine){
     while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
         materialStorage.push_back(section);
     }
-    FrameAspect frame(stoi(materialStorage[6]),stoi(materialStorage[7]),materialStorage[8]);
-    Packaging package(materialStorage[9],stoi(materialStorage[10]),stoi(materialStorage[11]),stoi(materialStorage[12]));
-    Material outputMaterial(materialStorage[1],materialStorage[2],materialStorage[3],materialStorage[4],materialStorage[5],
-            frame, package, stoi(materialStorage[13]),stof(materialStorage[14]),StringToVector(materialStorage[15]));
     return materialStorage;
 }
 
 void FileWriter::WriteOneSidedDVD(SingleSidedDVD inputDVDS){
+    //Takes all memeber variables gained from member functions and puts together into one string to write
     string oneSidedDVD="1DVD,";
     oneSidedDVD=inputDVDS.getMaterials();
     oneSidedDVD.append(FIRSTLEVELDELIMSTRNG);
@@ -33,13 +29,9 @@ void FileWriter::WriteOneSidedDVD(SingleSidedDVD inputDVDS){
 
 SingleSidedDVD FileWriter::ReadOneSidedDVD(string input)
 {
-    stringstream ss;
-    string section;
-    ss<<input;
-    vector<string> materialStorage;
-    while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
-        materialStorage.push_back(section);
-    }
+    //Takes a line and converts it into a single object, uses StringToVector to take vectors out of the line
+    vector<string> materialStorage=SplitLine(input);
+
     vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
     vector<string> extraLanguageTracks=StringToVector(materialStorage[16]);
     vector<string> extraSubtitleTracks=StringToVector(materialStorage[17]);
@@ -58,6 +50,7 @@ SingleSidedDVD FileWriter::ReadOneSidedDVD(string input)
 }
 
 void FileWriter::WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
+    //Takes all memeber variables gained from member functions and puts together into one string to write
     string twoSidedDVD="2DVD,";
     twoSidedDVD=inputDVDS.getMaterials();
     twoSidedDVD.append(FIRSTLEVELDELIMSTRNG);
@@ -73,13 +66,9 @@ void FileWriter::WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
 
 TwoSidedDVD FileWriter::ReadTwoSidedDVD(string input)
 {
-    stringstream ss;
-    string section;
-    ss<<input;
-    vector<string> materialStorage;
-    while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
-        materialStorage.push_back(section);
-    }
+    //Takes a line and converts it into a single object, uses StringToVector to take vectors out of the line
+    vector<string> materialStorage=SplitLine(input);
+
     vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
     vector<string> extraLanguageTracks=StringToVector(materialStorage[16]);
     vector<string> extraSubtitleTracks=StringToVector(materialStorage[17]);
@@ -97,6 +86,7 @@ TwoSidedDVD FileWriter::ReadTwoSidedDVD(string input)
 }
 
 void FileWriter::WriteBluRay(BluRay inputDVDS){
+    //Takes all memeber variables gained from member functions and puts together into one string to write
     string bluRay="BRAY,";
     bluRay=inputDVDS.getMaterials();
     bluRay.append(FIRSTLEVELDELIMSTRNG);
@@ -110,13 +100,9 @@ void FileWriter::WriteBluRay(BluRay inputDVDS){
 
 BluRay FileWriter::ReadBluRay(string input)
 {
-    stringstream ss;
-    string section;
-    ss<<input;
-    vector<string> materialStorage;
-    while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
-        materialStorage.push_back(section);
-    }
+    //Takes a line and converts it into a single object, uses StringToVector to take vectors out of the line
+    vector<string> materialStorage=SplitLine(input);
+
     vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
     vector<string> extraLanguageTracks=StringToVector(materialStorage[16]);
     vector<string> extraSubtitleTracks=StringToVector(materialStorage[17]);
@@ -134,6 +120,7 @@ BluRay FileWriter::ReadBluRay(string input)
 }
 
 void FileWriter::WriteVHS(VHS inputDVDS){
+    //Takes all memeber variables gained from member functions and puts together into one string to write
     string vhs="VHSS,";
     vhs=inputDVDS.getMaterials();
     vhs.append("\n");
@@ -145,13 +132,10 @@ void FileWriter::WriteVHS(VHS inputDVDS){
 
 VHS FileWriter::ReadVHS(string input)
 {
-    stringstream ss;
-    string section;
-    ss<<input;
-    vector<string> materialStorage;
-    while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
-        materialStorage.push_back(section);
-    }
+    //Takes a line and converts it into a single object, uses StringToVector to take vectors out of the line
+
+    vector<string> materialStorage=SplitLine(input);
+
     vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
     FrameAspect frame(stoi(materialStorage[6]),stoi(materialStorage[7]),materialStorage[8]);
     Packaging package(materialStorage[9],stoi(materialStorage[10]),stoi(materialStorage[11]),
@@ -164,6 +148,7 @@ VHS FileWriter::ReadVHS(string input)
 }
 
 void FileWriter::WriteComboBox(ComboBox inputDVDS){
+    //Takes all memeber variables gained from member functions and puts together into one string to write
     string comboBox="CBOX";
     comboBox.append(FIRSTLEVELDELIMSTRNG);
     comboBox.append(VectorToString(inputDVDS.getIdsOfDVDs()));
@@ -176,16 +161,13 @@ void FileWriter::WriteComboBox(ComboBox inputDVDS){
 
 ComboBox FileWriter::ReadComboBox(string input)
 {
+    //Takes a line and converts it into a single object, uses StringToVector to take vectors out of the line
     vector<string> Materials=ReadMaterials();
-    stringstream ss;
-    string section;
-    vector<string> materialStorage;
-    while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
-        materialStorage.push_back(section);
-    };
+    vector<string> materialStorage=SplitLine(input);
     vector<string> idsOfDVDS = StringToVector(materialStorage[1]);
     vector<SingleSidedDVD> singleDVDS;
     vector<TwoSidedDVD> doubleDVDS;
+    //Match a dvd to its combo-box, Simple ID matching and line conversion using relevant functions
     for(int i=0;i<idsOfDVDS.size();i++){
         string comboID=idsOfDVDS[i];
         for (int j=0;j<Materials.size();j++){
@@ -215,6 +197,7 @@ ComboBox FileWriter::ReadComboBox(string input)
     return returnComboBox;
 }
 void FileWriter::WriteMaterials(vector<Project> inputProject){
+    //Goes through a project and checks for contained materials and writes them if there is a non-zero ID value
     for (int i = 0; i < inputProject.size(); i++) {
         if(inputProject[i].getMaterialIDs()[0]=="0"){
             continue;
@@ -238,6 +221,7 @@ void FileWriter::WriteMaterials(vector<Project> inputProject){
 }
 
 vector<string> FileWriter::ReadMaterials(){
+    //Returns all lines in the materials file
     vector<string> materials;
     ifstream inputFile;
     inputFile.open(MATERIALFILENAME);
@@ -256,6 +240,7 @@ vector<string> FileWriter::ReadMaterials(){
 }
 
 void FileWriter::WriteProject(vector<Project> inputProject){
+    //Takes all projects and writes their member variables
     //Open and clear all files:
     ofstream projectFile, MaterialFile,CrewFile;
     MaterialFile.open(MATERIALFILENAME,ios_base::trunc);
@@ -263,15 +248,14 @@ void FileWriter::WriteProject(vector<Project> inputProject){
     CrewFile.open(CREWFILENAME,ios_base::trunc);
     CrewFile.close();
     projectFile.open(PROJECTFILENAME,ios_base::trunc);
+    //If no projects are passed
 	if(inputProject.size()==0){
         projectFile.close();
 		return;
 	}
-    //Re-Write files here
+    //Write files here
     for (int i = 0; i < inputProject.size(); i++) {
-//      string newLine = "$";
-        string newLine;
-        newLine.append(inputProject[i].getTitle());
+        string newLine = (inputProject[i].getTitle());
         newLine.append(FIRSTLEVELDELIMSTRNG);
         newLine.append(inputProject[i].getProjectStatus());
         newLine.append(FIRSTLEVELDELIMSTRNG);
@@ -296,6 +280,7 @@ void FileWriter::WriteProject(vector<Project> inputProject){
         newLine.append(VectorToString(inputProject[i].getMaterials()));
         newLine.append("\n");
         projectFile << newLine;
+        //Write extra materials/crews here
         WriteMaterials(inputProject);
         WriteCrew(to_string(inputProject[i].getCrewID()),inputProject[i].getCrew());
     }
@@ -303,6 +288,7 @@ void FileWriter::WriteProject(vector<Project> inputProject){
 }
 
 vector<Project> FileWriter::ReadProjects(){
+    //Reads the whole file and turns each line into a project
     vector<Project> returnedProjects;
     ifstream inputFile;
     inputFile.open(PROJECTFILENAME);
@@ -316,14 +302,7 @@ vector<Project> FileWriter::ReadProjects(){
     }
     while (getline(inputFile,line)) {
         Project tempProject;
-        stringstream lineStream;
-        lineStream<<line;
-        string section;
-        vector<string> resultsStorage, vectorStorage;
-        //Get member variables
-        while (getline(lineStream,section,FIRSTLEVELDELIMCHAR)){
-            resultsStorage.push_back(section);
-        }
+        vector<string> resultsStorage=SplitLine(line);
         //Build a project
         tempProject.setTitle(resultsStorage[0]);
         tempProject.setProjectStatus(resultsStorage[1]);
@@ -347,7 +326,8 @@ vector<Project> FileWriter::ReadProjects(){
 }
 
 void FileWriter::WriteCrew(string crewID, vector<CrewMember> inputcrew){
-    //vector<string> crewMemebers;
+    //Take a crew ID as pseudo-foreign key and write a vector a CrewMember(s) to a single line
+    //If not crew assigned break;
     if(crewID=="0"){
         return;
     }
@@ -363,6 +343,7 @@ void FileWriter::WriteCrew(string crewID, vector<CrewMember> inputcrew){
 }
 
 vector<string> FileWriter::ReadCrew(){
+    //Reads entire file and returns a vector of containing a single line per entry
     vector<string> AllCrews;
     ifstream inputFile;
     string line;
@@ -380,6 +361,7 @@ vector<string> FileWriter::ReadCrew(){
 }
 
 CrewMember FileWriter::CreateMember(string inputLine){
+    //Breaks a single crew member line into a object
     vector<string> variables;
     stringstream ss;
     ss<<inputLine;
@@ -393,14 +375,9 @@ CrewMember FileWriter::CreateMember(string inputLine){
 }
 
 vector<CrewMember> FileWriter::CreateCrewMembers(string inputLine){
+    //Take the entire line, start from the first crew member and create each member in the line
     vector<CrewMember> crewMembers;
-    vector<string> crewMemberEntries;
-    stringstream ss;
-    ss<<inputLine;
-    string section;
-    while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
-        crewMemberEntries.push_back(section);
-    }
+    vector<string> crewMemberEntries=SplitLine(inputLine);
     for(int i=1;i<crewMemberEntries.size();i++){
         crewMembers.push_back(CreateMember(crewMemberEntries[i]));
     }
