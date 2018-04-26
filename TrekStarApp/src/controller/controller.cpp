@@ -84,6 +84,60 @@ controller::controller()
     pw.ui->cbNameTitle->addItem("Miss");
     pw.ui->cbNameTitle->addItem("Dr");
 
+    // Sets all options for the materials type combo box on the project window
+    pw.ui->cbMaterialType->addItem("DVD Single Sided");
+    pw.ui->cbMaterialType->addItem("DVD Double Sided");
+    pw.ui->cbMaterialType->addItem("Blu Ray");
+    pw.ui->cbMaterialType->addItem("VHS");
+    pw.ui->cbMaterialType->addItem("Combo Box");
+
+    // Sets all options for the video format combo box on the project window
+    pw.ui->cbVFormat->addItem("mp4");
+    pw.ui->cbVFormat->addItem("flv");
+    pw.ui->cbVFormat->addItem("avi");
+    pw.ui->cbVFormat->addItem("mov");
+    pw.ui->cbVFormat->addItem("wmv");
+    pw.ui->cbVFormat->addItem("other");
+
+    // Sets all options for the audio format combo box on the project window
+    pw.ui->cbAFormat->addItem("mp3");
+    pw.ui->cbAFormat->addItem("flc");
+    pw.ui->cbAFormat->addItem("wav");
+    pw.ui->cbAFormat->addItem("ogg");
+    pw.ui->cbAFormat->addItem("other");
+
+    // Sets all options for the materials language combo box on the project window
+    pw.ui->cbMaterialLanguage->addItem("English");
+    pw.ui->cbMaterialLanguage->addItem("French");
+    pw.ui->cbMaterialLanguage->addItem("German");
+    pw.ui->cbMaterialLanguage->addItem("Spanish");
+    pw.ui->cbMaterialLanguage->addItem("Mandarin");
+    pw.ui->cbMaterialLanguage->addItem("Other");
+
+    // Sets all options for the materials subtitle combo box on the project window
+    pw.ui->cbSubLang->addItem("English");
+    pw.ui->cbSubLang->addItem("French");
+    pw.ui->cbSubLang->addItem("German");
+    pw.ui->cbSubLang->addItem("Spanish");
+    pw.ui->cbSubLang->addItem("Mandarin");
+    pw.ui->cbSubLang->addItem("Other");
+
+    // Sets all options for the materials extra language tracks combo box on the project window
+    pw.ui->cbExtraLanguageTracks->addItem("English");
+    pw.ui->cbExtraLanguageTracks->addItem("French");
+    pw.ui->cbExtraLanguageTracks->addItem("German");
+    pw.ui->cbExtraLanguageTracks->addItem("Spanish");
+    pw.ui->cbExtraLanguageTracks->addItem("Mandarin");
+    pw.ui->cbExtraLanguageTracks->addItem("Other");
+
+    // Sets all options for the materials extra subtitle tracks combo box on the project window
+    pw.ui->cbExtraSubtitleTracks->addItem("English");
+    pw.ui->cbExtraSubtitleTracks->addItem("French");
+    pw.ui->cbExtraSubtitleTracks->addItem("German");
+    pw.ui->cbExtraSubtitleTracks->addItem("Spanish");
+    pw.ui->cbExtraSubtitleTracks->addItem("Mandarin");
+    pw.ui->cbExtraSubtitleTracks->addItem("Other");
+
     // Sets placeholder text for search bars
     mw.ui->txtFilter->setPlaceholderText("Enter search here and choose corrsponding category");
     pw.ui->txtCrew->setPlaceholderText("Enter name of crew member to search");
@@ -115,6 +169,18 @@ controller::controller()
     connect(pw.ui->cmdCrewAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowCrewAdd()));
     connect(pw.ui->cmdCrewDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowCrewDel()));
     connect(pw.ui->cmdCrewFilter, SIGNAL(clicked()), this, SLOT(handleProjectWindowCrewFilter()));
+    connect(pw.ui->cbMaterialType, SIGNAL(currentIndexChanged(int)), this, SLOT(handleProjectWindowMaterialChange()));
+    connect(pw.ui->cmdMaterialClear, SIGNAL(clicked()), this, SLOT(handleProjectWindowMaterialChange()));
+    connect(pw.ui->cmdMaterialDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowMaterialDelete()));
+    connect(pw.ui->cmdMaterialCreate, SIGNAL(clicked()), this, SLOT(handleProjectWindowMaterialCreate()));
+    connect(pw.ui->cmdSubLangAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowSubLangAdd()));
+    connect(pw.ui->cmdSubLangDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowSubLangDel()));
+    connect(pw.ui->cmdExtraLanguageTracksAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowExtraLangAdd()));
+    connect(pw.ui->cmdExtraLanguageTracksDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowExtraLangDel()));
+    connect(pw.ui->cmdExtraSubtitleTracksAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowExtraSubLangAdd()));
+    connect(pw.ui->cmdExtraSubtitleTracksDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowExtraSubLangDel()));
+    connect(pw.ui->cmdBonusFeaturesAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowBonusAdd()));
+    connect(pw.ui->cmdBonusFeaturesDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowBonusDel()));
 
     // Displays list of all projects
     showAllProjects();
@@ -205,6 +271,7 @@ void controller::handleCreateProject(){
         setProjectWindow();
         handleProjectWindowCrewChange();
         handleProjectWindowStatusChange();
+        handleProjectWindowMaterialChange();
         pw.show();
         handleClear();
         showAllProjects();
@@ -396,6 +463,7 @@ void controller::handleOpenProject(){
             setProjectWindow();
             handleProjectWindowCrewChange();
             handleProjectWindowStatusChange();
+            handleProjectWindowMaterialChange();
             pw.show();
         }
     }
@@ -446,6 +514,8 @@ void controller::setProjectWindow(){
     }
     else if(openProj->getProjectStatus() == "Now Playing"){
         pw.ui->cbStatus->setCurrentIndex(1);
+    }else if(openProj->getProjectStatus() == "Released"){
+        pw.ui->cbStatus->setCurrentIndex(2);
     }
 
     if(openProj->getGenre() == "Action"){
@@ -925,6 +995,734 @@ void controller::filterCrewByRole(std::string role){
                    + "\n Locations: " + locationString));
 
         }
+    }
+
+}
+
+void controller::handleProjectWindowMaterialChange(){
+
+    pw.ui->txtMaterialTitle->clear();
+    pw.ui->txtIDNum->clear();
+    pw.ui->cbVFormat->setCurrentIndex(0);
+    pw.ui->cbAFormat->setCurrentIndex(0);
+    pw.ui->cbMaterialLanguage->setCurrentIndex(0);
+    pw.ui->txtMaterialFrame->clear();
+    pw.ui->sbMaterialRuntime->setValue(0);
+    pw.ui->sbMaterialPrice->setValue(0);
+    pw.ui->lstSubLang->clear();
+    pw.ui->txtFirstSideContent->clear();
+    pw.ui->txtSecondSideContent->clear();
+
+    std::string material = pw.ui->cbMaterialType->currentText().toStdString();
+    std::string frame;
+    std::string package;
+
+    if(material == "DVD Single Sided"){
+
+        if(openProj->getSingleDVD().getTitle() == ""){
+
+            pw.ui->lblMaterialAnswer->setText("Not Created");
+            pw.ui->lblMaterialAnswer->setStyleSheet("color: #D81E5B");
+            pw.ui->cmdMaterialDel->setVisible(false);
+            pw.ui->cmdMaterialClear->setText("Clear");
+            pw.ui->cmdMaterialCreate->setText("Create");
+
+        }else{
+
+            pw.ui->lblMaterialAnswer->setText("Created");
+            pw.ui->lblMaterialAnswer->setStyleSheet("color: #78CAD2");
+            pw.ui->cmdMaterialDel->setVisible(true);
+            pw.ui->cmdMaterialClear->setText("Clear Changes");
+            pw.ui->cmdMaterialCreate->setText("Apply Changes");
+
+            pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getSingleDVD().getTitle()));
+            pw.ui->txtIDNum->setText(QString::fromStdString(openProj->getSingleDVD().getIdNumber()));
+            pw.ui->sbMaterialRuntime->setValue(openProj->getSingleDVD().getRunTime());
+            pw.ui->sbMaterialPrice->setValue(openProj->getSingleDVD().getPrice());
+
+            if(openProj->getSingleDVD().getVFormat() == "mp4"){
+                pw.ui->cbVFormat->setCurrentIndex(0);
+            }
+            else if(openProj->getSingleDVD().getVFormat() == "flv"){
+                pw.ui->cbVFormat->setCurrentIndex(1);
+            }
+            else if(openProj->getSingleDVD().getVFormat() == "avi"){
+                pw.ui->cbVFormat->setCurrentIndex(2);
+            }
+            else if(openProj->getSingleDVD().getVFormat() == "mov"){
+                pw.ui->cbVFormat->setCurrentIndex(3);
+            }
+            else if(openProj->getSingleDVD().getVFormat() == "wmv"){
+                pw.ui->cbVFormat->setCurrentIndex(4);
+            }
+            else if(openProj->getSingleDVD().getVFormat() == "other"){
+                pw.ui->cbVFormat->setCurrentIndex(5);
+            }
+
+            if(openProj->getSingleDVD().getVFormat() == "mp3"){
+                pw.ui->cbAFormat->setCurrentIndex(0);
+            }
+            else if(openProj->getSingleDVD().getVFormat() == "flc"){
+                pw.ui->cbAFormat->setCurrentIndex(1);
+            }
+            else if(openProj->getSingleDVD().getVFormat() == "wav"){
+                pw.ui->cbAFormat->setCurrentIndex(2);
+            }
+            else if(openProj->getSingleDVD().getVFormat() == "ogg"){
+                pw.ui->cbAFormat->setCurrentIndex(3);
+            }
+            else if(openProj->getSingleDVD().getVFormat() == "other"){
+                pw.ui->cbAFormat->setCurrentIndex(4);
+            }
+
+            if(openProj->getSingleDVD().getLanguage() == "English"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(0);
+            }
+            else if(openProj->getSingleDVD().getLanguage() == "French"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(1);
+            }
+            else if(openProj->getSingleDVD().getLanguage() == "German"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(2);
+            }
+            else if(openProj->getSingleDVD().getLanguage() == "Spanish"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(3);
+            }
+            else if(openProj->getSingleDVD().getLanguage() == "Mandarin"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(4);
+            }
+            else if(openProj->getSingleDVD().getLanguage() == "Other"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(5);
+            }
+
+            frame = openProj->getSingleDVD().getFrame().getFrameAspect() + "/" + \
+                    openProj->getSingleDVD().getFrame().getRatioDescription() + "/" + \
+                    std::to_string(openProj->getSingleDVD().getFrame().getHorizontalRatio()) + "/" + \
+                    std::to_string(openProj->getSingleDVD().getFrame().getVerticalRatio());
+
+            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+
+            package = std::to_string(openProj->getSingleDVD().getPackage().getDepth()) + "/" + \
+                      std::to_string(openProj->getSingleDVD().getPackage().getHeight()) + "/" + \
+                      std::to_string(openProj->getSingleDVD().getPackage().getWidth()) + "/" + \
+                      openProj->getSingleDVD().getPackage().getMaterial() + "/" + \
+                      openProj->getSingleDVD().getPackage().getPackaging();
+
+            pw.ui->txtMaterialPackage->setText(QString::fromStdString(package));
+
+
+            for(unsigned int i = 0; i < openProj->getSingleDVD().getSubTitleLanguages().size(); ++i){
+                pw.ui->lstSubLang->addItem(QString::fromStdString(openProj->getSingleDVD().getSubTitleLanguages()[i]));
+            }
+
+            for(unsigned int j = 0; j < openProj->getSingleDVD().getExtraLanguageTracks().size(); ++j){
+                pw.ui->lstExtraLanguageTracks->addItem(QString::fromStdString(openProj->getSingleDVD().getExtraLanguageTracks()[j]));
+            }
+
+            for(unsigned int k = 0; k < openProj->getSingleDVD().getExtraSubtitleTracks().size(); ++k){
+                pw.ui->lstExtraSubtitleTracks->addItem(QString::fromStdString(openProj->getSingleDVD().getExtraSubtitleTracks()[k]));
+            }
+
+            for(unsigned int l = 0; l < openProj->getSingleDVD().getBonusFeatures().size(); ++l){
+                pw.ui->lstBonusFeatures->addItem(QString::fromStdString(openProj->getSingleDVD().getBonusFeatures()[l]));
+            }
+
+        }
+
+        pw.ui->lblFirstSideContent->setVisible(true);
+        pw.ui->txtFirstSideContent->setDisabled(false);
+        pw.ui->txtFirstSideContent->setVisible(true);
+
+        pw.ui->lblSecondSideContent->setVisible(false);
+        pw.ui->txtSecondSideContent->setDisabled(true);
+        pw.ui->txtSecondSideContent->setVisible(false);
+
+        pw.ui->lblExtraLanguageTracks->setVisible(true);
+        pw.ui->cbExtraLanguageTracks->setVisible(true);
+        pw.ui->cmdExtraLanguageTracksAdd->setDisabled(false);
+        pw.ui->cmdExtraLanguageTracksAdd->setVisible(true);
+        pw.ui->cmdExtraLanguageTracksDel->setDisabled(false);
+        pw.ui->cmdExtraLanguageTracksDel->setVisible(true);
+        pw.ui->lstExtraLanguageTracks->setVisible(true);
+
+        pw.ui->lblExtraSubtitleTracks->setVisible(true);
+        pw.ui->cbExtraSubtitleTracks->setVisible(true);
+        pw.ui->cmdExtraSubtitleTracksAdd->setDisabled(false);
+        pw.ui->cmdExtraSubtitleTracksAdd->setVisible(true);
+        pw.ui->cmdExtraSubtitleTracksDel->setDisabled(false);
+        pw.ui->cmdExtraSubtitleTracksDel->setVisible(true);
+        pw.ui->lstExtraSubtitleTracks->setVisible(true);
+
+        pw.ui->lblBonusFeatures->setVisible(true);
+        pw.ui->txtBonusFeatures->setVisible(true);
+        pw.ui->cmdBonusFeaturesAdd->setDisabled(false);
+        pw.ui->cmdBonusFeaturesAdd->setVisible(true);
+        pw.ui->cmdBonusFeaturesDel->setDisabled(false);
+        pw.ui->cmdBonusFeaturesDel->setVisible(true);
+        pw.ui->lstBonusFeatures->setVisible(true);
+
+    }
+    else if(material == "DVD Double Sided"){
+
+        if(openProj->getTwoDVD().getTitle() == ""){
+
+            pw.ui->lblMaterialAnswer->setText("Not Created");
+            pw.ui->lblMaterialAnswer->setStyleSheet("color: #D81E5B");
+            pw.ui->cmdMaterialDel->setVisible(false);
+            pw.ui->cmdMaterialClear->setText("Clear");
+            pw.ui->cmdMaterialCreate->setText("Create");
+
+        }else{
+
+            pw.ui->lblMaterialAnswer->setText("Created");
+            pw.ui->lblMaterialAnswer->setStyleSheet("color: #78CAD2");
+            pw.ui->cmdMaterialDel->setVisible(true);
+            pw.ui->cmdMaterialClear->setText("Clear Changes");
+            pw.ui->cmdMaterialCreate->setText("Apply Changes");
+
+            pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getTwoDVD().getTitle()));
+            pw.ui->txtIDNum->setText(QString::fromStdString(openProj->getTwoDVD().getIdNumber()));
+            pw.ui->sbMaterialRuntime->setValue(openProj->getTwoDVD().getRunTime());
+            pw.ui->sbMaterialPrice->setValue(openProj->getTwoDVD().getPrice());
+
+            if(openProj->getTwoDVD().getVFormat() == "mp4"){
+                pw.ui->cbVFormat->setCurrentIndex(0);
+            }
+            else if(openProj->getTwoDVD().getVFormat() == "flv"){
+                pw.ui->cbVFormat->setCurrentIndex(1);
+            }
+            else if(openProj->getTwoDVD().getVFormat() == "avi"){
+                pw.ui->cbVFormat->setCurrentIndex(2);
+            }
+            else if(openProj->getTwoDVD().getVFormat() == "mov"){
+                pw.ui->cbVFormat->setCurrentIndex(3);
+            }
+            else if(openProj->getTwoDVD().getVFormat() == "wmv"){
+                pw.ui->cbVFormat->setCurrentIndex(4);
+            }
+            else if(openProj->getTwoDVD().getVFormat() == "other"){
+                pw.ui->cbVFormat->setCurrentIndex(5);
+            }
+
+            if(openProj->getTwoDVD().getVFormat() == "mp3"){
+                pw.ui->cbAFormat->setCurrentIndex(0);
+            }
+            else if(openProj->getTwoDVD().getVFormat() == "flc"){
+                pw.ui->cbAFormat->setCurrentIndex(1);
+            }
+            else if(openProj->getTwoDVD().getVFormat() == "wav"){
+                pw.ui->cbAFormat->setCurrentIndex(2);
+            }
+            else if(openProj->getTwoDVD().getVFormat() == "ogg"){
+                pw.ui->cbAFormat->setCurrentIndex(3);
+            }
+            else if(openProj->getTwoDVD().getVFormat() == "other"){
+                pw.ui->cbAFormat->setCurrentIndex(4);
+            }
+
+            if(openProj->getTwoDVD().getLanguage() == "English"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(0);
+            }
+            else if(openProj->getTwoDVD().getLanguage() == "French"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(1);
+            }
+            else if(openProj->getTwoDVD().getLanguage() == "German"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(2);
+            }
+            else if(openProj->getTwoDVD().getLanguage() == "Spanish"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(3);
+            }
+            else if(openProj->getTwoDVD().getLanguage() == "Mandarin"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(4);
+            }
+            else if(openProj->getTwoDVD().getLanguage() == "Other"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(5);
+            }
+
+            frame = openProj->getTwoDVD().getFrame().getFrameAspect() + "/" + \
+                    openProj->getTwoDVD().getFrame().getRatioDescription() + "/" + \
+                    std::to_string(openProj->getTwoDVD().getFrame().getHorizontalRatio()) + "/" + \
+                    std::to_string(openProj->getTwoDVD().getFrame().getVerticalRatio());
+
+            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+
+            package = std::to_string(openProj->getTwoDVD().getPackage().getDepth()) + "/" + \
+                      std::to_string(openProj->getTwoDVD().getPackage().getHeight()) + "/" + \
+                      std::to_string(openProj->getTwoDVD().getPackage().getWidth()) + "/" + \
+                      openProj->getTwoDVD().getPackage().getMaterial() + "/" + \
+                      openProj->getTwoDVD().getPackage().getPackaging();
+
+            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+
+            pw.ui->txtFirstSideContent->setText(QString::fromStdString(openProj->getTwoDVD().getFirstSideContent()));
+            pw.ui->txtFirstSideContent->setText(QString::fromStdString(openProj->getTwoDVD().getFirstSideContent()));
+
+
+            for(unsigned int i = 0; i < openProj->getTwoDVD().getSubTitleLanguages().size(); ++i){
+                pw.ui->lstSubLang->addItem(QString::fromStdString(openProj->getTwoDVD().getSubTitleLanguages()[i]));
+            }
+
+            for(unsigned int j = 0; j < openProj->getTwoDVD().getExtraLanguageTracks().size(); ++j){
+                pw.ui->lstExtraLanguageTracks->addItem(QString::fromStdString(openProj->getTwoDVD().getExtraLanguageTracks()[j]));
+            }
+
+            for(unsigned int k = 0; k < openProj->getTwoDVD().getExtraSubtitleTracks().size(); ++k){
+                pw.ui->lstExtraSubtitleTracks->addItem(QString::fromStdString(openProj->getTwoDVD().getExtraSubtitleTracks()[k]));
+            }
+
+            for(unsigned int l = 0; l < openProj->getTwoDVD().getBonusFeatures().size(); ++l){
+                pw.ui->lstBonusFeatures->addItem(QString::fromStdString(openProj->getTwoDVD().getBonusFeatures()[l]));
+            }
+
+        }
+
+        pw.ui->lblFirstSideContent->setVisible(true);
+        pw.ui->txtFirstSideContent->setDisabled(false);
+        pw.ui->txtFirstSideContent->setVisible(true);
+
+        pw.ui->lblSecondSideContent->setVisible(true);
+        pw.ui->txtSecondSideContent->setDisabled(false);
+        pw.ui->txtSecondSideContent->setVisible(true);
+
+        pw.ui->lblExtraLanguageTracks->setVisible(true);
+        pw.ui->cbExtraLanguageTracks->setVisible(true);
+        pw.ui->cmdExtraLanguageTracksAdd->setDisabled(false);
+        pw.ui->cmdExtraLanguageTracksAdd->setVisible(true);
+        pw.ui->cmdExtraLanguageTracksDel->setDisabled(false);
+        pw.ui->cmdExtraLanguageTracksDel->setVisible(true);
+        pw.ui->lstExtraLanguageTracks->setVisible(true);
+
+        pw.ui->lblExtraSubtitleTracks->setVisible(true);
+        pw.ui->cbExtraSubtitleTracks->setVisible(true);
+        pw.ui->cmdExtraSubtitleTracksAdd->setDisabled(false);
+        pw.ui->cmdExtraSubtitleTracksAdd->setVisible(true);
+        pw.ui->cmdExtraSubtitleTracksDel->setDisabled(false);
+        pw.ui->cmdExtraSubtitleTracksDel->setVisible(true);
+        pw.ui->lstExtraSubtitleTracks->setVisible(true);
+
+        pw.ui->lblBonusFeatures->setVisible(true);
+        pw.ui->txtBonusFeatures->setVisible(true);
+        pw.ui->cmdBonusFeaturesAdd->setDisabled(false);
+        pw.ui->cmdBonusFeaturesAdd->setVisible(true);
+        pw.ui->cmdBonusFeaturesDel->setDisabled(false);
+        pw.ui->cmdBonusFeaturesDel->setVisible(true);
+        pw.ui->lstBonusFeatures->setVisible(true);
+
+    }
+    else if(material == "Blu Ray"){
+
+        if(openProj->getBluRay().getTitle() == ""){
+
+            pw.ui->lblMaterialAnswer->setText("Not Created");
+            pw.ui->lblMaterialAnswer->setStyleSheet("color: #D81E5B");
+            pw.ui->cmdMaterialDel->setVisible(false);
+            pw.ui->cmdMaterialClear->setText("Clear");
+            pw.ui->cmdMaterialCreate->setText("Create");
+
+        }else{
+
+            pw.ui->lblMaterialAnswer->setText("Created");
+            pw.ui->lblMaterialAnswer->setStyleSheet("color: #78CAD2");
+            pw.ui->cmdMaterialDel->setVisible(true);
+            pw.ui->cmdMaterialClear->setText("Clear Changes");
+            pw.ui->cmdMaterialCreate->setText("Apply Changes");
+
+            pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getBluRay().getTitle()));
+            pw.ui->txtIDNum->setText(QString::fromStdString(openProj->getBluRay().getIdNumber()));
+            pw.ui->sbMaterialRuntime->setValue(openProj->getBluRay().getRunTime());
+            pw.ui->sbMaterialPrice->setValue(openProj->getBluRay().getPrice());
+
+            if(openProj->getBluRay().getVFormat() == "mp4"){
+                pw.ui->cbVFormat->setCurrentIndex(0);
+            }
+            else if(openProj->getBluRay().getVFormat() == "flv"){
+                pw.ui->cbVFormat->setCurrentIndex(1);
+            }
+            else if(openProj->getBluRay().getVFormat() == "avi"){
+                pw.ui->cbVFormat->setCurrentIndex(2);
+            }
+            else if(openProj->getBluRay().getVFormat() == "mov"){
+                pw.ui->cbVFormat->setCurrentIndex(3);
+            }
+            else if(openProj->getBluRay().getVFormat() == "wmv"){
+                pw.ui->cbVFormat->setCurrentIndex(4);
+            }
+            else if(openProj->getBluRay().getVFormat() == "other"){
+                pw.ui->cbVFormat->setCurrentIndex(5);
+            }
+
+            if(openProj->getBluRay().getVFormat() == "mp3"){
+                pw.ui->cbAFormat->setCurrentIndex(0);
+            }
+            else if(openProj->getBluRay().getVFormat() == "flc"){
+                pw.ui->cbAFormat->setCurrentIndex(1);
+            }
+            else if(openProj->getBluRay().getVFormat() == "wav"){
+                pw.ui->cbAFormat->setCurrentIndex(2);
+            }
+            else if(openProj->getBluRay().getVFormat() == "ogg"){
+                pw.ui->cbAFormat->setCurrentIndex(3);
+            }
+            else if(openProj->getBluRay().getVFormat() == "other"){
+                pw.ui->cbAFormat->setCurrentIndex(4);
+            }
+
+            if(openProj->getBluRay().getLanguage() == "English"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(0);
+            }
+            else if(openProj->getBluRay().getLanguage() == "French"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(1);
+            }
+            else if(openProj->getBluRay().getLanguage() == "German"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(2);
+            }
+            else if(openProj->getBluRay().getLanguage() == "Spanish"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(3);
+            }
+            else if(openProj->getBluRay().getLanguage() == "Mandarin"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(4);
+            }
+            else if(openProj->getBluRay().getLanguage() == "Other"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(5);
+            }
+
+            frame = openProj->getBluRay().getFrame().getFrameAspect() + "/" + \
+                    openProj->getBluRay().getFrame().getRatioDescription() + "/" + \
+                    std::to_string(openProj->getBluRay().getFrame().getHorizontalRatio()) + "/" + \
+                    std::to_string(openProj->getBluRay().getFrame().getVerticalRatio());
+
+            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+
+            package = std::to_string(openProj->getBluRay().getPackage().getDepth()) + "/" + \
+                      std::to_string(openProj->getBluRay().getPackage().getHeight()) + "/" + \
+                      std::to_string(openProj->getBluRay().getPackage().getWidth()) + "/" + \
+                      openProj->getBluRay().getPackage().getMaterial() + "/" + \
+                      openProj->getBluRay().getPackage().getPackaging();
+
+            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+
+            for(unsigned int i = 0; i < openProj->getBluRay().getSubTitleLanguages().size(); ++i){
+                pw.ui->lstSubLang->addItem(QString::fromStdString(openProj->getBluRay().getSubTitleLanguages()[i]));
+            }
+
+            for(unsigned int j = 0; j < openProj->getBluRay().getExtraLanguageTracks().size(); ++j){
+                pw.ui->lstExtraLanguageTracks->addItem(QString::fromStdString(openProj->getBluRay().getExtraLanguageTracks()[j]));
+            }
+
+            for(unsigned int k = 0; k < openProj->getBluRay().getExtraSubtitleTracks().size(); ++k){
+                pw.ui->lstExtraSubtitleTracks->addItem(QString::fromStdString(openProj->getBluRay().getExtraSubtitleTracks()[k]));
+            }
+
+            for(unsigned int l = 0; l < openProj->getBluRay().getBonusTracks().size(); ++l){
+                pw.ui->lstBonusFeatures->addItem(QString::fromStdString(openProj->getBluRay().getBonusTracks()[l]));
+            }
+
+        }
+
+        pw.ui->lblFirstSideContent->setVisible(false);
+        pw.ui->txtFirstSideContent->setDisabled(true);
+        pw.ui->txtFirstSideContent->setVisible(false);
+
+        pw.ui->lblSecondSideContent->setVisible(false);
+        pw.ui->txtSecondSideContent->setDisabled(true);
+        pw.ui->txtSecondSideContent->setVisible(false);
+
+        pw.ui->lblExtraLanguageTracks->setVisible(true);
+        pw.ui->cbExtraLanguageTracks->setVisible(true);
+        pw.ui->cmdExtraLanguageTracksAdd->setDisabled(false);
+        pw.ui->cmdExtraLanguageTracksAdd->setVisible(true);
+        pw.ui->cmdExtraLanguageTracksDel->setDisabled(false);
+        pw.ui->cmdExtraLanguageTracksDel->setVisible(true);
+        pw.ui->lstExtraLanguageTracks->setVisible(true);
+
+        pw.ui->lblExtraSubtitleTracks->setVisible(true);
+        pw.ui->cbExtraSubtitleTracks->setVisible(true);
+        pw.ui->cmdExtraSubtitleTracksAdd->setDisabled(false);
+        pw.ui->cmdExtraSubtitleTracksAdd->setVisible(true);
+        pw.ui->cmdExtraSubtitleTracksDel->setDisabled(false);
+        pw.ui->cmdExtraSubtitleTracksDel->setVisible(true);
+        pw.ui->lstExtraSubtitleTracks->setVisible(true);
+
+        pw.ui->lblBonusFeatures->setVisible(true);
+        pw.ui->txtBonusFeatures->setVisible(true);
+        pw.ui->cmdBonusFeaturesAdd->setDisabled(false);
+        pw.ui->cmdBonusFeaturesAdd->setVisible(true);
+        pw.ui->cmdBonusFeaturesDel->setDisabled(false);
+        pw.ui->cmdBonusFeaturesDel->setVisible(true);
+        pw.ui->lstBonusFeatures->setVisible(true);
+
+    }
+    else if(material == "VHS"){
+
+        if(openProj->getVhs().getTitle() == ""){
+
+            pw.ui->lblMaterialAnswer->setText("Not Created");
+            pw.ui->lblMaterialAnswer->setStyleSheet("color: #D81E5B");
+            pw.ui->cmdMaterialDel->setVisible(false);
+            pw.ui->cmdMaterialClear->setText("Clear");
+            pw.ui->cmdMaterialCreate->setText("Create");
+
+        }else{
+
+            pw.ui->lblMaterialAnswer->setText("Created");
+            pw.ui->lblMaterialAnswer->setStyleSheet("color: #78CAD2");
+            pw.ui->cmdMaterialDel->setVisible(true);
+            pw.ui->cmdMaterialClear->setText("Clear Changes");
+            pw.ui->cmdMaterialCreate->setText("Apply Changes");
+
+            pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getVhs().getTitle()));
+            pw.ui->txtIDNum->setText(QString::fromStdString(openProj->getVhs().getIdNumber()));
+            pw.ui->sbMaterialRuntime->setValue(openProj->getVhs().getRunTime());
+            pw.ui->sbMaterialPrice->setValue(openProj->getVhs().getPrice());
+
+            if(openProj->getVhs().getVFormat() == "mp4"){
+                pw.ui->cbVFormat->setCurrentIndex(0);
+            }
+            else if(openProj->getVhs().getVFormat() == "flv"){
+                pw.ui->cbVFormat->setCurrentIndex(1);
+            }
+            else if(openProj->getVhs().getVFormat() == "avi"){
+                pw.ui->cbVFormat->setCurrentIndex(2);
+            }
+            else if(openProj->getVhs().getVFormat() == "mov"){
+                pw.ui->cbVFormat->setCurrentIndex(3);
+            }
+            else if(openProj->getVhs().getVFormat() == "wmv"){
+                pw.ui->cbVFormat->setCurrentIndex(4);
+            }
+            else if(openProj->getVhs().getVFormat() == "other"){
+                pw.ui->cbVFormat->setCurrentIndex(5);
+            }
+
+            if(openProj->getVhs().getVFormat() == "mp3"){
+                pw.ui->cbAFormat->setCurrentIndex(0);
+            }
+            else if(openProj->getVhs().getVFormat() == "flc"){
+                pw.ui->cbAFormat->setCurrentIndex(1);
+            }
+            else if(openProj->getVhs().getVFormat() == "wav"){
+                pw.ui->cbAFormat->setCurrentIndex(2);
+            }
+            else if(openProj->getVhs().getVFormat() == "ogg"){
+                pw.ui->cbAFormat->setCurrentIndex(3);
+            }
+            else if(openProj->getVhs().getVFormat() == "other"){
+                pw.ui->cbAFormat->setCurrentIndex(4);
+            }
+
+            if(openProj->getVhs().getLanguage() == "English"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(0);
+            }
+            else if(openProj->getVhs().getLanguage() == "French"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(1);
+            }
+            else if(openProj->getVhs().getLanguage() == "German"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(2);
+            }
+            else if(openProj->getVhs().getLanguage() == "Spanish"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(3);
+            }
+            else if(openProj->getVhs().getLanguage() == "Mandarin"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(4);
+            }
+            else if(openProj->getVhs().getLanguage() == "Other"){
+                pw.ui->cbMaterialLanguage->setCurrentIndex(5);
+            }
+
+            frame = openProj->getVhs().getFrame().getFrameAspect() + "/" + \
+                    openProj->getVhs().getFrame().getRatioDescription() + "/" + \
+                    std::to_string(openProj->getVhs().getFrame().getHorizontalRatio()) + "/" + \
+                    std::to_string(openProj->getVhs().getFrame().getVerticalRatio());
+
+            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+
+            package = std::to_string(openProj->getVhs().getPackage().getDepth()) + "/" + \
+                      std::to_string(openProj->getVhs().getPackage().getHeight()) + "/" + \
+                      std::to_string(openProj->getVhs().getPackage().getWidth()) + "/" + \
+                      openProj->getVhs().getPackage().getMaterial() + "/" + \
+                      openProj->getVhs().getPackage().getPackaging();
+
+            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+
+        }
+
+        pw.ui->lblFirstSideContent->setVisible(false);
+        pw.ui->txtFirstSideContent->setDisabled(true);
+        pw.ui->txtFirstSideContent->setVisible(false);
+
+        pw.ui->lblSecondSideContent->setVisible(false);
+        pw.ui->txtSecondSideContent->setDisabled(true);
+        pw.ui->txtSecondSideContent->setVisible(false);
+
+        pw.ui->lblExtraLanguageTracks->setVisible(false);
+        pw.ui->cbExtraLanguageTracks->setVisible(false);
+        pw.ui->cmdExtraLanguageTracksAdd->setDisabled(true);
+        pw.ui->cmdExtraLanguageTracksAdd->setVisible(false);
+        pw.ui->cmdExtraLanguageTracksDel->setDisabled(true);
+        pw.ui->cmdExtraLanguageTracksDel->setVisible(false);
+        pw.ui->lstExtraLanguageTracks->setVisible(false);
+
+        pw.ui->lblExtraSubtitleTracks->setVisible(false);
+        pw.ui->cbExtraSubtitleTracks->setVisible(false);
+        pw.ui->cmdExtraSubtitleTracksAdd->setDisabled(true);
+        pw.ui->cmdExtraSubtitleTracksAdd->setVisible(false);
+        pw.ui->cmdExtraSubtitleTracksDel->setDisabled(true);
+        pw.ui->cmdExtraSubtitleTracksDel->setVisible(false);
+        pw.ui->lstExtraSubtitleTracks->setVisible(false);
+
+        pw.ui->lblBonusFeatures->setVisible(false);
+        pw.ui->txtBonusFeatures->setVisible(false);
+        pw.ui->cmdBonusFeaturesAdd->setDisabled(true);
+        pw.ui->cmdBonusFeaturesAdd->setVisible(false);
+        pw.ui->cmdBonusFeaturesDel->setDisabled(true);
+        pw.ui->cmdBonusFeaturesDel->setVisible(false);
+        pw.ui->lstBonusFeatures->setVisible(false);
+
+    }
+    else if(material == "Combo Box"){
+
+    }
+
+    pw.ui->lblMaterialIDNum->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialTitle->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialFrame->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialPackage->setStyleSheet("color: #78CAD2");
+    pw.ui->lblBonusFeatures->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialSubLang->setStyleSheet("color: #78CAD2");
+    pw.ui->lblFirstSideContent->setStyleSheet("color: #78CAD2");
+    pw.ui->lblSecondSideContent->setStyleSheet("color: #78CAD2");
+    pw.ui->lblExtraLanguageTracks->setStyleSheet("color: #78CAD2");
+    pw.ui->lblExtraSubtitleTracks->setStyleSheet("color: #78CAD2");
+    pw.ui->lblBonusFeatures->setStyleSheet("color: #78CAD2");
+
+
+}
+
+void controller::handleProjectWindowMaterialDelete(){
+
+    std::string material = pw.ui->cbMaterialType->currentText().toStdString();
+
+    handleProjectWindowMaterialChange();
+
+}
+
+void controller::handleProjectWindowMaterialCreate(){
+
+}
+
+void controller::handleProjectWindowSubLangAdd(){
+
+    QString input = pw.ui->cbSubLang->currentText();
+    bool addOption = true;
+
+    std::vector<std::string> languages;
+    for(int i = 0; i < pw.ui->lstSubLang->count(); ++i){
+        languages.push_back(pw.ui->lstSubLang->item(i)->text().toStdString());
+    }
+
+    for(unsigned int j = 0; j < languages.size(); ++j){
+        if(input.toStdString() == languages[j]){
+            addOption = false;
+        }
+    }
+
+    if(addOption){
+        pw.ui->lstSubLang->addItem(input);
+    }
+
+    pw.ui->cbSubLang->setCurrentIndex(0);
+
+}
+
+void controller::handleProjectWindowSubLangDel(){
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstSubLang->selectedItems();
+    for(int i = 0; i < selectedItems.size(); i++){
+        delete pw.ui->lstSubLang->takeItem(pw.ui->lstSubLang->row(selectedItems[i]));
+    }
+
+}
+
+void controller::handleProjectWindowExtraLangAdd(){
+
+    QString input = pw.ui->cbExtraLanguageTracks->currentText();
+    bool addOption = true;
+
+    std::vector<std::string> languages;
+    for(int i = 0; i < pw.ui->lstExtraLanguageTracks->count(); ++i){
+        languages.push_back(pw.ui->lstExtraLanguageTracks->item(i)->text().toStdString());
+    }
+
+    for(unsigned int j = 0; j < languages.size(); ++j){
+        if(input.toStdString() == languages[j]){
+            addOption = false;
+        }
+    }
+
+    if(addOption){
+        pw.ui->lstExtraLanguageTracks->addItem(input);
+    }
+
+    pw.ui->cbExtraLanguageTracks->setCurrentIndex(0);
+
+}
+
+void controller::handleProjectWindowExtraLangDel(){
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstExtraLanguageTracks->selectedItems();
+    for(int i = 0; i < selectedItems.size(); i++){
+        delete pw.ui->lstExtraLanguageTracks->takeItem(pw.ui->lstExtraLanguageTracks->row(selectedItems[i]));
+    }
+
+}
+
+void controller::handleProjectWindowExtraSubLangAdd(){
+
+    QString input = pw.ui->cbExtraSubtitleTracks->currentText();
+    bool addOption = true;
+
+    std::vector<std::string> languages;
+    for(int i = 0; i < pw.ui->lstExtraSubtitleTracks->count(); ++i){
+        languages.push_back(pw.ui->lstExtraSubtitleTracks->item(i)->text().toStdString());
+    }
+
+    for(unsigned int j = 0; j < languages.size(); ++j){
+        if(input.toStdString() == languages[j]){
+            addOption = false;
+        }
+    }
+
+    if(addOption){
+        pw.ui->lstExtraSubtitleTracks->addItem(input);
+    }
+
+    pw.ui->cbExtraSubtitleTracks->setCurrentIndex(0);
+
+}
+
+void controller::handleProjectWindowExtraSubLangDel(){
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstExtraSubtitleTracks->selectedItems();
+    for(int i = 0; i < selectedItems.size(); i++){
+        delete pw.ui->lstExtraSubtitleTracks->takeItem(pw.ui->lstExtraSubtitleTracks->row(selectedItems[i]));
+    }
+
+}
+
+void controller::handleProjectWindowBonusAdd(){
+
+    QString input = pw.ui->txtBonusFeatures->text();
+    if(input.toStdString() != ""){
+        pw.ui->lstBonusFeatures->addItem(input);
+    }
+    pw.ui->txtBonusFeatures->clear();
+
+}
+
+void controller::handleProjectWindowBonusDel(){
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstBonusFeatures->selectedItems();
+    for(int i = 0; i < selectedItems.size(); i++){
+        delete pw.ui->lstBonusFeatures->takeItem(pw.ui->lstBonusFeatures->row(selectedItems[i]));
     }
 
 }

@@ -1,7 +1,6 @@
 #ifndef GUI_H
 #define GUI_H
 
-#include <QTCore>
 #include <QApplication>
 #include <QCoreApplication>
 #include <QMainWindow>

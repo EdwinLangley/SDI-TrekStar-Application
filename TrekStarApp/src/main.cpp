@@ -38,7 +38,7 @@ vector<string> StringToVector(string inputString){
 
 string VectorToString(vector<string> inputVector){
     string outputString;
-    for(int i=0; i<inputVector.size();i++){
+    for(unsigned int i=0; i<inputVector.size();i++){
         outputString.append(inputVector[i]);
         outputString.append(VECTORDELIMSTRNG);
     }

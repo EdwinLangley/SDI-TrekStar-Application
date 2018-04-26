@@ -36,3 +36,15 @@
 #cmdCrewFilter{
     font-size: 15px;
 }
+
+#cmdMaterialCreate{
+    font-size: 20px;
+}
+
+#cmdMaterialClear{
+    font-size: 20px;
+}
+
+#cmdMaterialDel{
+    font-size: 20px;
+}
