@@ -170,6 +170,17 @@ controller::controller()
     connect(pw.ui->cmdCrewDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowCrewDel()));
     connect(pw.ui->cmdCrewFilter, SIGNAL(clicked()), this, SLOT(handleProjectWindowCrewFilter()));
     connect(pw.ui->cbMaterialType, SIGNAL(currentIndexChanged(int)), this, SLOT(handleProjectWindowMaterialChange()));
+    connect(pw.ui->cmdMaterialClear, SIGNAL(clicked()), this, SLOT(handleProjectWindowMaterialChange()));
+    connect(pw.ui->cmdMaterialDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowMaterialDelete()));
+    connect(pw.ui->cmdMaterialCreate, SIGNAL(clicked()), this, SLOT(handleProjectWindowMaterialCreate()));
+    connect(pw.ui->cmdSubLangAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowSubLangAdd()));
+    connect(pw.ui->cmdSubLangDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowSubLangDel()));
+    connect(pw.ui->cmdExtraLanguageTracksAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowExtraLangAdd()));
+    connect(pw.ui->cmdExtraLanguageTracksDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowExtraLangDel()));
+    connect(pw.ui->cmdExtraSubtitleTracksAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowExtraSubLangAdd()));
+    connect(pw.ui->cmdExtraSubtitleTracksDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowExtraSubLangDel()));
+    connect(pw.ui->cmdBonusFeaturesAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowBonusAdd()));
+    connect(pw.ui->cmdBonusFeaturesDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowBonusDel()));
 
     // Displays list of all projects
     showAllProjects();
@@ -1583,5 +1594,135 @@ void controller::handleProjectWindowMaterialChange(){
     pw.ui->lblExtraSubtitleTracks->setStyleSheet("color: #78CAD2");
     pw.ui->lblBonusFeatures->setStyleSheet("color: #78CAD2");
 
+
+}
+
+void controller::handleProjectWindowMaterialDelete(){
+
+    std::string material = pw.ui->cbMaterialType->currentText().toStdString();
+
+    handleProjectWindowMaterialChange();
+
+}
+
+void controller::handleProjectWindowMaterialCreate(){
+
+}
+
+void controller::handleProjectWindowSubLangAdd(){
+
+    QString input = pw.ui->cbSubLang->currentText();
+    bool addOption = true;
+
+    std::vector<std::string> languages;
+    for(int i = 0; i < pw.ui->lstSubLang->count(); ++i){
+        languages.push_back(pw.ui->lstSubLang->item(i)->text().toStdString());
+    }
+
+    for(unsigned int j = 0; j < languages.size(); ++j){
+        if(input.toStdString() == languages[j]){
+            addOption = false;
+        }
+    }
+
+    if(addOption){
+        pw.ui->lstSubLang->addItem(input);
+    }
+
+    pw.ui->cbSubLang->setCurrentIndex(0);
+
+}
+
+void controller::handleProjectWindowSubLangDel(){
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstSubLang->selectedItems();
+    for(int i = 0; i < selectedItems.size(); i++){
+        delete pw.ui->lstSubLang->takeItem(pw.ui->lstSubLang->row(selectedItems[i]));
+    }
+
+}
+
+void controller::handleProjectWindowExtraLangAdd(){
+
+    QString input = pw.ui->cbExtraLanguageTracks->currentText();
+    bool addOption = true;
+
+    std::vector<std::string> languages;
+    for(int i = 0; i < pw.ui->lstExtraLanguageTracks->count(); ++i){
+        languages.push_back(pw.ui->lstExtraLanguageTracks->item(i)->text().toStdString());
+    }
+
+    for(unsigned int j = 0; j < languages.size(); ++j){
+        if(input.toStdString() == languages[j]){
+            addOption = false;
+        }
+    }
+
+    if(addOption){
+        pw.ui->lstExtraLanguageTracks->addItem(input);
+    }
+
+    pw.ui->cbExtraLanguageTracks->setCurrentIndex(0);
+
+}
+
+void controller::handleProjectWindowExtraLangDel(){
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstExtraLanguageTracks->selectedItems();
+    for(int i = 0; i < selectedItems.size(); i++){
+        delete pw.ui->lstExtraLanguageTracks->takeItem(pw.ui->lstExtraLanguageTracks->row(selectedItems[i]));
+    }
+
+}
+
+void controller::handleProjectWindowExtraSubLangAdd(){
+
+    QString input = pw.ui->cbExtraSubtitleTracks->currentText();
+    bool addOption = true;
+
+    std::vector<std::string> languages;
+    for(int i = 0; i < pw.ui->lstExtraSubtitleTracks->count(); ++i){
+        languages.push_back(pw.ui->lstExtraSubtitleTracks->item(i)->text().toStdString());
+    }
+
+    for(unsigned int j = 0; j < languages.size(); ++j){
+        if(input.toStdString() == languages[j]){
+            addOption = false;
+        }
+    }
+
+    if(addOption){
+        pw.ui->lstExtraSubtitleTracks->addItem(input);
+    }
+
+    pw.ui->cbExtraSubtitleTracks->setCurrentIndex(0);
+
+}
+
+void controller::handleProjectWindowExtraSubLangDel(){
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstExtraSubtitleTracks->selectedItems();
+    for(int i = 0; i < selectedItems.size(); i++){
+        delete pw.ui->lstExtraSubtitleTracks->takeItem(pw.ui->lstExtraSubtitleTracks->row(selectedItems[i]));
+    }
+
+}
+
+void controller::handleProjectWindowBonusAdd(){
+
+    QString input = pw.ui->txtBonusFeatures->text();
+    if(input.toStdString() != ""){
+        pw.ui->lstBonusFeatures->addItem(input);
+    }
+    pw.ui->txtBonusFeatures->clear();
+
+}
+
+void controller::handleProjectWindowBonusDel(){
+
+    QList <QListWidgetItem *> selectedItems = pw.ui->lstBonusFeatures->selectedItems();
+    for(int i = 0; i < selectedItems.size(); i++){
+        delete pw.ui->lstBonusFeatures->takeItem(pw.ui->lstBonusFeatures->row(selectedItems[i]));
+    }
 
 }

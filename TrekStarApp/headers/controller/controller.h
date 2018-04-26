@@ -42,6 +42,17 @@ private slots:
     void handleProjectWindowCrewDel();
     void handleProjectWindowCrewFilter();
     void handleProjectWindowMaterialChange();
+    void handleProjectWindowMaterialDelete();
+    void handleProjectWindowMaterialCreate();
+    void handleProjectWindowSubLangAdd();
+    void handleProjectWindowSubLangDel();
+    void handleProjectWindowExtraLangAdd();
+    void handleProjectWindowExtraLangDel();
+    void handleProjectWindowExtraSubLangAdd();
+    void handleProjectWindowExtraSubLangDel();
+    void handleProjectWindowBonusAdd();
+    void handleProjectWindowBonusDel();
+
 
 private:
     void showAllProjects();
