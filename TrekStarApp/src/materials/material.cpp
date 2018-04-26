@@ -133,7 +133,9 @@ Material::Material(){
     
 }
 
-Material::Material(string idNumber, string title, string vFormat, string aFormat, string language, FrameAspect frame, Packaging package, int runTime, float price, vector<string> subTitleLanguages)
+Material::Material(string idNumber, string title, string vFormat, string aFormat, string language,
+                   FrameAspect frame, Packaging package, int runTime, float price,
+                   vector<string> subTitleLanguages)
 {
     this->idNumber=idNumber;
     this->title=title;

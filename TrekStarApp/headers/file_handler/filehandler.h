@@ -21,7 +21,8 @@ public:
     //Updated
     void WriteMaterials(vector<Project> inputProject);
     vector<string> ReadMaterials();
-    Material SplitMaterial(string inputLine);
+
+    vector<string> SplitMaterial(string inputLine);
     //Updated
     void WriteCrew(string crewID, vector<CrewMember> inputcrew);
     vector<string>ReadCrew();

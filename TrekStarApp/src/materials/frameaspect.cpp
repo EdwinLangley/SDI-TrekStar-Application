@@ -37,7 +37,9 @@ FrameAspect::FrameAspect()
 
 FrameAspect::FrameAspect(int horizontalRatio, int verticalRatio, string ratioDescription)
 {
-
+    this->horizontalRatio=horizontalRatio;
+    this->verticalRatio=verticalRatio;
+    this->ratioDescription=ratioDescription;
 }
 
 string FrameAspect::getFrameAspect()

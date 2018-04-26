@@ -47,5 +47,8 @@ ComboBox::ComboBox()
 
 ComboBox::ComboBox(unsigned int numberOfDVDs, vector<string> idsOfDVDs, vector<SingleSidedDVD> SingleDVDs, vector<TwoSidedDVD> DoubleDVDs)
 {
-
+    this->numberOfDVDs=numberOfDVDs;
+    this->idsOfDVDs=idsOfDVDs;
+    this->SingleDVDs=SingleDVDs;
+    this->DoubleDVDs=DoubleDVDs;
 }

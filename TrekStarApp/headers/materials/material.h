@@ -10,7 +10,7 @@ using namespace std;
 class Material
 {
 
-private:
+protected:
    string idNumber = "0";
    string title = "";
    string vFormat = "";

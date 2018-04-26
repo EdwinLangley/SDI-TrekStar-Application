@@ -3,7 +3,7 @@
 using namespace std;
 
 //TAKE MATERIAL(ABSTRACT CLASS COMPONENT) OUT OF A DERRIVED CLASS
-Material FileWriter::SplitMaterial(string inputLine){
+vector<string> FileWriter::SplitMaterial(string inputLine){
 
     stringstream ss;
     string section;
@@ -16,7 +16,7 @@ Material FileWriter::SplitMaterial(string inputLine){
     Packaging package(materialStorage[9],stoi(materialStorage[10]),stoi(materialStorage[11]),stoi(materialStorage[12]));
     Material outputMaterial(materialStorage[1],materialStorage[2],materialStorage[3],materialStorage[4],materialStorage[5],
             frame, package, stoi(materialStorage[13]),stof(materialStorage[14]),StringToVector(materialStorage[15]));
-    return outputMaterial;
+    return materialStorage;
 }
 
 void FileWriter::WriteOneSidedDVD(SingleSidedDVD inputDVDS){
@@ -40,11 +40,20 @@ SingleSidedDVD FileWriter::ReadOneSidedDVD(string input)
     while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
         materialStorage.push_back(section);
     }
+    vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
     vector<string> extraLanguageTracks=StringToVector(materialStorage[16]);
     vector<string> extraSubtitleTracks=StringToVector(materialStorage[17]);
     vector<string> bonusFeatures=StringToVector(materialStorage[18]);
-    string firstSideContent=materialStorage[19];
-    SingleSidedDVD returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures,firstSideContent);
+
+    FrameAspect frame(stoi(materialStorage[6]),stoi(materialStorage[7]),materialStorage[8]);
+    Packaging package(materialStorage[9],stoi(materialStorage[10]),stoi(materialStorage[11]),
+            stoi(materialStorage[12]));
+
+    SingleSidedDVD returnDVD(materialStorage[1],materialStorage[2],materialStorage[3],
+            materialStorage[4],materialStorage[5],frame,package,stoi(materialStorage[13]),
+            stof(materialStorage[14]),subtitleLanguages,extraLanguageTracks,
+            extraSubtitleTracks,bonusFeatures,materialStorage[19]);
+
     return returnDVD;
 }
 
@@ -71,12 +80,19 @@ TwoSidedDVD FileWriter::ReadTwoSidedDVD(string input)
     while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
         materialStorage.push_back(section);
     }
+    vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
     vector<string> extraLanguageTracks=StringToVector(materialStorage[16]);
     vector<string> extraSubtitleTracks=StringToVector(materialStorage[17]);
     vector<string> bonusFeatures=StringToVector(materialStorage[18]);
-    string firstSideContent=materialStorage[19];
-    string secondSideContent=materialStorage[20];
-    TwoSidedDVD returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures,firstSideContent,secondSideContent);
+
+    FrameAspect frame(stoi(materialStorage[6]),stoi(materialStorage[7]),materialStorage[8]);
+    Packaging package(materialStorage[9],stoi(materialStorage[10]),stoi(materialStorage[11]),
+            stoi(materialStorage[12]));
+
+    TwoSidedDVD returnDVD(materialStorage[1],materialStorage[2],materialStorage[3],
+            materialStorage[4],materialStorage[5],frame,package,stoi(materialStorage[13]),
+            stof(materialStorage[14]),subtitleLanguages,extraLanguageTracks,
+            extraSubtitleTracks,bonusFeatures,materialStorage[19],materialStorage[20]);
     return returnDVD;
 }
 
@@ -101,10 +117,19 @@ BluRay FileWriter::ReadBluRay(string input)
     while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
         materialStorage.push_back(section);
     }
+    vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
     vector<string> extraLanguageTracks=StringToVector(materialStorage[16]);
     vector<string> extraSubtitleTracks=StringToVector(materialStorage[17]);
     vector<string> bonusFeatures=StringToVector(materialStorage[18]);
-    BluRay returnDVD(SplitMaterial(input),extraLanguageTracks,extraSubtitleTracks,bonusFeatures);
+
+    FrameAspect frame(stoi(materialStorage[6]),stoi(materialStorage[7]),materialStorage[8]);
+    Packaging package(materialStorage[9],stoi(materialStorage[10]),stoi(materialStorage[11]),
+            stoi(materialStorage[12]));
+
+    BluRay returnDVD(materialStorage[1],materialStorage[2],materialStorage[3],
+            materialStorage[4],materialStorage[5],frame,package,stoi(materialStorage[13]),
+            stof(materialStorage[14]),subtitleLanguages,extraLanguageTracks,
+            extraSubtitleTracks,bonusFeatures);
     return returnDVD;
 }
 
@@ -120,7 +145,21 @@ void FileWriter::WriteVHS(VHS inputDVDS){
 
 VHS FileWriter::ReadVHS(string input)
 {
-    VHS returnVHS(SplitMaterial(input));
+    stringstream ss;
+    string section;
+    ss<<input;
+    vector<string> materialStorage;
+    while(getline(ss,section,FIRSTLEVELDELIMCHAR)){
+        materialStorage.push_back(section);
+    }
+    vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
+    FrameAspect frame(stoi(materialStorage[6]),stoi(materialStorage[7]),materialStorage[8]);
+    Packaging package(materialStorage[9],stoi(materialStorage[10]),stoi(materialStorage[11]),
+            stoi(materialStorage[12]));
+
+    VHS returnVHS(materialStorage[1],materialStorage[2],materialStorage[3],
+            materialStorage[4],materialStorage[5],frame,package,stoi(materialStorage[13]),
+            stof(materialStorage[14]),subtitleLanguages);
     return returnVHS;
 }
 

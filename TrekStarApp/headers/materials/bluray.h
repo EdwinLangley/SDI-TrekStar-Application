@@ -20,7 +20,16 @@ private:
 
 public:
     BluRay();
-    BluRay(Material inputMaterial, vector<string> extraLanguageTracks, vector<string> extraSubtitleTracks, vector<string> bonusTracks);
+    BluRay(string idNumber, string title, string vFormat, string aFormat, string language,
+           FrameAspect frame, Packaging package, int runTime, float price,
+           vector<string> subTitleLanguages, vector<string> extraLanguageTracks,
+           vector<string> extraSubtitleTracks, vector<string> bonusTracks)
+        :Material(idNumber,title,vFormat,aFormat,language,frame,package,
+                  runTime, price,subTitleLanguages){
+        this->extraLanguageTracks=extraLanguageTracks;
+        this->extraSubtitleTracks=extraSubtitleTracks;
+        this->bonusTracks=bonusTracks;
+    }
     vector<string> getExtraLanguageTracks() const;
     void setExtraLanguageTracks(const vector<string> &value);
     vector<string> getExtraSubtitleTracks() const;

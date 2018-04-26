@@ -8,7 +8,7 @@ using namespace std;
 
 class DVD : public Material
 {
-private:
+protected:
     vector<string> extraLanguageTracks;
     vector<string> extraSubtitleTracks;
     vector<string> bonusFeatures;
@@ -17,6 +17,18 @@ private:
 
 public:
     DVD();
+    DVD(string idNumber, string title, string vFormat, string aFormat, string language,
+        FrameAspect frame, Packaging package, int runTime, float price,
+        vector<string> subTitleLanguages, vector<string> extraLanguageTracks,
+        vector<string> extraSubtitleTracks, vector<string> bonusFeatures, string firstSideContent)
+        :Material(idNumber,title,vFormat,aFormat,language,frame,package,
+                  runTime, price,subTitleLanguages)
+    {
+        this->extraLanguageTracks=extraLanguageTracks;
+        this->extraSubtitleTracks=extraSubtitleTracks;
+        this->bonusFeatures=bonusFeatures;
+        this->firstSideContent=firstSideContent;
+    }
     vector<string> getExtraLanguageTracks() const;
     void setExtraLanguageTracks(const vector<string> &value);
     vector<string> getExtraSubtitleTracks() const;

@@ -60,5 +60,8 @@ Packaging::Packaging()
 
 Packaging::Packaging(string material, unsigned int height, unsigned int width, unsigned int depth)
 {
-
+    this->material=material;
+    this->height=height;
+    this->width=width;
+    this->depth=depth;
 }

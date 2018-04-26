@@ -49,7 +49,19 @@ BluRay::BluRay()
 
 }
 
-BluRay::BluRay(Material inputMaterial, vector<string> extraLanguageTracks, vector<string> extraSubtitleTracks, vector<string> bonusTracks)
-{
-
-}
+//BluRay::BluRay(Material inputMaterial, vector<string> extraLanguageTracks, vector<string> extraSubtitleTracks, vector<string> bonusTracks)
+//{
+//    this->idNumber=inputMaterial.getIdNumber();
+//    this->title=inputMaterial.getTitle();
+//    this->vFormat=inputMaterial.getVFormat();
+//    this->aFormat=inputMaterial.getAFormat();
+//    this->language=inputMaterial.getLanguage();
+//    this->frame=inputMaterial.getFrame();
+//    this->package=inputMaterial.getPackage();
+//    this->runTime=inputMaterial.getRunTime();
+//    this->price=inputMaterial.getPrice();
+//    this->subTitleLanguages=inputMaterial.getSubTitleLanguages();
+//    this->extraLanguageTracks=extraLanguageTracks;
+//    this->extraSubtitleTracks=extraSubtitleTracks;
+//    this->bonusTracks=bonusTracks;
+//}
