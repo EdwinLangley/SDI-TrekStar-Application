@@ -171,7 +171,7 @@ Project& DoublyLinkedList::operator[](unsigned int n)
         throw std::invalid_argument("Index out of bounds");
     }
 
-    int pos = 0;
+    unsigned int pos = 0;
     while (pos != n)
     {
         previous = current;
@@ -235,7 +235,7 @@ vector<string> DoublyLinkedList::findByRoleAndName(string Role, string Name)
 
         vector<CrewMember> Crew = current->data.getCrew();
 
-        for (int i = 0; i < Crew.size(); i++)
+        for (unsigned int i = 0; i < Crew.size(); i++)
         {
             CrewMember test = Crew.at(i);
             if (test.getRole() == Role && test.getName() == Name)
@@ -262,7 +262,7 @@ vector<string> DoublyLinkedList::findByKeyword(string keyword)
 
         vector<string> Keywords = current->data.getKeywords();
 
-        for (int i = 0; i < Keywords.size(); i++)
+        for (unsigned int i = 0; i < Keywords.size(); i++)
         {
             if (Keywords[i] == keyword)
             {
@@ -495,7 +495,7 @@ vector<string> DoublyLinkedList::sortByOldest()
 
     vector<string> AllProjectsStrings;
 
-    for (int stop =0; stop < AllProjects.size(); stop++ )
+    for (unsigned int stop =0; stop < AllProjects.size(); stop++ )
     {
         AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + ": was released on " +AllProjects.at(stop).getReleaseDate());
     }

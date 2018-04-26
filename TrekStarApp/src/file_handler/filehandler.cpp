@@ -168,9 +168,9 @@ ComboBox FileWriter::ReadComboBox(string input)
     vector<SingleSidedDVD> singleDVDS;
     vector<TwoSidedDVD> doubleDVDS;
     //Match a dvd to its combo-box, Simple ID matching and line conversion using relevant functions
-    for(int i=0;i<idsOfDVDS.size();i++){
+    for(unsigned int i=0;i<idsOfDVDS.size();i++){
         string comboID=idsOfDVDS[i];
-        for (int j=0;j<Materials.size();j++){
+        for (unsigned int j=0;j<Materials.size();j++){
             string line =Materials[j];
             string type,id;
             stringstream ss;
@@ -198,7 +198,7 @@ ComboBox FileWriter::ReadComboBox(string input)
 }
 void FileWriter::WriteMaterials(vector<Project> inputProject){
     //Goes through a project and checks for contained materials and writes them if there is a non-zero ID value
-    for (int i = 0; i < inputProject.size(); i++) {
+    for (unsigned int i = 0; i < inputProject.size(); i++) {
         if(inputProject[i].getMaterialIDs()[0]=="0"){
             continue;
         }
@@ -254,7 +254,7 @@ void FileWriter::WriteProject(vector<Project> inputProject){
 		return;
 	}
     //Write files here
-    for (int i = 0; i < inputProject.size(); i++) {
+    for (unsigned int i = 0; i < inputProject.size(); i++) {
         string newLine = (inputProject[i].getTitle());
         newLine.append(FIRSTLEVELDELIMSTRNG);
         newLine.append(inputProject[i].getProjectStatus());
@@ -333,7 +333,7 @@ void FileWriter::WriteCrew(string crewID, vector<CrewMember> inputcrew){
     }
     ofstream outputFile;
     string crewLine=crewID;
-    for (int i=0; i<inputcrew.size();i++){
+    for (unsigned int i=0; i<inputcrew.size();i++){
         crewLine.append(FIRSTLEVELDELIMSTRNG);
         crewLine.append(inputcrew[i].getCrewMember());
     }
@@ -378,7 +378,7 @@ vector<CrewMember> FileWriter::CreateCrewMembers(string inputLine){
     //Take the entire line, start from the first crew member and create each member in the line
     vector<CrewMember> crewMembers;
     vector<string> crewMemberEntries=SplitLine(inputLine);
-    for(int i=1;i<crewMemberEntries.size();i++){
+    for(unsigned int i=1;i<crewMemberEntries.size();i++){
         crewMembers.push_back(CreateMember(crewMemberEntries[i]));
     }
     return crewMembers;
@@ -390,12 +390,12 @@ vector<Project> FileWriter::BuildProjectList(){
     vector<string>materialLines=aFileWriter.ReadMaterials();
     vector<string>crewLines=aFileWriter.ReadCrew();
     //Go through Project list
-    for (int i=0; i<projects.size();i++){
+    for (unsigned int i=0; i<projects.size();i++){
         //Go through material list for the project
         if(projects[i].getMaterialIDs()[0]!="0"){
-            for (int j=0;j<projects[i].getMaterialIDs().size();j++){
+            for (unsigned int j=0;j<projects[i].getMaterialIDs().size();j++){
                 //Go through list of materials and then compare it to the current material
-                for (int k=0;k<materialLines.size();k++){
+                for (unsigned int k=0;k<materialLines.size();k++){
                     string line=materialLines[k];
                     string type,id;
                     stringstream ss;
@@ -435,7 +435,7 @@ vector<Project> FileWriter::BuildProjectList(){
         if (projects[i].getCrewID()==0){
             continue;
         }
-        for (int j=0;j<crewLines.size();j++){
+        for (unsigned int j=0;j<crewLines.size();j++){
             string line=crewLines[j];
             string id;
             stringstream ss;
