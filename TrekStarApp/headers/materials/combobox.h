@@ -31,6 +31,31 @@ public:
     void setSingleDVDs(const vector<SingleSidedDVD> &value);
     vector<TwoSidedDVD> getDoubleDVDs() const;
     void setDoubleDVDs(const vector<TwoSidedDVD> &value);
+
+    bool operator ==(const ComboBox& comboBox){
+        if(
+                this->numberOfDVDs==comboBox.numberOfDVDs&&
+                this->idsOfDVDs==comboBox.idsOfDVDs)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    bool operator !=(const ComboBox& comboBox){
+        if(
+                this->numberOfDVDs!=comboBox.numberOfDVDs||
+                this->idsOfDVDs!=comboBox.idsOfDVDs)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 };
 
 #endif // COMBOBOX_H

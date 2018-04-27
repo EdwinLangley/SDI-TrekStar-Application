@@ -24,6 +24,34 @@ public:
     string getRatioDescription() const;
     void setRatioDescription(const string &value);
     string getFrameAspect();
+
+    bool operator ==(const FrameAspect& frameAspect){
+        if(
+                this->horizontalRatio==frameAspect.horizontalRatio &&
+                this->verticalRatio==frameAspect.verticalRatio&&
+                this->ratioDescription==frameAspect.ratioDescription)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    bool operator !=(const FrameAspect& frameAspect){
+        if(
+                this->horizontalRatio!=frameAspect.horizontalRatio||
+                this->verticalRatio!=frameAspect.verticalRatio||
+                this->ratioDescription!=frameAspect.ratioDescription)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 };
 
 #endif // FRAMEASPECT_H

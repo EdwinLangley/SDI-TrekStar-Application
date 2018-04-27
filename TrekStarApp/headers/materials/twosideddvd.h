@@ -27,6 +27,57 @@ public:
 
     string getSecondSideContent() const;
     void setSecondSideContent(const string &value);
+
+    bool operator ==(const TwoSidedDVD& twoSidedDVD){
+        if(
+                this->idNumber==twoSidedDVD.idNumber&&
+                this->title==twoSidedDVD.title&&
+                this->vFormat==twoSidedDVD.vFormat&&
+                this->aFormat==twoSidedDVD.aFormat&&
+                this->language==twoSidedDVD.language&&
+                this->frame==twoSidedDVD.frame&&
+                this->package==twoSidedDVD.package&&
+                this->runTime==twoSidedDVD.runTime&&
+                this->price==twoSidedDVD.price&&
+                this->subTitleLanguages==twoSidedDVD.subTitleLanguages&&
+                this->extraLanguageTracks==twoSidedDVD.extraLanguageTracks&&
+                this->extraSubtitleTracks==twoSidedDVD.extraSubtitleTracks&&
+                this->bonusFeatures==twoSidedDVD.bonusFeatures&&
+                this->firstSideContent==twoSidedDVD.firstSideContent&&
+                this->secondSideContent==twoSidedDVD.secondSideContent)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    bool operator !=(const TwoSidedDVD& twoSidedDVD){
+        if(
+                this->idNumber!=twoSidedDVD.idNumber||
+                this->title!=twoSidedDVD.title||
+                this->vFormat!=twoSidedDVD.vFormat||
+                this->aFormat!=twoSidedDVD.aFormat||
+                this->language!=twoSidedDVD.language||
+                this->frame!=twoSidedDVD.frame||
+                this->package!=twoSidedDVD.package||
+                this->runTime!=twoSidedDVD.runTime||
+                this->price!=twoSidedDVD.price||
+                this->subTitleLanguages!=twoSidedDVD.subTitleLanguages||
+                this->extraLanguageTracks!=twoSidedDVD.extraLanguageTracks||
+                this->extraSubtitleTracks!=twoSidedDVD.extraSubtitleTracks||
+                this->bonusFeatures!=twoSidedDVD.bonusFeatures||
+                this->firstSideContent!=twoSidedDVD.firstSideContent||
+                this->secondSideContent!=twoSidedDVD.secondSideContent)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 };
 
 #endif // TWOSIDEDDVD_H

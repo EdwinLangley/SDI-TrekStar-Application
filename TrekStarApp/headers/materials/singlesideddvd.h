@@ -18,6 +18,54 @@ public:
              bonusFeatures,firstSideContent)
     {
     }
+    bool operator ==(const SingleSidedDVD& singleSidedDVD){
+        if(
+                this->idNumber==singleSidedDVD.idNumber&&
+                this->title==singleSidedDVD.title&&
+                this->vFormat==singleSidedDVD.vFormat&&
+                this->aFormat==singleSidedDVD.aFormat&&
+                this->language==singleSidedDVD.language&&
+                this->frame==singleSidedDVD.frame&&
+                this->package==singleSidedDVD.package&&
+                this->runTime==singleSidedDVD.runTime&&
+                this->price==singleSidedDVD.price&&
+                this->subTitleLanguages==singleSidedDVD.subTitleLanguages&&
+                this->extraLanguageTracks==singleSidedDVD.extraLanguageTracks&&
+                this->extraSubtitleTracks==singleSidedDVD.extraSubtitleTracks&&
+                this->bonusFeatures==singleSidedDVD.bonusFeatures&&
+                this->firstSideContent==singleSidedDVD.firstSideContent)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    bool operator !=(const SingleSidedDVD& singleSidedDVD){
+        if(
+                this->idNumber!=singleSidedDVD.idNumber||
+                this->title!=singleSidedDVD.title||
+                this->vFormat!=singleSidedDVD.vFormat||
+                this->aFormat!=singleSidedDVD.aFormat||
+                this->language!=singleSidedDVD.language||
+                this->frame!=singleSidedDVD.frame||
+                this->package!=singleSidedDVD.package||
+                this->runTime!=singleSidedDVD.runTime||
+                this->price!=singleSidedDVD.price||
+                this->subTitleLanguages!=singleSidedDVD.subTitleLanguages||
+                this->extraLanguageTracks!=singleSidedDVD.extraLanguageTracks||
+                this->extraSubtitleTracks!=singleSidedDVD.extraSubtitleTracks||
+                this->bonusFeatures!=singleSidedDVD.bonusFeatures||
+                this->firstSideContent!=singleSidedDVD.firstSideContent)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 };
 
 #endif // SINGLESIDEDDVD_H

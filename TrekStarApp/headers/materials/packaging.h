@@ -27,6 +27,36 @@ public:
     unsigned int getDepth() const;
     void setDepth(unsigned int value);
     string getPackaging();
+
+    bool operator ==(const Packaging& packaging){
+        if(
+                this->material==packaging.material&&
+                this->height==packaging.height&&
+                this->width==packaging.width&&
+                this->depth==packaging.depth
+                )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    bool operator !=(const Packaging& packaging){
+        if(
+                this->material!=packaging.material||
+                this->height!=packaging.height||
+                this->width!=packaging.width||
+                this->depth!=packaging.depth)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 };
 
 #endif // PACKAGING_H

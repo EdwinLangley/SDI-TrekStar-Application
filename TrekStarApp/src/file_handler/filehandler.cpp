@@ -1,4 +1,9 @@
 #include "filehandler.h"
+#include <QDir>
+#include <QFile>
+#include <QDateTime>
+#include <QTextStream>
+
 
 using namespace std;
 
@@ -239,7 +244,7 @@ vector<string> FileWriter::ReadMaterials(){
     return materials;
 }
 
-void FileWriter::WriteProject(vector<Project> inputProject){
+void FileWriter::WriteProject(){
     //Takes all projects and writes their member variables
     //Open and clear all files:
     ofstream projectFile, MaterialFile,CrewFile;
@@ -249,40 +254,40 @@ void FileWriter::WriteProject(vector<Project> inputProject){
     CrewFile.close();
     projectFile.open(PROJECTFILENAME,ios_base::trunc);
     //If no projects are passed
-	if(inputProject.size()==0){
+    if(this->UpdatedProjectList.size()==0){
         projectFile.close();
 		return;
 	}
     //Write files here
-    for (unsigned int i = 0; i < inputProject.size(); i++) {
-        string newLine = (inputProject[i].getTitle());
+    for (unsigned int i = 0; i < this->UpdatedProjectList.size(); i++) {
+        string newLine = (this->UpdatedProjectList[i].getTitle());
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(inputProject[i].getProjectStatus());
+        newLine.append(this->UpdatedProjectList[i].getProjectStatus());
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(inputProject[i].getSummary());
+        newLine.append(this->UpdatedProjectList[i].getSummary());
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(inputProject[i].getGenre());
+        newLine.append(this->UpdatedProjectList[i].getGenre());
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(inputProject[i].getReleaseDate());
+        newLine.append(this->UpdatedProjectList[i].getReleaseDate());
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(inputProject[i].getLanguage());
+        newLine.append(this->UpdatedProjectList[i].getLanguage());
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(to_string(inputProject[i].getCrewID()));
+        newLine.append(to_string(this->UpdatedProjectList[i].getCrewID()));
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(to_string(inputProject[i].getWeeklyBoxFigures()));
+        newLine.append(to_string(this->UpdatedProjectList[i].getWeeklyBoxFigures()));
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(to_string(inputProject[i].getRunTime()));
+        newLine.append(to_string(this->UpdatedProjectList[i].getRunTime()));
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(VectorToString(inputProject[i].getKeywords()));
+        newLine.append(VectorToString(this->UpdatedProjectList[i].getKeywords()));
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(VectorToString(inputProject[i].getFilmLocations()));
+        newLine.append(VectorToString(this->UpdatedProjectList[i].getFilmLocations()));
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(VectorToString(inputProject[i].getMaterials()));
+        newLine.append(VectorToString(this->UpdatedProjectList[i].getMaterials()));
         newLine.append("\n");
         projectFile << newLine;
         //Write extra materials/crews here
-        WriteMaterials(inputProject);
-        WriteCrew(to_string(inputProject[i].getCrewID()),inputProject[i].getCrew());
+        WriteMaterials(this->UpdatedProjectList);
+        WriteCrew(to_string(this->UpdatedProjectList[i].getCrewID()),this->UpdatedProjectList[i].getCrew());
     }
     projectFile.close();
 }
@@ -449,10 +454,65 @@ vector<Project> FileWriter::BuildProjectList(){
             }
         }
     }
+    this->OldProjectList=projects;
     return projects;
 }
 
+void FileWriter::BuildReport(){
+    const string REPORTSDIRNAME = "Reports/";
+    QDateTime DateTime;
+    QDate currentDate=QDate::currentDate();
+    QTime currentTime=QTime::currentTime();
+    string currentDateString = to_string(currentDate.day())+"."+to_string(currentDate.month())+"."+to_string(currentDate.year());
+    string currentTimeSting= to_string(currentTime.hour())+":"+to_string(currentTime.minute());
+    //DO FILE REPORT STUFFS
+    //Check for a difference
+    //If different, write changes
+    //A change report should be created with a date as the name in a folder called reports
+    QDir directory;
+    directory.mkdir(QString::fromStdString(REPORTSDIRNAME));
+    //Write to a report that has the same date as the current date, otherwise create one.
+    string fileName = REPORTSDIRNAME+"/"+currentDateString+".txt";
+    ofstream reportFile;
+    //Opens the file in write only mode, appending to the end of the file
+    reportFile.open(fileName, ios_base::app);
+    reportFile<<"New Report on: "<<currentTimeSting<<"\n";
+    //Check for a difference in projects
+    if(this->OldProjectList.size()!=this->UpdatedProjectList.size()){
+        //if a project has been added
+        if(this->OldProjectList.size()<this->UpdatedProjectList.size()){
+            for(int i=this->OldProjectList.size();i<UpdatedProjectList.size();i++){
+                reportFile<<"New Project added: "<<this->UpdatedProjectList[i].getTitle()<<"\n";
+            }
+        }
+    }
+    //If the amount is the same
+    else{
+        for (int i=0;i<this->UpdatedProjectList.size();i++){
+            if(this->OldProjectList[i]==this->UpdatedProjectList[i]){
+                continue;
+            }
+            else{
+                reportFile<<"Change made in: "<<this->UpdatedProjectList[i].getTitle()<<"\n";
+            }
+        }
+    }
+    //Sales limit exceeded
+    for (int i=0;i<this->UpdatedProjectList.size();i++){
+        if(this->UpdatedProjectList[i].getWeeklyBoxFigures()>ReportEarningsLimit){
+            reportFile<<"Total Box Office Earning Exceeded for: "<<this->UpdatedProjectList[i].getTitle()<<"\n";
+        }
+    }
+    reportFile.close();
+}
+
+
 FileWriter::FileWriter()
+{
+}
+
+FileWriter::~FileWriter()
 {
 
 }
+
