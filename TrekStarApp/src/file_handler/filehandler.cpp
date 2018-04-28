@@ -20,7 +20,8 @@ vector<string> FileWriter::SplitLine(string inputLine){
 }
 
 void FileWriter::WriteOneSidedDVD(SingleSidedDVD inputDVDS){
-    //Takes all memeber variables gained from member functions and puts together into one string to write
+    //Takes all memeber variables gained from member functions
+    //and puts together into one string to write
     string oneSidedDVD="1DVD,";
     oneSidedDVD=inputDVDS.getMaterials();
     oneSidedDVD.append(FIRSTLEVELDELIMSTRNG);
@@ -34,7 +35,8 @@ void FileWriter::WriteOneSidedDVD(SingleSidedDVD inputDVDS){
 
 SingleSidedDVD FileWriter::ReadOneSidedDVD(string input)
 {
-    //Takes a line and converts it into a single object, uses StringToVector to take vectors out of the line
+    //Takes a line and converts it into a single object,
+    //uses StringToVector to take vectors out of the line
     vector<string> materialStorage=SplitLine(input);
 
     vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
@@ -55,7 +57,8 @@ SingleSidedDVD FileWriter::ReadOneSidedDVD(string input)
 }
 
 void FileWriter::WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
-    //Takes all memeber variables gained from member functions and puts together into one string to write
+    //Takes all memeber variables gained from member functions
+    //and puts together into one string to write
     string twoSidedDVD="2DVD,";
     twoSidedDVD=inputDVDS.getMaterials();
     twoSidedDVD.append(FIRSTLEVELDELIMSTRNG);
@@ -71,7 +74,8 @@ void FileWriter::WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
 
 TwoSidedDVD FileWriter::ReadTwoSidedDVD(string input)
 {
-    //Takes a line and converts it into a single object, uses StringToVector to take vectors out of the line
+    //Takes a line and converts it into a single object,
+    //uses StringToVector to take vectors out of the line
     vector<string> materialStorage=SplitLine(input);
 
     vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
@@ -91,7 +95,8 @@ TwoSidedDVD FileWriter::ReadTwoSidedDVD(string input)
 }
 
 void FileWriter::WriteBluRay(BluRay inputDVDS){
-    //Takes all memeber variables gained from member functions and puts together into one string to write
+    //Takes all memeber variables gained from member functions
+    //and puts together into one string to write
     string bluRay="BRAY,";
     bluRay=inputDVDS.getMaterials();
     bluRay.append(FIRSTLEVELDELIMSTRNG);
@@ -105,7 +110,8 @@ void FileWriter::WriteBluRay(BluRay inputDVDS){
 
 BluRay FileWriter::ReadBluRay(string input)
 {
-    //Takes a line and converts it into a single object, uses StringToVector to take vectors out of the line
+    //Takes a line and converts it into a single object,
+    //uses StringToVector to take vectors out of the line
     vector<string> materialStorage=SplitLine(input);
 
     vector<string> subtitleLanguages=StringToVector(materialStorage[15]);
@@ -125,7 +131,8 @@ BluRay FileWriter::ReadBluRay(string input)
 }
 
 void FileWriter::WriteVHS(VHS inputDVDS){
-    //Takes all memeber variables gained from member functions and puts together into one string to write
+    //Takes all memeber variables gained from member functions
+    //and puts together into one string to write
     string vhs="VHSS,";
     vhs=inputDVDS.getMaterials();
     vhs.append("\n");
@@ -137,7 +144,8 @@ void FileWriter::WriteVHS(VHS inputDVDS){
 
 VHS FileWriter::ReadVHS(string input)
 {
-    //Takes a line and converts it into a single object, uses StringToVector to take vectors out of the line
+    //Takes a line and converts it into a single object,
+    //uses StringToVector to take vectors out of the line
 
     vector<string> materialStorage=SplitLine(input);
 
@@ -153,7 +161,8 @@ VHS FileWriter::ReadVHS(string input)
 }
 
 void FileWriter::WriteComboBox(ComboBox inputDVDS){
-    //Takes all memeber variables gained from member functions and puts together into one string to write
+    //Takes all memeber variables gained from member functions
+    //and puts together into one string to write
     string comboBox="CBOX";
     comboBox.append(FIRSTLEVELDELIMSTRNG);
     comboBox.append(VectorToString(inputDVDS.getIdsOfDVDs()));
@@ -166,7 +175,8 @@ void FileWriter::WriteComboBox(ComboBox inputDVDS){
 
 ComboBox FileWriter::ReadComboBox(string input)
 {
-    //Takes a line and converts it into a single object, uses StringToVector to take vectors out of the line
+    //Takes a line and converts it into a single object,
+    //uses StringToVector to take vectors out of the line
     vector<string> Materials=ReadMaterials();
     vector<string> materialStorage=SplitLine(input);
     vector<string> idsOfDVDS = StringToVector(materialStorage[1]);
@@ -202,7 +212,8 @@ ComboBox FileWriter::ReadComboBox(string input)
     return returnComboBox;
 }
 void FileWriter::WriteMaterials(vector<Project> inputProject){
-    //Goes through a project and checks for contained materials and writes them if there is a non-zero ID value
+    //Goes through a project and checks for contained materials
+    //and writes them if there is a non-zero ID value
     for (unsigned int i = 0; i < inputProject.size(); i++) {
         if(inputProject[i].getMaterialIDs()[0]=="0"){
             continue;
@@ -287,7 +298,8 @@ void FileWriter::WriteProject(){
         projectFile << newLine;
         //Write extra materials/crews here
         WriteMaterials(this->UpdatedProjectList);
-        WriteCrew(to_string(this->UpdatedProjectList[i].getCrewID()),this->UpdatedProjectList[i].getCrew());
+        WriteCrew(to_string(this->UpdatedProjectList[i].getCrewID()),
+                  this->UpdatedProjectList[i].getCrew());
     }
     projectFile.close();
 }
@@ -463,8 +475,11 @@ void FileWriter::BuildReport(){
     QDateTime DateTime;
     QDate currentDate=QDate::currentDate();
     QTime currentTime=QTime::currentTime();
-    string currentDateString = to_string(currentDate.day())+"."+to_string(currentDate.month())+"."+to_string(currentDate.year());
+
+    string currentDateString = to_string(currentDate.day())+"."+to_string(currentDate.month())+
+            "."+to_string(currentDate.year());
     string currentTimeSting= to_string(currentTime.hour())+":"+to_string(currentTime.minute());
+
     //DO FILE REPORT STUFFS
     //Check for a difference
     //If different, write changes
@@ -500,7 +515,8 @@ void FileWriter::BuildReport(){
     //Sales limit exceeded
     for (int i=0;i<this->UpdatedProjectList.size();i++){
         if(this->UpdatedProjectList[i].getWeeklyBoxFigures()>ReportEarningsLimit){
-            reportFile<<"Total Box Office Earning Exceeded for: "<<this->UpdatedProjectList[i].getTitle()<<"\n";
+            reportFile<<"Total Box Office Earning Exceeded for: "<<
+                        this->UpdatedProjectList[i].getTitle()<<"\n";
         }
     }
     reportFile.close();
