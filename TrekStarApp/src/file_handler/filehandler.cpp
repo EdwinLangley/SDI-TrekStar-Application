@@ -267,8 +267,8 @@ void FileWriter::WriteProject(){
     //If no projects are passed
     if(this->UpdatedProjectList.size()==0){
         projectFile.close();
-		return;
-	}
+        return;
+    }
     //Write files here
     for (unsigned int i = 0; i < this->UpdatedProjectList.size(); i++) {
         string newLine = (this->UpdatedProjectList[i].getTitle());
@@ -472,7 +472,6 @@ vector<Project> FileWriter::BuildProjectList(){
 
 void FileWriter::BuildReport(){
     const string REPORTSDIRNAME = "Reports/";
-    QDateTime DateTime;
     QDate currentDate=QDate::currentDate();
     QTime currentTime=QTime::currentTime();
 
@@ -491,19 +490,19 @@ void FileWriter::BuildReport(){
     ofstream reportFile;
     //Opens the file in write only mode, appending to the end of the file
     reportFile.open(fileName, ios_base::app);
-    reportFile<<"New Report on: "<<currentTimeSting<<"\n";
+    reportFile<<"New Report on: "<<currentDateString<<" at: "<<currentTimeSting<<"\n";
     //Check for a difference in projects
     if(this->OldProjectList.size()!=this->UpdatedProjectList.size()){
         //if a project has been added
         if(this->OldProjectList.size()<this->UpdatedProjectList.size()){
-            for(int i=this->OldProjectList.size();i<UpdatedProjectList.size();i++){
+            for(unsigned int i=this->OldProjectList.size();i<UpdatedProjectList.size();i++){
                 reportFile<<"New Project added: "<<this->UpdatedProjectList[i].getTitle()<<"\n";
             }
         }
     }
     //If the amount is the same
     else{
-        for (int i=0;i<this->UpdatedProjectList.size();i++){
+        for (unsigned int i=0;i<this->UpdatedProjectList.size();i++){
             if(this->OldProjectList[i]==this->UpdatedProjectList[i]){
                 continue;
             }
@@ -513,7 +512,7 @@ void FileWriter::BuildReport(){
         }
     }
     //Sales limit exceeded
-    for (int i=0;i<this->UpdatedProjectList.size();i++){
+    for (unsigned int i=0;i<this->UpdatedProjectList.size();i++){
         if(this->UpdatedProjectList[i].getWeeklyBoxFigures()>ReportEarningsLimit){
             reportFile<<"Total Box Office Earning Exceeded for: "<<
                         this->UpdatedProjectList[i].getTitle()<<"\n";
