@@ -116,6 +116,9 @@ vector<string> sortByOldest();
 //and then return the value incremented by one.
 int getNewCrewId();
 
+//Function to find highest Material ID and increment by 1
+int getNewMaterialId();
+
 };
 
 

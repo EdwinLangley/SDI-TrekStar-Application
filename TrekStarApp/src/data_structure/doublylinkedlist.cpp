@@ -447,3 +447,28 @@ int DoublyLinkedList::getNewCrewId()
     return HighestId+1;
 }
 
+int DoublyLinkedList::getNewMaterialId()
+{
+    int HighestId = 0;
+    Node *current = head;
+    Node *previous = new Node;
+
+    while (current != NULL)
+    {
+        vector<string> ProjectIds = current->data.getMaterialIDs();
+
+        for (int i = 0; i < ProjectIds.size(); i++)
+        {
+            if (stoi(ProjectIds[i]) > HighestId)
+            {
+                HighestId = stoi(ProjectIds[i]);
+            }
+        }
+
+        previous = current;
+        current = current->next;
+    }
+
+    return HighestId+1;
+}
+

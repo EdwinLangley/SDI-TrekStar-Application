@@ -22,8 +22,8 @@ vector<string> FileWriter::SplitLine(string inputLine){
 void FileWriter::WriteOneSidedDVD(SingleSidedDVD inputDVDS){
     //Takes all memeber variables gained from member functions
     //and puts together into one string to write
-    string oneSidedDVD="1DVD,";
-    oneSidedDVD=inputDVDS.getMaterials();
+    string oneSidedDVD="1DVD";
+    oneSidedDVD.append(inputDVDS.getMaterials());
     oneSidedDVD.append(FIRSTLEVELDELIMSTRNG);
     oneSidedDVD.append(inputDVDS.getDVD());
     oneSidedDVD.append("\n");
@@ -59,8 +59,8 @@ SingleSidedDVD FileWriter::ReadOneSidedDVD(string input)
 void FileWriter::WriteTwoSidedDVD(TwoSidedDVD inputDVDS){
     //Takes all memeber variables gained from member functions
     //and puts together into one string to write
-    string twoSidedDVD="2DVD,";
-    twoSidedDVD=inputDVDS.getMaterials();
+    string twoSidedDVD="2DVD";
+    twoSidedDVD.append(inputDVDS.getMaterials());
     twoSidedDVD.append(FIRSTLEVELDELIMSTRNG);
     twoSidedDVD.append(inputDVDS.getDVD());
     twoSidedDVD.append(FIRSTLEVELDELIMSTRNG);
@@ -97,8 +97,8 @@ TwoSidedDVD FileWriter::ReadTwoSidedDVD(string input)
 void FileWriter::WriteBluRay(BluRay inputDVDS){
     //Takes all memeber variables gained from member functions
     //and puts together into one string to write
-    string bluRay="BRAY,";
-    bluRay=inputDVDS.getMaterials();
+    string bluRay="BRAY";
+    bluRay.append(inputDVDS.getMaterials());
     bluRay.append(FIRSTLEVELDELIMSTRNG);
     bluRay.append(inputDVDS.getBluRay());
     bluRay.append("\n");
@@ -133,8 +133,8 @@ BluRay FileWriter::ReadBluRay(string input)
 void FileWriter::WriteVHS(VHS inputDVDS){
     //Takes all memeber variables gained from member functions
     //and puts together into one string to write
-    string vhs="VHSS,";
-    vhs=inputDVDS.getMaterials();
+    string vhs="VHSS";
+    vhs.append(inputDVDS.getMaterials());
     vhs.append("\n");
     ofstream outputFile;
     outputFile.open(MATERIALFILENAME,ios_base::app);
