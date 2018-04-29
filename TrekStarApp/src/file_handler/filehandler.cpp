@@ -193,8 +193,9 @@ ComboBox FileWriter::ReadComboBox(string input)
     vector<TwoSidedDVD> doubleDVDS;
     //Match a dvd to its combo-box, Simple ID matching and line conversion using relevant functions
     for(unsigned int i=0;i<idsOfDVDS.size();i++){
-        string comboID=idsOfDVDS[i];
         for (unsigned int j=0;j<Materials.size();j++){
+            //Go through a line of the materials, get the TYPE and ID, if the ID matches
+            //make the correct dvd
             string line =Materials[j];
             string type,id;
             stringstream ss;
