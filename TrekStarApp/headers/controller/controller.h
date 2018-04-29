@@ -52,6 +52,8 @@ private slots:
     void handleProjectWindowExtraSubLangDel();
     void handleProjectWindowBonusAdd();
     void handleProjectWindowBonusDel();
+    void updateComboRuntime();
+    void updateMinimumPackage();
 
     void handleSettingsApply();
 

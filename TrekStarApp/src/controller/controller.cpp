@@ -184,6 +184,10 @@ controller::controller()
     connect(pw.ui->cmdExtraSubtitleTracksDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowExtraSubLangDel()));
     connect(pw.ui->cmdBonusFeaturesAdd, SIGNAL(clicked()), this, SLOT(handleProjectWindowBonusAdd()));
     connect(pw.ui->cmdBonusFeaturesDel, SIGNAL(clicked()), this, SLOT(handleProjectWindowBonusDel()));
+    connect(pw.ui->sbComboSingleDVD, SIGNAL(valueChanged(int)), this, SLOT(updateComboRuntime()));
+    connect(pw.ui->sbComboDoubleDVD, SIGNAL(valueChanged(int)), this, SLOT(updateComboRuntime()));
+    connect(pw.ui->sbComboSingleDVD, SIGNAL(valueChanged(int)), this, SLOT(updateMinimumPackage()));
+    connect(pw.ui->sbComboDoubleDVD, SIGNAL(valueChanged(int)), this, SLOT(updateMinimumPackage()));
 
     // Displays list of all projects
     showAllProjects();
@@ -1004,6 +1008,10 @@ void controller::filterCrewByRole(std::string role){
 
 void controller::handleProjectWindowMaterialChange(){
 
+    pw.ui->sbPackagingHeight->setMinimum(0);
+    pw.ui->sbPackagingWidth->setMinimum(0);
+    pw.ui->sbPackagingDepth->setMinimum(0);
+
     pw.ui->txtMaterialTitle->clear();
     pw.ui->txtMaterialIDNum->clear();
     pw.ui->cbVFormat->setCurrentIndex(0);
@@ -1024,22 +1032,66 @@ void controller::handleProjectWindowMaterialChange(){
     pw.ui->lstBonusFeatures->clear();
     pw.ui->lstExtraLanguageTracks->clear();
     pw.ui->lstExtraSubtitleTracks->clear();
+    pw.ui->sbComboSingleDVD->setValue(0);
+    pw.ui->sbComboDoubleDVD->setValue(0);
+
+    pw.ui->sbMaterialRuntime->setDisabled(false);
+
+    pw.ui->lblVFormat->setVisible(true);
+    pw.ui->cbVFormat->setDisabled(false);
+    pw.ui->cbVFormat->setVisible(true);
+
+    pw.ui->lblAFormat->setVisible(true);
+    pw.ui->cbAFormat->setDisabled(false);
+    pw.ui->cbAFormat->setVisible(true);
+
+    pw.ui->lblMaterialLanguage->setVisible(true);
+    pw.ui->cbMaterialLanguage->setDisabled(false);
+    pw.ui->cbMaterialLanguage->setVisible(true);
+
+    pw.ui->lblMaterialRuntime->setDisabled(false);
+
+    pw.ui->lblMaterialSubLang->setVisible(true);
+    pw.ui->cbSubLang->setDisabled(false);
+    pw.ui->cbSubLang->setVisible(true);
+    pw.ui->cmdSubLangAdd->setDisabled(false);
+    pw.ui->cmdSubLangAdd->setVisible(true);
+    pw.ui->cmdSubLangDel->setDisabled(false);
+    pw.ui->cmdSubLangDel->setVisible(true);
+    pw.ui->lstSubLang->setVisible(true);
+
+    pw.ui->lblMaterialFrameAspect->setVisible(true);
+    pw.ui->lblMaterialFrameDescription->setVisible(true);
+    pw.ui->txtFrameDescription->setDisabled(false);
+    pw.ui->txtFrameDescription->setVisible(true);
+    pw.ui->lblMaterialFrameHorizontal->setVisible(true);
+    pw.ui->sbFrameHorizontal->setDisabled(false);
+    pw.ui->sbFrameHorizontal->setVisible(true);
+    pw.ui->lblMaterialFrameVertical->setVisible(true);
+    pw.ui->sbFrameVertical->setDisabled(false);
+    pw.ui->sbFrameVertical->setVisible(true);
+
+    pw.ui->lblComboSingleDVD->setVisible(false);
+    pw.ui->sbComboSingleDVD->setDisabled(true);
+    pw.ui->sbComboSingleDVD->setVisible(false);
+
+    pw.ui->lblComboDoubleDVD->setVisible(false);
+    pw.ui->sbComboDoubleDVD->setDisabled(true);
+    pw.ui->sbComboDoubleDVD->setVisible(false);
 
     pw.ui->cbPackagingMaterial->addItem("Plastic");
+
+    pw.ui->lblMaterialAnswer->setText("Not Created");
+    pw.ui->lblMaterialAnswer->setStyleSheet("color: #D81E5B");
+    pw.ui->cmdMaterialDel->setVisible(false);
+    pw.ui->cmdMaterialClear->setText("Clear");
+    pw.ui->cmdMaterialCreate->setText("Create");
 
     std::string material = pw.ui->cbMaterialType->currentText().toStdString();
 
     if(material == "DVD Single Sided"){
 
-        if(openProj->getSingleDVD().getTitle() == ""){
-
-            pw.ui->lblMaterialAnswer->setText("Not Created");
-            pw.ui->lblMaterialAnswer->setStyleSheet("color: #D81E5B");
-            pw.ui->cmdMaterialDel->setVisible(false);
-            pw.ui->cmdMaterialClear->setText("Clear");
-            pw.ui->cmdMaterialCreate->setText("Create");
-
-        }else{
+        if(openProj->getSingleDVD().getTitle() != ""){
 
             pw.ui->lblMaterialAnswer->setText("Created");
             pw.ui->lblMaterialAnswer->setStyleSheet("color: #78CAD2");
@@ -1170,15 +1222,7 @@ void controller::handleProjectWindowMaterialChange(){
     }
     else if(material == "DVD Double Sided"){
 
-        if(openProj->getTwoDVD().getTitle() == ""){
-
-            pw.ui->lblMaterialAnswer->setText("Not Created");
-            pw.ui->lblMaterialAnswer->setStyleSheet("color: #D81E5B");
-            pw.ui->cmdMaterialDel->setVisible(false);
-            pw.ui->cmdMaterialClear->setText("Clear");
-            pw.ui->cmdMaterialCreate->setText("Create");
-
-        }else{
+        if(openProj->getTwoDVD().getTitle() != ""){
 
             pw.ui->lblMaterialAnswer->setText("Created");
             pw.ui->lblMaterialAnswer->setStyleSheet("color: #78CAD2");
@@ -1311,15 +1355,7 @@ void controller::handleProjectWindowMaterialChange(){
     }
     else if(material == "Blu Ray"){
 
-        if(openProj->getBluRay().getTitle() == ""){
-
-            pw.ui->lblMaterialAnswer->setText("Not Created");
-            pw.ui->lblMaterialAnswer->setStyleSheet("color: #D81E5B");
-            pw.ui->cmdMaterialDel->setVisible(false);
-            pw.ui->cmdMaterialClear->setText("Clear");
-            pw.ui->cmdMaterialCreate->setText("Create");
-
-        }else{
+        if(openProj->getBluRay().getTitle() != ""){
 
             pw.ui->lblMaterialAnswer->setText("Created");
             pw.ui->lblMaterialAnswer->setStyleSheet("color: #78CAD2");
@@ -1450,15 +1486,7 @@ void controller::handleProjectWindowMaterialChange(){
 
         pw.ui->cbPackagingMaterial->addItem("Cardboard");
 
-        if(openProj->getVhs().getTitle() == ""){
-
-            pw.ui->lblMaterialAnswer->setText("Not Created");
-            pw.ui->lblMaterialAnswer->setStyleSheet("color: #D81E5B");
-            pw.ui->cmdMaterialDel->setVisible(false);
-            pw.ui->cmdMaterialClear->setText("Clear");
-            pw.ui->cmdMaterialCreate->setText("Create");
-
-        }else{
+        if(openProj->getVhs().getTitle() != ""){
 
             pw.ui->lblMaterialAnswer->setText("Created");
             pw.ui->lblMaterialAnswer->setStyleSheet("color: #78CAD2");
@@ -1583,14 +1611,101 @@ void controller::handleProjectWindowMaterialChange(){
         pw.ui->cbPackagingMaterial->clear();
         pw.ui->cbPackagingMaterial->addItem("Cardboard");
 
-        unsigned int numberOfDVDs = QInputDialog::getInt(&pw, tr("ComboBox"), tr("Enter the number of DVDs in the ComboBox: "), \
-                                                openProj->getComboBox().getNumberOfDVDs(), 0, 100, 1);
+        pw.ui->sbMaterialRuntime->setDisabled(true);
 
-        ComboBox newValue;
-        newValue.setNumberOfDVDs(numberOfDVDs);
-        openProj->setComboBox(newValue);
+        if(openProj->getComboBox().getTitle() != ""){
 
-        pw.ui->cbMaterialType->setCurrentIndex(0);
+            pw.ui->lblMaterialAnswer->setText("Created");
+            pw.ui->lblMaterialAnswer->setStyleSheet("color: #78CAD2");
+            pw.ui->cmdMaterialDel->setVisible(true);
+            pw.ui->cmdMaterialClear->setText("Clear Changes");
+            pw.ui->cmdMaterialCreate->setText("Apply Changes");
+
+            pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getComboBox().getTitle()));
+            pw.ui->sbMaterialPrice->setValue(openProj->getComboBox().getPrice());
+            pw.ui->sbComboSingleDVD->setValue(openProj->getComboBox().getNumberOfDVDs());
+            //pw.ui->sbComboDoubleDVD->setValue(QString::fromStdString(openProj->getComboBox().get));
+            pw.ui->sbPackagingHeight->setValue(openProj->getComboBox().getPackaging().getHeight());
+            pw.ui->sbPackagingWidth->setValue(openProj->getComboBox().getPackaging().getWidth());
+            pw.ui->sbPackagingDepth->setValue(openProj->getComboBox().getPackaging().getDepth());
+
+            updateComboRuntime();
+
+        }
+
+        pw.ui->lblComboSingleDVD->setVisible(true);
+        pw.ui->sbComboSingleDVD->setDisabled(false);
+        pw.ui->sbComboSingleDVD->setVisible(true);
+
+        pw.ui->lblComboDoubleDVD->setVisible(true);
+        pw.ui->sbComboDoubleDVD->setDisabled(false);
+        pw.ui->sbComboDoubleDVD->setVisible(true);
+
+        pw.ui->lblVFormat->setVisible(false);
+        pw.ui->cbVFormat->setDisabled(true);
+        pw.ui->cbVFormat->setVisible(false);
+
+        pw.ui->lblAFormat->setVisible(false);
+        pw.ui->cbAFormat->setDisabled(true);
+        pw.ui->cbAFormat->setVisible(false);
+
+        pw.ui->lblMaterialLanguage->setVisible(false);
+        pw.ui->cbMaterialLanguage->setDisabled(true);
+        pw.ui->cbMaterialLanguage->setVisible(false);
+
+        pw.ui->lblMaterialRuntime->setDisabled(true);
+
+        pw.ui->lblMaterialSubLang->setVisible(false);
+        pw.ui->cbSubLang->setDisabled(true);
+        pw.ui->cbSubLang->setVisible(false);
+        pw.ui->cmdSubLangAdd->setDisabled(true);
+        pw.ui->cmdSubLangAdd->setVisible(false);
+        pw.ui->cmdSubLangDel->setDisabled(true);
+        pw.ui->cmdSubLangDel->setVisible(false);
+        pw.ui->lstSubLang->setVisible(false);
+
+        pw.ui->lblMaterialFrameAspect->setVisible(false);
+        pw.ui->lblMaterialFrameDescription->setVisible(false);
+        pw.ui->txtFrameDescription->setDisabled(true);
+        pw.ui->txtFrameDescription->setVisible(false);
+        pw.ui->lblMaterialFrameHorizontal->setVisible(false);
+        pw.ui->sbFrameHorizontal->setDisabled(true);
+        pw.ui->sbFrameHorizontal->setVisible(false);
+        pw.ui->lblMaterialFrameVertical->setVisible(false);
+        pw.ui->sbFrameVertical->setDisabled(true);
+        pw.ui->sbFrameVertical->setVisible(false);
+
+        pw.ui->lblFirstSideContent->setVisible(false);
+        pw.ui->txtFirstSideContent->setDisabled(true);
+        pw.ui->txtFirstSideContent->setVisible(false);
+
+        pw.ui->lblSecondSideContent->setVisible(false);
+        pw.ui->txtSecondSideContent->setDisabled(true);
+        pw.ui->txtSecondSideContent->setVisible(false);
+
+        pw.ui->lblExtraLanguageTracks->setVisible(false);
+        pw.ui->cbExtraLanguageTracks->setVisible(false);
+        pw.ui->cmdExtraLanguageTracksAdd->setDisabled(true);
+        pw.ui->cmdExtraLanguageTracksAdd->setVisible(false);
+        pw.ui->cmdExtraLanguageTracksDel->setDisabled(true);
+        pw.ui->cmdExtraLanguageTracksDel->setVisible(false);
+        pw.ui->lstExtraLanguageTracks->setVisible(false);
+
+        pw.ui->lblExtraSubtitleTracks->setVisible(false);
+        pw.ui->cbExtraSubtitleTracks->setVisible(false);
+        pw.ui->cmdExtraSubtitleTracksAdd->setDisabled(true);
+        pw.ui->cmdExtraSubtitleTracksAdd->setVisible(false);
+        pw.ui->cmdExtraSubtitleTracksDel->setDisabled(true);
+        pw.ui->cmdExtraSubtitleTracksDel->setVisible(false);
+        pw.ui->lstExtraSubtitleTracks->setVisible(false);
+
+        pw.ui->lblBonusFeatures->setVisible(false);
+        pw.ui->txtBonusFeatures->setVisible(false);
+        pw.ui->cmdBonusFeaturesAdd->setDisabled(true);
+        pw.ui->cmdBonusFeaturesAdd->setVisible(false);
+        pw.ui->cmdBonusFeaturesDel->setDisabled(true);
+        pw.ui->cmdBonusFeaturesDel->setVisible(false);
+        pw.ui->lstBonusFeatures->setVisible(false);
 
     }
 
@@ -1622,6 +1737,8 @@ void controller::handleProjectWindowMaterialDelete(){
         openProj->setBluRay(BluRay());
     }else if(material == "VHS"){
         openProj->setVhs(VHS());
+    }else if(material == "Combo Box"){
+        openProj->setComboBox(ComboBox());
     }
 
     handleProjectWindowMaterialChange();
@@ -1635,53 +1752,71 @@ void controller::handleProjectWindowMaterialCreate(){
     bool submit = true;
     std::string materialType = pw.ui->cbMaterialType->currentText().toStdString();
 
-    std::vector<std::string> extraLanguageTracks;
-    std::vector<std::string> extraSubtitleTracks;
-    std::vector<std::string> bonusFeatures;
     std::string firstSideContent;
     std::string secondSideContent;
+    std::string vformat;
+    std::string aformat;
+    std::string language;
+    int frameHorizontal;
+    int frameVertical;
+    int runtime;
+    int comboNumberSingleDVD;
+    int comboNumberDoubleDVD;
+    std::string frameDesc;
+    std::vector<std::string> subLang;
+    std::vector<std::string> extraLanguageTracks;
+    std::vector<std::string> extraSubtitleTracks;
+    std::vector<std::string> bonusFeatures;   
 
     // Getting data from window
     std::string title = pw.ui->txtMaterialTitle->text().toStdString();
     std::string id = to_string(projList.getNewMaterialId());
-    std::string vformat = pw.ui->cbVFormat->currentText().toStdString();
-    std::string aformat = pw.ui->cbAFormat->currentText().toStdString();
-    std::string language = pw.ui->cbMaterialLanguage->currentText().toStdString();
-    int runtime = pw.ui->sbMaterialRuntime->value();
     int price = pw.ui->sbMaterialPrice->value();
-    int frameHorizontal = pw.ui->sbFrameHorizontal->value();
-    int frameVertical = pw.ui->sbFrameVertical->value();
-    std::string frameDesc = pw.ui->txtFrameDescription->text().toStdString();
     std::string packagingMaterial = pw.ui->cbPackagingMaterial->currentText().toStdString();
     int packagingHeight = pw.ui->sbPackagingHeight->value();
     int packagingWidth = pw.ui->sbPackagingWidth->value();
     int packagingDepth = pw.ui->sbPackagingDepth->value();
 
-    std::vector<std::string> subLang;
-    for(int i = 0; i < pw.ui->lstSubLang->count(); ++i){
-        subLang.push_back(pw.ui->lstSubLang->item(i)->text().toStdString());
-    }
+    if(materialType != "Combo Box"){
 
-    if(materialType != "VHS"){
+        runtime = pw.ui->sbMaterialRuntime->value();
+        vformat = pw.ui->cbVFormat->currentText().toStdString();
+        aformat = pw.ui->cbAFormat->currentText().toStdString();
+        language = pw.ui->cbMaterialLanguage->currentText().toStdString();
+        frameHorizontal = pw.ui->sbFrameHorizontal->value();
+        frameVertical = pw.ui->sbFrameVertical->value();
+        frameDesc = pw.ui->txtFrameDescription->text().toStdString();
 
-        for(int i = 0; i < pw.ui->lstExtraLanguageTracks->count(); ++i){
-            extraLanguageTracks.push_back(pw.ui->lstExtraLanguageTracks->item(i)->text().toStdString());
+        for(int i = 0; i < pw.ui->lstSubLang->count(); ++i){
+            subLang.push_back(pw.ui->lstSubLang->item(i)->text().toStdString());
         }
 
-        for(int i = 0; i < pw.ui->lstExtraSubtitleTracks->count(); ++i){
-            extraSubtitleTracks.push_back(pw.ui->lstExtraSubtitleTracks->item(i)->text().toStdString());
-        }
+        if(materialType != "VHS"){
 
-        for(int i = 0; i < pw.ui->lstBonusFeatures->count(); ++i){
-            bonusFeatures.push_back(pw.ui->lstBonusFeatures->item(i)->text().toStdString());
-        }
+            for(int i = 0; i < pw.ui->lstExtraLanguageTracks->count(); ++i){
+                extraLanguageTracks.push_back(pw.ui->lstExtraLanguageTracks->item(i)->text().toStdString());
+            }
 
-        if(materialType != "Blu Ray"){
-            firstSideContent = pw.ui->txtFirstSideContent->text().toStdString();
-            if(materialType == "DVD Double Sided"){
-                secondSideContent = pw.ui->txtSecondSideContent->text().toStdString();
+            for(int i = 0; i < pw.ui->lstExtraSubtitleTracks->count(); ++i){
+                extraSubtitleTracks.push_back(pw.ui->lstExtraSubtitleTracks->item(i)->text().toStdString());
+            }
+
+            for(int i = 0; i < pw.ui->lstBonusFeatures->count(); ++i){
+                bonusFeatures.push_back(pw.ui->lstBonusFeatures->item(i)->text().toStdString());
+            }
+
+            if(materialType != "Blu Ray"){
+                firstSideContent = pw.ui->txtFirstSideContent->text().toStdString();
+                if(materialType == "DVD Double Sided"){
+                    secondSideContent = pw.ui->txtSecondSideContent->text().toStdString();
+                }
             }
         }
+    }else{
+
+        comboNumberSingleDVD = pw.ui->sbComboSingleDVD->value();
+        comboNumberDoubleDVD = pw.ui->sbComboDoubleDVD->value();
+
     }
 
     // Error checking
@@ -1699,34 +1834,6 @@ void controller::handleProjectWindowMaterialCreate(){
         pw.ui->lblMaterialIDNum->setStyleSheet("color: #78CAD2");
     }
 
-    if(frameDesc == ""){
-        submit = false;
-        pw.ui->lblMaterialFrameDescription->setStyleSheet("color: #D81E5B");
-    }else{
-        pw.ui->lblMaterialFrameDescription->setStyleSheet("color: #78CAD2");
-    }
-
-    if(packagingMaterial == ""){
-        submit = false;
-        pw.ui->lblMaterialPackageMaterial->setStyleSheet("color: #D81E5B");
-    }else{
-        pw.ui->lblMaterialPackageMaterial->setStyleSheet("color: #78CAD2");
-    }
-
-    if(subLang.size() == 0){
-        submit = false;
-        pw.ui->lblMaterialSubLang->setStyleSheet("color: #D81E5B");
-    }else{
-        pw.ui->lblMaterialSubLang->setStyleSheet("color: #78CAD2");
-    }
-
-    if(runtime == 0){
-        submit = false;
-        pw.ui->lblMaterialRuntime->setStyleSheet("color: #D81E5B");
-    }else{
-        pw.ui->lblMaterialRuntime->setStyleSheet("color: #78CAD2");
-    }
-
     if(price == 0){
         submit = false;
         pw.ui->lblMaterialPrice->setStyleSheet("color: #D81E5B");
@@ -1734,18 +1841,11 @@ void controller::handleProjectWindowMaterialCreate(){
         pw.ui->lblMaterialPrice->setStyleSheet("color: #78CAD2");
     }
 
-    if(frameHorizontal == 0){
+    if(packagingMaterial == ""){
         submit = false;
-        pw.ui->lblMaterialFrameHorizontal->setStyleSheet("color: #D81E5B");
+        pw.ui->lblMaterialPackageMaterial->setStyleSheet("color: #D81E5B");
     }else{
-        pw.ui->lblMaterialFrameHorizontal->setStyleSheet("color: #78CAD2");
-    }
-
-    if(frameVertical == 0){
-        submit = false;
-        pw.ui->lblMaterialFrameVertical->setStyleSheet("color: #D81E5B");
-    }else{
-        pw.ui->lblMaterialFrameVertical->setStyleSheet("color: #78CAD2");
+        pw.ui->lblMaterialPackageMaterial->setStyleSheet("color: #78CAD2");
     }
 
     if(packagingHeight == 0){
@@ -1769,62 +1869,118 @@ void controller::handleProjectWindowMaterialCreate(){
         pw.ui->lblMaterialPackageDepth->setStyleSheet("color: #78CAD2");
     }
 
-    if(materialType != "VHS"){
+    if(materialType != "Combo Box"){
 
-        if(extraLanguageTracks.size() == 0){
+        if(runtime == 0){
             submit = false;
-            pw.ui->lblExtraLanguageTracks->setStyleSheet("color: #D81E5B");
+            pw.ui->lblMaterialRuntime->setStyleSheet("color: #D81E5B");
         }else{
-            pw.ui->lblExtraLanguageTracks->setStyleSheet("color: #78CAD2");
+            pw.ui->lblMaterialRuntime->setStyleSheet("color: #78CAD2");
         }
 
-        if(extraSubtitleTracks.size() == 0){
+        if(frameDesc == ""){
             submit = false;
-            pw.ui->lblExtraSubtitleTracks->setStyleSheet("color: #D81E5B");
+            pw.ui->lblMaterialFrameDescription->setStyleSheet("color: #D81E5B");
         }else{
-            pw.ui->lblExtraSubtitleTracks->setStyleSheet("color: #78CAD2");
+            pw.ui->lblMaterialFrameDescription->setStyleSheet("color: #78CAD2");
         }
 
-        if(bonusFeatures.size() == 0){
+        if(subLang.size() == 0){
             submit = false;
-            pw.ui->lblBonusFeatures->setStyleSheet("color: #D81E5B");
+            pw.ui->lblMaterialSubLang->setStyleSheet("color: #D81E5B");
         }else{
-            pw.ui->lblBonusFeatures->setStyleSheet("color: #78CAD2");
+            pw.ui->lblMaterialSubLang->setStyleSheet("color: #78CAD2");
         }
 
-        if(materialType != "Blu Ray"){
+        if(frameHorizontal == 0){
+            submit = false;
+            pw.ui->lblMaterialFrameHorizontal->setStyleSheet("color: #D81E5B");
+        }else{
+            pw.ui->lblMaterialFrameHorizontal->setStyleSheet("color: #78CAD2");
+        }
 
-            if(firstSideContent == ""){
+        if(frameVertical == 0){
+            submit = false;
+            pw.ui->lblMaterialFrameVertical->setStyleSheet("color: #D81E5B");
+        }else{
+            pw.ui->lblMaterialFrameVertical->setStyleSheet("color: #78CAD2");
+        }
+
+        if(materialType != "VHS"){
+
+            if(extraLanguageTracks.size() == 0){
                 submit = false;
-                pw.ui->lblFirstSideContent->setStyleSheet("color: #D81E5B");
+                pw.ui->lblExtraLanguageTracks->setStyleSheet("color: #D81E5B");
             }else{
-                pw.ui->lblFirstSideContent->setStyleSheet("color: #78CAD2");
+                pw.ui->lblExtraLanguageTracks->setStyleSheet("color: #78CAD2");
             }
 
-            if(materialType == "DVD Double Sided"){
+            if(extraSubtitleTracks.size() == 0){
+                submit = false;
+                pw.ui->lblExtraSubtitleTracks->setStyleSheet("color: #D81E5B");
+            }else{
+                pw.ui->lblExtraSubtitleTracks->setStyleSheet("color: #78CAD2");
+            }
 
-                if(secondSideContent == ""){
+            if(bonusFeatures.size() == 0){
+                submit = false;
+                pw.ui->lblBonusFeatures->setStyleSheet("color: #D81E5B");
+            }else{
+                pw.ui->lblBonusFeatures->setStyleSheet("color: #78CAD2");
+            }
+
+            if(materialType != "Blu Ray"){
+
+                if(firstSideContent == ""){
                     submit = false;
-                    pw.ui->lblSecondSideContent->setStyleSheet("color: #D81E5B");
+                    pw.ui->lblFirstSideContent->setStyleSheet("color: #D81E5B");
                 }else{
-                    pw.ui->lblSecondSideContent->setStyleSheet("color: #78CAD2");
+                    pw.ui->lblFirstSideContent->setStyleSheet("color: #78CAD2");
+                }
+
+                if(materialType == "DVD Double Sided"){
+
+                    if(secondSideContent == ""){
+                        submit = false;
+                        pw.ui->lblSecondSideContent->setStyleSheet("color: #D81E5B");
+                    }else{
+                        pw.ui->lblSecondSideContent->setStyleSheet("color: #78CAD2");
+                    }
                 }
             }
         }
+    }else{
+
+        if(comboNumberSingleDVD == 0){
+            submit = false;
+            pw.ui->lblComboSingleDVD->setStyleSheet("color: #D81E5B");
+        }else{
+            pw.ui->lblComboSingleDVD->setStyleSheet("color: #78CAD2");
+        }
+
+        if(comboNumberDoubleDVD == 0){
+            submit = false;
+            pw.ui->lblComboDoubleDVD->setStyleSheet("color: #D81E5B");
+        }else{
+            pw.ui->lblComboDoubleDVD->setStyleSheet("color: #78CAD2");
+        }
+
     }
 
     if(submit == true){
-
-        FrameAspect frame;
-        frame.setRatioDescription(frameDesc);
-        frame.setHorizontalRatio(frameHorizontal);
-        frame.setVerticalRatio(frameVertical);
 
         Packaging package;
         package.setMaterial(packagingMaterial);
         package.setHeight(packagingHeight);
         package.setWidth(packagingWidth);
         package.setDepth(packagingDepth);
+
+        FrameAspect frame;
+        if(materialType != "Combo Box"){
+            frame.setRatioDescription(frameDesc);
+            frame.setHorizontalRatio(frameHorizontal);
+            frame.setVerticalRatio(frameVertical);
+        }
 
         if(materialType == "DVD Single Sided"){
 
@@ -1905,6 +2061,19 @@ void controller::handleProjectWindowMaterialCreate(){
             newMaterial.setPackage(package);
 
             openProj->setVhs(newMaterial);
+
+        }else if(materialType == "Combo Box"){
+
+            ComboBox newMaterial;
+
+            newMaterial.setIdNumber(id);
+            newMaterial.setTitle(title);
+            newMaterial.setPrice(price);
+            newMaterial.setPackaging(package);
+            newMaterial.setNumberOfDVDs(comboNumberSingleDVD);
+            //newMaterial.setNumberOfDVDs(comboNumberSingleDVD);
+
+            openProj->setComboBox(newMaterial);
 
         }
 
@@ -2040,5 +2209,60 @@ void controller::handleSettingsApply(){
     if(input.toStdString() != ""){
         projList.File.ReportEarningsLimit=(input.toInt());
     }
+
+}
+
+void controller::updateComboRuntime(){
+
+    int numOfSingle = pw.ui->sbComboSingleDVD->value();
+    int numOfDouble = pw.ui->sbComboDoubleDVD->value();
+    int runtimeSingle = openProj->getSingleDVD().getRunTime();
+    int runtimeDouble = openProj->getTwoDVD().getRunTime();
+
+    pw.ui->sbMaterialRuntime->setValue((numOfSingle * runtimeSingle) + (numOfDouble * runtimeDouble));
+
+}
+
+void controller::updateMinimumPackage(){
+
+    unsigned int minHeight = 0;
+    unsigned int minWidth = 0;
+    unsigned int minDepth = 0;
+
+    pw.ui->sbPackagingHeight->setMinimum(0);
+    pw.ui->sbPackagingWidth->setMinimum(0);
+    pw.ui->sbPackagingDepth->setMinimum(0);
+
+    pw.ui->sbPackagingHeight->setValue(0);
+    pw.ui->sbPackagingWidth->setValue(0);
+    pw.ui->sbPackagingDepth->setValue(0);
+
+    if(pw.ui->sbComboSingleDVD->value() != 0){
+
+        minHeight = openProj->getSingleDVD().getPackage().getHeight();
+        minWidth = openProj->getSingleDVD().getPackage().getWidth();
+        minDepth = openProj->getSingleDVD().getPackage().getDepth();
+
+    }
+
+    if(pw.ui->sbComboDoubleDVD->value() != 0){
+
+        if(minHeight < openProj->getTwoDVD().getPackage().getHeight()){
+            minHeight = openProj->getTwoDVD().getPackage().getHeight();
+        }
+
+        if(minWidth < openProj->getTwoDVD().getPackage().getWidth()){
+            minWidth = openProj->getTwoDVD().getPackage().getWidth();
+        }
+
+        if(minDepth < openProj->getTwoDVD().getPackage().getDepth()){
+            minDepth = openProj->getTwoDVD().getPackage().getDepth();
+        }
+
+    }
+
+    pw.ui->sbPackagingHeight->setMinimum(minHeight);
+    pw.ui->sbPackagingWidth->setMinimum(minWidth);
+    pw.ui->sbPackagingDepth->setMinimum(minDepth);
 
 }
