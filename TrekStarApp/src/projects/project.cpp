@@ -76,6 +76,17 @@ vector<string> Project::getMaterials() const
     return materialIDs;
 }
 
+vector<string> Project::getAllMaterials() const
+{
+    vector<string> MaterialIDS;
+    MaterialIDS.push_back(this->singleDVD.getIdNumber());
+    MaterialIDS.push_back(this->twoDVD.getIdNumber());
+    MaterialIDS.push_back(this->bluRay.getIdNumber());
+    MaterialIDS.push_back(this->vhs.getIdNumber());
+    MaterialIDS.push_back(VectorToString(this->comboBox.getIdsOfDVDs()));
+    return MaterialIDS;
+}
+
 void Project::setMaterials(const vector<string> &value)
 {
     materialIDs = value;

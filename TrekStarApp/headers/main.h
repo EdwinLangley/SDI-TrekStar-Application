@@ -15,6 +15,8 @@
 #define PROJECTFILENAME     "ProjectFile.txt"
 #define MATERIALFILENAME    "MaterialFile.txt"
 #define CREWFILENAME        "CrewFile.txt"
+#define SETTINGSFILE "settings.txt"
+
 
 #define FIRSTLEVELDELIMCHAR     '#'
 #define FIRSTLEVELDELIMSTRNG    "#"

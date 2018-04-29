@@ -22,7 +22,7 @@ public:
 private:
     Node *head, *tail;
 public:
-    FileWriter File;
+    FileWriter File=FileWriter();
     DoublyLinkedList()
     {
         head=NULL;

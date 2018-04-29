@@ -293,7 +293,7 @@ void FileWriter::WriteProject(){
         newLine.append(FIRSTLEVELDELIMSTRNG);
         newLine.append(VectorToString(this->UpdatedProjectList[i].getFilmLocations()));
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(VectorToString(this->UpdatedProjectList[i].getMaterials()));
+        newLine.append(VectorToString(this->UpdatedProjectList[i].getAllMaterials()));
         newLine.append("\n");
         projectFile << newLine;
         //Write extra materials/crews here
@@ -521,13 +521,34 @@ void FileWriter::BuildReport(){
     reportFile.close();
 }
 
+void FileWriter::ReadSettings(){
+    ifstream inputFile;
+    inputFile.open(SETTINGSFILE);
+    string line;
+    getline(inputFile,line);
+    try{
+        ReportEarningsLimit=stoi(line);}
+    catch (invalid_argument){
+        ReportEarningsLimit=1000;
+    }
+    inputFile.close();
+}
+
+void FileWriter::WriteSettings(){
+    ofstream outputFile;
+    outputFile.open(SETTINGSFILE,ios_base::trunc);
+    outputFile<<ReportEarningsLimit;
+    outputFile.close();
+
+}
 
 FileWriter::FileWriter()
 {
+    ReadSettings();
 }
 
 FileWriter::~FileWriter()
 {
-
+    WriteSettings();
 }
 
