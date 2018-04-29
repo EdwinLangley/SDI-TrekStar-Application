@@ -1017,13 +1017,15 @@ void controller::handleProjectWindowMaterialChange(){
     pw.ui->sbFrameHorizontal->setValue(0);
     pw.ui->sbFrameVertical->setValue(0);
     pw.ui->txtFrameDescription->clear();
-    pw.ui->txtPackagingMaterial->clear();
+    pw.ui->cbPackagingMaterial->clear();
     pw.ui->sbPackagingHeight->setValue(0);
     pw.ui->sbPackagingWidth->setValue(0);
     pw.ui->sbPackagingDepth->setValue(0);
     pw.ui->lstBonusFeatures->clear();
     pw.ui->lstExtraLanguageTracks->clear();
     pw.ui->lstExtraSubtitleTracks->clear();
+
+    pw.ui->cbPackagingMaterial->addItem("Plastic");
 
     std::string material = pw.ui->cbMaterialType->currentText().toStdString();
 
@@ -1108,7 +1110,7 @@ void controller::handleProjectWindowMaterialChange(){
             pw.ui->sbFrameVertical->setValue(openProj->getSingleDVD().getFrame().getVerticalRatio());
             pw.ui->txtFrameDescription->setText(QString::fromStdString(openProj->getSingleDVD().getFrame().getRatioDescription()));
 
-            pw.ui->txtPackagingMaterial->setText(QString::fromStdString(openProj->getSingleDVD().getPackage().getMaterial()));
+            pw.ui->cbPackagingMaterial->setCurrentIndex(0);
             pw.ui->sbPackagingHeight->setValue(openProj->getSingleDVD().getPackage().getHeight());
             pw.ui->sbPackagingWidth->setValue(openProj->getSingleDVD().getPackage().getWidth());
             pw.ui->sbPackagingDepth->setValue(openProj->getSingleDVD().getPackage().getDepth());
@@ -1247,7 +1249,7 @@ void controller::handleProjectWindowMaterialChange(){
             pw.ui->sbFrameVertical->setValue(openProj->getTwoDVD().getFrame().getVerticalRatio());
             pw.ui->txtFrameDescription->setText(QString::fromStdString(openProj->getTwoDVD().getFrame().getRatioDescription()));
 
-            pw.ui->txtPackagingMaterial->setText(QString::fromStdString(openProj->getTwoDVD().getPackage().getMaterial()));
+            pw.ui->cbPackagingMaterial->setCurrentIndex(0);
             pw.ui->sbPackagingHeight->setValue(openProj->getTwoDVD().getPackage().getHeight());
             pw.ui->sbPackagingWidth->setValue(openProj->getTwoDVD().getPackage().getWidth());
             pw.ui->sbPackagingDepth->setValue(openProj->getTwoDVD().getPackage().getDepth());
@@ -1388,7 +1390,7 @@ void controller::handleProjectWindowMaterialChange(){
             pw.ui->sbFrameVertical->setValue(openProj->getBluRay().getFrame().getVerticalRatio());
             pw.ui->txtFrameDescription->setText(QString::fromStdString(openProj->getBluRay().getFrame().getRatioDescription()));
 
-            pw.ui->txtPackagingMaterial->setText(QString::fromStdString(openProj->getBluRay().getPackage().getMaterial()));
+            pw.ui->cbPackagingMaterial->setCurrentIndex(0);
             pw.ui->sbPackagingHeight->setValue(openProj->getBluRay().getPackage().getHeight());
             pw.ui->sbPackagingWidth->setValue(openProj->getBluRay().getPackage().getWidth());
             pw.ui->sbPackagingDepth->setValue(openProj->getBluRay().getPackage().getDepth());
@@ -1445,6 +1447,8 @@ void controller::handleProjectWindowMaterialChange(){
 
     }
     else if(material == "VHS"){
+
+        pw.ui->cbPackagingMaterial->addItem("Cardboard");
 
         if(openProj->getVhs().getTitle() == ""){
 
@@ -1525,7 +1529,12 @@ void controller::handleProjectWindowMaterialChange(){
             pw.ui->sbFrameVertical->setValue(openProj->getVhs().getFrame().getVerticalRatio());
             pw.ui->txtFrameDescription->setText(QString::fromStdString(openProj->getVhs().getFrame().getRatioDescription()));
 
-            pw.ui->txtPackagingMaterial->setText(QString::fromStdString(openProj->getVhs().getPackage().getMaterial()));
+            if(openProj->getVhs().getPackage().getMaterial() == "Plastic"){
+                pw.ui->cbPackagingMaterial->setCurrentIndex(0);
+            }else if(openProj->getVhs().getPackage().getMaterial() == "Cardboard"){
+                pw.ui->cbPackagingMaterial->setCurrentIndex(1);
+            }
+
             pw.ui->sbPackagingHeight->setValue(openProj->getVhs().getPackage().getHeight());
             pw.ui->sbPackagingWidth->setValue(openProj->getVhs().getPackage().getWidth());
             pw.ui->sbPackagingDepth->setValue(openProj->getVhs().getPackage().getDepth());
@@ -1571,6 +1580,9 @@ void controller::handleProjectWindowMaterialChange(){
     }
     else if(material == "Combo Box"){
 
+        pw.ui->cbPackagingMaterial->clear();
+        pw.ui->cbPackagingMaterial->addItem("Cardboard");
+
         unsigned int numberOfDVDs = QInputDialog::getInt(&pw, tr("ComboBox"), tr("Enter the number of DVDs in the ComboBox: "), \
                                                 openProj->getComboBox().getNumberOfDVDs(), 0, 100, 1);
 
@@ -1603,13 +1615,13 @@ void controller::handleProjectWindowMaterialDelete(){
     std::string material = pw.ui->cbMaterialType->currentText().toStdString();
 
     if(material == "DVD Single Sided"){
-        openProj->getSingleDVD().setIdNumber(0);
+        openProj->setSingleDVD(SingleSidedDVD());
     }else if(material == "DVD Double Sided"){
-        openProj->getTwoDVD().setIdNumber(0);
+        openProj->setTwoDVD(TwoSidedDVD());
     }else if(material == "Blu Ray"){
-        openProj->getBluRay().setIdNumber(0);
+        openProj->setBluRay(BluRay());
     }else if(material == "VHS"){
-        openProj->getVhs().setIdNumber(0);
+        openProj->setVhs(VHS());
     }
 
     handleProjectWindowMaterialChange();
@@ -1629,7 +1641,7 @@ void controller::handleProjectWindowMaterialCreate(){
 
     // Getting data from window
     std::string title = pw.ui->txtMaterialTitle->text().toStdString();
-    std::string id = pw.ui->txtMaterialIDNum->text().toStdString();
+    std::string id = to_string(projList.getNewMaterialId());
     std::string vformat = pw.ui->cbVFormat->currentText().toStdString();
     std::string aformat = pw.ui->cbAFormat->currentText().toStdString();
     std::string language = pw.ui->cbMaterialLanguage->currentText().toStdString();
@@ -1638,7 +1650,7 @@ void controller::handleProjectWindowMaterialCreate(){
     int frameHorizontal = pw.ui->sbFrameHorizontal->value();
     int frameVertical = pw.ui->sbFrameVertical->value();
     std::string frameDesc = pw.ui->txtFrameDescription->text().toStdString();
-    std::string packagingMaterial = pw.ui->txtPackagingMaterial->text().toStdString();
+    std::string packagingMaterial = pw.ui->cbPackagingMaterial->currentText().toStdString();
     int packagingHeight = pw.ui->sbPackagingHeight->value();
     int packagingWidth = pw.ui->sbPackagingWidth->value();
     int packagingDepth = pw.ui->sbPackagingDepth->value();
@@ -1664,7 +1676,7 @@ void controller::handleProjectWindowMaterialCreate(){
 
         if(materialType != "Blu Ray"){
             firstSideContent = pw.ui->txtFirstSideContent->text().toStdString();
-            if(materialType == "Double Sided DVD"){
+            if(materialType == "DVD Double Sided"){
                 secondSideContent = pw.ui->txtSecondSideContent->text().toStdString();
             }
         }
@@ -1738,7 +1750,7 @@ void controller::handleProjectWindowMaterialCreate(){
                 pw.ui->lblFirstSideContent->setStyleSheet("color: #78CAD2");
             }
 
-            if(materialType == "Double Sided DVD"){
+            if(materialType == "DVD Double Sided"){
 
                 if(secondSideContent == ""){
                     submit = false;
