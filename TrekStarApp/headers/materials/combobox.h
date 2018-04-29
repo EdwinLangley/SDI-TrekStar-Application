@@ -19,6 +19,7 @@ private:
     float price = 0;
 
     unsigned int numberOfDVDs = 0;
+    unsigned int numberofDoubleDVDs = 0;
     vector<string> idsOfDVDs = {"0"};
     vector<SingleSidedDVD> SingleDVDs;
     vector<TwoSidedDVD> DoubleDVDs;
@@ -70,6 +71,8 @@ public:
     float getPrice() const;
     void setPrice(float value);
     string getDetails();
+    unsigned int getNumberofDoubleDVDs() const;
+    void setNumberofDoubleDVDs(unsigned int value);
 };
 
 #endif // COMBOBOX_H
