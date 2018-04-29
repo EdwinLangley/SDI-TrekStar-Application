@@ -278,6 +278,7 @@ void controller::handleCreateProject(){
         pw.show();
         handleClear();
         showAllProjects();
+        handleFilter();
 
      }
 
@@ -363,7 +364,7 @@ void controller::handleFilter(){
         std::vector<std::string> returnedValues;
 
         if(filterCategory == "No Filter"){
-            showAllProjects();
+            returnedValues = projList.getAllFilmTitles();
         }
         else if(filterCategory == "Newest to Oldest"){
             returnedValues = projList.sortByNewest();
@@ -388,7 +389,56 @@ void controller::handleFilter(){
         }
 
         for(unsigned int i = 0; i < returnedValues.size(); ++i){
-            mw.ui->lstProjects->addItem(QString::fromStdString(returnedValues[i]));
+            Project temp;
+
+            if (filterCategory == "Newest to Oldest" || filterCategory == "Oldest to Newest" )
+            {
+                std::string projectTitle = "";
+                std::size_t found = returnedValues[i].find_last_of(":");
+                if (found != string::npos)
+                {
+                    projectTitle = returnedValues[i].substr(0,found);
+                }
+
+                temp = projList.findByTitle(projectTitle);
+            }
+            else
+            {
+                temp = projList.findByTitle(returnedValues[i]);
+            }
+
+
+
+            string Materials = "\nMaterials ";
+            if (temp.getBluRay().getIdNumber() != "0")
+            {
+                Materials = Materials + "- Blu Ray ";
+            }
+
+            if (temp.getSingleDVD().getIdNumber() != "0")
+            {
+                Materials = Materials + "- Single Sided DVD ";
+            }
+
+            if (temp.getTwoDVD().getIdNumber() != "0")
+            {
+                Materials = Materials + "- Two Sided DVD ";
+            }
+
+            if (temp.getVhs().getIdNumber() != "0")
+            {
+                Materials = Materials + "- VHS ";
+            }
+
+            //Combo box id
+//            if (temp.getBluRay().getIdNumber() != "0")
+//            {
+//                Materials = Materials + "- Blu Ray";
+//            }
+
+
+
+            mw.ui->lstProjects->addItem(QString::fromStdString(returnedValues[i] + ":" +Materials));
         }
     }
     catch(std::out_of_range e1){
@@ -407,11 +457,35 @@ void controller::handleFilter(){
 // Outputs all projects to project list
 void controller::showAllProjects(){
     try{
+        Project temp;
         std::vector<std::string> allProjects = projList.getAllFilmTitles();
         mw.ui->lstProjects->clear();
         for(unsigned int i = 0; i < allProjects.size(); ++i){
 
-            mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i]));
+            temp = projList.findByTitle(allProjects[i]);
+
+            string Materials = "\nMaterials ";
+            if (temp.getBluRay().getIdNumber() != "0")
+            {
+                Materials = Materials + "- Blu Ray ";
+            }
+
+            if (temp.getSingleDVD().getIdNumber() != "0")
+            {
+                Materials = Materials + "- Single Sided DVD ";
+            }
+
+            if (temp.getTwoDVD().getIdNumber() != "0")
+            {
+                Materials = Materials + "- Two Sided DVD ";
+            }
+
+            if (temp.getVhs().getIdNumber() != "0")
+            {
+                Materials = Materials + "- VHS ";
+            }
+
+            mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i] + ":" +Materials));
         }
     }
     catch(out_of_range e1){
