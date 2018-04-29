@@ -753,6 +753,9 @@
      </property>
     </widget>
     <widget class="QLineEdit" name="txtMaterialIDNum">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>120</x>
@@ -760,6 +763,9 @@
        <width>141</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QLineEdit" name="txtMaterialTitle">

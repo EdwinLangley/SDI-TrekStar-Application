@@ -1603,13 +1603,13 @@ void controller::handleProjectWindowMaterialDelete(){
     std::string material = pw.ui->cbMaterialType->currentText().toStdString();
 
     if(material == "DVD Single Sided"){
-        openProj->getSingleDVD().setIdNumber(0);
+        openProj->setSingleDVD(SingleSidedDVD());
     }else if(material == "DVD Double Sided"){
-        openProj->getTwoDVD().setIdNumber(0);
+        openProj->setTwoDVD(TwoSidedDVD());
     }else if(material == "Blu Ray"){
-        openProj->getBluRay().setIdNumber(0);
+        openProj->setBluRay(BluRay());
     }else if(material == "VHS"){
-        openProj->getVhs().setIdNumber(0);
+        openProj->setVhs(VHS());
     }
 
     handleProjectWindowMaterialChange();
@@ -1629,7 +1629,7 @@ void controller::handleProjectWindowMaterialCreate(){
 
     // Getting data from window
     std::string title = pw.ui->txtMaterialTitle->text().toStdString();
-    std::string id = pw.ui->txtMaterialIDNum->text().toStdString();
+    std::string id = to_string(projList.getNewMaterialId());
     std::string vformat = pw.ui->cbVFormat->currentText().toStdString();
     std::string aformat = pw.ui->cbAFormat->currentText().toStdString();
     std::string language = pw.ui->cbMaterialLanguage->currentText().toStdString();
@@ -1664,7 +1664,7 @@ void controller::handleProjectWindowMaterialCreate(){
 
         if(materialType != "Blu Ray"){
             firstSideContent = pw.ui->txtFirstSideContent->text().toStdString();
-            if(materialType == "Double Sided DVD"){
+            if(materialType == "DVD Double Sided"){
                 secondSideContent = pw.ui->txtSecondSideContent->text().toStdString();
             }
         }
@@ -1738,7 +1738,7 @@ void controller::handleProjectWindowMaterialCreate(){
                 pw.ui->lblFirstSideContent->setStyleSheet("color: #78CAD2");
             }
 
-            if(materialType == "Double Sided DVD"){
+            if(materialType == "DVD Double Sided"){
 
                 if(secondSideContent == ""){
                     submit = false;
