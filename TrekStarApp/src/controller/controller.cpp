@@ -5,6 +5,8 @@
 #include "project.h"
 #include "doublylinkedlist.h"
 
+#include <QInputDialog>
+
 
 controller::controller()
 {
@@ -1002,20 +1004,27 @@ void controller::filterCrewByRole(std::string role){
 void controller::handleProjectWindowMaterialChange(){
 
     pw.ui->txtMaterialTitle->clear();
-    pw.ui->txtIDNum->clear();
+    pw.ui->txtMaterialIDNum->clear();
     pw.ui->cbVFormat->setCurrentIndex(0);
     pw.ui->cbAFormat->setCurrentIndex(0);
     pw.ui->cbMaterialLanguage->setCurrentIndex(0);
-    pw.ui->txtMaterialFrame->clear();
     pw.ui->sbMaterialRuntime->setValue(0);
     pw.ui->sbMaterialPrice->setValue(0);
     pw.ui->lstSubLang->clear();
     pw.ui->txtFirstSideContent->clear();
     pw.ui->txtSecondSideContent->clear();
+    pw.ui->sbFrameHorizontal->setValue(0);
+    pw.ui->sbFrameVertical->setValue(0);
+    pw.ui->txtFrameDescription->clear();
+    pw.ui->txtPackagingMaterial->clear();
+    pw.ui->sbPackagingHeight->setValue(0);
+    pw.ui->sbPackagingWidth->setValue(0);
+    pw.ui->sbPackagingDepth->setValue(0);
+    pw.ui->lstBonusFeatures->clear();
+    pw.ui->lstExtraLanguageTracks->clear();
+    pw.ui->lstExtraSubtitleTracks->clear();
 
     std::string material = pw.ui->cbMaterialType->currentText().toStdString();
-    std::string frame;
-    std::string package;
 
     if(material == "DVD Single Sided"){
 
@@ -1036,7 +1045,7 @@ void controller::handleProjectWindowMaterialChange(){
             pw.ui->cmdMaterialCreate->setText("Apply Changes");
 
             pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getSingleDVD().getTitle()));
-            pw.ui->txtIDNum->setText(QString::fromStdString(openProj->getSingleDVD().getIdNumber()));
+            pw.ui->txtMaterialIDNum->setText(QString::fromStdString(openProj->getSingleDVD().getIdNumber()));
             pw.ui->sbMaterialRuntime->setValue(openProj->getSingleDVD().getRunTime());
             pw.ui->sbMaterialPrice->setValue(openProj->getSingleDVD().getPrice());
 
@@ -1059,19 +1068,19 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbVFormat->setCurrentIndex(5);
             }
 
-            if(openProj->getSingleDVD().getVFormat() == "mp3"){
+            if(openProj->getSingleDVD().getAFormat() == "mp3"){
                 pw.ui->cbAFormat->setCurrentIndex(0);
             }
-            else if(openProj->getSingleDVD().getVFormat() == "flc"){
+            else if(openProj->getSingleDVD().getAFormat() == "flc"){
                 pw.ui->cbAFormat->setCurrentIndex(1);
             }
-            else if(openProj->getSingleDVD().getVFormat() == "wav"){
+            else if(openProj->getSingleDVD().getAFormat() == "wav"){
                 pw.ui->cbAFormat->setCurrentIndex(2);
             }
-            else if(openProj->getSingleDVD().getVFormat() == "ogg"){
+            else if(openProj->getSingleDVD().getAFormat() == "ogg"){
                 pw.ui->cbAFormat->setCurrentIndex(3);
             }
-            else if(openProj->getSingleDVD().getVFormat() == "other"){
+            else if(openProj->getSingleDVD().getAFormat() == "other"){
                 pw.ui->cbAFormat->setCurrentIndex(4);
             }
 
@@ -1094,21 +1103,16 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbMaterialLanguage->setCurrentIndex(5);
             }
 
-            frame = openProj->getSingleDVD().getFrame().getFrameAspect() + "/" + \
-                    openProj->getSingleDVD().getFrame().getRatioDescription() + "/" + \
-                    std::to_string(openProj->getSingleDVD().getFrame().getHorizontalRatio()) + "/" + \
-                    std::to_string(openProj->getSingleDVD().getFrame().getVerticalRatio());
+            pw.ui->sbFrameHorizontal->setValue(openProj->getSingleDVD().getFrame().getHorizontalRatio());
+            pw.ui->sbFrameVertical->setValue(openProj->getSingleDVD().getFrame().getVerticalRatio());
+            pw.ui->txtFrameDescription->setText(QString::fromStdString(openProj->getSingleDVD().getFrame().getRatioDescription()));
 
-            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+            pw.ui->txtPackagingMaterial->setText(QString::fromStdString(openProj->getSingleDVD().getPackage().getMaterial()));
+            pw.ui->sbPackagingHeight->setValue(openProj->getSingleDVD().getPackage().getHeight());
+            pw.ui->sbPackagingWidth->setValue(openProj->getSingleDVD().getPackage().getWidth());
+            pw.ui->sbPackagingDepth->setValue(openProj->getSingleDVD().getPackage().getDepth());
 
-            package = std::to_string(openProj->getSingleDVD().getPackage().getDepth()) + "/" + \
-                      std::to_string(openProj->getSingleDVD().getPackage().getHeight()) + "/" + \
-                      std::to_string(openProj->getSingleDVD().getPackage().getWidth()) + "/" + \
-                      openProj->getSingleDVD().getPackage().getMaterial() + "/" + \
-                      openProj->getSingleDVD().getPackage().getPackaging();
-
-            pw.ui->txtMaterialPackage->setText(QString::fromStdString(package));
-
+            pw.ui->txtFirstSideContent->setText(QString::fromStdString(openProj->getSingleDVD().getFirstSideContent()));
 
             for(unsigned int i = 0; i < openProj->getSingleDVD().getSubTitleLanguages().size(); ++i){
                 pw.ui->lstSubLang->addItem(QString::fromStdString(openProj->getSingleDVD().getSubTitleLanguages()[i]));
@@ -1180,7 +1184,7 @@ void controller::handleProjectWindowMaterialChange(){
             pw.ui->cmdMaterialCreate->setText("Apply Changes");
 
             pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getTwoDVD().getTitle()));
-            pw.ui->txtIDNum->setText(QString::fromStdString(openProj->getTwoDVD().getIdNumber()));
+            pw.ui->txtMaterialIDNum->setText(QString::fromStdString(openProj->getTwoDVD().getIdNumber()));
             pw.ui->sbMaterialRuntime->setValue(openProj->getTwoDVD().getRunTime());
             pw.ui->sbMaterialPrice->setValue(openProj->getTwoDVD().getPrice());
 
@@ -1203,19 +1207,19 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbVFormat->setCurrentIndex(5);
             }
 
-            if(openProj->getTwoDVD().getVFormat() == "mp3"){
+            if(openProj->getTwoDVD().getAFormat() == "mp3"){
                 pw.ui->cbAFormat->setCurrentIndex(0);
             }
-            else if(openProj->getTwoDVD().getVFormat() == "flc"){
+            else if(openProj->getTwoDVD().getAFormat() == "flc"){
                 pw.ui->cbAFormat->setCurrentIndex(1);
             }
-            else if(openProj->getTwoDVD().getVFormat() == "wav"){
+            else if(openProj->getTwoDVD().getAFormat() == "wav"){
                 pw.ui->cbAFormat->setCurrentIndex(2);
             }
-            else if(openProj->getTwoDVD().getVFormat() == "ogg"){
+            else if(openProj->getTwoDVD().getAFormat() == "ogg"){
                 pw.ui->cbAFormat->setCurrentIndex(3);
             }
-            else if(openProj->getTwoDVD().getVFormat() == "other"){
+            else if(openProj->getTwoDVD().getAFormat() == "other"){
                 pw.ui->cbAFormat->setCurrentIndex(4);
             }
 
@@ -1238,23 +1242,17 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbMaterialLanguage->setCurrentIndex(5);
             }
 
-            frame = openProj->getTwoDVD().getFrame().getFrameAspect() + "/" + \
-                    openProj->getTwoDVD().getFrame().getRatioDescription() + "/" + \
-                    std::to_string(openProj->getTwoDVD().getFrame().getHorizontalRatio()) + "/" + \
-                    std::to_string(openProj->getTwoDVD().getFrame().getVerticalRatio());
+            pw.ui->sbFrameHorizontal->setValue(openProj->getTwoDVD().getFrame().getHorizontalRatio());
+            pw.ui->sbFrameVertical->setValue(openProj->getTwoDVD().getFrame().getVerticalRatio());
+            pw.ui->txtFrameDescription->setText(QString::fromStdString(openProj->getTwoDVD().getFrame().getRatioDescription()));
 
-            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
-
-            package = std::to_string(openProj->getTwoDVD().getPackage().getDepth()) + "/" + \
-                      std::to_string(openProj->getTwoDVD().getPackage().getHeight()) + "/" + \
-                      std::to_string(openProj->getTwoDVD().getPackage().getWidth()) + "/" + \
-                      openProj->getTwoDVD().getPackage().getMaterial() + "/" + \
-                      openProj->getTwoDVD().getPackage().getPackaging();
-
-            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+            pw.ui->txtPackagingMaterial->setText(QString::fromStdString(openProj->getTwoDVD().getPackage().getMaterial()));
+            pw.ui->sbPackagingHeight->setValue(openProj->getTwoDVD().getPackage().getHeight());
+            pw.ui->sbPackagingWidth->setValue(openProj->getTwoDVD().getPackage().getWidth());
+            pw.ui->sbPackagingDepth->setValue(openProj->getTwoDVD().getPackage().getDepth());
 
             pw.ui->txtFirstSideContent->setText(QString::fromStdString(openProj->getTwoDVD().getFirstSideContent()));
-            pw.ui->txtFirstSideContent->setText(QString::fromStdString(openProj->getTwoDVD().getFirstSideContent()));
+            pw.ui->txtSecondSideContent->setText(QString::fromStdString(openProj->getTwoDVD().getSecondSideContent()));
 
 
             for(unsigned int i = 0; i < openProj->getTwoDVD().getSubTitleLanguages().size(); ++i){
@@ -1327,7 +1325,7 @@ void controller::handleProjectWindowMaterialChange(){
             pw.ui->cmdMaterialCreate->setText("Apply Changes");
 
             pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getBluRay().getTitle()));
-            pw.ui->txtIDNum->setText(QString::fromStdString(openProj->getBluRay().getIdNumber()));
+            pw.ui->txtMaterialIDNum->setText(QString::fromStdString(openProj->getBluRay().getIdNumber()));
             pw.ui->sbMaterialRuntime->setValue(openProj->getBluRay().getRunTime());
             pw.ui->sbMaterialPrice->setValue(openProj->getBluRay().getPrice());
 
@@ -1350,19 +1348,19 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbVFormat->setCurrentIndex(5);
             }
 
-            if(openProj->getBluRay().getVFormat() == "mp3"){
+            if(openProj->getBluRay().getAFormat() == "mp3"){
                 pw.ui->cbAFormat->setCurrentIndex(0);
             }
-            else if(openProj->getBluRay().getVFormat() == "flc"){
+            else if(openProj->getBluRay().getAFormat() == "flc"){
                 pw.ui->cbAFormat->setCurrentIndex(1);
             }
-            else if(openProj->getBluRay().getVFormat() == "wav"){
+            else if(openProj->getBluRay().getAFormat() == "wav"){
                 pw.ui->cbAFormat->setCurrentIndex(2);
             }
-            else if(openProj->getBluRay().getVFormat() == "ogg"){
+            else if(openProj->getBluRay().getAFormat() == "ogg"){
                 pw.ui->cbAFormat->setCurrentIndex(3);
             }
-            else if(openProj->getBluRay().getVFormat() == "other"){
+            else if(openProj->getBluRay().getAFormat() == "other"){
                 pw.ui->cbAFormat->setCurrentIndex(4);
             }
 
@@ -1385,20 +1383,14 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbMaterialLanguage->setCurrentIndex(5);
             }
 
-            frame = openProj->getBluRay().getFrame().getFrameAspect() + "/" + \
-                    openProj->getBluRay().getFrame().getRatioDescription() + "/" + \
-                    std::to_string(openProj->getBluRay().getFrame().getHorizontalRatio()) + "/" + \
-                    std::to_string(openProj->getBluRay().getFrame().getVerticalRatio());
+            pw.ui->sbFrameHorizontal->setValue(openProj->getBluRay().getFrame().getHorizontalRatio());
+            pw.ui->sbFrameVertical->setValue(openProj->getBluRay().getFrame().getVerticalRatio());
+            pw.ui->txtFrameDescription->setText(QString::fromStdString(openProj->getBluRay().getFrame().getRatioDescription()));
 
-            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
-
-            package = std::to_string(openProj->getBluRay().getPackage().getDepth()) + "/" + \
-                      std::to_string(openProj->getBluRay().getPackage().getHeight()) + "/" + \
-                      std::to_string(openProj->getBluRay().getPackage().getWidth()) + "/" + \
-                      openProj->getBluRay().getPackage().getMaterial() + "/" + \
-                      openProj->getBluRay().getPackage().getPackaging();
-
-            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+            pw.ui->txtPackagingMaterial->setText(QString::fromStdString(openProj->getBluRay().getPackage().getMaterial()));
+            pw.ui->sbPackagingHeight->setValue(openProj->getBluRay().getPackage().getHeight());
+            pw.ui->sbPackagingWidth->setValue(openProj->getBluRay().getPackage().getWidth());
+            pw.ui->sbPackagingDepth->setValue(openProj->getBluRay().getPackage().getDepth());
 
             for(unsigned int i = 0; i < openProj->getBluRay().getSubTitleLanguages().size(); ++i){
                 pw.ui->lstSubLang->addItem(QString::fromStdString(openProj->getBluRay().getSubTitleLanguages()[i]));
@@ -1470,7 +1462,7 @@ void controller::handleProjectWindowMaterialChange(){
             pw.ui->cmdMaterialCreate->setText("Apply Changes");
 
             pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getVhs().getTitle()));
-            pw.ui->txtIDNum->setText(QString::fromStdString(openProj->getVhs().getIdNumber()));
+            pw.ui->txtMaterialIDNum->setText(QString::fromStdString(openProj->getVhs().getIdNumber()));
             pw.ui->sbMaterialRuntime->setValue(openProj->getVhs().getRunTime());
             pw.ui->sbMaterialPrice->setValue(openProj->getVhs().getPrice());
 
@@ -1493,19 +1485,19 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbVFormat->setCurrentIndex(5);
             }
 
-            if(openProj->getVhs().getVFormat() == "mp3"){
+            if(openProj->getVhs().getAFormat() == "mp3"){
                 pw.ui->cbAFormat->setCurrentIndex(0);
             }
-            else if(openProj->getVhs().getVFormat() == "flc"){
+            else if(openProj->getVhs().getAFormat() == "flc"){
                 pw.ui->cbAFormat->setCurrentIndex(1);
             }
-            else if(openProj->getVhs().getVFormat() == "wav"){
+            else if(openProj->getVhs().getAFormat() == "wav"){
                 pw.ui->cbAFormat->setCurrentIndex(2);
             }
-            else if(openProj->getVhs().getVFormat() == "ogg"){
+            else if(openProj->getVhs().getAFormat() == "ogg"){
                 pw.ui->cbAFormat->setCurrentIndex(3);
             }
-            else if(openProj->getVhs().getVFormat() == "other"){
+            else if(openProj->getVhs().getAFormat() == "other"){
                 pw.ui->cbAFormat->setCurrentIndex(4);
             }
 
@@ -1528,20 +1520,18 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbMaterialLanguage->setCurrentIndex(5);
             }
 
-            frame = openProj->getVhs().getFrame().getFrameAspect() + "/" + \
-                    openProj->getVhs().getFrame().getRatioDescription() + "/" + \
-                    std::to_string(openProj->getVhs().getFrame().getHorizontalRatio()) + "/" + \
-                    std::to_string(openProj->getVhs().getFrame().getVerticalRatio());
+            pw.ui->sbFrameHorizontal->setValue(openProj->getVhs().getFrame().getHorizontalRatio());
+            pw.ui->sbFrameVertical->setValue(openProj->getVhs().getFrame().getVerticalRatio());
+            pw.ui->txtFrameDescription->setText(QString::fromStdString(openProj->getVhs().getFrame().getRatioDescription()));
 
-            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+            pw.ui->txtPackagingMaterial->setText(QString::fromStdString(openProj->getVhs().getPackage().getMaterial()));
+            pw.ui->sbPackagingHeight->setValue(openProj->getVhs().getPackage().getHeight());
+            pw.ui->sbPackagingWidth->setValue(openProj->getVhs().getPackage().getWidth());
+            pw.ui->sbPackagingDepth->setValue(openProj->getVhs().getPackage().getDepth());
 
-            package = std::to_string(openProj->getVhs().getPackage().getDepth()) + "/" + \
-                      std::to_string(openProj->getVhs().getPackage().getHeight()) + "/" + \
-                      std::to_string(openProj->getVhs().getPackage().getWidth()) + "/" + \
-                      openProj->getVhs().getPackage().getMaterial() + "/" + \
-                      openProj->getVhs().getPackage().getPackaging();
-
-            pw.ui->txtMaterialFrame->setText(QString::fromStdString(frame));
+            for(unsigned int i = 0; i < openProj->getVhs().getSubTitleLanguages().size(); ++i){
+                pw.ui->lstSubLang->addItem(QString::fromStdString(openProj->getVhs().getSubTitleLanguages()[i]));
+            }
 
         }
 
@@ -1580,12 +1570,19 @@ void controller::handleProjectWindowMaterialChange(){
     }
     else if(material == "Combo Box"){
 
+        unsigned int numberOfDVDs = QInputDialog::getInt(&pw, tr("ComboBox"), tr("Enter the number of DVDs in the ComboBox: "), \
+                                                openProj->getComboBox().getNumberOfDVDs(), 0, 100, 1);
+
+        ComboBox newValue;
+        newValue.setNumberOfDVDs(numberOfDVDs);
+        openProj->setComboBox(newValue);
+
+        pw.ui->cbMaterialType->setCurrentIndex(0);
+
     }
 
     pw.ui->lblMaterialIDNum->setStyleSheet("color: #78CAD2");
     pw.ui->lblMaterialTitle->setStyleSheet("color: #78CAD2");
-    pw.ui->lblMaterialFrame->setStyleSheet("color: #78CAD2");
-    pw.ui->lblMaterialPackage->setStyleSheet("color: #78CAD2");
     pw.ui->lblBonusFeatures->setStyleSheet("color: #78CAD2");
     pw.ui->lblMaterialSubLang->setStyleSheet("color: #78CAD2");
     pw.ui->lblFirstSideContent->setStyleSheet("color: #78CAD2");
@@ -1593,7 +1590,10 @@ void controller::handleProjectWindowMaterialChange(){
     pw.ui->lblExtraLanguageTracks->setStyleSheet("color: #78CAD2");
     pw.ui->lblExtraSubtitleTracks->setStyleSheet("color: #78CAD2");
     pw.ui->lblBonusFeatures->setStyleSheet("color: #78CAD2");
-
+    pw.ui->lblMaterialFrameAspect->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialFrameDescription->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialPackage->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialPackageMaterial->setStyleSheet("color: #78CAD2");
 
 }
 
@@ -1601,11 +1601,252 @@ void controller::handleProjectWindowMaterialDelete(){
 
     std::string material = pw.ui->cbMaterialType->currentText().toStdString();
 
+    if(material == "DVD Single Sided"){
+        openProj->getSingleDVD().setIdNumber(0);
+    }else if(material == "DVD Double Sided"){
+        openProj->getTwoDVD().setIdNumber(0);
+    }else if(material == "Blu Ray"){
+        openProj->getBluRay().setIdNumber(0);
+    }else if(material == "VHS"){
+        openProj->getVhs().setIdNumber(0);
+    }
+
     handleProjectWindowMaterialChange();
 
 }
 
 void controller::handleProjectWindowMaterialCreate(){
+
+    bool submit = true;
+    std::string materialType = pw.ui->cbMaterialType->currentText().toStdString();
+
+    std::vector<std::string> extraLanguageTracks;
+    std::vector<std::string> extraSubtitleTracks;
+    std::vector<std::string> bonusFeatures;
+    std::string firstSideContent;
+    std::string secondSideContent;
+
+    // Getting data from window
+    std::string title = pw.ui->txtMaterialTitle->text().toStdString();
+    std::string id = pw.ui->txtMaterialIDNum->text().toStdString();
+    std::string vformat = pw.ui->cbVFormat->currentText().toStdString();
+    std::string aformat = pw.ui->cbAFormat->currentText().toStdString();
+    std::string language = pw.ui->cbMaterialLanguage->currentText().toStdString();
+    int runtime = pw.ui->sbMaterialRuntime->value();
+    int price = pw.ui->sbMaterialPrice->value();
+    int frameHorizontal = pw.ui->sbFrameHorizontal->value();
+    int frameVertical = pw.ui->sbFrameVertical->value();
+    std::string frameDesc = pw.ui->txtFrameDescription->text().toStdString();
+    std::string packagingMaterial = pw.ui->txtPackagingMaterial->text().toStdString();
+    int packagingHeight = pw.ui->sbPackagingHeight->value();
+    int packagingWidth = pw.ui->sbPackagingWidth->value();
+    int packagingDepth = pw.ui->sbPackagingDepth->value();
+
+    std::vector<std::string> subLang;
+    for(int i = 0; i < pw.ui->lstSubLang->count(); ++i){
+        subLang.push_back(pw.ui->lstSubLang->item(i)->text().toStdString());
+    }
+
+    if(materialType != "VHS"){
+
+        for(int i = 0; i < pw.ui->lstExtraLanguageTracks->count(); ++i){
+            extraLanguageTracks.push_back(pw.ui->lstExtraLanguageTracks->item(i)->text().toStdString());
+        }
+
+        for(int i = 0; i < pw.ui->lstExtraSubtitleTracks->count(); ++i){
+            extraSubtitleTracks.push_back(pw.ui->lstExtraSubtitleTracks->item(i)->text().toStdString());
+        }
+
+        for(int i = 0; i < pw.ui->lstBonusFeatures->count(); ++i){
+            bonusFeatures.push_back(pw.ui->lstBonusFeatures->item(i)->text().toStdString());
+        }
+
+        if(materialType != "Blu Ray"){
+            firstSideContent = pw.ui->txtFirstSideContent->text().toStdString();
+            if(materialType == "Double Sided DVD"){
+                secondSideContent = pw.ui->txtSecondSideContent->text().toStdString();
+            }
+        }
+    }
+
+    // Error checking
+    if(title == ""){
+        submit = false;
+        pw.ui->lblMaterialTitle->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialTitle->setStyleSheet("color: #78CAD2");
+    }
+
+    if(id == ""){
+        submit = false;
+        pw.ui->lblMaterialIDNum->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialIDNum->setStyleSheet("color: #78CAD2");
+    }
+
+    if(frameDesc == ""){
+        submit = false;
+        pw.ui->lblMaterialFrameDescription->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialFrameDescription->setStyleSheet("color: #78CAD2");
+    }
+
+    if(packagingMaterial == ""){
+        submit = false;
+        pw.ui->lblMaterialPackageMaterial->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialPackageMaterial->setStyleSheet("color: #78CAD2");
+    }
+
+    if(subLang.size() == 0){
+        submit = false;
+        pw.ui->lblMaterialSubLang->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialSubLang->setStyleSheet("color: #78CAD2");
+    }
+
+    if(materialType != "VHS"){
+
+        if(extraLanguageTracks.size() == 0){
+            submit = false;
+            pw.ui->lblExtraLanguageTracks->setStyleSheet("color: #D81E5B");
+        }else{
+            pw.ui->lblExtraLanguageTracks->setStyleSheet("color: #78CAD2");
+        }
+
+        if(extraSubtitleTracks.size() == 0){
+            submit = false;
+            pw.ui->lblExtraSubtitleTracks->setStyleSheet("color: #D81E5B");
+        }else{
+            pw.ui->lblExtraSubtitleTracks->setStyleSheet("color: #78CAD2");
+        }
+
+        if(bonusFeatures.size() == 0){
+            submit = false;
+            pw.ui->lblBonusFeatures->setStyleSheet("color: #D81E5B");
+        }else{
+            pw.ui->lblBonusFeatures->setStyleSheet("color: #78CAD2");
+        }
+
+        if(materialType != "Blu Ray"){
+
+            if(firstSideContent == ""){
+                submit = false;
+                pw.ui->lblFirstSideContent->setStyleSheet("color: #D81E5B");
+            }else{
+                pw.ui->lblFirstSideContent->setStyleSheet("color: #78CAD2");
+            }
+
+            if(materialType == "Double Sided DVD"){
+
+                if(secondSideContent == ""){
+                    submit = false;
+                    pw.ui->lblSecondSideContent->setStyleSheet("color: #D81E5B");
+                }else{
+                    pw.ui->lblSecondSideContent->setStyleSheet("color: #78CAD2");
+                }
+            }
+        }
+    }
+
+    if(submit == true){
+
+        FrameAspect frame;
+        frame.setRatioDescription(frameDesc);
+        frame.setHorizontalRatio(frameHorizontal);
+        frame.setVerticalRatio(frameVertical);
+
+        Packaging package;
+        package.setMaterial(packagingMaterial);
+        package.setHeight(packagingHeight);
+        package.setWidth(packagingWidth);
+        package.setDepth(packagingDepth);
+
+        if(materialType == "DVD Single Sided"){
+
+            SingleSidedDVD newMaterial;
+
+            newMaterial.setIdNumber(id);
+            newMaterial.setTitle(title);
+            newMaterial.setVFormat(vformat);
+            newMaterial.setAFormat(aformat);
+            newMaterial.setLanguage(language);
+            newMaterial.setPrice(price);
+            newMaterial.setRunTime(runtime);
+            newMaterial.setSubTitleLanguages(subLang);
+            newMaterial.setFrame(frame);
+            newMaterial.setPackage(package);
+            newMaterial.setFirstSideContent(firstSideContent);
+            newMaterial.setExtraLanguageTracks(extraLanguageTracks);
+            newMaterial.setExtraSubtitleTracks(extraSubtitleTracks);
+            newMaterial.setBonusFeatures(bonusFeatures);
+
+            openProj->setSingleDVD(newMaterial);
+
+        }else if(materialType == "DVD Double Sided"){
+
+            TwoSidedDVD newMaterial;
+
+            newMaterial.setIdNumber(id);
+            newMaterial.setTitle(title);
+            newMaterial.setVFormat(vformat);
+            newMaterial.setAFormat(aformat);
+            newMaterial.setLanguage(language);
+            newMaterial.setPrice(price);
+            newMaterial.setRunTime(runtime);
+            newMaterial.setSubTitleLanguages(subLang);
+            newMaterial.setFrame(frame);
+            newMaterial.setPackage(package);
+            newMaterial.setFirstSideContent(firstSideContent);
+            newMaterial.setSecondSideContent(secondSideContent);
+            newMaterial.setExtraLanguageTracks(extraLanguageTracks);
+            newMaterial.setExtraSubtitleTracks(extraSubtitleTracks);
+            newMaterial.setBonusFeatures(bonusFeatures);
+
+            openProj->setTwoDVD(newMaterial);
+
+        }else if(materialType == "Blu Ray"){
+
+            BluRay newMaterial;
+
+            newMaterial.setIdNumber(id);
+            newMaterial.setTitle(title);
+            newMaterial.setVFormat(vformat);
+            newMaterial.setAFormat(aformat);
+            newMaterial.setLanguage(language);
+            newMaterial.setPrice(price);
+            newMaterial.setRunTime(runtime);
+            newMaterial.setSubTitleLanguages(subLang);
+            newMaterial.setFrame(frame);
+            newMaterial.setPackage(package);
+            newMaterial.setExtraLanguageTracks(extraLanguageTracks);
+            newMaterial.setExtraSubtitleTracks(extraSubtitleTracks);
+            newMaterial.setBonusTracks(bonusFeatures);
+
+            openProj->setBluRay(newMaterial);
+
+        }else if(materialType == "VHS"){
+
+            VHS newMaterial;
+
+            newMaterial.setIdNumber(id);
+            newMaterial.setTitle(title);
+            newMaterial.setVFormat(vformat);
+            newMaterial.setAFormat(aformat);
+            newMaterial.setLanguage(language);
+            newMaterial.setPrice(price);
+            newMaterial.setRunTime(runtime);
+            newMaterial.setSubTitleLanguages(subLang);
+            newMaterial.setFrame(frame);
+            newMaterial.setPackage(package);
+
+            openProj->setVhs(newMaterial);
+
+        }
+
+        handleProjectWindowMaterialChange();
+
+    }
 
 }
 

@@ -4,6 +4,8 @@
 #include "main.h"
 #include "project.h"
 #include "filehandler.h"
+#include <QtConcurrent/qtconcurrentrun.h>
+#include <QThread>
 
 class DoublyLinkedList
 {
@@ -26,6 +28,7 @@ public:
         head=NULL;
         tail=NULL;
         //To load projects into the double linked list
+        //CHANGE TO A CONSTRUCTOR THAT CREATES THE PROJECT LIST
         vector<Project> AllProjects = File.BuildProjectList();
         if(AllProjects.size()!=0){
             for (unsigned int i =0; i < AllProjects.size();i++)
@@ -42,15 +45,14 @@ public:
         vector<string> Titles = getAllFilmTitles();
         vector<Project> Projects;
 
-
         for (unsigned int i = 0; i < Titles.size(); i++)
         {
             Projects.push_back(findByTitle(Titles[i]));
         }
-        File.WriteProject(Projects);
-
-
-
+        //CHANGE TO DESTRUCTOR THAT WRITES PROJECTS/MATERIALS AND REPORTS
+        File.UpdatedProjectList=Projects;
+        QFuture<void> reportThread = QtConcurrent::run(&File,&FileWriter::BuildReport);
+        File.WriteProject();
         Node *current = head;
         Node *nextNode = NULL;
         while (current != NULL)
@@ -60,8 +62,7 @@ public:
             delete current;
             current = nextNode;
         }
-
-
+        reportThread.waitForFinished();
     }
 
 //Creates a new node, with Data = Value (Project)

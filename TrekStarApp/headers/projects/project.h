@@ -71,14 +71,67 @@ public:
     void setVhs(const VHS &value);
     ComboBox getComboBox() const;
     void setComboBox(const ComboBox &value);
-    vector<string> getMaterialIDs() const;
     void setMaterialIDs(const vector<string> &value);
+    vector<string> getMaterialIDs() const;
     int getWeeklyBoxFigures() const;
     void setWeeklyBoxFigures(int value);
     vector<string> getKeywords() const;
     void setKeywords(const vector<string> &value);
     int getRunTime() const;
     void setRunTime(int value);
+
+    bool operator ==(const Project& project){
+        if(
+                this->title==project.title&&
+                this->projectStatus==project.projectStatus&&
+                this->summary==project.summary&&
+                this->genre==project.projectStatus&&
+                this->releaseDate==project.releaseDate&&
+                this->language==project.language&&
+                this->runTime==project.runTime&&
+                this->weeklyBoxFigures==project.weeklyBoxFigures&&
+                this->keywords==project.keywords&&
+                this->filmLocations==project.filmLocations&&
+                this->singleDVD==project.singleDVD&&
+                this->twoDVD==project.twoDVD&&
+                this->bluRay==project.bluRay&&
+                this->vhs==project.vhs&&
+                this->comboBox==project.comboBox&&
+                this->materialIDs==project.materialIDs)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    bool operator !=(const Project& project){
+        if(
+                this->title!=project.title||
+                this->projectStatus!=project.projectStatus||
+                this->summary!=project.summary||
+                this->genre!=project.projectStatus||
+                this->releaseDate!=project.releaseDate||
+                this->language!=project.language||
+                this->runTime!=project.runTime||
+                this->weeklyBoxFigures!=project.weeklyBoxFigures||
+                this->keywords!=project.keywords||
+                this->filmLocations!=project.filmLocations||
+                this->singleDVD!=project.singleDVD||
+                this->twoDVD!=project.twoDVD||
+                this->bluRay!=project.bluRay||
+                this->vhs!=project.vhs||
+                this->comboBox!=project.comboBox||
+                this->materialIDs!=project.materialIDs)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 };
 
 #endif // PROJECT_H
