@@ -1625,6 +1625,8 @@ void controller::handleProjectWindowMaterialDelete(){
     }
 
     handleProjectWindowMaterialChange();
+    handleCreateProject();
+    handleFilter();
 
 }
 
@@ -1907,6 +1909,8 @@ void controller::handleProjectWindowMaterialCreate(){
         }
 
         handleProjectWindowMaterialChange();
+        handleCreateProject();
+        handleFilter();
 
     }
 

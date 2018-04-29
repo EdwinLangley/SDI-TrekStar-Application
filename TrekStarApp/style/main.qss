@@ -3,6 +3,10 @@
     height: 50%;
 }
 
+#cmdApplyChanges {
+    font-size: 20px;
+}
+
 #cmdProjectDel {
     font-size: 20px;
 }
