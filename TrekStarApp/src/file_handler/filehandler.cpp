@@ -171,6 +171,13 @@ void FileWriter::WriteComboBox(ComboBox inputDVDS){
     outputFile.open(MATERIALFILENAME,ios_base::app);
     outputFile<<comboBox;
     outputFile.close();
+    //Incase this is used for combo-boxes
+    for(int i=0;i<inputDVDS.getSingleDVDs().size();i++){
+        WriteOneSidedDVD(inputDVDS.getSingleDVDs()[i]);
+    }
+    for(int i=0;i<inputDVDS.getDoubleDVDs().size();i++){
+        WriteTwoSidedDVD(inputDVDS.getDoubleDVDs()[i]);
+    }
 }
 
 ComboBox FileWriter::ReadComboBox(string input)

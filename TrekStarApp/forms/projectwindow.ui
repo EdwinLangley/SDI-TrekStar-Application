@@ -761,6 +761,9 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
     </widget>
     <widget class="QLineEdit" name="txtMaterialTitle">
      <property name="geometry">
