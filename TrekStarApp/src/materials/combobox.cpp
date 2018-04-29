@@ -40,6 +40,46 @@ void ComboBox::setDoubleDVDs(const vector<TwoSidedDVD> &value)
     DoubleDVDs = value;
 }
 
+string ComboBox::getIdNumber() const
+{
+    return idNumber;
+}
+
+void ComboBox::setIdNumber(const string &value)
+{
+    idNumber = value;
+}
+
+string ComboBox::getTitle() const
+{
+    return title;
+}
+
+void ComboBox::setTitle(const string &value)
+{
+    title = value;
+}
+
+Packaging ComboBox::getPackaging() const
+{
+    return packaging;
+}
+
+void ComboBox::setPackaging(const Packaging &value)
+{
+    packaging = value;
+}
+
+float ComboBox::getPrice() const
+{
+    return price;
+}
+
+void ComboBox::setPrice(float value)
+{
+    price = value;
+}
+
 ComboBox::ComboBox()
 {
     
