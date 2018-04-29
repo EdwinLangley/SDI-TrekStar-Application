@@ -1,6 +1,10 @@
 .QTabBar::tab {
-    width: 300%;
+    width: 411%;
     height: 50%;
+}
+
+.QInputDialog{
+    background-color: @lightColour;
 }
 
 #lblProjectName {
