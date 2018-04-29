@@ -410,6 +410,7 @@ void controller::showAllProjects(){
         std::vector<std::string> allProjects = projList.getAllFilmTitles();
         mw.ui->lstProjects->clear();
         for(unsigned int i = 0; i < allProjects.size(); ++i){
+
             mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i]));
         }
     }
@@ -433,8 +434,17 @@ void controller::handleProjectDel(){
 
         QList <QListWidgetItem *> selectedItems = mw.ui->lstProjects->selectedItems();
         std::string projectTitle;
+
+
         for(int i = 0; i < selectedItems.size(); i++){
             projectTitle = selectedItems[i]->text().toStdString();
+
+            std::size_t found = projectTitle.find_last_of(":");
+            if (found != string::npos)
+            {
+                projectTitle = projectTitle.substr(0,found);
+            }
+
             projList.delete_by_title(projectTitle);
             delete mw.ui->lstProjects->takeItem(mw.ui->lstProjects->row(selectedItems[i]));
 
@@ -461,6 +471,13 @@ void controller::handleOpenProject(){
     try{
         QList <QListWidgetItem *> selectedItems = mw.ui->lstProjects->selectedItems();
         std::string projectTitle = selectedItems[0]->text().toStdString();
+
+        std::size_t found = projectTitle.find_last_of(":");
+        if (found != string::npos)
+        {
+            projectTitle = projectTitle.substr(0,found);
+        }
+
         if(projectTitle != ""){
             openProj = &projList.findByTitle(projectTitle);
             setProjectWindow();
