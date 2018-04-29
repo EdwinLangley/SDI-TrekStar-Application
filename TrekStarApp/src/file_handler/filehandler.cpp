@@ -297,10 +297,10 @@ void FileWriter::WriteProject(){
         newLine.append("\n");
         projectFile << newLine;
         //Write extra materials/crews here
-        WriteMaterials(this->UpdatedProjectList);
         WriteCrew(to_string(this->UpdatedProjectList[i].getCrewID()),
                   this->UpdatedProjectList[i].getCrew());
     }
+    WriteMaterials(this->UpdatedProjectList);
     projectFile.close();
 }
 

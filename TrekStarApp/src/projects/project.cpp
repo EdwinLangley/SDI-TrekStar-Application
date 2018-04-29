@@ -76,14 +76,30 @@ vector<string> Project::getMaterials() const
     return materialIDs;
 }
 
-vector<string> Project::getAllMaterials() const
+vector<string> Project::getAllMaterials()
 {
     vector<string> MaterialIDS;
-    MaterialIDS.push_back(this->singleDVD.getIdNumber());
-    MaterialIDS.push_back(this->twoDVD.getIdNumber());
-    MaterialIDS.push_back(this->bluRay.getIdNumber());
-    MaterialIDS.push_back(this->vhs.getIdNumber());
-    MaterialIDS.push_back(VectorToString(this->comboBox.getIdsOfDVDs()));
+    if(this->singleDVD.getIdNumber()!="0"){
+        MaterialIDS.push_back(this->singleDVD.getIdNumber());
+    }
+    if(this->twoDVD.getIdNumber()!="0"){
+        MaterialIDS.push_back(this->twoDVD.getIdNumber());
+    }
+    if(this->bluRay.getIdNumber()!="0"){
+        MaterialIDS.push_back(this->bluRay.getIdNumber());
+    }
+    if(this->vhs.getIdNumber()!="0"){
+        MaterialIDS.push_back(this->vhs.getIdNumber());
+    }
+    if(this->comboBox.getNumberOfDVDs()!=0){
+        for(int i=0; i<this->comboBox.getIdsOfDVDs().size();i++){
+            MaterialIDS.push_back(this->comboBox.getIdsOfDVDs()[i]);
+        }
+    }
+    if(MaterialIDS.size()==0){
+        MaterialIDS={"0"};
+    }
+    materialIDs=MaterialIDS;
     return MaterialIDS;
 }
 

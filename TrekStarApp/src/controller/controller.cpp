@@ -1630,10 +1630,6 @@ void controller::handleProjectWindowMaterialCreate(){
     // Getting data from window
     std::string title = pw.ui->txtMaterialTitle->text().toStdString();
     std::string id = pw.ui->txtMaterialIDNum->text().toStdString();
-    std::vector<std::string> MaterialIds = openProj->getMaterialIDs();
-
-    MaterialIds.insert(MaterialIds.begin(), id);
-    openProj->setMaterialIDs(MaterialIds);
     std::string vformat = pw.ui->cbVFormat->currentText().toStdString();
     std::string aformat = pw.ui->cbAFormat->currentText().toStdString();
     std::string language = pw.ui->cbMaterialLanguage->currentText().toStdString();
