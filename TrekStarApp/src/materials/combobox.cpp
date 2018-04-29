@@ -93,6 +93,16 @@ string ComboBox::getDetails()
     return returnLine;
 }
 
+unsigned int ComboBox::getNumberofDoubleDVDs() const
+{
+    return numberofDoubleDVDs;
+}
+
+void ComboBox::setNumberofDoubleDVDs(unsigned int value)
+{
+    numberofDoubleDVDs = value;
+}
+
 ComboBox::ComboBox()
 {
     
