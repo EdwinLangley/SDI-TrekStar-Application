@@ -83,13 +83,13 @@ void ComboBox::setPrice(float value)
 string ComboBox::getDetails()
 {
     string returnLine;
-    returnLine.append(this->idNumber);//2
+    returnLine.append(this->idNumber);//1
     returnLine.append(FIRSTLEVELDELIMSTRNG);
-    returnLine.append(this->title);//3
+    returnLine.append(this->title);//2
     returnLine.append(FIRSTLEVELDELIMSTRNG);
-    returnLine.append(this->packaging.getPackaging());//4/5/6/7
+    returnLine.append(this->packaging.getPackaging());//3/4/5/6
     returnLine.append(FIRSTLEVELDELIMSTRNG);
-    returnLine.append(to_string(this->price));//8
+    returnLine.append(to_string(this->price));//7
     return returnLine;
 }
 

@@ -165,9 +165,9 @@ void FileWriter::WriteComboBox(ComboBox inputDVDS){
     //and puts together into one string to write
     string comboBox="CBOX";
     comboBox.append(FIRSTLEVELDELIMSTRNG);
-    comboBox.append(VectorToString(inputDVDS.getIdsOfDVDs()));
-    comboBox.append(FIRSTLEVELDELIMSTRNG);
     comboBox.append(inputDVDS.getDetails());
+    comboBox.append(FIRSTLEVELDELIMSTRNG);
+    comboBox.append(VectorToString(inputDVDS.getIdsOfDVDs()));
     comboBox.append("\n");
     ofstream outputFile;
     outputFile.open(MATERIALFILENAME,ios_base::app);
@@ -188,7 +188,7 @@ ComboBox FileWriter::ReadComboBox(string input)
     //uses StringToVector to take vectors out of the line
     vector<string> Materials=ReadMaterials();
     vector<string> materialStorage=SplitLine(input);
-    vector<string> idsOfDVDS = StringToVector(materialStorage[1]);
+    vector<string> idsOfDVDS = StringToVector(materialStorage[8]);
     vector<SingleSidedDVD> singleDVDS;
     vector<TwoSidedDVD> doubleDVDS;
     //Match a dvd to its combo-box, Simple ID matching and line conversion using relevant functions
@@ -218,10 +218,10 @@ ComboBox FileWriter::ReadComboBox(string input)
             }
         }
     }
-    Packaging package(materialStorage[4],stoi(materialStorage[5]),
-            stoi(materialStorage[6]),stoi(materialStorage[7]));
+    Packaging package(materialStorage[3],stoi(materialStorage[4]),
+            stoi(materialStorage[5]),stoi(materialStorage[6]));
     ComboBox returnComboBox(idsOfDVDS.size(),idsOfDVDS,singleDVDS,doubleDVDS,
-                            materialStorage[2],materialStorage[3],package,stof(materialStorage[8]));
+                            materialStorage[1],materialStorage[2],package,stof(materialStorage[7]));
     return returnComboBox;
 }
 void FileWriter::WriteMaterials(vector<Project> inputProject){
@@ -243,7 +243,7 @@ void FileWriter::WriteMaterials(vector<Project> inputProject){
         if(inputProject[i].getVhs().getIdNumber()!="0"){
             WriteVHS(inputProject[i].getVhs());
         }
-        if(inputProject[i].getComboBox().getIdsOfDVDs()[0]!="0"){
+        if(inputProject[i].getComboBox().getIdNumber()!="0"){
             WriteComboBox(inputProject[i].getComboBox());
         }
     }

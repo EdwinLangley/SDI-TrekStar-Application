@@ -93,7 +93,7 @@ vector<string> Project::getAllMaterials()
     }
     if(this->comboBox.getNumberOfDVDs()!=0){
         for(int i=0; i<this->comboBox.getIdsOfDVDs().size();i++){
-            MaterialIDS.push_back(this->comboBox.getIdsOfDVDs()[i]);
+            MaterialIDS.push_back(this->comboBox.getIdNumber());
         }
     }
     if(MaterialIDS.size()==0){
