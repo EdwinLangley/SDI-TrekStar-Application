@@ -166,6 +166,8 @@ void FileWriter::WriteComboBox(ComboBox inputDVDS){
     string comboBox="CBOX";
     comboBox.append(FIRSTLEVELDELIMSTRNG);
     comboBox.append(VectorToString(inputDVDS.getIdsOfDVDs()));
+    comboBox.append(FIRSTLEVELDELIMSTRNG);
+    comboBox.append(inputDVDS.getDetails());
     comboBox.append("\n");
     ofstream outputFile;
     outputFile.open(MATERIALFILENAME,ios_base::app);
@@ -215,7 +217,10 @@ ComboBox FileWriter::ReadComboBox(string input)
             }
         }
     }
-    ComboBox returnComboBox(idsOfDVDS.size(),idsOfDVDS,singleDVDS,doubleDVDS);
+    Packaging package(materialStorage[4],stoi(materialStorage[5]),
+            stoi(materialStorage[6]),stoi(materialStorage[7]));
+    ComboBox returnComboBox(idsOfDVDS.size(),idsOfDVDS,singleDVDS,doubleDVDS,
+                            materialStorage[2],materialStorage[3],package,stof(materialStorage[8]));
     return returnComboBox;
 }
 void FileWriter::WriteMaterials(vector<Project> inputProject){
