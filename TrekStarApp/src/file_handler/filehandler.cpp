@@ -166,11 +166,20 @@ void FileWriter::WriteComboBox(ComboBox inputDVDS){
     string comboBox="CBOX";
     comboBox.append(FIRSTLEVELDELIMSTRNG);
     comboBox.append(VectorToString(inputDVDS.getIdsOfDVDs()));
+    comboBox.append(FIRSTLEVELDELIMSTRNG);
+    comboBox.append(inputDVDS.getDetails());
     comboBox.append("\n");
     ofstream outputFile;
     outputFile.open(MATERIALFILENAME,ios_base::app);
     outputFile<<comboBox;
     outputFile.close();
+    //Incase this is used for combo-boxes
+    for(int i=0;i<inputDVDS.getSingleDVDs().size();i++){
+        WriteOneSidedDVD(inputDVDS.getSingleDVDs()[i]);
+    }
+    for(int i=0;i<inputDVDS.getDoubleDVDs().size();i++){
+        WriteTwoSidedDVD(inputDVDS.getDoubleDVDs()[i]);
+    }
 }
 
 ComboBox FileWriter::ReadComboBox(string input)
@@ -184,8 +193,9 @@ ComboBox FileWriter::ReadComboBox(string input)
     vector<TwoSidedDVD> doubleDVDS;
     //Match a dvd to its combo-box, Simple ID matching and line conversion using relevant functions
     for(unsigned int i=0;i<idsOfDVDS.size();i++){
-        string comboID=idsOfDVDS[i];
         for (unsigned int j=0;j<Materials.size();j++){
+            //Go through a line of the materials, get the TYPE and ID, if the ID matches
+            //make the correct dvd
             string line =Materials[j];
             string type,id;
             stringstream ss;
@@ -208,7 +218,10 @@ ComboBox FileWriter::ReadComboBox(string input)
             }
         }
     }
-    ComboBox returnComboBox(idsOfDVDS.size(),idsOfDVDS,singleDVDS,doubleDVDS);
+    Packaging package(materialStorage[4],stoi(materialStorage[5]),
+            stoi(materialStorage[6]),stoi(materialStorage[7]));
+    ComboBox returnComboBox(idsOfDVDS.size(),idsOfDVDS,singleDVDS,doubleDVDS,
+                            materialStorage[2],materialStorage[3],package,stof(materialStorage[8]));
     return returnComboBox;
 }
 void FileWriter::WriteMaterials(vector<Project> inputProject){

@@ -102,11 +102,11 @@ controller::controller()
     pw.ui->cbVFormat->addItem("other");
 
     // Sets all options for the audio format combo box on the project window
-    pw.ui->cbAFormat->addItem("mp3");
-    pw.ui->cbAFormat->addItem("flc");
-    pw.ui->cbAFormat->addItem("wav");
-    pw.ui->cbAFormat->addItem("ogg");
-    pw.ui->cbAFormat->addItem("other");
+    pw.ui->cbAFormat->addItem("Dolby");
+    pw.ui->cbAFormat->addItem("Dolby digital");
+    pw.ui->cbAFormat->addItem("MPEG-1");
+    pw.ui->cbAFormat->addItem("PCM");
+    pw.ui->cbAFormat->addItem("DTS");
 
     // Sets all options for the materials language combo box on the project window
     pw.ui->cbMaterialLanguage->addItem("English");
@@ -1162,19 +1162,19 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbVFormat->setCurrentIndex(5);
             }
 
-            if(openProj->getSingleDVD().getAFormat() == "mp3"){
+            if(openProj->getSingleDVD().getAFormat() == "Dolby"){
                 pw.ui->cbAFormat->setCurrentIndex(0);
             }
-            else if(openProj->getSingleDVD().getAFormat() == "flc"){
+            else if(openProj->getSingleDVD().getAFormat() == "Dolby digital"){
                 pw.ui->cbAFormat->setCurrentIndex(1);
             }
-            else if(openProj->getSingleDVD().getAFormat() == "wav"){
+            else if(openProj->getSingleDVD().getAFormat() == "MPEG-1"){
                 pw.ui->cbAFormat->setCurrentIndex(2);
             }
-            else if(openProj->getSingleDVD().getAFormat() == "ogg"){
+            else if(openProj->getSingleDVD().getAFormat() == "PCM"){
                 pw.ui->cbAFormat->setCurrentIndex(3);
             }
-            else if(openProj->getSingleDVD().getAFormat() == "other"){
+            else if(openProj->getSingleDVD().getAFormat() == "DTS"){
                 pw.ui->cbAFormat->setCurrentIndex(4);
             }
 
@@ -1301,19 +1301,19 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbVFormat->setCurrentIndex(5);
             }
 
-            if(openProj->getTwoDVD().getAFormat() == "mp3"){
+            if(openProj->getTwoDVD().getAFormat() == "Dolby"){
                 pw.ui->cbAFormat->setCurrentIndex(0);
             }
-            else if(openProj->getTwoDVD().getAFormat() == "flc"){
+            else if(openProj->getTwoDVD().getAFormat() == "Dolby digital"){
                 pw.ui->cbAFormat->setCurrentIndex(1);
             }
-            else if(openProj->getTwoDVD().getAFormat() == "wav"){
+            else if(openProj->getTwoDVD().getAFormat() == "MPEG-1"){
                 pw.ui->cbAFormat->setCurrentIndex(2);
             }
-            else if(openProj->getTwoDVD().getAFormat() == "ogg"){
+            else if(openProj->getTwoDVD().getAFormat() == "PCM"){
                 pw.ui->cbAFormat->setCurrentIndex(3);
             }
-            else if(openProj->getTwoDVD().getAFormat() == "other"){
+            else if(openProj->getTwoDVD().getAFormat() == "DTS"){
                 pw.ui->cbAFormat->setCurrentIndex(4);
             }
 
@@ -1442,19 +1442,19 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbVFormat->setCurrentIndex(5);
             }
 
-            if(openProj->getBluRay().getAFormat() == "mp3"){
+            if(openProj->getBluRay().getAFormat() == "Dolby"){
                 pw.ui->cbAFormat->setCurrentIndex(0);
             }
-            else if(openProj->getBluRay().getAFormat() == "flc"){
+            else if(openProj->getBluRay().getAFormat() == "Dolby digital"){
                 pw.ui->cbAFormat->setCurrentIndex(1);
             }
-            else if(openProj->getBluRay().getAFormat() == "wav"){
+            else if(openProj->getBluRay().getAFormat() == "MPEG-1"){
                 pw.ui->cbAFormat->setCurrentIndex(2);
             }
-            else if(openProj->getBluRay().getAFormat() == "ogg"){
+            else if(openProj->getBluRay().getAFormat() == "PCM"){
                 pw.ui->cbAFormat->setCurrentIndex(3);
             }
-            else if(openProj->getBluRay().getAFormat() == "other"){
+            else if(openProj->getBluRay().getAFormat() == "DTS"){
                 pw.ui->cbAFormat->setCurrentIndex(4);
             }
 
@@ -1581,19 +1581,19 @@ void controller::handleProjectWindowMaterialChange(){
                 pw.ui->cbVFormat->setCurrentIndex(5);
             }
 
-            if(openProj->getVhs().getAFormat() == "mp3"){
+            if(openProj->getVhs().getAFormat() == "Dolby"){
                 pw.ui->cbAFormat->setCurrentIndex(0);
             }
-            else if(openProj->getVhs().getAFormat() == "flc"){
+            else if(openProj->getVhs().getAFormat() == "Dolby digital"){
                 pw.ui->cbAFormat->setCurrentIndex(1);
             }
-            else if(openProj->getVhs().getAFormat() == "wav"){
+            else if(openProj->getVhs().getAFormat() == "MPEG-1"){
                 pw.ui->cbAFormat->setCurrentIndex(2);
             }
-            else if(openProj->getVhs().getAFormat() == "ogg"){
+            else if(openProj->getVhs().getAFormat() == "PCM"){
                 pw.ui->cbAFormat->setCurrentIndex(3);
             }
-            else if(openProj->getVhs().getAFormat() == "other"){
+            else if(openProj->getVhs().getAFormat() == "DTS"){
                 pw.ui->cbAFormat->setCurrentIndex(4);
             }
 
@@ -1716,6 +1716,8 @@ void controller::handleProjectWindowMaterialDelete(){
     }
 
     handleProjectWindowMaterialChange();
+    handleCreateProject();
+    handleFilter();
 
 }
 
@@ -1807,6 +1809,55 @@ void controller::handleProjectWindowMaterialCreate(){
         pw.ui->lblMaterialSubLang->setStyleSheet("color: #D81E5B");
     }else{
         pw.ui->lblMaterialSubLang->setStyleSheet("color: #78CAD2");
+    }
+
+    if(runtime == 0){
+        submit = false;
+        pw.ui->lblMaterialRuntime->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialRuntime->setStyleSheet("color: #78CAD2");
+    }
+
+    if(price == 0){
+        submit = false;
+        pw.ui->lblMaterialPrice->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialPrice->setStyleSheet("color: #78CAD2");
+    }
+
+    if(frameHorizontal == 0){
+        submit = false;
+        pw.ui->lblMaterialFrameHorizontal->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialFrameHorizontal->setStyleSheet("color: #78CAD2");
+    }
+
+    if(frameVertical == 0){
+        submit = false;
+        pw.ui->lblMaterialFrameVertical->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialFrameVertical->setStyleSheet("color: #78CAD2");
+    }
+
+    if(packagingHeight == 0){
+        submit = false;
+        pw.ui->lblMaterialPackageHeight->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialPackageHeight->setStyleSheet("color: #78CAD2");
+    }
+
+    if(packagingWidth == 0){
+        submit = false;
+        pw.ui->lblMaterialPackageWidth->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialPackageWidth->setStyleSheet("color: #78CAD2");
+    }
+
+    if(packagingDepth == 0){
+        submit = false;
+        pw.ui->lblMaterialPackageDepth->setStyleSheet("color: #D81E5B");
+    }else{
+        pw.ui->lblMaterialPackageDepth->setStyleSheet("color: #78CAD2");
     }
 
     if(materialType != "VHS"){
@@ -1949,6 +2000,8 @@ void controller::handleProjectWindowMaterialCreate(){
         }
 
         handleProjectWindowMaterialChange();
+        handleCreateProject();
+        handleFilter();
 
     }
 

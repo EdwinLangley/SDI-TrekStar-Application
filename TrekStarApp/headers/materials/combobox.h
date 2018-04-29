@@ -4,6 +4,7 @@
 #include "main.h"
 #include "twosideddvd.h"
 #include "singlesideddvd.h"
+#include "packaging.h"
 
 
 using namespace std;
@@ -12,17 +13,21 @@ using namespace std;
 class ComboBox
 {
 private:
+    string idNumber = "0";
+    string title = "";
+    Packaging packaging;
+    float price = 0;
+
     unsigned int numberOfDVDs = 0;
-
     vector<string> idsOfDVDs = {"0"};
-
     vector<SingleSidedDVD> SingleDVDs;
     vector<TwoSidedDVD> DoubleDVDs;
 
 public:
     ComboBox();
     ComboBox(unsigned int numberOfDVDs, vector<string> idsOfDVDs,
-             vector<SingleSidedDVD> SingleDVDs, vector<TwoSidedDVD> DoubleDVDs);
+             vector<SingleSidedDVD> SingleDVDs, vector<TwoSidedDVD> DoubleDVDs,
+             string idNumber, string title, Packaging packaging, float price);
     unsigned int getNumberOfDVDs() const;
     void setNumberOfDVDs(unsigned int value);
     vector<string> getIdsOfDVDs() const;
@@ -56,6 +61,15 @@ public:
             return false;
         }
     }
+    string getIdNumber() const;
+    void setIdNumber(const string &value);
+    string getTitle() const;
+    void setTitle(const string &value);
+    Packaging getPackaging() const;
+    void setPackaging(const Packaging &value);
+    float getPrice() const;
+    void setPrice(float value);
+    string getDetails();
 };
 
 #endif // COMBOBOX_H
