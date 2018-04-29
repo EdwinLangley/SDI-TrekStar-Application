@@ -1715,7 +1715,7 @@ void controller::handleProjectWindowMaterialChange(){
             pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getComboBox().getTitle()));
             pw.ui->sbMaterialPrice->setValue(openProj->getComboBox().getPrice());
             pw.ui->sbComboSingleDVD->setValue(openProj->getComboBox().getNumberOfDVDs());
-            //pw.ui->sbComboDoubleDVD->setValue(QString::fromStdString(openProj->getComboBox().get));
+            pw.ui->sbComboDoubleDVD->setValue(openProj->getComboBox().getNumberofDoubleDVDs());
             pw.ui->sbPackagingHeight->setValue(openProj->getComboBox().getPackaging().getHeight());
             pw.ui->sbPackagingWidth->setValue(openProj->getComboBox().getPackaging().getWidth());
             pw.ui->sbPackagingDepth->setValue(openProj->getComboBox().getPackaging().getDepth());
@@ -2162,7 +2162,7 @@ void controller::handleProjectWindowMaterialCreate(){
             newMaterial.setPrice(price);
             newMaterial.setPackaging(package);
             newMaterial.setNumberOfDVDs(comboNumberSingleDVD);
-            //newMaterial.setNumberOfDVDs(comboNumberSingleDVD);
+            newMaterial.setNumberofDoubleDVDs(comboNumberDoubleDVD);
 
             openProj->setComboBox(newMaterial);
 
