@@ -54,7 +54,7 @@ SOURCES += \
         src/gui/stylesheetreader.cpp \
         src/gui/projectwindow.cpp \
         src/crew/crewMember.cpp \
-    src/controller/controller.cpp
+        src/controller/controller.cpp \
 
 HEADERS += \
         headers/gui/mainwindow.h \
@@ -75,11 +75,11 @@ HEADERS += \
         headers/gui/gui.h \
         headers/gui/projectwindow.h \
         headers/crew/crewMember.h \
-    headers/controller/controller.h
+        headers/controller/controller.h \
 
 FORMS += \
         forms/mainwindow.ui \
-        forms/projectwindow.ui
+        forms/projectwindow.ui \
 
 RESOURCES += \
         style/styleVariables.txt \
@@ -89,4 +89,4 @@ RESOURCES += \
         res/arrowDownWhite.png \
         res/arrowDownBlue.png \
         res/arrowUpWhite.png \
-        res/arrowUpBlue.png
+        res/arrowUpBlue.png \

@@ -156,6 +156,7 @@ controller::controller()
     connect(mw.ui->cmdProjectDel, SIGNAL (clicked()), this, SLOT (handleProjectDel()));
     connect(mw.ui->cmdOpenProject, SIGNAL (clicked()), this, SLOT (handleOpenProject()));
     connect(mw.ui->cbStatus, SIGNAL(currentIndexChanged(int)), this, SLOT(handleStatusChange()));
+    connect(mw.ui->cmdApplySettings, SIGNAL(clicked()), this, SLOT(handleSettingsApply()));
 
     // Connects button press signals on project window to functions
     connect(pw.ui->cmdApplyGeneralChanges, SIGNAL(clicked()),this, SLOT(handleApplyGeneralChanges()));
@@ -1723,6 +1724,15 @@ void controller::handleProjectWindowBonusDel(){
     QList <QListWidgetItem *> selectedItems = pw.ui->lstBonusFeatures->selectedItems();
     for(int i = 0; i < selectedItems.size(); i++){
         delete pw.ui->lstBonusFeatures->takeItem(pw.ui->lstBonusFeatures->row(selectedItems[i]));
+    }
+
+}
+
+void controller::handleSettingsApply(){
+
+    QString input = mw.ui->txtEarningsLimit->text();
+    if(input.toStdString() != ""){
+        projList.File.ReportEarningsLimit=(input.toInt());
     }
 
 }

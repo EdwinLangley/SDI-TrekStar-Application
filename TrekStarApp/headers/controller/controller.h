@@ -53,6 +53,8 @@ private slots:
     void handleProjectWindowBonusAdd();
     void handleProjectWindowBonusDel();
 
+    void handleSettingsApply();
+
 
 private:
     void showAllProjects();

@@ -19,6 +19,11 @@ public:
 
     FileWriter();
     ~FileWriter();
+
+    //Settings Function
+    void ReadSettings();
+    void WriteSettings();
+
     //Updated
     //Stored as
     //Title#ProjectStatus#Summary#Genre#ReleaseDate#Language#CrewID#WeeklyBoxFigures#RunTime#VECTOR of keywords#VECTOR of filmLocations#vector of MaterialIDs\n
