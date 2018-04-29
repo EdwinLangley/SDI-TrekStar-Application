@@ -293,7 +293,7 @@ void FileWriter::WriteProject(){
         newLine.append(FIRSTLEVELDELIMSTRNG);
         newLine.append(VectorToString(this->UpdatedProjectList[i].getFilmLocations()));
         newLine.append(FIRSTLEVELDELIMSTRNG);
-        newLine.append(VectorToString(this->UpdatedProjectList[i].getMaterials()));
+        newLine.append(VectorToString(this->UpdatedProjectList[i].getAllMaterials()));
         newLine.append("\n");
         projectFile << newLine;
         //Write extra materials/crews here

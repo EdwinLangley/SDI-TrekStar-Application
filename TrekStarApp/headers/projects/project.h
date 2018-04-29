@@ -56,6 +56,7 @@ public:
     vector<string> getFilmLocations() const;
     void setFilmLocations(const vector<string> &value);
     vector<string> getMaterials() const;
+    vector<string> getAllMaterials() const;
     void setMaterials(const vector<string> &value);
     int getCrewID() const;
     void setCrewID(const int &value);
