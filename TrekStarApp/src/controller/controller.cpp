@@ -395,12 +395,16 @@ void controller::handleFilter(){
             {
                 std::string projectTitle = "";
                 std::size_t found = returnedValues[i].find_last_of(":");
+
+                std::cout << returnedValues[i] << std::endl;
+
                 if (found != string::npos)
                 {
                     projectTitle = returnedValues[i].substr(0,found);
                 }
 
                 temp = projList.findByTitle(projectTitle);
+
             }
             else
             {
@@ -445,7 +449,7 @@ void controller::handleFilter(){
 
             if (temp.getComboBox().getIdNumber() != "0")
             {
-                materials = materials + "Combo Box";
+                materials = materials + "Combo Box, ";
             }
 
             if(materials == ""){
@@ -457,7 +461,18 @@ void controller::handleFilter(){
 
             materials = "\n Materials: " + materials;
 
-            mw.ui->lstProjects->addItem(QString::fromStdString(returnedValues[i] + ":" + crew + materials));
+            std::string output = returnedValues[i];
+
+            if (filterCategory == "Newest to Oldest" || filterCategory == "Oldest to Newest" ){
+                std::string title = output.substr(0, returnedValues[i].find_first_of(":"));
+                std::string Date =  output.substr(returnedValues[i].find_first_of(":") + 2, \
+                                                  returnedValues[i].size() - (returnedValues[i].find_first_of(":")));
+                output = title + ":\n Released: " + Date;
+            }else{
+                output = output + ":";
+            }
+
+            mw.ui->lstProjects->addItem(QString::fromStdString(output + crew + materials));
 
         }
     }
@@ -524,7 +539,7 @@ void controller::showAllProjects(){
 
             if (temp.getComboBox().getIdNumber() != "0")
             {
-                materials = materials + "Combo Box";
+                materials = materials + "Combo Box, ";
             }
 
             if(materials == ""){
@@ -2039,7 +2054,7 @@ void controller::handleProjectWindowMaterialCreate(){
             pw.ui->lblMaterialFrameDescription->setStyleSheet("color: #78CAD2");
         }
 
-        if(subLang.size() == 0){
+        if(subLang.size() == 0 ||(subLang.size() > 1 && materialType == "VHS")){
             submit = false;
             pw.ui->lblMaterialSubLang->setStyleSheet("color: #D81E5B");
         }else{

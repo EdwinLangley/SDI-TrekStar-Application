@@ -383,7 +383,7 @@ vector<string> DoublyLinkedList::sortByNewest()
 
     for (int stop = AllProjects.size() - 1; stop >= 0; stop-- )
     {
-        AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + ": was released on " +AllProjects.at(stop).getReleaseDate());
+        AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + ": " +AllProjects.at(stop).getReleaseDate());
     }
 
     return AllProjectsStrings;
@@ -445,7 +445,7 @@ vector<string> DoublyLinkedList::sortByOldest()
 
     for (unsigned int stop =0; stop < AllProjects.size(); stop++ )
     {
-        AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + ": was released on " +AllProjects.at(stop).getReleaseDate());
+        AllProjectsStrings.push_back(AllProjects.at(stop).getTitle() + ": " + AllProjects.at(stop).getReleaseDate());
     }
 
     return AllProjectsStrings;
