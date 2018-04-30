@@ -86,7 +86,7 @@ public:
                 this->title==project.title&&
                 this->projectStatus==project.projectStatus&&
                 this->summary==project.summary&&
-                this->genre==project.projectStatus&&
+                this->genre==project.genre&&
                 this->releaseDate==project.releaseDate&&
                 this->language==project.language&&
                 this->runTime==project.runTime&&
@@ -112,7 +112,7 @@ public:
                 this->title!=project.title||
                 this->projectStatus!=project.projectStatus||
                 this->summary!=project.summary||
-                this->genre!=project.projectStatus||
+                this->genre!=project.genre||
                 this->releaseDate!=project.releaseDate||
                 this->language!=project.language||
                 this->runTime!=project.runTime||
