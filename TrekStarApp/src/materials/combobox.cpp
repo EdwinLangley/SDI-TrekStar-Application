@@ -90,6 +90,10 @@ string ComboBox::getDetails()
     returnLine.append(this->packaging.getPackaging());//3/4/5/6
     returnLine.append(FIRSTLEVELDELIMSTRNG);
     returnLine.append(to_string(this->price));//7
+    returnLine.append(FIRSTLEVELDELIMSTRNG);
+    returnLine.append(to_string(this->numberOfDVDs));//8
+    returnLine.append(FIRSTLEVELDELIMSTRNG);
+    returnLine.append(to_string(this->numberofDoubleDVDs));//9
     return returnLine;
 }
 
@@ -110,7 +114,8 @@ ComboBox::ComboBox()
 
 ComboBox::ComboBox(unsigned int numberOfDVDs, vector<string> idsOfDVDs,
                    vector<SingleSidedDVD> SingleDVDs, vector<TwoSidedDVD> DoubleDVDs,
-                   string idNumber, string title, Packaging packaging, float price)
+                   string idNumber, string title, Packaging packaging, float price,
+                   unsigned int numberOfDoubleDVDs)
 {
     this->numberOfDVDs=numberOfDVDs;
     this->idsOfDVDs=idsOfDVDs;
@@ -120,4 +125,5 @@ ComboBox::ComboBox(unsigned int numberOfDVDs, vector<string> idsOfDVDs,
     this->title=title;
     this->packaging=packaging;
     this->price=price;
+    this->numberofDoubleDVDs=numberOfDoubleDVDs;
 }

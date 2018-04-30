@@ -165,21 +165,21 @@ void FileWriter::WriteComboBox(ComboBox inputDVDS){
     //and puts together into one string to write
     string comboBox="CBOX";
     comboBox.append(FIRSTLEVELDELIMSTRNG);
-    comboBox.append(inputDVDS.getDetails());
+    comboBox.append(inputDVDS.getDetails());//1-9
     comboBox.append(FIRSTLEVELDELIMSTRNG);
-    comboBox.append(VectorToString(inputDVDS.getIdsOfDVDs()));
+    comboBox.append(VectorToString(inputDVDS.getIdsOfDVDs()));//10
     comboBox.append("\n");
     ofstream outputFile;
     outputFile.open(MATERIALFILENAME,ios_base::app);
     outputFile<<comboBox;
     outputFile.close();
     //Incase this is used for combo-boxes
-    for(unsigned int i=0;i<inputDVDS.getSingleDVDs().size();i++){
-        WriteOneSidedDVD(inputDVDS.getSingleDVDs()[i]);
-    }
-    for(unsigned int i=0;i<inputDVDS.getDoubleDVDs().size();i++){
-        WriteTwoSidedDVD(inputDVDS.getDoubleDVDs()[i]);
-    }
+//    for(unsigned int i=0;i<inputDVDS.getSingleDVDs().size();i++){
+//        WriteOneSidedDVD(inputDVDS.getSingleDVDs()[i]);
+//    }
+//    for(unsigned int i=0;i<inputDVDS.getDoubleDVDs().size();i++){
+//        WriteTwoSidedDVD(inputDVDS.getDoubleDVDs()[i]);
+//    }
 }
 
 ComboBox FileWriter::ReadComboBox(string input)
@@ -188,7 +188,7 @@ ComboBox FileWriter::ReadComboBox(string input)
     //uses StringToVector to take vectors out of the line
     vector<string> Materials=ReadMaterials();
     vector<string> materialStorage=SplitLine(input);
-    vector<string> idsOfDVDS = StringToVector(materialStorage[8]);
+    vector<string> idsOfDVDS = StringToVector(materialStorage[10]);
     vector<SingleSidedDVD> singleDVDS;
     vector<TwoSidedDVD> doubleDVDS;
     //Match a dvd to its combo-box, Simple ID matching and line conversion using relevant functions
@@ -220,8 +220,10 @@ ComboBox FileWriter::ReadComboBox(string input)
     }
     Packaging package(materialStorage[3],stoi(materialStorage[4]),
             stoi(materialStorage[5]),stoi(materialStorage[6]));
-    ComboBox returnComboBox(idsOfDVDS.size(),idsOfDVDS,singleDVDS,doubleDVDS,
-                            materialStorage[1],materialStorage[2],package,stof(materialStorage[7]));
+
+    ComboBox returnComboBox(stoi(materialStorage[8]),StringToVector(materialStorage[10]),
+            singleDVDS,doubleDVDS,materialStorage[1],materialStorage[2],package,
+                            stof(materialStorage[7]),stoi(materialStorage[9]));
     return returnComboBox;
 }
 void FileWriter::WriteMaterials(vector<Project> inputProject){

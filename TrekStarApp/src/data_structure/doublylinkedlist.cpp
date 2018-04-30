@@ -455,6 +455,7 @@ int DoublyLinkedList::getNewMaterialId()
 
     while (current != NULL)
     {
+        current->data.getAllMaterials();
         vector<string> ProjectIds = current->data.getMaterialIDs();
 
         for (unsigned int i = 0; i < ProjectIds.size(); i++)
