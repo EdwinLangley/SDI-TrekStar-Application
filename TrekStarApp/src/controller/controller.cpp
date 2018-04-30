@@ -561,10 +561,12 @@ void controller::handleProjectDel(){
         for(int i = 0; i < selectedItems.size(); i++){
             projectTitle = selectedItems[i]->text().toStdString();
 
-            std::size_t found = projectTitle.find_last_of(":");
+            std::size_t found = projectTitle.find_first_of("\n");
             if (found != string::npos)
             {
                 projectTitle = projectTitle.substr(0,found);
+                projectTitle.pop_back();
+                std::cout << projectTitle << std::endl;
             }
 
             projList.delete_by_title(projectTitle);
@@ -594,10 +596,12 @@ void controller::handleOpenProject(){
         QList <QListWidgetItem *> selectedItems = mw.ui->lstProjects->selectedItems();
         std::string projectTitle = selectedItems[0]->text().toStdString();
 
-        std::size_t found = projectTitle.find_first_of(":");
+        std::size_t found = projectTitle.find_first_of("\n");
         if (found != string::npos)
         {
             projectTitle = projectTitle.substr(0,found);
+            projectTitle.pop_back();
+            std::cout << projectTitle << std::endl;
         }
 
         if(projectTitle != ""){
