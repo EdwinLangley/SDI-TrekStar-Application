@@ -396,7 +396,7 @@ void controller::handleFilter(){
                 std::string projectTitle = "";
                 std::size_t found = returnedValues[i].find_last_of(":");
 
-                std::cout << returnedValues[i] << std::endl;
+
 
                 if (found != string::npos)
                 {
@@ -474,18 +474,16 @@ void controller::handleFilter(){
 
             mw.ui->lstProjects->addItem(QString::fromStdString(output + crew + materials));
 
+
         }
+
     }
-    catch(std::out_of_range e1){
-        std::cout << e1.what() << std::endl;
+
+    catch(...){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","No project with this filter");
+        messageBox.setFixedSize(500,200);
     }
-    catch(std::invalid_argument e2){
-        std::cout << e2.what() << std::endl;
-    }
-    catch(std::bad_alloc e3){
-        std::cout << e3.what() << std::endl;
-    }
-    catch(...){}
 
 }
 
@@ -554,16 +552,12 @@ void controller::showAllProjects(){
             mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i] + ":" + crew + materials));
         }
     }
-    catch(out_of_range e1){
-        std::cout << e1.what() << std::endl;
+
+    catch(...){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Error showing projects");
+        messageBox.setFixedSize(500,200);
     }
-    catch(std::invalid_argument e2){
-        std::cout << e2.what() << std::endl;
-    }
-    catch(std::bad_alloc e3){
-        std::cout << e3.what() << std::endl;
-    }
-    catch(...){}
 
 }
 
@@ -592,16 +586,13 @@ void controller::handleProjectDel(){
         }
 
     }
-    catch (out_of_range e1){
-        std::cout << e1.what() << std::endl;
+
+    catch(...){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Error removing this project");
+        messageBox.setFixedSize(500,200);
+
     }
-    catch(std::invalid_argument e2){
-        std::cout << e2.what() << std::endl;
-    }
-    catch(std::bad_alloc e3){
-        std::cout << e3.what() << std::endl;
-    }
-    catch(...){}
 
 
 }
@@ -629,16 +620,13 @@ void controller::handleOpenProject(){
             pw.show();
         }
     }
-    catch(out_of_range e1){
-        std::cout << e1.what() << std::endl;
+
+    catch(...){
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Error opening this project");
+        messageBox.setFixedSize(500,200);
+
     }
-    catch(std::invalid_argument e2){
-        std::cout << e2.what() << std::endl;
-    }
-    catch(std::bad_alloc e3){
-        std::cout << e3.what() << std::endl;
-    }
-    catch(...){}
 
 }
 
