@@ -91,10 +91,8 @@ vector<string> Project::getAllMaterials()
     if(this->vhs.getIdNumber()!="0"){
         MaterialIDS.push_back(this->vhs.getIdNumber());
     }
-    if(this->comboBox.getNumberOfDVDs()!=0){
-        for(unsigned int i=0; i<this->comboBox.getIdsOfDVDs().size();i++){
-            MaterialIDS.push_back(this->comboBox.getIdNumber());
-        }
+    if(this->comboBox.getIdNumber()!="0"){
+        MaterialIDS.push_back(this->comboBox.getIdNumber());
     }
     if(MaterialIDS.size()==0){
         MaterialIDS={"0"};

@@ -1756,6 +1756,7 @@ void controller::handleProjectWindowMaterialChange(){
             pw.ui->cmdMaterialClear->setText("Clear Changes");
             pw.ui->cmdMaterialCreate->setText("Apply Changes");
 
+            pw.ui->txtMaterialIDNum->setText(QString::fromStdString(openProj->getComboBox().getIdNumber()));
             pw.ui->txtMaterialTitle->setText(QString::fromStdString(openProj->getComboBox().getTitle()));
             pw.ui->sbMaterialPrice->setValue(openProj->getComboBox().getPrice());
             pw.ui->sbComboSingleDVD->setValue(openProj->getComboBox().getNumberOfDVDs());

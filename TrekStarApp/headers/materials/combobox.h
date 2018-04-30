@@ -28,7 +28,8 @@ public:
     ComboBox();
     ComboBox(unsigned int numberOfDVDs, vector<string> idsOfDVDs,
              vector<SingleSidedDVD> SingleDVDs, vector<TwoSidedDVD> DoubleDVDs,
-             string idNumber, string title, Packaging packaging, float price);
+             string idNumber, string title, Packaging packaging, float price,
+             unsigned int numberOfDoubleDVDs);
     unsigned int getNumberOfDVDs() const;
     void setNumberOfDVDs(unsigned int value);
     vector<string> getIdsOfDVDs() const;
