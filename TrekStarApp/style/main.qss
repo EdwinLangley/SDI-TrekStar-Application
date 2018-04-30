@@ -23,6 +23,10 @@
     font-size: 20px;
 }
 
+#cmdApplySettings {
+    font-size: 20px;
+}
+
 #lstProject {
     border-radius: 25px;
     border: 3px solid @highlight;

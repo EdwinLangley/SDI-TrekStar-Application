@@ -510,9 +510,9 @@
      <widget class="QPushButton" name="cmdApplySettings">
       <property name="geometry">
        <rect>
-        <x>330</x>
+        <x>290</x>
         <y>180</y>
-        <width>281</width>
+        <width>371</width>
         <height>61</height>
        </rect>
       </property>

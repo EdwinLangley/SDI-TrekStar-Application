@@ -5,9 +5,6 @@
 #include "project.h"
 #include "doublylinkedlist.h"
 
-#include <QInputDialog>
-
-
 controller::controller()
 {
 
@@ -309,10 +306,6 @@ void controller::handleClear(){
     mw.ui->lblLocations->setStyleSheet("color: #78CAD2");
     mw.ui->lblKeywords->setStyleSheet("color: #78CAD2");
 
-    //Keep this comment, its how we are calling the destructor and I wont remember it :(
-    //DoublyLinkedList *projList2 = &projList;
-    //delete projList2;
-
 }
 
 // Adds the input from the text box to the location list
@@ -411,38 +404,58 @@ void controller::handleFilter(){
                 temp = projList.findByTitle(returnedValues[i]);
             }
 
+            std::string materials = "";
+            std::string crew = "";
 
-
-            string Materials = "\nMaterials ";
-            if (temp.getBluRay().getIdNumber() != "0")
-            {
-                Materials = Materials + "- Blu Ray ";
+            for(unsigned int j = 0; j < temp.getCrew().size(); ++j){
+                crew = crew + temp.getCrew()[j].getName() + ", ";
             }
+
+            if(crew == ""){
+                crew = "None";
+            }else{
+                crew.pop_back();
+                crew.pop_back();
+            }
+
+            crew = "\n Crew: " + crew;
 
             if (temp.getSingleDVD().getIdNumber() != "0")
             {
-                Materials = Materials + "- Single Sided DVD ";
+                materials = materials + "Single Sided DVD, ";
             }
 
             if (temp.getTwoDVD().getIdNumber() != "0")
             {
-                Materials = Materials + "- Two Sided DVD ";
+                materials = materials + "Two Sided DVD, ";
+            }
+
+            if (temp.getBluRay().getIdNumber() != "0")
+            {
+                materials = materials + "Blu Ray, ";
             }
 
             if (temp.getVhs().getIdNumber() != "0")
             {
-                Materials = Materials + "- VHS ";
+                materials = materials + "VHS, ";
             }
 
-            //Combo box id
-//            if (temp.getBluRay().getIdNumber() != "0")
-//            {
-//                Materials = Materials + "- Blu Ray";
-//            }
+            if (temp.getComboBox().getIdNumber() != "0")
+            {
+                materials = materials + "Combo Box";
+            }
 
+            if(materials == ""){
+                materials = "None";
+            }else{
+                materials.pop_back();
+                materials.pop_back();
+            }
 
+            materials = "\n Materials: " + materials;
 
-            mw.ui->lstProjects->addItem(QString::fromStdString(returnedValues[i] + ":" +Materials));
+            mw.ui->lstProjects->addItem(QString::fromStdString(returnedValues[i] + ":" + crew + materials));
+
         }
     }
     catch(std::out_of_range e1){
@@ -460,36 +473,67 @@ void controller::handleFilter(){
 
 // Outputs all projects to project list
 void controller::showAllProjects(){
+
     try{
+
         Project temp;
         std::vector<std::string> allProjects = projList.getAllFilmTitles();
         mw.ui->lstProjects->clear();
+
         for(unsigned int i = 0; i < allProjects.size(); ++i){
 
             temp = projList.findByTitle(allProjects[i]);
+            std::string materials = "";
+            std::string crew = "";
 
-            string Materials = "\nMaterials ";
-            if (temp.getBluRay().getIdNumber() != "0")
-            {
-                Materials = Materials + "- Blu Ray ";
+            for(unsigned int j = 0; j < temp.getCrew().size(); ++j){
+                crew = crew + temp.getCrew()[j].getName() + ", ";
             }
+
+            if(crew == ""){
+                crew = "None";
+            }else{
+                crew.pop_back();
+                crew.pop_back();
+            }
+
+            crew = "\n Crew: " + crew;
 
             if (temp.getSingleDVD().getIdNumber() != "0")
             {
-                Materials = Materials + "- Single Sided DVD ";
+                materials = materials + "Single Sided DVD, ";
             }
 
             if (temp.getTwoDVD().getIdNumber() != "0")
             {
-                Materials = Materials + "- Two Sided DVD ";
+                materials = materials + "Two Sided DVD, ";
             }
+
+            if (temp.getBluRay().getIdNumber() != "0")
+            {
+                materials = materials + "Blu Ray, ";
+            }            
 
             if (temp.getVhs().getIdNumber() != "0")
             {
-                Materials = Materials + "- VHS ";
+                materials = materials + "VHS, ";
             }
 
-            mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i] + ":" +Materials));
+            if (temp.getComboBox().getIdNumber() != "0")
+            {
+                materials = materials + "Combo Box";
+            }
+
+            if(materials == ""){
+                materials = "None";
+            }else{
+                materials.pop_back();
+                materials.pop_back();
+            }
+
+            materials = "\n Materials: " + materials;
+
+            mw.ui->lstProjects->addItem(QString::fromStdString(allProjects[i] + ":" + crew + materials));
         }
     }
     catch(out_of_range e1){
@@ -550,7 +594,7 @@ void controller::handleOpenProject(){
         QList <QListWidgetItem *> selectedItems = mw.ui->lstProjects->selectedItems();
         std::string projectTitle = selectedItems[0]->text().toStdString();
 
-        std::size_t found = projectTitle.find_last_of(":");
+        std::size_t found = projectTitle.find_first_of(":");
         if (found != string::npos)
         {
             projectTitle = projectTitle.substr(0,found);
@@ -1813,6 +1857,15 @@ void controller::handleProjectWindowMaterialChange(){
     pw.ui->lblMaterialFrameDescription->setStyleSheet("color: #78CAD2");
     pw.ui->lblMaterialPackage->setStyleSheet("color: #78CAD2");
     pw.ui->lblMaterialPackageMaterial->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialPrice->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialRuntime->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialPackageHeight->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialPackageWidth->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialPackageDepth->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialFrameHorizontal->setStyleSheet("color: #78CAD2");
+    pw.ui->lblMaterialFrameVertical->setStyleSheet("color: #78CAD2");
+    pw.ui->lblComboSingleDVD->setStyleSheet("color: #78CAD2");
+    pw.ui->lblComboDoubleDVD->setStyleSheet("color: #78CAD2");
 
 }
 
@@ -2316,6 +2369,9 @@ void controller::updateComboRuntime(){
 
 void controller::updateMinimumPackage(){
 
+    int numOfSingle = pw.ui->sbComboSingleDVD->value();
+    int numOfDouble = pw.ui->sbComboDoubleDVD->value();
+
     unsigned int minHeight = 0;
     unsigned int minWidth = 0;
     unsigned int minDepth = 0;
@@ -2332,7 +2388,6 @@ void controller::updateMinimumPackage(){
 
         minHeight = openProj->getSingleDVD().getPackage().getHeight();
         minWidth = openProj->getSingleDVD().getPackage().getWidth();
-        minDepth = openProj->getSingleDVD().getPackage().getDepth();
 
     }
 
@@ -2346,11 +2401,10 @@ void controller::updateMinimumPackage(){
             minWidth = openProj->getTwoDVD().getPackage().getWidth();
         }
 
-        if(minDepth < openProj->getTwoDVD().getPackage().getDepth()){
-            minDepth = openProj->getTwoDVD().getPackage().getDepth();
-        }
-
     }
+
+    minDepth = (openProj->getSingleDVD().getPackage().getDepth() * numOfSingle)  \
+            + (openProj->getTwoDVD().getPackage().getDepth() * numOfDouble);
 
     pw.ui->sbPackagingHeight->setMinimum(minHeight);
     pw.ui->sbPackagingWidth->setMinimum(minWidth);

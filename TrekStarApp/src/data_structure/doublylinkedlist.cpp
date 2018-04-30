@@ -457,7 +457,7 @@ int DoublyLinkedList::getNewMaterialId()
     {
         vector<string> ProjectIds = current->data.getMaterialIDs();
 
-        for (int i = 0; i < ProjectIds.size(); i++)
+        for (unsigned int i = 0; i < ProjectIds.size(); i++)
         {
             if (stoi(ProjectIds[i]) > HighestId)
             {

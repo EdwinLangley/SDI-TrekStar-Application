@@ -36,7 +36,7 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tbGeneral">
     <attribute name="title">
@@ -863,6 +863,9 @@
        <height>31</height>
       </rect>
      </property>
+     <property name="maximum">
+      <number>999999999</number>
+     </property>
     </widget>
     <widget class="QLabel" name="lblMaterialCreated">
      <property name="geometry">
@@ -937,6 +940,9 @@
        <width>141</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="maximum">
+      <number>1000</number>
      </property>
     </widget>
     <widget class="QPushButton" name="cmdExtraLanguageTracksDel">
