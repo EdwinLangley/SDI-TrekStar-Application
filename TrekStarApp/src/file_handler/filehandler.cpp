@@ -533,6 +533,7 @@ void FileWriter::BuildReport(){
                         this->UpdatedProjectList[i].getTitle()<<"\n";
         }
     }
+    reportFile<<"\n";
     reportFile.close();
 }
 

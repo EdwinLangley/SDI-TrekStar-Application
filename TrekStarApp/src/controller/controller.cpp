@@ -1049,6 +1049,8 @@ void controller::handleProjectWindowCrewAdd(){
         pw.ui->deDofB->setDate(QDate(2000, 1, 1));
         pw.ui->txtIDNum->clear();
         pw.ui->sbExperience->setValue(0);
+        handleCreateProject();
+        handleFilter();
     }
 
 }
@@ -1076,6 +1078,8 @@ void controller::handleProjectWindowCrewDel(){
 
         openProj->setCrew(crew);
         delete pw.ui->lstCrew->takeItem(pw.ui->lstCrew->row(selectedItems[i]));
+        handleCreateProject();
+        handleFilter();
     }
 
 }
