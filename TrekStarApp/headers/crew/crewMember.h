@@ -16,7 +16,7 @@ private:
     string role = "";//4
     int yearsOfExperience = 0;//5
 
-    vector<string> locationsWorkedAt = {"Location1", "Location2"};//6
+    vector<string> locationsWorkedAt = {""};//6
 
 
 public:

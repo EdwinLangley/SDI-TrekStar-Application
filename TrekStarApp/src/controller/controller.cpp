@@ -198,9 +198,7 @@ controller::controller()
 
 }
 
-void controller::handleClose(){
-    std::cout << "lol" << std::endl;
-}
+
 
 void controller::handleCreateProject(){
 
@@ -571,7 +569,6 @@ void controller::handleProjectDel(){
             {
                 projectTitle = projectTitle.substr(0,found);
                 projectTitle.pop_back();
-                std::cout << projectTitle << std::endl;
             }
 
             projList.delete_by_title(projectTitle);
@@ -606,7 +603,6 @@ void controller::handleOpenProject(){
         {
             projectTitle = projectTitle.substr(0,found);
             projectTitle.pop_back();
-            std::cout << projectTitle << std::endl;
         }
 
         if(projectTitle != ""){

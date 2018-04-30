@@ -18,7 +18,6 @@ public:
 
 private slots:
 
-    void handleClose();
     void handleCreateProject();
     void handleClear();
     void handleLocationAdd();

@@ -258,7 +258,6 @@ vector<string> FileWriter::ReadMaterials(){
     inputFile.open(MATERIALFILENAME);
     if (!inputFile.is_open()){
         materials.clear();
-        cout<<"No file:Materials"<<endl;
         inputFile.close();
         return materials;
     }
@@ -325,10 +324,8 @@ vector<Project> FileWriter::ReadProjects(){
     ifstream inputFile;
     inputFile.open(PROJECTFILENAME);
     string line;
-    cout<<"file reading"<<endl;
     if (!inputFile.is_open()){
         returnedProjects.clear();
-        cout<<"No file:Projects"<<endl;
         inputFile.close();
         return returnedProjects;
     }
@@ -353,7 +350,6 @@ vector<Project> FileWriter::ReadProjects(){
         returnedProjects.push_back(tempProject);
     }
     inputFile.close();
-    cout<<returnedProjects.size()<<endl;
     return returnedProjects;
 }
 
@@ -382,7 +378,6 @@ vector<string> FileWriter::ReadCrew(){
     inputFile.open(CREWFILENAME);
     if (!inputFile.is_open()){
         AllCrews.clear();
-        cout<<"No file:Crew"<<endl;
         inputFile.close();
         return AllCrews;
     }

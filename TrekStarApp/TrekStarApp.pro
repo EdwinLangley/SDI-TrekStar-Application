@@ -48,7 +48,6 @@ SOURCES += \
         src/materials/bluray.cpp \
         src/materials/vhs.cpp \
         src/materials/combobox.cpp \
-        src/data_structure/node.cpp \
         src/data_structure/doublylinkedlist.cpp \
         src/file_handler/filehandler.cpp \
         src/gui/stylesheetreader.cpp \
@@ -68,7 +67,6 @@ HEADERS += \
         headers/materials/bluray.h \
         headers/materials/vhs.h \
         headers/materials/combobox.h \
-        headers/data_structure/node.h \
         headers/data_structure/doublylinkedlist.h \
         headers/file_handler/filehandler.h \
         headers/main.h \
