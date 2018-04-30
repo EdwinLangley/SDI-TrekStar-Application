@@ -33,6 +33,7 @@ controller::controller()
     mw.ui->cbFilter->addItem("Title");
     mw.ui->cbFilter->addItem("Genre");
     mw.ui->cbFilter->addItem("Keywords");
+    mw.ui->cbFilter->addItem("A-Z");
     mw.ui->cbFilter->addItem("Newest to Oldest");
     mw.ui->cbFilter->addItem("Oldest to Newest");
     mw.ui->cbFilter->addItem("Director");
@@ -363,6 +364,10 @@ void controller::handleFilter(){
         if(filterCategory == "No Filter"){
             returnedValues = projList.getAllFilmTitles();
         }
+        else if (filterCategory == "A-Z")
+        {
+            returnedValues = projList.sortProject(projList.getAllFilmTitles());
+        }
         else if(filterCategory == "Newest to Oldest"){
             returnedValues = projList.sortByNewest();
         }
@@ -372,7 +377,7 @@ void controller::handleFilter(){
         else if (input != ""){
 
                 if(filterCategory == "Title"){
-                    returnedValues = projList.findByKeyword(input);
+                    returnedValues = projList.searchByTitle(input);
                 }
                 else if(filterCategory == "Genre"){
                     returnedValues = projList.findByGenre(input);

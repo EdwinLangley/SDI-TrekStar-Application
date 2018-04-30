@@ -126,6 +126,32 @@ Project& DoublyLinkedList::findByTitle(string title)
 
 }
 
+
+vector<string> DoublyLinkedList::searchByTitle(string title)
+{
+    Node *current = head;
+    Node *previous = new Node;
+    vector<string> AllProjects;
+    while (current != NULL)
+    {
+        if (current->data.getTitle() == title)
+        {
+
+            AllProjects.push_back(current->data.getTitle());
+
+        }
+
+        previous = current;
+        current = current->next;
+
+    }
+
+
+
+    return AllProjects;
+
+}
+
 vector<string> DoublyLinkedList::findByGenre(string Genre)
 {
     vector<string> AllProjects;

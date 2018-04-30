@@ -81,6 +81,9 @@ Project& operator[](unsigned int n);
 //Then throws an invalid_argument error that will need to be caught
 Project& findByTitle(string title);
 
+//Search via title
+vector<string> searchByTitle(string title);
+
 //Function to return a vector of strings with Film names that are for the same genre.
 //If no films are found for this genre, throws an out_of_range error that needs to be caught
 vector<string> findByGenre(string Genre);
