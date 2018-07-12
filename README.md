@@ -4,7 +4,7 @@ Repo for the Software Design and Implementation module
 
 
 
-![alt text](https://lh6.googleusercontent.com/D-oy5QXb4iKPbEaZv2ssqwRzvok-fpMgcxYbse3C_wEaFxLanTseZglA7uNgkYQnsu8yNLSY1y5jzARckpp1=w2588-h2034-rw "Logo Title Text 1")
+![alt text](https://lh6.googleusercontent.com/UwAh2g6sHLRDrpgQC2aE_EmxMCXn9H__SR16NPhhkNoXthyM23Y394m1ZiGj3yjtnz4NWKvO1aW52Lott_-v=w1996-h2034-rw "Logo Title Text 1")
 
 ![alt text](https://lh3.googleusercontent.com/jGwcnx67pB1KCTIeZ-f3Tn04b8fnSA2Y7jbRjpkcRU9CGzXAa7vvcNZ7LL42kHAct6YXOeLhHjP32q3FD7ix=w2588-h2034-rw "Logo Title Text 1")
 
