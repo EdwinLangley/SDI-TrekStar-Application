@@ -46,21 +46,21 @@ When the user has finished entering information about the crew member, they can 
 ### Filtering Projects
 To filter by project properties, the user can navigate to “Open Project”, here they will find a list of all of the previously added projects. The user has the option to filter by the following properties
 
-No filter applied
-Title 				(Requires extra text input)
-Genre				(Requires extra text input)
-Keywords			(Requires extra text input)
-A-Z
-Newest to oldest date
-Oldest to newest date 
-Director			(Requires extra text input)
-Actor				(Requires extra text input)
-Producer			(Requires extra text input)
-Writer				(Requires extra text input)
-Editor				(Requires extra text input)
-Production Designer		(Requires extra text input)
-Set Decorator			(Requires extra text input)
-Costumer Designer 		(Requires extra text input)
+No filter applied <br />
+Title 				(Requires extra text input)<br />
+Genre				(Requires extra text input)<br />
+Keywords			(Requires extra text input)<br />
+A-Z<br />
+Newest to oldest date<br />
+Oldest to newest date <br />
+Director			(Requires extra text input)<br />
+Actor				(Requires extra text input)<br />
+Producer			(Requires extra text input)<br />
+Writer				(Requires extra text input)<br />
+Editor				(Requires extra text input)<br />
+Production Designer		(Requires extra text input)<br />
+Set Decorator			(Requires extra text input)<br />
+Costumer Designer 		(Requires extra text input)<br />
 
 
 ![alt text](https://lh6.googleusercontent.com/fSHY1mTIwHwtYm_xidGAiVAqtR2TsARZ0bcQZ7_2Zb-rGAzxMeYQS8Nj2HexkPmhvYoM0bvvYvZccu5zxy2k=w1996-h2034 "Logo Title Text 1")
