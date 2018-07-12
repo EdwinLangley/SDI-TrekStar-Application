@@ -68,12 +68,13 @@ Costumer Designer 		(Requires extra text input)
 ### Modifying Current Projects
 If the user wishes to change some core properties relating to a specific project then they can navigate to the project using the filter functionality mentioned above. When the user selected open project all of the fields are still editable in the “General” tab.
 
+![alt text](https://lh6.googleusercontent.com/RjMAWVQweqaR6Ah-BODBWud9Z32xK17EOW4pCjCZGYOYCHSRe8tpSc4HEMDZuwT6CU1JHPdjEAhD4F3v8Aym=w1996-h2034 "Logo Title Text 1")
 
 When the user has finished making their changes, they can click apply changes and the modifications will appear in the project the next time it is used.
 ### Modifying Current Materials
 If the user wishes to change some properties relating to a specific projects materials then they can navigate to the project using the filter functionality. When the user selected open project all of the fields are still editable in the “Materials” tab.
 
-![alt text](https://lh6.googleusercontent.com/RjMAWVQweqaR6Ah-BODBWud9Z32xK17EOW4pCjCZGYOYCHSRe8tpSc4HEMDZuwT6CU1JHPdjEAhD4F3v8Aym=w1996-h2034 "Logo Title Text 1")
+![alt text](https://lh6.googleusercontent.com/Jii5dtvLqDDI-tGLTZ4bH957AdQ6Wff8sUUzFRtbojnKOgJiGwkbY4PrzoiHx5yd_lUj_ripxTFeGvtjy3B_=w1996-h2034-rw "Logo Title Text 1")
 
 When the user has finished making their changes, they can click apply changes and the modifications will appear in the materials the next time it is used.
 ### Modifying Current Crew
@@ -81,6 +82,7 @@ If the user wishes to change some properties relating to a specific projects cre
 
 The user will need to select the crew member from the populated list and delete them. The user is now free to add another crew member under the same name and role with the new information.
 
+![alt text](https://lh4.googleusercontent.com/KjS3_HqQ5QZahbLQuf122l3-MVYkTmSpGzza55qZndOIiLKdjraNU8LgH58hDVSlWV0Ctpbe8zArnLZ1gwgv=w1996-h2034 "Logo Title Text 1")
 
 
 ### Saving Projects
@@ -98,6 +100,6 @@ The user does not need to worry about the process of saving files. The close fun
 
 
 
-![alt text](https://lh6.googleusercontent.com/Jii5dtvLqDDI-tGLTZ4bH957AdQ6Wff8sUUzFRtbojnKOgJiGwkbY4PrzoiHx5yd_lUj_ripxTFeGvtjy3B_=w1996-h2034-rw "Logo Title Text 1")
 
-![alt text](https://lh4.googleusercontent.com/KjS3_HqQ5QZahbLQuf122l3-MVYkTmSpGzza55qZndOIiLKdjraNU8LgH58hDVSlWV0Ctpbe8zArnLZ1gwgv=w1996-h2034 "Logo Title Text 1")
+
+
