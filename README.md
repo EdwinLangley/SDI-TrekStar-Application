@@ -2,14 +2,14 @@
 
 Repo for the Software Design and Implementation module
 
-##User Guide
+## User Guide
 
-###The Interface
+### The Interface
 When the user opens up the application they will be greeted by the following interface:
 
 
 
-###Loading Stored Projects
+### Loading Stored Projects
 The user does not need to worry about locating the previously added projects as this is handled automatically on start up from a comma separated values file stored locally to the application.
 Adding New Projects
 If the user wishes to add a new project then they must navigate to the ‘New Project’ tab, enter the details about the project and select the create project button found on the bottom right
@@ -21,7 +21,7 @@ Dependant on the status of the project selected the user might not be able to ad
 As it is possible to have multiple items for the properties of locations and keywords, users enter single values into boxes and then proceed to press add.
 
 If the user changes their mind about a location or keyword, they may highlight this value and then select the remove button - this will remove the item from the list.
-###Adding Materials to Projects
+### Adding Materials to Projects
 When the user selects “Create Project”, if the project status is set to released, they will automatically be prompted to add a (or multiple) types of materials in the specific project window. This window also contains the general (core information regarding the project) and crew (information about crew assigned to the project) tabs, however these are not relevant for this stage.
 
 
@@ -38,7 +38,7 @@ The user can then proceed to add relevant information about the crew member such
 
 When the user has finished entering information about the crew member, they can select add which is situated near the center of the screen. The crew member will now be populated below.  
 
-###Filtering Projects
+### Filtering Projects
 To filter by project properties, the user can navigate to “Open Project”, here they will find a list of all of the previously added projects. The user has the option to filter by the following properties
 
 No filter applied
@@ -59,24 +59,24 @@ Costumer Designer 		(Requires extra text input)
 
 
 
-###Modifying Current Projects
+### Modifying Current Projects
 If the user wishes to change some core properties relating to a specific project then they can navigate to the project using the filter functionality mentioned above. When the user selected open project all of the fields are still editable in the “General” tab.
 
 
 When the user has finished making their changes, they can click apply changes and the modifications will appear in the project the next time it is used.
-###Modifying Current Materials
+### Modifying Current Materials
 If the user wishes to change some properties relating to a specific projects materials then they can navigate to the project using the filter functionality. When the user selected open project all of the fields are still editable in the “Materials” tab.
 
 
 When the user has finished making their changes, they can click apply changes and the modifications will appear in the materials the next time it is used.
-###Modifying Current Crew
+### Modifying Current Crew
 If the user wishes to change some properties relating to a specific projects crew then they can navigate to the project using the filter functionality. When the user selected open project all of the fields are still editable in the “Crew” tab.
 
 The user will need to select the crew member from the populated list and delete them. The user is now free to add another crew member under the same name and role with the new information.
 
 
 
-###Saving Projects
+### Saving Projects
 The user does not need to worry about the process of saving files. The close function has been overridden to save all of the current, projects, materials and crew into a character delimited file  stored locally to the application. 
 
 
