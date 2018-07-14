@@ -8,17 +8,17 @@ This project is cross platform so does not require any additional steps than clo
 
 ## Prerequisites
 
-C++11
+C++11<br />
 Qt5
 
 ## Built With
-Visual Studio 2017
+Visual Studio 2017<br />
 Qt Designer
 
 ## Authors
-Edwin Langley (EdwinLangley)
-Edward Celella (EdCelella)
-Joe Griffin (Jg71ff1n)
+Edwin Langley (EdwinLangley)<br />
+Edward Celella (EdCelella)<br />
+Joe Griffin (Jg71ff1n)<br />
 Sam Milward (sammilward)
 
 ## License 
