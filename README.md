@@ -1,4 +1,4 @@
-# SDIPROJECT
+# SDI TrekStar Application
 
 Repo for the Software Design and Implementation module
 
